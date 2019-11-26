@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace UI.Desktop
 {
-    public partial class Form1 : Form
+    public partial class formMain : Form
     {
-        public Form1()
+        public formMain()
         {
             InitializeComponent();
+        }
+
+        private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

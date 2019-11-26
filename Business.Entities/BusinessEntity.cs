@@ -30,7 +30,5 @@ namespace Business.Entities
             this.State = States.New;
         }
 
-
-
     }
 }
