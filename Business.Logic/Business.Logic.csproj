@@ -50,6 +50,10 @@
       <Project>{be7bd0b3-eace-4a30-a556-83891ffd564a}</Project>
       <Name>Business.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data.Database\Data.Database.csproj">
+      <Project>{bff440cc-0d17-491f-b191-117a4ef0e656}</Project>
+      <Name>Data.Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
