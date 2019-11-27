@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Especialidad_Logic.cs" />
-    <Compile Include="Persona_Logic.cs" />
+    <Compile Include="EspecialidadLogic.cs" />
+    <Compile Include="PersonaLogic.cs" />
+    <Compile Include="PlanLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

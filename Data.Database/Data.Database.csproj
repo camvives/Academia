@@ -44,16 +44,13 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="EspecialidadAdapter.cs" />
+    <Compile Include="PlanAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Entities\Business.Entities.csproj">
       <Project>{be7bd0b3-eace-4a30-a556-83891ffd564a}</Project>
       <Name>Business.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UI.Desktop\UI.Desktop.csproj">
-      <Project>{51f3aad5-3220-497a-9b69-06fe2b4d2620}</Project>
-      <Name>UI.Desktop</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Logic
 {
-    public class Persona_Logic
+    public class PersonaLogic
     { 
 
     }
