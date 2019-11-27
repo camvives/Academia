@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-    class BusinessEntity
+    public class BusinessEntity
     {
         public enum States { Deleted, New, Modified, Unmodified }
 
+        #region CAMPOS
         private int _id;
         private States _state;
+        #endregion
 
+        #region PROPIEDADES
         public int ID
         {
             get { return _id; }
@@ -24,6 +27,8 @@ namespace Business.Entities
             get { return _state; }
             set { _state = value; }
         }
+
+        #endregion
 
         public BusinessEntity()
         {

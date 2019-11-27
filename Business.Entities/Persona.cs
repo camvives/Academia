@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-    public class Persona
+    public class Persona : BusinessEntity
     {
         public enum TiposPersonas { Admin, Docente, Alumno }
 
