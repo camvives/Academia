@@ -16,9 +16,16 @@ namespace Business.Logic
         {
           PlanData = new PlanAdapter();
         }
+
         public List<Plan> GetPlanesEsp(int idesp)
         {
             return PlanData.GetPlanesEsp(idesp);
         }
+
+        public Plan GetOne(int ID)
+        {
+            return PlanData.GetOne(ID);
+        }
+
     }
 }
