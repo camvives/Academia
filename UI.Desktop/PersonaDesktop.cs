@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Util;
 
 namespace UI.Desktop
 {
@@ -31,17 +32,8 @@ namespace UI.Desktop
             cmbCarrera.ValueMember = "ID";
         }
 
-        private void CmbCarrera_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //Obtiene el objeto seleccionado del combobox
-            Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
 
-            PlanLogic plan = new PlanLogic();
-            cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
-            cmbPlan.DisplayMember = "Descripcion";
-            cmbPlan.ValueMember = "ID";
-        }
-
+        #region METODOS
         public override void MapearADatos()
         {
             if (this.Modo == ModoForm.Alta)
@@ -91,14 +83,185 @@ namespace UI.Desktop
             this.MapearADatos();
 
             UsuarioDesktop usuarioDesktop = new UsuarioDesktop(PersonaActual);
-            usuarioDesktop.Show();
-            
+            usuarioDesktop.Show();      
   
+        }
+
+        public bool Validar()
+        {
+
+           if (cmbTipo.SelectedIndex == -1)
+           {
+                this.Notificar("Usuario no válido", "Debe seleccionar un tipo de usuario.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+           }
+           else if (this.CamposVacios())
+           {
+                this.Notificar("Campos vacíos", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+           }
+           else if (!(Validaciones.EmailValido(txtEmail.Text)))
+           {
+                this.Notificar("Email no válido", "Por favor, ingrese un formato de mail válido.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+           }
+
+
+           return true;      
+        }
+
+        public bool CamposVacios()
+        {
+            if (txtApellido.Text == " ")
+            {
+                return false;
+            }
+            else if (txtNombre.Text == " ")
+            {
+                return false;
+            }
+            else if (txtNombre.Text == " ")
+            {
+                return false;
+            }
+            else if (txtDireccion.Text == " ")
+            {
+                return false;
+            }
+            else if (txtDireccionNum.Text == " ")
+            {
+                return false;
+            }
+            else if(txtEmail.Text == " ")
+            {
+                return false;
+            }
+            else if ((cmbTipo.SelectedItem.ToString() == "Docente" || cmbTipo.SelectedItem.ToString() == "Alumno") && txtLegajo.Text == " ")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+        private void CmbCarrera_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //Obtiene el objeto seleccionado del combobox
+            Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
+
+            PlanLogic plan = new PlanLogic();
+            cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
+            cmbPlan.DisplayMember = "Descripcion";
+            cmbPlan.ValueMember = "ID";
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            this.GuardarCambios();
+            if (this.Validar())
+            {
+                this.GuardarCambios();
+            }
         }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TxtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Verifica que solo se puedan ingresar números en telefono
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtLegajo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Verifica que solo se puedan ingresar números en el legajo
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtDireccionNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Verifica que solo se puedan ingresar números en la direccion
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtDireccion_Enter(object sender, EventArgs e)
+        {
+            if (txtDireccion.Text == "Calle")
+            {
+                txtDireccion.Text = "";
+                txtDireccion.ForeColor = Color.Black;
+            }
+        }
+
+        private void TxtDireccion_Leave(object sender, EventArgs e)
+        {
+            if (txtDireccion.Text == "")
+            {
+                txtDireccion.Text = "Calle";
+                txtDireccion.ForeColor = Color.Silver;
+            }
+        }
+
+        private void TxtDireccionNum_Enter(object sender, EventArgs e)
+        {
+            if (txtDireccionNum.Text == "Nro")
+            {
+                txtDireccionNum.Text = "";
+                txtDireccionNum.ForeColor = Color.Black;
+            }
+        }
+
+        private void TxtDireccionNum_Leave(object sender, EventArgs e)
+        {
+            if (txtDireccionNum.Text == "")
+            {
+                txtDireccionNum.Text = "Nro";
+                txtDireccionNum.ForeColor = Color.Silver;
+            }
+        }
+
+        private void CmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTipo.SelectedItem.ToString() == "Administrador")
+            {
+                txtLegajo.Enabled = false;
+                txtLegajo.Text = "";
+                cmbCarrera.Enabled = false;
+                cmbCarrera.Text = "";
+                cmbPlan.Enabled = false;
+                cmbPlan.Text = "";
+            }
+            else if (cmbTipo.SelectedItem.ToString() == "Docente")
+            {
+                cmbCarrera.Enabled = false;
+                cmbPlan.Enabled = false;
+                txtLegajo.Enabled = true;
+
+                cmbCarrera.Text = "";
+                cmbPlan.Text = "";
+            }
+            else
+            {
+                cmbCarrera.Enabled = true;
+                cmbPlan.Enabled = true;
+                txtLegajo.Enabled = true;
+            }
+        }
+        #endregion
     }
 }

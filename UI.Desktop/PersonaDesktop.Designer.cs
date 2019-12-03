@@ -77,11 +77,11 @@
             this.tableLayoutPanel5.ColumnCount = 3;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.8612F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.1388F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbCarrera, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbPlan, 2, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(11, 456);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(10, 455);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -104,10 +104,10 @@
             this.cmbCarrera.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbCarrera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCarrera.FormattingEnabled = true;
-            this.cmbCarrera.Location = new System.Drawing.Point(106, 11);
+            this.cmbCarrera.Location = new System.Drawing.Point(105, 11);
             this.cmbCarrera.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmbCarrera.Name = "cmbCarrera";
-            this.cmbCarrera.Size = new System.Drawing.Size(216, 30);
+            this.cmbCarrera.Size = new System.Drawing.Size(212, 30);
             this.cmbCarrera.TabIndex = 2;
             this.cmbCarrera.Text = "Especialidad";
             this.cmbCarrera.SelectedValueChanged += new System.EventHandler(this.CmbCarrera_SelectedValueChanged);
@@ -117,7 +117,7 @@
             this.cmbPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlan.FormattingEnabled = true;
-            this.cmbPlan.Location = new System.Drawing.Point(328, 11);
+            this.cmbPlan.Location = new System.Drawing.Point(323, 11);
             this.cmbPlan.Name = "cmbPlan";
             this.cmbPlan.Size = new System.Drawing.Size(73, 30);
             this.cmbPlan.TabIndex = 3;
@@ -131,7 +131,7 @@
             this.tableLayoutPanel4.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.txtLegajo, 1, 0);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(11, 401);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(10, 402);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.57831F));
@@ -156,6 +156,7 @@
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(174, 30);
             this.txtLegajo.TabIndex = 1;
+            this.txtLegajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtLegajo_KeyPress);
             // 
             // tableLayoutPanel3
             // 
@@ -164,7 +165,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.34043F));
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.dtpNacimiento, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(11, 349);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(10, 349);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -209,13 +210,14 @@
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(169, 535);
+            this.btnCancelar.Location = new System.Drawing.Point(170, 535);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(98, 42);
             this.btnCancelar.TabIndex = 14;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -235,7 +237,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtDireccionNum, 2, 3);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(11, 70);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 69);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -270,6 +272,8 @@
             this.txtDireccion.TabIndex = 3;
             this.txtDireccion.Tag = "";
             this.txtDireccion.Text = "Calle";
+            this.txtDireccion.Enter += new System.EventHandler(this.TxtDireccion_Enter);
+            this.txtDireccion.Leave += new System.EventHandler(this.TxtDireccion_Leave);
             // 
             // txtApellido
             // 
@@ -307,6 +311,7 @@
             this.cmbTipo.Size = new System.Drawing.Size(272, 30);
             this.cmbTipo.TabIndex = 0;
             this.cmbTipo.Text = "Seleccione una opción";
+            this.cmbTipo.SelectedIndexChanged += new System.EventHandler(this.CmbTipo_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -370,6 +375,9 @@
             this.txtDireccionNum.Size = new System.Drawing.Size(84, 30);
             this.txtDireccionNum.TabIndex = 4;
             this.txtDireccionNum.Text = "Nro";
+            this.txtDireccionNum.Enter += new System.EventHandler(this.TxtDireccionNum_Enter);
+            this.txtDireccionNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtDireccionNum_KeyPress);
+            this.txtDireccionNum.Leave += new System.EventHandler(this.TxtDireccionNum_Leave);
             // 
             // tableLayoutPanel2
             // 
@@ -378,7 +386,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.48804F));
             this.tableLayoutPanel2.Controls.Add(this.txtTelefono, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(11, 299);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 298);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -394,6 +402,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(270, 30);
             this.txtTelefono.TabIndex = 0;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTelefono_KeyPress);
             // 
             // label6
             // 
@@ -411,7 +420,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label10.Location = new System.Drawing.Point(99, 16);
+            this.label10.Location = new System.Drawing.Point(99, 15);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(239, 32);
             this.label10.TabIndex = 8;
@@ -420,9 +429,10 @@
             // 
             // FormPersonaDesktop
             // 
+            this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 591);
+            this.ClientSize = new System.Drawing.Size(452, 591);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
