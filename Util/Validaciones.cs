@@ -22,5 +22,13 @@ namespace Util
                 return false;
             }
         }
+        public static Boolean ValidarContraseña(string clave, int num)
+        {
+            if (clave.Length < num)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

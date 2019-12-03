@@ -83,6 +83,7 @@ namespace UI.Desktop
             this.MapearADatos();
 
             UsuarioDesktop usuarioDesktop = new UsuarioDesktop(PersonaActual);
+            this.Hide();
             usuarioDesktop.Show();      
   
         }
@@ -95,7 +96,7 @@ namespace UI.Desktop
                 this.Notificar("Usuario no válido", "Debe seleccionar un tipo de usuario.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
            }
-           else if (this.CamposVacios())
+           else if (!this.CamposVacios())
            {
                 this.Notificar("Campos vacíos", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

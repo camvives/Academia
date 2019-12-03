@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Util;
 
 namespace UI.Desktop
 {
@@ -27,6 +28,7 @@ namespace UI.Desktop
             PersonaActual = persona;
         }
 
+        #region METODOS
         public override void MapearADatos()
         {
             if (this.Modo == ModoForm.Alta)
@@ -44,14 +46,79 @@ namespace UI.Desktop
 
         public void GuardarCambios()
         {
-            this.MapearADatos();
-            UsuarioLogic usuarioLogic = new UsuarioLogic();
-            usuarioLogic.Save(UsuarioActual, PersonaActual);
+            try
+            {
+                this.MapearADatos();
+                UsuarioLogic usuarioLogic = new UsuarioLogic();
+                usuarioLogic.Save(UsuarioActual, PersonaActual);
+                this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.OpenForms["FormPersonaDesktop"].Close();
+                this.Close();
+                
+            }
+            catch
+            {
+                this.Notificar("Error", "Error al registrar usuario, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        public bool Validar()
+        {
+            if (!this.CamposVacios())
+            {
+                this.Notificar("Campos vacíos", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (txtClave.Text != txtConfirmarClave.Text)
+            {
+                this.Notificar("Verifique su contraseña", "Las contraseñas no coinciden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (Validaciones.ValidarContraseña(txtClave.Text, 8))
+            {
+                this.Notificar("Verifique su contraseña", "La contraseña debe contener al menos 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CamposVacios()
+        {
+            if (txtUsuario.Text == " ")
+            {
+                return false;
+            }
+            else if (txtClave.Text == " ")
+            {
+                return false;
+            }
+            else if(txtConfirmarClave.Text == " ")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
+        #region ELEMENTOS DEL FORM
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            this.GuardarCambios();
+            if (this.Validar())
+            {
+                this.GuardarCambios();
+            }
         }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Application.OpenForms["FormPersonaDesktop"].Close();
+            this.Close();
+        }
+
+        #endregion
     }
 }
