@@ -21,5 +21,11 @@ namespace Business.Logic
         {
             UsuarioData.Save(usuario, persona);
         }
+
+        public (List<Usuario>, List<Persona>) GetAll()
+        {
+            return UsuarioData.GetAll();
+        }
+
     }
 }

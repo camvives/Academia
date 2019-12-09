@@ -89,5 +89,55 @@ namespace Data.Database
             }
 
         }
+
+        public (List<Usuario>, List<Persona>) GetAll()
+        {
+            List<Persona> personas = new List<Persona>();
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdUsuarios = new SqlCommand("SELECT * FROM usuarios us INNER JOIN personas per ON us.id_persona = per.id_persona", sqlConn);
+                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
+
+                while (drUsuarios.Read())
+                {
+                    Usuario usr = new Usuario();
+                    Persona per = new Persona();
+
+                    usr.ID = (int)drUsuarios["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
+                    usr.Clave = (string)drUsuarios["clave"];
+                    usr.Habilitado = (bool)drUsuarios["habilitado"];
+
+                    per.ID = (int)drUsuarios["id_persona"];
+                    per.Apellido = (string)drUsuarios["apellido"];
+                    per.Nombre = (string)drUsuarios["nombre"];
+                    per.Direccion = (string)drUsuarios["direccion"];
+                    per.Email = (string)drUsuarios["email"];
+                    per.Telefono = (string)drUsuarios["telefono"];
+                    per.FechaNacimiento = (DateTime)drUsuarios["fecha_nac"];
+                    //per.Legajo = (int)drUsuarios["legajo"];
+                    ////AGREGAR TIPO PERSONA
+                    //per.IDPlan = (int)drUsuarios["id_plan"];
+
+                    personas.Add(per);
+                    usuarios.Add(usr);
+                }
+
+                drUsuarios.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return (usuarios, personas);
+            
+        }
     }
 }
