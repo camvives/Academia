@@ -97,7 +97,9 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdUsuarios = new SqlCommand("SELECT * FROM usuarios us INNER JOIN personas per ON us.id_persona = per.id_persona", sqlConn);
+                SqlCommand cmdUsuarios = new SqlCommand("SELECT * FROM usuarios us " +
+                                                        "INNER JOIN personas per " +
+                                                        "ON us.id_persona = per.id_persona", sqlConn);
                 SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
 
                 while (drUsuarios.Read())
@@ -117,10 +119,25 @@ namespace Data.Database
                     per.Email = (string)drUsuarios["email"];
                     per.Telefono = (string)drUsuarios["telefono"];
                     per.FechaNacimiento = (DateTime)drUsuarios["fecha_nac"];
-                    //per.Legajo = (int)drUsuarios["legajo"];
-                    ////AGREGAR TIPO PERSONA
-                    //per.IDPlan = (int)drUsuarios["id_plan"];
+                    per.TipoPersona = (Persona.TiposPersonas)(int)drUsuarios["tipo_persona"];
 
+                    if(drUsuarios["legajo"] is DBNull)
+                    {
+                        per.Legajo = 0;
+                    }
+                    else
+                    {
+                        per.Legajo = Convert.ToInt32(drUsuarios["legajo"]);
+                    }
+                    
+                    if(drUsuarios["id_plan"] is DBNull)
+                    {
+                        per.IDPlan = 0;
+                    }
+                    else
+                    {
+                        per.IDPlan = Convert.ToInt32(drUsuarios["id_plan"]);
+                    }
                     personas.Add(per);
                     usuarios.Add(usr);
                 }
