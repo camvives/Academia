@@ -117,31 +117,31 @@ namespace UI.Desktop
 
         public bool CamposVacios()
         {
-            if (txtApellido.Text == " ")
+            if (string.IsNullOrEmpty(txtApellido.Text))
             {
                 return false;
             }
-            else if (txtNombre.Text == " ")
+            else if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 return false;
             }
-            else if (txtNombre.Text == " ")
+            else if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 return false;
             }
-            else if (txtDireccion.Text == " ")
+            else if (string.IsNullOrEmpty(txtDireccion.Text))
             {
                 return false;
             }
-            else if (txtDireccionNum.Text == " ")
+            else if (string.IsNullOrEmpty(txtDireccionNum.Text))
             {
                 return false;
             }
-            else if(txtEmail.Text == " ")
+            else if(string.IsNullOrEmpty(txtEmail.Text))
             {
                 return false;
             }
-            else if ((cmbTipo.SelectedItem.ToString() == "Docente" || cmbTipo.SelectedItem.ToString() == "Alumno") && txtLegajo.Text == " ")
+            else if ((cmbTipo.SelectedItem.ToString() == "Docente" || cmbTipo.SelectedItem.ToString() == "Alumno") && string.IsNullOrEmpty(txtLegajo.Text))
             {
                 return false;
             }

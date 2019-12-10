@@ -37,39 +37,6 @@ namespace UI.Desktop
             }
         }
 
-        private void FormUsuarios_Load(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
-        private void BtnActualizar_Click(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
-        private void BtnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void TsbNuevo_Click(object sender, EventArgs e)
-        {
-            this.Enabled = false;
-            FormPersonaDesktop persona = new FormPersonaDesktop();
-            persona.ShowDialog();
-            if (persona.DialogResult == DialogResult.OK)
-            {
-                this.Enabled = true;
-                this.Focus();
-            }
-            this.Listar();
-        }
-
-        private void TsbInformacion_Click(object sender, EventArgs e)
-        {
-            this.MostrarDatos();
-        }
-
         public void MostrarDatos()
         {
             UsuarioLogic ul = new UsuarioLogic();
@@ -96,7 +63,7 @@ namespace UI.Desktop
             }
 
             string plandesc;
-            if(plan.Descripcion is null)
+            if (plan.Descripcion is null)
             {
                 plandesc = "-";
             }
@@ -106,7 +73,7 @@ namespace UI.Desktop
             }
 
             string espdesc;
-            if(especialidad.Descripcion is null)
+            if (especialidad.Descripcion is null)
             {
                 espdesc = "-";
             }
@@ -116,7 +83,7 @@ namespace UI.Desktop
             }
 
             string leg;
-            if(persona.Legajo == 0)
+            if (persona.Legajo == 0)
             {
                 leg = "-";
             }
@@ -137,10 +104,84 @@ namespace UI.Desktop
                             "Teléfono: " + persona.Telefono + "\n" +
                             "Fecha de Nacimiento: " + persona.FechaNacimiento.ToString("dd/MM/yyyy") + "\n" +
                             "Tipo: " + persona.TipoPersona.ToString() + "\n" +
-                            "Legajo: " + leg+ "\n" +  
-                            "Carrera: " + espdesc + "\n"+
-                            "Plan: "+ plandesc,
+                            "Legajo: " + leg + "\n" +
+                            "Carrera: " + espdesc + "\n" +
+                            "Plan: " + plandesc,
                             "Datos del Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void EliminarUsuario()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                Usuario usuario;
+                Persona persona;
+                int ID = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
+                (usuario, persona) = ul.GetOne(ID);
+
+                ul.Delete(usuario.ID, persona.ID);
+            }
+            catch
+            {
+                MessageBox.Show("Error", "Error al eliminar usuario, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        #region ELEMENTOS DEL FORM
+
+        private void FormUsuarios_Load(object sender, EventArgs e)
+        {
+            this.Listar();
+        }
+
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            this.Listar();
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TsbNuevo_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            FormPersonaDesktop persona = new FormPersonaDesktop();
+            persona.ShowDialog();
+            if (persona.DialogResult == DialogResult.OK || persona.DialogResult == DialogResult.Cancel)
+            {
+                this.Enabled = true;
+                this.Focus();
+            }
+           
+            this.Listar();
+        }
+
+        private void TsbInformacion_Click(object sender, EventArgs e)
+        {
+            this.MostrarDatos();
+        }
+
+        private void TsbEliminar_Click(object sender, EventArgs e)
+        {
+            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar al Usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (mensaje == DialogResult.Yes)
+            {
+                this.EliminarUsuario();
+                MessageBox.Show("El usuario se ha eliminado", "Eliminar Usuario");
+                this.Listar();
+            }
+        }
+        #endregion
+
+
+
+
+
     }
 }

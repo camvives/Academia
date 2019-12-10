@@ -83,15 +83,15 @@ namespace UI.Desktop
 
         public bool CamposVacios()
         {
-            if (txtUsuario.Text == " ")
+            if (string.IsNullOrEmpty(txtUsuario.Text))
             {
                 return false;
             }
-            else if (txtClave.Text == " ")
+            else if (string.IsNullOrEmpty(txtClave.Text))
             {
                 return false;
             }
-            else if(txtConfirmarClave.Text == " ")
+            else if(string.IsNullOrEmpty(txtConfirmarClave.Text))
             {
                 return false;
             }

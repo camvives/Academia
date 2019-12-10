@@ -193,5 +193,27 @@ namespace Data.Database
 
             return (usr, per);
         }
+
+        public void Delete(int IdUsr, int IdPer)
+        {
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdDeleteUsr = new SqlCommand("DELETE usuarios WHERE id_usuario=@id", sqlConn);
+                SqlCommand cmdDeletePer = new SqlCommand("DELETE personas WHERE id_persona=@idper", sqlConn);
+                cmdDeleteUsr.Parameters.AddWithValue("@id", IdUsr);
+                cmdDeletePer.Parameters.AddWithValue("@idper", IdPer);
+                cmdDeleteUsr.ExecuteNonQuery();
+                cmdDeletePer.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+        }
     }
 }
