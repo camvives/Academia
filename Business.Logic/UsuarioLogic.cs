@@ -27,5 +27,10 @@ namespace Business.Logic
             return UsuarioData.GetAll();
         }
 
+        public (Usuario, Persona) GetOne(int id)
+        {
+            return UsuarioData.GetOne(id);
+        }
+
     }
 }

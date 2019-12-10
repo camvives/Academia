@@ -17,8 +17,8 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            //try
-            //{
+            try
+            {
                 dgvUsuarios.Rows.Clear();
                 UsuarioLogic ul = new UsuarioLogic();
                 List<Persona> personas;
@@ -29,12 +29,12 @@ namespace UI.Desktop
                 {
                     dgvUsuarios.Rows.Add(usr.b.ID, usr.a.Nombre, usr.a.Apellido, usr.b.NombreUsuario, usr.a.Email, usr.b.Habilitado);
                 }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Error al recuperar la lista de usuarios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    this.Close();
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Error al recuperar la lista de usuarios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void FormUsuarios_Load(object sender, EventArgs e)
@@ -57,6 +57,59 @@ namespace UI.Desktop
             this.Enabled = false;
             FormPersonaDesktop persona = new FormPersonaDesktop();
             persona.ShowDialog();
+            this.Enabled = true;
+        }
+
+        private void TsbInformacion_Click(object sender, EventArgs e)
+        {
+            this.MostrarDatos();
+        }
+
+        public void MostrarDatos()
+        {
+            UsuarioLogic ul = new UsuarioLogic();
+            Usuario usuario;
+            Persona persona;
+            int ID = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
+            (usuario, persona) = ul.GetOne(ID);
+
+            string hab;
+            if (usuario.Habilitado == true)
+            {
+                hab = "Sí";
+            }
+            else
+            {
+                hab = "No";
+            }
+
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(persona.IDPlan);
+
+            string plandesc;
+            if(plan.Descripcion is null)
+            {
+                plandesc = "-";
+            }
+            else
+            {
+                plandesc = plan.Descripcion;
+            }
+
+            MessageBox.Show("ID: " + usuario.ID + "\n" +
+                            "Nombre de Usuario: " + usuario.NombreUsuario + "\n" +
+                            "Habilitado: " + hab + "\n" +
+                            "\n" +
+                            "Nombre: " + persona.Nombre + "\n" +
+                            "Apellido: " + persona.Apellido + "\n" +
+                            "Dirección: " + persona.Direccion + "\n" +
+                            "Email: " + persona.Email + "\n" +
+                            "Teléfono: " + persona.Telefono + "\n" +
+                            "Fecha de Nacimiento: " + persona.FechaNacimiento.ToString("dd/MM/yyyy") + "\n" +
+                            "Legajo: " + persona.Legajo + "\n" +
+                            "Tipo: " + persona.TipoPersona.ToString() + "\n" +
+                            "Plan: "+ plandesc,
+                            "Datos del Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

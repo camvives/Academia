@@ -109,35 +109,12 @@ namespace Data.Database
 
                     usr.ID = (int)drUsuarios["id_usuario"];
                     usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-                    usr.Clave = (string)drUsuarios["clave"];
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
 
-                    per.ID = (int)drUsuarios["id_persona"];
                     per.Apellido = (string)drUsuarios["apellido"];
                     per.Nombre = (string)drUsuarios["nombre"];
-                    per.Direccion = (string)drUsuarios["direccion"];
                     per.Email = (string)drUsuarios["email"];
-                    per.Telefono = (string)drUsuarios["telefono"];
-                    per.FechaNacimiento = (DateTime)drUsuarios["fecha_nac"];
-                    per.TipoPersona = (Persona.TiposPersonas)(int)drUsuarios["tipo_persona"];
-
-                    if(drUsuarios["legajo"] is DBNull)
-                    {
-                        per.Legajo = 0;
-                    }
-                    else
-                    {
-                        per.Legajo = Convert.ToInt32(drUsuarios["legajo"]);
-                    }
                     
-                    if(drUsuarios["id_plan"] is DBNull)
-                    {
-                        per.IDPlan = 0;
-                    }
-                    else
-                    {
-                        per.IDPlan = Convert.ToInt32(drUsuarios["id_plan"]);
-                    }
                     personas.Add(per);
                     usuarios.Add(usr);
                 }
@@ -155,6 +132,66 @@ namespace Data.Database
 
             return (usuarios, personas);
             
+        }
+
+        public (Usuario, Persona) GetOne(int id)
+        {
+            Usuario usr = new Usuario();
+            Persona per = new Persona();
+
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM usuarios us " +
+                                                       "INNER JOIN personas per " +
+                                                       "ON us.id_persona = per.id_persona " +
+                                                       "WHERE @id = us.id_usuario", sqlConn);
+                cmdUsuario.Parameters.AddWithValue("@id", id);
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
+
+                if (drUsuario.Read())
+                {
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    usr.Habilitado = (bool)drUsuario["habilitado"];
+                    
+                    per.Apellido = (string)drUsuario["apellido"];
+                    per.Nombre = (string)drUsuario["nombre"];
+                    per.Direccion = (string)drUsuario["direccion"];
+                    per.Email = (string)drUsuario["email"];
+                    per.Telefono = (string)drUsuario["telefono"];
+                    per.FechaNacimiento = (DateTime)drUsuario["fecha_nac"];
+                    per.TipoPersona = (Persona.TiposPersonas)(int)drUsuario["tipo_persona"];
+
+                    if (drUsuario["legajo"] is DBNull)
+                    {
+                        per.Legajo = '-';
+                    }
+                    else
+                    {
+                        per.Legajo = Convert.ToInt32(drUsuario["legajo"]);
+                    }
+
+                    if (drUsuario["id_plan"] is DBNull)
+                    {
+                        per.IDPlan = '-';
+                    }
+                    else
+                    {
+                        per.IDPlan = Convert.ToInt32(drUsuario["id_plan"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return (usr, per);
         }
     }
 }
