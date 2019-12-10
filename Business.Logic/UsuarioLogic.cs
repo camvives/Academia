@@ -32,10 +32,5 @@ namespace Business.Logic
             return UsuarioData.GetOne(id);
         }
 
-        public void Delete(int IdUsr, int IdPer)
-        {
-            UsuarioData.Delete(IdUsr, IdPer);
-        }
-
     }
 }

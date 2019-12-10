@@ -120,7 +120,8 @@ namespace UI.Desktop
                 int ID = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
                 (usuario, persona) = ul.GetOne(ID);
 
-                ul.Delete(usuario.ID, persona.ID);
+                usuario.State = BusinessEntity.States.Deleted;
+                ul.Save(usuario, persona);
             }
             catch
             {

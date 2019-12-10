@@ -17,6 +17,10 @@ namespace Data.Database
             {
                 this.Insert(usuario, persona);
             }
+            else if (usuario.State == BusinessEntity.States.Deleted)
+            {
+                this.Delete(usuario.ID, persona.ID);
+            }
         }
 
         public void Insert(Usuario usuario, Persona persona)
