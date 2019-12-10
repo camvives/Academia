@@ -84,8 +84,12 @@ namespace UI.Desktop
 
             UsuarioDesktop usuarioDesktop = new UsuarioDesktop(PersonaActual);
             this.Hide();
-            usuarioDesktop.Show();      
-  
+            usuarioDesktop.ShowDialog();
+            if (usuarioDesktop.DialogResult == DialogResult.OK)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+ 
         }
 
         public bool Validar()

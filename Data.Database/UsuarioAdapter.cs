@@ -165,7 +165,7 @@ namespace Data.Database
 
                     if (drUsuario["legajo"] is DBNull)
                     {
-                        per.Legajo = '-';
+                        per.Legajo = 0;
                     }
                     else
                     {
@@ -174,7 +174,7 @@ namespace Data.Database
 
                     if (drUsuario["id_plan"] is DBNull)
                     {
-                        per.IDPlan = '-';
+                        per.IDPlan = 0;
                     }
                     else
                     {

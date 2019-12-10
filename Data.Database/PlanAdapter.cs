@@ -27,6 +27,7 @@ namespace Data.Database
                 {
                     plan.ID = (int)drPlanes["id_plan"];
                     plan.Descripcion = (string)drPlanes["desc_plan"];
+                    plan.IDEspecialidad = (int)drPlanes["id_especialidad"];
                 }
 
                 drPlanes.Close();

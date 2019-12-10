@@ -52,9 +52,7 @@ namespace UI.Desktop
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
                 usuarioLogic.Save(UsuarioActual, PersonaActual);
                 this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.OpenForms["FormPersonaDesktop"].Close();
-                this.Close();
-                
+                this.DialogResult = DialogResult.OK;
             }
             catch
             {
