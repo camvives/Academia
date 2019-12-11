@@ -16,11 +16,13 @@ namespace UI.Desktop
     public partial class FormPersonaDesktop : ApplicationForm
     {
         public Persona PersonaActual { get; set; }
+        public Usuario UsuarioActual { get; set; }
 
         public FormPersonaDesktop()
         {
             InitializeComponent();
         }
+
         public FormPersonaDesktop(int id, ModoForm modo):this()
         {
             Modo = modo;
@@ -28,7 +30,7 @@ namespace UI.Desktop
 
             try
             {
-                (_, PersonaActual) = ul.GetOne(id);
+                (UsuarioActual, PersonaActual) = ul.GetOne(id);
                 this.MapearDeDatos();
             }
             catch
@@ -40,62 +42,64 @@ namespace UI.Desktop
 
         private void FormPersonaDesktop_Load(object sender, EventArgs e)
         {
+            if (Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }         
+        }
+
+
+        #region METODOS
+
+        public void CompletarCombobox()
+        {
             EspecialidadLogic especialidad = new EspecialidadLogic();
 
             //Completa el combobox de carrera con la descripcion de la tabla especialidades
             cmbCarrera.DataSource = especialidad.GetAll();
             cmbCarrera.DisplayMember = "Descripcion";
             cmbCarrera.ValueMember = "ID";
-            if(Modo == ModoForm.Modificacion)
-            {
-                this.cmbCarrera.Text = "";
-                this.cmbPlan.Text = "";
-            }
-            
         }
 
-
-        #region METODOS
         public override void MapearADatos()
         {
-            if (this.Modo == ModoForm.Alta)
+         
+            if(Modo == ModoForm.Alta)
             {
                 PersonaActual = new Persona();
+            }
 
-                this.PersonaActual.Nombre = this.txtNombre.Text;
-                this.PersonaActual.Apellido = this.txtApellido.Text;
-                this.PersonaActual.Email = this.txtEmail.Text;
-                this.PersonaActual.Direccion = this.txtDireccion.Text + ' ' + this.txtDireccionNum.Text;
-                this.PersonaActual.Telefono = this.txtTelefono.Text;
-                this.PersonaActual.FechaNacimiento = dtpNacimiento.Value;
+            this.PersonaActual.Nombre = this.txtNombre.Text;
+            this.PersonaActual.Apellido = this.txtApellido.Text;
+            this.PersonaActual.Email = this.txtEmail.Text;
+            this.PersonaActual.Direccion = this.txtDireccion.Text + ' ' + this.txtDireccionNum.Text;
+            this.PersonaActual.Telefono = this.txtTelefono.Text;
+            this.PersonaActual.FechaNacimiento = dtpNacimiento.Value;
 
-                //DE ACUERDO AL TIPO DE USUARIO
-                if (cmbTipo.SelectedItem.ToString() == "Alumno")
-                {
-                    this.PersonaActual.TipoPersona = Persona.TiposPersonas.Alumno;
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
+            //DE ACUERDO AL TIPO DE USUARIO
+            if (cmbTipo.SelectedItem.ToString() == "Alumno")
+            {
+                this.PersonaActual.TipoPersona = Persona.TiposPersonas.Alumno;
+                this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
 
-                    //Obtiene el objeto seleccionado del combobox Planes
-                    Plan plan = (Plan)cmbPlan.SelectedItem; 
-                    PlanLogic planLogic = new PlanLogic();
-                    this.PersonaActual.IDPlan = planLogic.GetOne(plan.ID).ID;
-                }
+                //Obtiene el objeto seleccionado del combobox Planes
+                Plan plan = (Plan)cmbPlan.SelectedItem;
+                PlanLogic planLogic = new PlanLogic();
+                this.PersonaActual.IDPlan = planLogic.GetOne(plan.ID).ID;
+            }
 
-                else if (cmbTipo.SelectedItem.ToString() == "Administrador")
-                {
-                    this.PersonaActual.TipoPersona = Persona.TiposPersonas.Administrador;
-                    this.PersonaActual.Legajo = 0;
-                    this.PersonaActual.IDPlan = 0;
-                }
+            else if (cmbTipo.SelectedItem.ToString() == "Administrador")
+            {
+                this.PersonaActual.TipoPersona = Persona.TiposPersonas.Administrador;
+                this.PersonaActual.Legajo = 0;
+                this.PersonaActual.IDPlan = 0;
+            }
 
-                else if (cmbTipo.SelectedItem.ToString() == "Docente")
-                {
-                    this.PersonaActual.TipoPersona = Persona.TiposPersonas.Docente;
-                    this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
-                    this.PersonaActual.IDPlan = 0;
-                }
-
-                this.PersonaActual.State = BusinessEntity.States.New;
+            else if (cmbTipo.SelectedItem.ToString() == "Docente")
+            {
+                this.PersonaActual.TipoPersona = Persona.TiposPersonas.Docente;
+                this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
+                this.PersonaActual.IDPlan = 0;
             }
 
         }
@@ -112,11 +116,31 @@ namespace UI.Desktop
             this.txtEmail.Text = this.PersonaActual.Email;
             this.dtpNacimiento.Value = this.PersonaActual.FechaNacimiento;
             this.txtTelefono.Text = this.PersonaActual.Telefono;
+            this.cmbTipo.SelectedIndex = cmbTipo.FindStringExact(this.PersonaActual.TipoPersona.ToString());
 
+            #region Direccion
             txtDireccion.ForeColor = Color.Black;
             txtDireccionNum.ForeColor = Color.Black;
-            this.txtDireccion.Text = this.PersonaActual.Direccion;
-     
+
+            string direccion = string.Empty;
+            string numdir = string.Empty;
+
+            //Separa numeros de la dirección
+            foreach (char c in PersonaActual.Direccion)
+            {
+                if (Char.IsLetter(c))
+                {
+                    direccion += c;
+                }
+                if (Char.IsNumber(c))
+                {
+                    numdir += c;
+                }
+            }
+            this.txtDireccion.Text = direccion;
+            this.txtDireccionNum.Text = numdir;
+            #endregion
+
             if (PersonaActual.Legajo != 0)
             {
                 this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
@@ -132,16 +156,12 @@ namespace UI.Desktop
                 this.cmbPlan.Enabled = false;
             }
             
-            this.cmbTipo.Text = this.PersonaActual.TipoPersona.ToString();
-            this.cmbTipo.SelectedItem = this.PersonaActual.TipoPersona;
-
-            this.cmbPlan.Text = plan.Descripcion;
-            this.cmbPlan.SelectedItem = plan.Descripcion;
-
-            this.cmbCarrera.Text = especialidad.Descripcion;
-            this.cmbCarrera.Text = especialidad.Descripcion;
-          
-
+            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+            {
+                this.CompletarCombobox();
+                this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
+                this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+            }
 
             if (this.Modo == ModoForm.Modificacion)
             {
@@ -153,14 +173,23 @@ namespace UI.Desktop
         {
             this.MapearADatos();
 
-            UsuarioDesktop usuarioDesktop = new UsuarioDesktop(PersonaActual);
+            UsuarioDesktop usuarioDesktop;
+            if(Modo == ModoForm.Modificacion)
+            {
+               usuarioDesktop = new UsuarioDesktop(UsuarioActual, PersonaActual, Modo);
+            }
+            else
+            {
+                usuarioDesktop = new UsuarioDesktop(PersonaActual);
+            }
+
             this.Hide();
             usuarioDesktop.ShowDialog();
+
             if (usuarioDesktop.DialogResult == DialogResult.OK)
             {
                 this.DialogResult = DialogResult.OK;
             }
- 
         }
 
         public bool Validar()
@@ -196,7 +225,7 @@ namespace UI.Desktop
             {
                 return false;
             }
-            else if (string.IsNullOrEmpty(txtNombre.Text))
+            else if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 return false;
             }
@@ -333,6 +362,7 @@ namespace UI.Desktop
             }
             else
             {
+                this.CompletarCombobox();
                 cmbCarrera.Enabled = true;
                 cmbPlan.Enabled = true;
                 txtLegajo.Enabled = true;

@@ -21,6 +21,10 @@ namespace Data.Database
             {
                 this.Delete(usuario.ID, persona.ID);
             }
+            else if(usuario.State == BusinessEntity.States.Modified)
+            {
+                this.Update(usuario, persona);
+            }
         }
 
         public void Insert(Usuario usuario, Persona persona)
@@ -158,7 +162,9 @@ namespace Data.Database
                     usr.ID = (int)drUsuario["id_usuario"];
                     usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
                     usr.Habilitado = (bool)drUsuario["habilitado"];
-                    
+                    usr.Clave = (string)drUsuario["clave"];
+
+                    per.ID = (int)drUsuario["id_persona"];
                     per.Apellido = (string)drUsuario["apellido"];
                     per.Nombre = (string)drUsuario["nombre"];
                     per.Direccion = (string)drUsuario["direccion"];
@@ -173,7 +179,7 @@ namespace Data.Database
                     }
                     else
                     {
-                        per.Legajo = Convert.ToInt32(drUsuario["legajo"]);
+                        per.Legajo = (int)drUsuario["legajo"];
                     }
 
                     if (drUsuario["id_plan"] is DBNull)
@@ -182,7 +188,7 @@ namespace Data.Database
                     }
                     else
                     {
-                        per.IDPlan = Convert.ToInt32(drUsuario["id_plan"]);
+                        per.IDPlan = (int)drUsuario["id_plan"];
                     }
                 }
             }
@@ -200,24 +206,120 @@ namespace Data.Database
 
         public void Delete(int IdUsr, int IdPer)
         {
+            this.OpenConnection();
+            SqlCommand cmdDeleteUsr = sqlConn.CreateCommand();
+            SqlTransaction transaction = sqlConn.BeginTransaction("DeleteUsuario");
+            cmdDeleteUsr.Transaction = transaction;
+
             try
-            {
-                this.OpenConnection();
-                SqlCommand cmdDeleteUsr = new SqlCommand("DELETE usuarios WHERE id_usuario=@id", sqlConn);
-                SqlCommand cmdDeletePer = new SqlCommand("DELETE personas WHERE id_persona=@idper", sqlConn);
+            {          
+                cmdDeleteUsr.CommandText = "DELETE FROM usuarios WHERE id_usuario=@id";
                 cmdDeleteUsr.Parameters.AddWithValue("@id", IdUsr);
-                cmdDeletePer.Parameters.AddWithValue("@idper", IdPer);
                 cmdDeleteUsr.ExecuteNonQuery();
-                cmdDeletePer.ExecuteNonQuery();
+
+                cmdDeleteUsr.CommandText = "DELETE FROM personas WHERE id_persona=@idper";                
+                cmdDeleteUsr.Parameters.AddWithValue("@idper", IdPer);
+                cmdDeleteUsr.ExecuteNonQuery();
+
+                transaction.Commit();
             }
             catch (Exception ex)
             {
-                throw ex;
-            }
-            finally
-            {
-                this.CloseConnection();
+                try
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+                catch (Exception ex2)
+                {
+                    throw ex2;
+                }
             }
         }
+
+        public void Update(Usuario usuario, Persona persona)
+        {
+
+            this.OpenConnection();
+
+            SqlCommand cmdUsuario = sqlConn.CreateCommand();
+            SqlTransaction transaction = sqlConn.BeginTransaction("UpdateUsuario");
+            cmdUsuario.Transaction = transaction;
+
+            try
+            {
+                #region UPDATE PERSONA
+                cmdUsuario.CommandText = "UPDATE personas SET nombre = @nombre," +
+                                                            " apellido = @apellido," +
+                                                            " direccion = @direccion," +
+                                                            " email = @email," +
+                                                            " telefono = @telefono," +
+                                                            " fecha_nac = @fecha_nac," +
+                                                            " legajo = @legajo," +
+                                                            " tipo_persona = @tipo_persona," +
+                                                            " id_plan = @id_plan " +
+                                                            "WHERE id_persona = @idper";
+                cmdUsuario.Parameters.AddWithValue("@idper", persona.ID);                                      
+                cmdUsuario.Parameters.AddWithValue("@nombre", persona.Nombre);
+                cmdUsuario.Parameters.AddWithValue("@apellido", persona.Apellido);
+                cmdUsuario.Parameters.AddWithValue("@direccion", persona.Direccion);
+                cmdUsuario.Parameters.AddWithValue("@email", persona.Email);
+                cmdUsuario.Parameters.AddWithValue("@telefono", persona.Telefono);
+                cmdUsuario.Parameters.AddWithValue("@fecha_nac", persona.FechaNacimiento);
+                cmdUsuario.Parameters.AddWithValue("@tipo_persona", persona.TipoPersona);
+
+                if (persona.IDPlan == 0)
+                {
+                    cmdUsuario.Parameters.AddWithValue("@id_plan", DBNull.Value);
+                }
+                else
+                {
+                    cmdUsuario.Parameters.AddWithValue("@id_plan", persona.IDPlan);
+                }
+
+                if (persona.Legajo == 0)
+                {
+                    cmdUsuario.Parameters.AddWithValue("@legajo", DBNull.Value);
+                }
+                else
+                {
+                    cmdUsuario.Parameters.AddWithValue("@legajo", persona.Legajo);
+                }
+
+                cmdUsuario.ExecuteNonQuery();
+                #endregion
+
+                #region INSERT USUARIO
+                cmdUsuario.CommandText = "UPDATE usuarios SET nombre_usuario = @nombreUsuario," +
+                                                           " clave = @clave," +
+                                                           " habilitado = @habilitado," +
+                                                           " id_persona = @id_persona" +
+                                                           " WHERE id_usuario = @idus";
+
+                cmdUsuario.Parameters.AddWithValue("@idus", usuario.ID);
+                cmdUsuario.Parameters.AddWithValue("@nombreUsuario", usuario.NombreUsuario);
+                cmdUsuario.Parameters.AddWithValue("@clave", usuario.Clave);
+                cmdUsuario.Parameters.AddWithValue("@habilitado", usuario.Habilitado);
+                cmdUsuario.Parameters.AddWithValue("@id_persona", persona.ID);
+                cmdUsuario.ExecuteNonQuery();
+                #endregion
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+                catch (Exception ex2)
+                {
+                    throw ex2;
+                }
+            }
+
+        }
+
     }
 }

@@ -125,7 +125,7 @@ namespace UI.Desktop
             }
             catch
             {
-                MessageBox.Show("Error", "Error al eliminar usuario, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al eliminar usuario, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -179,16 +179,15 @@ namespace UI.Desktop
             }
         }
 
-
-
-
-        #endregion
-
         private void TsbEditar_Click(object sender, EventArgs e)
         {
             int ID = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
             FormPersonaDesktop formPersona = new FormPersonaDesktop(ID, ModoForm.Modificacion);
             formPersona.ShowDialog();
+            this.Listar();
         }
+        #endregion
+
+
     }
 }

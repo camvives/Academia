@@ -28,19 +28,56 @@ namespace UI.Desktop
             PersonaActual = persona;
         }
 
+        public UsuarioDesktop(Usuario usuario, Persona persona, ModoForm modo):this()
+        {
+            UsuarioActual = usuario;
+            PersonaActual = persona;
+            Modo = modo;
+
+            try
+            {
+               this.MapearDeDatos();
+            }
+            catch
+            {
+                MessageBox.Show("Error al recuperar datos del usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+
+        }
+
         #region METODOS
         public override void MapearADatos()
         {
+            if(Modo == ModoForm.Alta)
+            {
+                UsuarioActual = new Usuario();
+            }
+            
+            this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
+            this.UsuarioActual.Clave = this.txtClave.Text;
+            this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+
             if (this.Modo == ModoForm.Alta)
             {
-                Usuario usuario = new Usuario();
-                UsuarioActual = usuario;
-
-                this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-                this.UsuarioActual.Clave = this.txtClave.Text;
-                this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-
                 this.UsuarioActual.State = BusinessEntity.States.New;
+            }
+            else if(this.Modo == ModoForm.Modificacion)
+            {
+                this.UsuarioActual.State = BusinessEntity.States.Modified;
+            }
+        }
+
+        public override void MapearDeDatos()
+        {
+            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
+            this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
+            this.txtClave.Text = this.UsuarioActual.Clave;
+            this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
+
+            if (this.Modo == ModoForm.Modificacion)
+            {
+                this.btnGuardar.Text = "Guardar";
             }
         }
 
@@ -51,7 +88,16 @@ namespace UI.Desktop
                 this.MapearADatos();
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
                 usuarioLogic.Save(UsuarioActual, PersonaActual);
+
+                if(Modo == ModoForm.Alta)
+                {
                 this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if(Modo == ModoForm.Modificacion)
+                {
+                this.Notificar("Editar Usuario", "Los cambios han sido registrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 this.DialogResult = DialogResult.OK;
             }
             catch
