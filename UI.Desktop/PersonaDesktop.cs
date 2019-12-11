@@ -47,7 +47,7 @@ namespace UI.Desktop
                 this.CompletarCombobox();
             }         
         }
-
+        
 
         #region METODOS
 
