@@ -21,5 +21,17 @@ namespace UI.Desktop
         {
             this.Dispose();
         }
+
+        private void UsuarioToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormPersonaDesktop formPersona = new FormPersonaDesktop();
+            formPersona.ShowDialog();
+        }
+
+        private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormUsuarios formUsuarios = new FormUsuarios();
+            formUsuarios.ShowDialog();
+        }
     }
 }

@@ -70,6 +70,7 @@
             // 
             this.usuarioToolStripMenuItem1.Name = "usuarioToolStripMenuItem1";
             resources.ApplyResources(this.usuarioToolStripMenuItem1, "usuarioToolStripMenuItem1");
+            this.usuarioToolStripMenuItem1.Click += new System.EventHandler(this.UsuarioToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -94,6 +95,7 @@
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             resources.ApplyResources(this.usuariosToolStripMenuItem, "usuariosToolStripMenuItem");
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.UsuariosToolStripMenuItem_Click);
             // 
             // formMain
             // 
