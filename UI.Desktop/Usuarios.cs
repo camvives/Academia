@@ -178,11 +178,17 @@ namespace UI.Desktop
                 this.Listar();
             }
         }
+
+
+
+
         #endregion
 
-
-
-
-
+        private void TsbEditar_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
+            FormPersonaDesktop formPersona = new FormPersonaDesktop(ID, ModoForm.Modificacion);
+            formPersona.ShowDialog();
+        }
     }
 }

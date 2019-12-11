@@ -21,6 +21,22 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
+        public FormPersonaDesktop(int id, ModoForm modo):this()
+        {
+            Modo = modo;
+            UsuarioLogic ul = new UsuarioLogic();
+
+            try
+            {
+                (_, PersonaActual) = ul.GetOne(id);
+                this.MapearDeDatos();
+            }
+            catch
+            {
+                MessageBox.Show("Error al recuperar datos del usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
 
         private void FormPersonaDesktop_Load(object sender, EventArgs e)
         {
@@ -30,6 +46,12 @@ namespace UI.Desktop
             cmbCarrera.DataSource = especialidad.GetAll();
             cmbCarrera.DisplayMember = "Descripcion";
             cmbCarrera.ValueMember = "ID";
+            if(Modo == ModoForm.Modificacion)
+            {
+                this.cmbCarrera.Text = "";
+                this.cmbPlan.Text = "";
+            }
+            
         }
 
 
@@ -61,7 +83,7 @@ namespace UI.Desktop
 
                 else if (cmbTipo.SelectedItem.ToString() == "Administrador")
                 {
-                    this.PersonaActual.TipoPersona = Persona.TiposPersonas.Admin;
+                    this.PersonaActual.TipoPersona = Persona.TiposPersonas.Administrador;
                     this.PersonaActual.Legajo = 0;
                     this.PersonaActual.IDPlan = 0;
                 }
@@ -76,6 +98,55 @@ namespace UI.Desktop
                 this.PersonaActual.State = BusinessEntity.States.New;
             }
 
+        }
+
+        public override void MapearDeDatos()
+        {
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(PersonaActual.IDPlan);
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            this.txtNombre.Text = this.PersonaActual.Nombre;
+            this.txtApellido.Text = this.PersonaActual.Apellido;
+            this.txtEmail.Text = this.PersonaActual.Email;
+            this.dtpNacimiento.Value = this.PersonaActual.FechaNacimiento;
+            this.txtTelefono.Text = this.PersonaActual.Telefono;
+
+            txtDireccion.ForeColor = Color.Black;
+            txtDireccionNum.ForeColor = Color.Black;
+            this.txtDireccion.Text = this.PersonaActual.Direccion;
+     
+            if (PersonaActual.Legajo != 0)
+            {
+                this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
+            }
+            else
+            {
+                this.txtLegajo.Enabled = false;
+            }
+
+            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
+            {
+                this.cmbCarrera.Enabled = false;
+                this.cmbPlan.Enabled = false;
+            }
+            
+            this.cmbTipo.Text = this.PersonaActual.TipoPersona.ToString();
+            this.cmbTipo.SelectedItem = this.PersonaActual.TipoPersona;
+
+            this.cmbPlan.Text = plan.Descripcion;
+            this.cmbPlan.SelectedItem = plan.Descripcion;
+
+            this.cmbCarrera.Text = especialidad.Descripcion;
+            this.cmbCarrera.Text = especialidad.Descripcion;
+          
+
+
+            if (this.Modo == ModoForm.Modificacion)
+            {
+                this.btnGuardar.Text = "Guardar";
+            }
         }
 
         public void GuardarCambios()

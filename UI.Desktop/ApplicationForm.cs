@@ -22,6 +22,8 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
+        public virtual void MapearDeDatos() { }
+
         public virtual void MapearADatos() { }
 
         public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)

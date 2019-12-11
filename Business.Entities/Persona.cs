@@ -8,7 +8,7 @@ namespace Business.Entities
 {
     public class Persona : BusinessEntity
     {
-        public enum TiposPersonas { Admin, Docente, Alumno }
+        public enum TiposPersonas { Administrador, Docente, Alumno }
 
         #region CAMPOS
         private string _apellido;

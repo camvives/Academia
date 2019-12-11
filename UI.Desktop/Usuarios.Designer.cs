@@ -87,6 +87,7 @@
             this.tsbEditar.Size = new System.Drawing.Size(85, 29);
             this.tsbEditar.Text = "Editar";
             this.tsbEditar.ToolTipText = "Modificar Usuario";
+            this.tsbEditar.Click += new System.EventHandler(this.TsbEditar_Click);
             // 
             // tsbEliminar
             // 
