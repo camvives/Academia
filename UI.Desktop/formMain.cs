@@ -15,6 +15,7 @@ namespace UI.Desktop
         public formMain()
         {
             InitializeComponent();
+
         }
 
         private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -32,6 +33,15 @@ namespace UI.Desktop
         {
             FormUsuarios formUsuarios = new FormUsuarios();
             formUsuarios.ShowDialog();
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            formLogin login = new formLogin();
+            if (login.ShowDialog() != DialogResult.OK)
+            {
+                this.Dispose();
+            }
         }
     }
 }

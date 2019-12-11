@@ -321,5 +321,29 @@ namespace Data.Database
 
         }
 
+        public string GetClave(string nombreUsuario)
+        {
+            string clave = null;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdClave = new SqlCommand("SELECT clave FROM usuarios " +
+                                                       " WHERE @nombreUsuario = nombre_usuario", sqlConn);
+                cmdClave.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                SqlDataReader drClave = cmdClave.ExecuteReader();
+
+                if (drClave.Read())
+                {
+                    clave = (string)drClave["clave"];
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return clave;
+        }
+
     }
 }

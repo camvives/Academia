@@ -32,5 +32,9 @@ namespace Business.Logic
             return UsuarioData.GetOne(id);
         }
 
+        public string GetClave(string nombreUsuario)
+        {
+            return UsuarioData.GetClave(nombreUsuario);
+        }
     }
 }

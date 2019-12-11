@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using Business.Logic;
+using Business.Entities;
 
 namespace Util
 {
@@ -29,6 +31,22 @@ namespace Util
                 return true;
             }
             return false;
+        }
+
+        public static Boolean ValidarUsuario(string user, string clave)
+        {
+            UsuarioLogic ul = new UsuarioLogic();
+            string claveBD = ul.GetClave(user);
+
+            if (claveBD == clave)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
     }
 }

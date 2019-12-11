@@ -33,6 +33,7 @@ namespace UI.Desktop
             UsuarioActual = usuario;
             PersonaActual = persona;
             Modo = modo;
+            this.Text = "Editar Usuario";
 
             try
             {

@@ -109,6 +109,7 @@
             this.IsMdiContainer = true;
             this.Name = "formMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);

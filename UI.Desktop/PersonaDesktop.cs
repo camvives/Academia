@@ -25,6 +25,7 @@ namespace UI.Desktop
 
         public FormPersonaDesktop(int id, ModoForm modo):this()
         {
+            this.Text = "Editar Usuario";
             Modo = modo;
             UsuarioLogic ul = new UsuarioLogic();
 
