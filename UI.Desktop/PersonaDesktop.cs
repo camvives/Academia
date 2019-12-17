@@ -85,8 +85,7 @@ namespace UI.Desktop
 
                 //Obtiene el objeto seleccionado del combobox Planes
                 Plan plan = (Plan)cmbPlan.SelectedItem;
-                PlanLogic planLogic = new PlanLogic();
-                this.PersonaActual.IDPlan = planLogic.GetOne(plan.ID).ID;
+                this.PersonaActual.IDPlan = plan.ID;
             }
 
             else if (cmbTipo.SelectedItem.ToString() == "Administrador")

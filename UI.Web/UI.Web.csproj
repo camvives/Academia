@@ -67,15 +67,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplicationFrom.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\fondo1.png" />
     <Content Include="Imagenes\fondo4.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Login.aspx" />
+    <Content Include="Usuario.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationFrom.aspx.cs">
+      <DependentUpon>ApplicationFrom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationFrom.aspx.designer.cs">
+      <DependentUpon>ApplicationFrom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -94,6 +103,13 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuario.aspx.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuario.aspx.designer.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.Master" />
@@ -108,6 +124,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business.Entities\Business.Entities.csproj">
+      <Project>{be7bd0b3-eace-4a30-a556-83891ffd564a}</Project>
+      <Name>Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.Logic\Business.Logic.csproj">
+      <Project>{7bfbb134-41d0-4e65-ab19-a94fd01bc575}</Project>
+      <Name>Business.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,6 @@
 ﻿body {
-    background-image: url('Imagenes/fondo4.png');
-    background-size: cover;
+    /*background-image: url('Imagenes/fondo4.png');
+    background-size: cover;*/
 }
 .principal {
     background-color: rgba(27, 25, 27, 0.35);
@@ -9,4 +9,19 @@
 .logo {
     width: 173px;
     height: 56px;
+}
+
+.formulario{
+    text-align:center;
+
+}
+
+.celda1 {
+    width: 467px;
+    text-align: right;
+}
+
+.celda2 {
+   
+    text-align:justify;
 }

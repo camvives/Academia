@@ -14,7 +14,7 @@
         <div class="principal">
            <br />
            &nbsp;&nbsp;&nbsp;&nbsp;
-           <img alt="" src="Imagenes/Logo.png" class="logo" />
+            <asp:ImageButton ID="imgLogo" runat="server" Height="56px" ImageUrl="~/Imagenes/Logo.png" Width="173px" />
             <br />
            <br />
         </div>
