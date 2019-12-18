@@ -1,7 +1,6 @@
-﻿body {
-    background-image: url('Imagenes/fondo_optimized.png');
-    background-size: cover;
-
+﻿.body {
+    /*background-image: url('Imagenes/fondo_optimized.png');
+    background-size: cover;*/
 }
 .principal {
     background-color: rgba(27, 25, 27, 0.35);

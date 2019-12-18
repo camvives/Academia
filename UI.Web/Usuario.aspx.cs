@@ -42,6 +42,7 @@ namespace UI.Web
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlCarrera.Items.Remove("Seleccionar Carrera");
+            ddlPlan.Items.Remove("Plan");
             int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
 
             PlanLogic plan = new PlanLogic();
@@ -53,7 +54,7 @@ namespace UI.Web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar())
+            if (Validar() && Page.IsValid)
             {
                 this.MapearADatos();
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
@@ -74,7 +75,7 @@ namespace UI.Web
             this.PersonaActual.Nombre = this.txtNombre.Text;
             this.PersonaActual.Apellido = this.txtApellido.Text;
             this.PersonaActual.Email = this.txtEmail.Text;
-            this.PersonaActual.Direccion = this.txtDireccion.Text +" "+ this.txtDireccionNum.Text;
+            this.PersonaActual.Direccion = this.txtDireccion.Text;
             this.PersonaActual.Telefono = this.txtTelefono.Text;
             this.PersonaActual.FechaNacimiento = DateTime.Parse(txtAnio.Text + "-" + txtMes.Text + "-" + txtDia.Text);
             this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
@@ -121,29 +122,7 @@ namespace UI.Web
             this.txtAnio.Text = this.PersonaActual.FechaNacimiento.Year.ToString();
             this.txtTelefono.Text = this.PersonaActual.Telefono;
             this.ddlTipo.Text = this.PersonaActual.TipoPersona.ToString();
-
-            #region Direccion
-            txtDireccion.ForeColor = System.Drawing.Color.Black;
-            txtDireccionNum.ForeColor = System.Drawing.Color.Black;
-
-            string direccion = string.Empty;
-            string numdir = string.Empty;
-
-            //Separa numeros de la dirección
-            foreach (char c in PersonaActual.Direccion)
-            {
-                if (Char.IsLetter(c))
-                {
-                    direccion += c;
-                }
-                if (Char.IsNumber(c))
-                {
-                    numdir += c;
-                }
-            }
-            this.txtDireccion.Text = direccion;
-            this.txtDireccionNum.Text = numdir;
-            #endregion
+            this.txtDireccion.Text = this.PersonaActual.Direccion;
 
             if (PersonaActual.Legajo != 0)
             {
@@ -191,10 +170,6 @@ namespace UI.Web
             {
                 return false;
             }
-            else if (string.IsNullOrEmpty(txtDireccionNum.Text))
-            {
-                return false;
-            }
             else if (string.IsNullOrEmpty(txtEmail.Text))
             {
                 return false;
@@ -215,6 +190,10 @@ namespace UI.Web
             {
                 return false;
             }
+            else if(ddlCarrera.SelectedIndex == 0)
+            {
+                return false;
+            }
             else
             {
                 return true;
@@ -226,23 +205,25 @@ namespace UI.Web
 
             if (ddlTipo.SelectedIndex == -1)
             {
-                this.lblError.ForeColor = System.Drawing.Color.Red;
                 this.lblError.Text = "Debe seleccionar un tipo de usuario";
                 this.lblError.Visible = true;
+                System.Threading.Thread.Sleep(5000);
+                this.lblError.Visible = false;
+
                 return false;
             }
             else if (!this.CamposVacios())
             {
-                this.lblError.ForeColor = System.Drawing.Color.Red;
                 this.lblError.Text = "Debe completar todos los campos";
                 this.lblError.Visible = true;
+
                 return false;
             }
             else if (!(Validaciones.EmailValido(txtEmail.Text)))
             {
-                this.lblError.ForeColor = System.Drawing.Color.Red;
                 this.lblError.Text = "Formato de mail inválido";
                 this.lblError.Visible = true;
+
                 return false;
             }
 
@@ -256,18 +237,22 @@ namespace UI.Web
                 txtLegajo.Enabled = false;
                 txtLegajo.Text = "";
                 ddlCarrera.Enabled = false;
-                ddlCarrera.Text = "";
+                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+                ddlCarrera.Text = "Seleccionar Carrera";
                 ddlPlan.Enabled = false;
-                ddlPlan.Text = "";
+                ddlPlan.Items.Insert(0, "Plan");
+                ddlPlan.Text = "Plan";
             }
             else if (ddlTipo.SelectedItem.ToString() == "Docente")
             {
                 ddlCarrera.Enabled = false;
-                ddlTipo.Enabled = false;
+                ddlPlan.Enabled = false;
                 txtLegajo.Enabled = true;
 
-                ddlCarrera.Text = "";
-                ddlPlan.Text = "";
+                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+                ddlCarrera.Text = "Seleccionar Carrera";
+                ddlPlan.Items.Insert(0, "Plan");
+                ddlPlan.Text = "Plan";
             }
             else
             {
@@ -277,5 +262,7 @@ namespace UI.Web
                 txtLegajo.Enabled = true;
             }
         }
+
+
     }
 }
