@@ -53,9 +53,12 @@ namespace UI.Web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            this.MapearADatos();
-            UsuarioLogic usuarioLogic = new UsuarioLogic();
-            usuarioLogic.Save(UsuarioActual, PersonaActual);
+            if (Validar())
+            {
+                this.MapearADatos();
+                UsuarioLogic usuarioLogic = new UsuarioLogic();
+                usuarioLogic.Save(UsuarioActual, PersonaActual);
+            }
         }
 
         public override void MapearADatos()
@@ -223,17 +226,23 @@ namespace UI.Web
 
             if (ddlTipo.SelectedIndex == -1)
             {
-                this.lblError.Text = "Debe seleccionar un tipo de usuario";      
+                this.lblError.ForeColor = System.Drawing.Color.Red;
+                this.lblError.Text = "Debe seleccionar un tipo de usuario";
+                this.lblError.Visible = true;
                 return false;
             }
             else if (!this.CamposVacios())
             {
+                this.lblError.ForeColor = System.Drawing.Color.Red;
                 this.lblError.Text = "Debe completar todos los campos";
+                this.lblError.Visible = true;
                 return false;
             }
             else if (!(Validaciones.EmailValido(txtEmail.Text)))
             {
+                this.lblError.ForeColor = System.Drawing.Color.Red;
                 this.lblError.Text = "Formato de mail inválido";
+                this.lblError.Visible = true;
                 return false;
             }
 
