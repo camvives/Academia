@@ -18,5 +18,7 @@ namespace UI.Web
         }
 
         public virtual void MapearADatos() { }
+
+        public virtual void MapearDeDatos() { }
     }
 }

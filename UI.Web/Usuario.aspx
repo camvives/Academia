@@ -1,65 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuario.aspx.cs" Inherits="UI.Web.Usuario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
     <style type="text/css">
         .auto-style1 {
-            width: 1160px;
-            height: 303px;
-            margin-left: 0px;
+            margin-left: 3px;
         }
-        .auto-style5 {
-            margin-left: 19px;
-        }
-        .auto-style6 {
-            margin-left: 0px;
-        }
-        .auto-style7 {
-            margin-bottom: 0px;
-        }
-        .auto-style19 {
-            text-align: center;
-            height: 551px;
-        }
-        .auto-style21 {
-            width: 100%;
-            height: 93px;
-        }
-        .auto-style24 {
-            width: 588px;
-            height: 31px;
-        }
-        .auto-style25 {
-            height: 31px;
-        }
-        .auto-style38 {
-            width: 546px;
-            text-align: right;
-            height: 33px;
-        }
-        .auto-style39 {
-            text-align: justify;
-            width: 579px;
-            height: 33px;
-        }
-        .auto-style40 {
-            width: 546px;
-            text-align: right;
-            height: 34px;
-        }
-        .auto-style41 {
-            text-align: justify;
-            width: 579px;
-            height: 34px;
-        }
+
     </style>
+
     </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="auto-style19">
-    <h1>Datos Personales</h1>
-        <table class="auto-style1">
+    <div class="formulario">
+    <h1>Nuevo Usuario</h1>
+        <table class="tabla">
             <tr>
-                <td class="auto-style38">Tipo </td>
-                <td class="auto-style39">
-                    <asp:DropDownList ID="ddlTipo" runat="server" Height="24px" Width="242px" CssClass="auto-style7">
+                <td class="celda1">Tipo </td>
+                <td class="celda2">
+                    <asp:DropDownList ID="ddlTipo" runat="server"  Width="231px" CssClass="elementoCelda" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" Height="25px">
                         <asp:ListItem>Administrador</asp:ListItem>
                         <asp:ListItem>Docente</asp:ListItem>
                         <asp:ListItem>Alumno</asp:ListItem>
@@ -67,88 +24,95 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style38">Nombre</td>
-                <td class="auto-style39">
-                    <asp:TextBox ID="txtNombre" runat="server" Width="243px" CssClass="auto-style6"></asp:TextBox>
+                <td class="celda1">Nombre</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtNombre" runat="server" Width="231px" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style38">Apellido</td>
-                <td class="auto-style39">
-                    <asp:TextBox ID="txtApellido" runat="server" Width="243px"></asp:TextBox>
+                <td class="celda1">Apellido</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtApellido" runat="server" Width="231px" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Dirección</td>
-                <td class="auto-style41">
-                    <asp:TextBox ID="txtDireccion" runat="server" Width="244px"></asp:TextBox>
+                <td class="celda1">Dirección</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtDireccion" runat="server" Width="143px" ForeColor="Black" CssClass="elementoCelda" ></asp:TextBox>
+                    <asp:TextBox ID="txtDireccionNum" runat="server" Width="69px" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Email</td>
-                <td class="auto-style41">
-                    <asp:TextBox ID="txtEmail" runat="server" Width="244px"></asp:TextBox>
+                <td class="celda1">Email</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtEmail" runat="server" Width="231px" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Teléfono</td>
-                <td class="auto-style41">
-                    <asp:TextBox ID="txtTelefono" runat="server" Width="243px"></asp:TextBox>
+                <td class="celda1">Teléfono</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtTelefono" runat="server" Width="231px" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Fecha de Nacimiento</td>
-                <td class="auto-style41">
-                    <asp:TextBox ID="txtDia" runat="server" Width="55px"></asp:TextBox> &nbsp;
-                    <asp:TextBox ID="txtMes" runat="server" Width="50px" CssClass="auto-style6"></asp:TextBox> &nbsp;
-                    <asp:TextBox ID="txtAnio" runat="server" Width="58px"></asp:TextBox>&nbsp;
+                <td class="celda1">Fecha de Nacimiento</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtDia" runat="server" Width="37px" CssClass="elementoCelda"></asp:TextBox> &nbsp;
+                    <asp:Label ID="Label1" runat="server" Text="/" Font-Size="Medium" Font-Bold="True"></asp:Label>
+                    <asp:TextBox ID="txtMes" runat="server" Width="31px" CssClass="elementoCelda"></asp:TextBox> &nbsp;
+                    <asp:Label ID="Label2" runat="server" Text="/" Font-Size="Medium" Font-Bold="True"></asp:Label>
+                    <asp:TextBox ID="txtAnio" runat="server" Width="51px" CssClass="elementoCelda"></asp:TextBox> &nbsp;
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Legajo</td>
-                <td class="auto-style41">
-                    <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
+                <td class="celda1">Legajo</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtLegajo" runat="server" CssClass="elementoCelda"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style40">Carrera</td>
-                <td class="auto-style41">
-                    <asp:DropDownList ID="ddlCarrera" runat="server" Height="24px" Width="195px" AutoPostBack="True" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged">
+                <td class="celda1">Carrera</td>
+                <td class="celda2">
+                    <asp:DropDownList ID="ddlCarrera" runat="server"  Width="195px" CssClass="elementoCelda" AutoPostBack="True" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" Height="25px">
                     </asp:DropDownList>
-                    <asp:DropDownList ID="ddlPlan" runat="server" CssClass="auto-style5" Width="91px" Height="24px">
+                    <asp:DropDownList ID="ddlPlan" runat="server" CssClass="auto-style1" Width="54px" Height="25px">
                     </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda1">&nbsp;</td>
+                <td class="auto-style13">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="celda1">Usuario</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtUsuario" runat="server" CssClass="elementoCelda" Width="231px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda1">Contraseña</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtClave" runat="server" Width="231px" CssClass="elementoCelda" ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda1">Confirmar Cotraseña</td>
+                <td class="celda2">
+                    <asp:TextBox ID="txtConfirmaClave" runat="server" Width="231px" CssClass="elementoCelda"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="celda1">Habilitado</td>
+                <td class="celda2">
+                    <asp:CheckBox ID="chkHabilitado" runat="server" CssClass="elementoCelda" Checked="True" Font-Size="X-Large" />
                 </td>
             </tr>
         </table>
         <br />
-        <table class="auto-style21">
-            <tr>
-                <td class="auto-style24">Usuario</td>
-                <td class="auto-style25">
-                    <asp:TextBox ID="txtUsuario" runat="server" CssClass="auto-style6" Width="247px"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style24">Contraseña</td>
-                <td class="auto-style25">
-                    <asp:TextBox ID="txtClave" runat="server" Width="235px"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style24">Confirmar Contraseña</td>
-                <td class="auto-style25">
-                    <asp:TextBox ID="txtConfirmaClave" runat="server" Width="230px"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="auto-style24">Habilitado</td>
-                <td class="auto-style25">
-                    <asp:CheckBox ID="chkHabilitado" runat="server" />
-                </td>
-            </tr>
-        </table>
+        <asp:Label ID="lblError" runat="server" Text="Error" Visible="False"></asp:Label>
         <br />
-        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+        <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Guardar" Height="35px" Width="122px" CssClass="botonAceptar" />
     <br />
     </div>
 </asp:Content>

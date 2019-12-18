@@ -70,8 +70,7 @@
     <Content Include="ApplicationFrom.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
-    <Content Include="Imagenes\fondo1.png" />
-    <Content Include="Imagenes\fondo4.png" />
+    <Content Include="Imagenes\fondo_optimized.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Login.aspx" />
     <Content Include="Usuario.aspx" />
@@ -133,6 +132,10 @@
     <ProjectReference Include="..\Business.Logic\Business.Logic.csproj">
       <Project>{7bfbb134-41d0-4e65-ab19-a94fd01bc575}</Project>
       <Name>Business.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{e84ea45a-6efe-43ac-9f10-7d58f2d71982}</Project>
+      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
