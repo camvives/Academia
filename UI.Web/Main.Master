@@ -8,12 +8,19 @@
      <link href="Estilos.css" rel ="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            background-color: rgba(27, 25, 27, 0.35);
+            height: 97px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="principal">
-           <br />
+        <div class="auto-style1">
            &nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:ImageButton ID="imgLogo" runat="server" Height="56px" ImageUrl="~/Imagenes/Logo.png" Width="173px" />
             <br />
            <br />

@@ -20,27 +20,33 @@ namespace UI.Web
         {
             if (!IsPostBack)
             {
-                this.CompletarDDList();
+                this.CompletarDDLEsp();
+                this.CompletarFecha();
             }
         }
 
-        public void CompletarDDList()
+
+
+        public void CompletarDDLEsp()
         {
             EspecialidadLogic especialidad = new EspecialidadLogic();
-
-            //Completa el DropDownList de carrera con la descripcion de la tabla especialidades
-            List<Especialidad> especialidades = new List<Especialidad>();
-
-            especialidades = especialidad.GetAll();
             ddlCarrera.DataTextField = "Descripcion";
             ddlCarrera.DataValueField = "ID";
-            ddlCarrera.DataSource = especialidades;  
+            ddlCarrera.DataSource = especialidad.GetAll();
             ddlCarrera.DataBind();
-            ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+
+
+            ddlCarrera.Items.Insert(0, "Seleccionar Carrera");          
+            if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue("Plan"))))
+            {
+                ddlPlan.Items.Insert(0, "Plan");
+            }
+            ddlPlan.Text = "Plan";
         }
 
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ddlPlan.Enabled = true;
             ddlCarrera.Items.Remove("Seleccionar Carrera");
             ddlPlan.Items.Remove("Plan");
             int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
@@ -49,7 +55,8 @@ namespace UI.Web
             ddlPlan.DataTextField = "Descripcion";
             ddlPlan.DataValueField = "ID";
             ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-            ddlPlan.DataBind();
+            ddlPlan.DataBind();         
+
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -77,7 +84,7 @@ namespace UI.Web
             this.PersonaActual.Email = this.txtEmail.Text;
             this.PersonaActual.Direccion = this.txtDireccion.Text;
             this.PersonaActual.Telefono = this.txtTelefono.Text;
-            this.PersonaActual.FechaNacimiento = DateTime.Parse(txtAnio.Text + "-" + txtMes.Text + "-" + txtDia.Text);
+            this.PersonaActual.FechaNacimiento = DateTime.Parse(FormatFecha());
             this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             this.UsuarioActual.Clave = this.txtClave.Text;
             this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
@@ -117,9 +124,9 @@ namespace UI.Web
             this.txtNombre.Text = this.PersonaActual.Nombre;
             this.txtApellido.Text = this.PersonaActual.Apellido;
             this.txtEmail.Text = this.PersonaActual.Email;
-            this.txtDia.Text = this.PersonaActual.FechaNacimiento.Day.ToString();
-            this.txtMes.Text = this.PersonaActual.FechaNacimiento.Month.ToString();
-            this.txtAnio.Text = this.PersonaActual.FechaNacimiento.Year.ToString();
+            this.ddlDia.Text = this.PersonaActual.FechaNacimiento.Day.ToString();
+            this.ddlMes.Text = this.PersonaActual.FechaNacimiento.Month.ToString();
+            this.ddlAnio.Text = this.PersonaActual.FechaNacimiento.Year.ToString();
             this.txtTelefono.Text = this.PersonaActual.Telefono;
             this.ddlTipo.Text = this.PersonaActual.TipoPersona.ToString();
             this.txtDireccion.Text = this.PersonaActual.Direccion;
@@ -141,7 +148,7 @@ namespace UI.Web
 
             if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
             {
-                this.CompletarDDList();
+                this.CompletarDDLEsp();
                 this.ddlPlan.Text = plan.Descripcion ;
                 this.ddlCarrera.Text = especialidad.Descripcion;
             }
@@ -234,14 +241,18 @@ namespace UI.Web
         {
             if (ddlTipo.SelectedItem.ToString() == "Administrador")
             {
+                ddlPlan.Items.Remove("Plan");
                 txtLegajo.Enabled = false;
                 txtLegajo.Text = "";
                 ddlCarrera.Enabled = false;
                 ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
                 ddlCarrera.Text = "Seleccionar Carrera";
                 ddlPlan.Enabled = false;
-                ddlPlan.Items.Insert(0, "Plan");
-                ddlPlan.Text = "Plan";
+                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
+                {
+                    ddlPlan.Items.Insert(0, "");
+                }
+                ddlPlan.Text = "";
             }
             else if (ddlTipo.SelectedItem.ToString() == "Docente")
             {
@@ -249,20 +260,81 @@ namespace UI.Web
                 ddlPlan.Enabled = false;
                 txtLegajo.Enabled = true;
 
+                ddlPlan.Items.Remove("Plan");
                 ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
                 ddlCarrera.Text = "Seleccionar Carrera";
-                ddlPlan.Items.Insert(0, "Plan");
-                ddlPlan.Text = "Plan";
+                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
+                {
+                    ddlPlan.Items.Insert(0, "");
+                }
+                ddlPlan.Text = "";
             }
             else
             {
-                this.CompletarDDList();
+                this.CompletarDDLEsp();
                 ddlCarrera.Enabled = true;
                 ddlPlan.Enabled = true;
                 txtLegajo.Enabled = true;
+                ddlPlan.Items.Remove("");
             }
         }
 
 
+        public void CompletarFecha()
+        {
+            for (int i = 1; i <= 31; i++)
+            {
+                ddlDia.Items.Add(i.ToString("D2"));
+            }
+
+            for (int i = 1; i <= 12; i++)
+            {
+
+                ddlMes.Items.Add(i.ToString("D2"));
+            }
+            for (int i = 1930; i <= DateTime.Today.Year; i++)
+            {
+                ddlAnio.Items.Add(i.ToString());
+            }
+        }
+
+
+        protected void reqLegajo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (ddlTipo.SelectedValue == "Administrador")
+            {
+                reqLegajo1.Enabled = false ;
+            }
+        }
+
+        protected void reqCarrera_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if(ddlTipo.SelectedValue == "Alumno")
+            {
+                reqCarrera1.Enabled = true;
+            }
+
+        }
+
+
+        public string FormatFecha()
+        {
+            return ddlAnio.Text + "/" + ddlMes.Text + "/" + ddlDia.Text;
+        }
+
+        protected void ddlDia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = FormatFecha();
+        }
+
+        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           txtFecha.Text = FormatFecha();
+        }
+
+        protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = FormatFecha();
+        }
     }
 }

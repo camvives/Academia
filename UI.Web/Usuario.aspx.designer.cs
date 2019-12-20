@@ -85,6 +85,15 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
+        /// valEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valEmail;
+        
+        /// <summary>
         /// reqEmail control.
         /// </summary>
         /// <remarks>
@@ -112,13 +121,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTel;
         
         /// <summary>
-        /// txtDia control.
+        /// ddlDia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDia;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDia;
         
         /// <summary>
         /// Label1 control.
@@ -130,13 +139,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// txtMes control.
+        /// ddlMes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMes;
         
         /// <summary>
         /// Label2 control.
@@ -148,13 +157,31 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// txtAnio control.
+        /// ddlAnio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAnio;
+        
+        /// <summary>
+        /// valFechas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valFechas;
+        
+        /// <summary>
+        /// txtFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFecha;
         
         /// <summary>
         /// txtLegajo control.
@@ -164,6 +191,24 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLegajo;
+        
+        /// <summary>
+        /// reqLegajo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator reqLegajo;
+        
+        /// <summary>
+        /// reqLegajo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLegajo1;
         
         /// <summary>
         /// ddlCarrera control.
@@ -182,6 +227,24 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPlan;
+        
+        /// <summary>
+        /// reqCarrera control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator reqCarrera;
+        
+        /// <summary>
+        /// reqCarrera1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCarrera1;
         
         /// <summary>
         /// txtUsuario control.
@@ -211,6 +274,15 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtClave;
         
         /// <summary>
+        /// valClave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valClave;
+        
+        /// <summary>
         /// reqClave control.
         /// </summary>
         /// <remarks>
@@ -227,6 +299,15 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmaClave;
+        
+        /// <summary>
+        /// valClaves control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valClaves;
         
         /// <summary>
         /// reqCClave control.
