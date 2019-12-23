@@ -42,7 +42,84 @@ namespace UI.Web
 
             gridView.DataSource = dt;
             gridView.DataBind();
+            
         }
 
+
+       public void MostrarDatos()
+       {
+                UsuarioLogic ul = new UsuarioLogic();
+                Business.Entities.Usuario usuario;
+                Persona persona;
+                int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
+                (usuario, persona) = ul.GetOne(ID);
+
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(persona.IDPlan);
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            #region Validaciones
+            string hab;
+            if (usuario.Habilitado == true)
+            {
+                hab = "Sí";
+            }
+            else
+            {
+                hab = "No";
+            }
+
+            string plandesc;
+            if (plan.Descripcion is null)
+            {
+                plandesc = "-";
+            }
+            else
+            {
+                plandesc = plan.Descripcion;
+            }
+
+            string espdesc;
+            if (especialidad.Descripcion is null)
+            {
+                espdesc = "-";
+            }
+            else
+            {
+                espdesc = especialidad.Descripcion;
+            }
+
+            string leg;
+            if (persona.Legajo == 0)
+            {
+                leg = "-";
+            }
+            else
+            {
+                leg = persona.Legajo.ToString();
+            }
+            #endregion
+
+            this.lblID.Text = usuario.ID.ToString();
+            this.lblNombreUsuario.Text = usuario.NombreUsuario;
+            this.lblHabilitado.Text = hab;
+            this.lblNombre.Text = persona.Nombre;
+            this.lblApellido.Text = persona.Apellido;
+            this.lblDireccion.Text = persona.Direccion;
+            this.lblEmail.Text = persona.Email;
+            this.lblTelefono.Text = persona.Telefono;
+            this.lblFechaNac.Text = persona.FechaNacimiento.ToString("dd/MM/yyyy");
+            this.lblTipo.Text = persona.TipoPersona.ToString();
+            this.lblLegajo.Text = leg;
+            this.lblCarrera.Text = espdesc;
+            this.lblPlan.Text = plandesc;
+       }
+
+        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.MostrarDatos();
+        }
     }
 }
