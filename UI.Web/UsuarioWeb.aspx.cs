@@ -10,11 +10,11 @@ using Util;
 
 namespace UI.Web
 {
-    public partial class Usuario : UI.Web.ApplicationFrom
+    public partial class UsuarioWeb : UI.Web.ApplicationFrom
     {
         public Persona PersonaActual { get; set; }
         public Business.Entities.Usuario UsuarioActual { get; set; }
-        
+
 
         protected new void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +22,15 @@ namespace UI.Web
             {
                 this.CompletarDDLEsp();
                 this.CompletarFecha();
+                this.Modo = (ModoForm)Application["UsuarioWeb"];
+
+                if (this.Modo == ModoForm.Modificacion)
+                {
+                    MapearDeDatos();
+                }
+                
             }
+
         }
 
 
@@ -116,47 +124,24 @@ namespace UI.Web
 
         public override void MapearDeDatos()
         {
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(PersonaActual.IDPlan);
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+            ddlTipo.SelectedValue = this.Context.Items["Tipo"].ToString();
+            txtLegajo.Text = this.Context.Items["Legajo"].ToString();
+            this.CambiaTipo();               
+            txtNombre.Text = this.Context.Items["Nombre"].ToString();
+            txtApellido.Text = this.Context.Items["Apellido"].ToString();
+            txtDireccion.Text = this.Context.Items["Direccion"].ToString();
+            txtEmail.Text = this.Context.Items["Email"].ToString();
+            txtTelefono.Text = this.Context.Items["Telefono"].ToString();
+            ddlDia.Text = this.Context.Items["Fecha"].ToString().Substring(0, 2);
+            ddlMes.Text = this.Context.Items["Fecha"].ToString().Substring(3, 2);
+            ddlAnio.Text = this.Context.Items["Fecha"].ToString().Substring(6, 4);
+            txtUsuario.Text = this.Context.Items["Usuario"].ToString();
+            txtClave.Attributes["value"] = this.Context.Items["Clave"].ToString();
+            txtConfirmaClave.Attributes["value"] = this.Context.Items["Clave"].ToString();            
+            ddlCarrera.Text = this.Context.Items["Carrera"].ToString();
+            ddlPlan.Text = this.Context.Items["Plan"].ToString();
+            chkHabilitado.Checked = (bool)this.Context.Items["Habilitado"];
 
-            this.txtNombre.Text = this.PersonaActual.Nombre;
-            this.txtApellido.Text = this.PersonaActual.Apellido;
-            this.txtEmail.Text = this.PersonaActual.Email;
-            this.ddlDia.Text = this.PersonaActual.FechaNacimiento.Day.ToString();
-            this.ddlMes.Text = this.PersonaActual.FechaNacimiento.Month.ToString();
-            this.ddlAnio.Text = this.PersonaActual.FechaNacimiento.Year.ToString();
-            this.txtTelefono.Text = this.PersonaActual.Telefono;
-            this.ddlTipo.Text = this.PersonaActual.TipoPersona.ToString();
-            this.txtDireccion.Text = this.PersonaActual.Direccion;
-
-            if (PersonaActual.Legajo != 0)
-            {
-                this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
-            }
-            else
-            {
-                this.txtLegajo.Enabled = false;
-            }
-
-            if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
-            {
-                this.ddlCarrera.Enabled = false;
-                this.ddlPlan.Enabled = false;
-            }
-
-            if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
-            {
-                this.CompletarDDLEsp();
-                this.ddlPlan.Text = plan.Descripcion ;
-                this.ddlCarrera.Text = especialidad.Descripcion;
-            }
-
-            if (this.Modo == ModoForm.Modificacion)
-            {
-                this.btnAceptar.Text = "Guardar";
-            }
         }
 
         public bool CamposVacios()
@@ -239,44 +224,7 @@ namespace UI.Web
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlTipo.SelectedItem.ToString() == "Administrador")
-            {
-                ddlPlan.Items.Remove("Plan");
-                txtLegajo.Enabled = false;
-                txtLegajo.Text = "";
-                ddlCarrera.Enabled = false;
-                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
-                ddlCarrera.Text = "Seleccionar Carrera";
-                ddlPlan.Enabled = false;
-                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
-                {
-                    ddlPlan.Items.Insert(0, "");
-                }
-                ddlPlan.Text = "";
-            }
-            else if (ddlTipo.SelectedItem.ToString() == "Docente")
-            {
-                ddlCarrera.Enabled = false;
-                ddlPlan.Enabled = false;
-                txtLegajo.Enabled = true;
-
-                ddlPlan.Items.Remove("Plan");
-                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
-                ddlCarrera.Text = "Seleccionar Carrera";
-                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
-                {
-                    ddlPlan.Items.Insert(0, "");
-                }
-                ddlPlan.Text = "";
-            }
-            else
-            {
-                this.CompletarDDLEsp();
-                ddlCarrera.Enabled = true;
-                ddlPlan.Enabled = true;
-                txtLegajo.Enabled = true;
-                ddlPlan.Items.Remove("");
-            }
+            this.CambiaTipo();
         }
 
 
@@ -335,6 +283,48 @@ namespace UI.Web
         protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtFecha.Text = FormatFecha();
+        }
+
+        public void CambiaTipo()
+        {
+            if (ddlTipo.SelectedItem.ToString() == "Administrador")
+            {
+                ddlPlan.Items.Remove("Plan");
+                txtLegajo.Enabled = false;
+                txtLegajo.Text = "";
+                ddlCarrera.Enabled = false;
+                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+                ddlCarrera.Text = "Seleccionar Carrera";
+                ddlPlan.Enabled = false;
+                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
+                {
+                    ddlPlan.Items.Insert(0, "");
+                }
+                ddlPlan.Text = "";
+            }
+            else if (ddlTipo.SelectedItem.ToString() == "Docente")
+            {
+                ddlCarrera.Enabled = false;
+                ddlPlan.Enabled = false;
+                txtLegajo.Enabled = true;
+
+                ddlPlan.Items.Remove("Plan");
+                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+                ddlCarrera.Text = "Seleccionar Carrera";
+                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue(""))))
+                {
+                    ddlPlan.Items.Insert(0, "");
+                }
+                ddlPlan.Text = "";
+            }
+            else
+            {
+                this.CompletarDDLEsp();
+                ddlCarrera.Enabled = true;
+                ddlPlan.Enabled = true;
+                txtLegajo.Enabled = true;
+                ddlPlan.Items.Remove("");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style2 {
@@ -37,7 +37,7 @@
         <table style="width:100%;">
             <tr>
                 <td>
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns = "False" DataKeyNames="ID" Height="251px" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged">
+        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns = "False" DataKeyNames="ID" Height="251px" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />

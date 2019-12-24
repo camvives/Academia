@@ -11,8 +11,9 @@ using System.Data;
 
 namespace UI.Web
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class UsuariosWeb : System.Web.UI.Page
     {
+        public Usuario UsuarioActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -45,14 +46,12 @@ namespace UI.Web
             
         }
 
-
        public void MostrarDatos()
        {
                 UsuarioLogic ul = new UsuarioLogic();
-                Business.Entities.Usuario usuario;
                 Persona persona;
                 int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
-                (usuario, persona) = ul.GetOne(ID);
+                (UsuarioActual, persona) = ul.GetOne(ID);
 
                 PlanLogic pl = new PlanLogic();
                 Plan plan = pl.GetOne(persona.IDPlan);
@@ -62,7 +61,7 @@ namespace UI.Web
 
             #region Validaciones
             string hab;
-            if (usuario.Habilitado == true)
+            if (UsuarioActual.Habilitado == true)
             {
                 hab = "Sí";
             }
@@ -102,8 +101,8 @@ namespace UI.Web
             }
             #endregion
 
-            this.lblID.Text = usuario.ID.ToString();
-            this.lblNombreUsuario.Text = usuario.NombreUsuario;
+            this.lblID.Text = UsuarioActual.ID.ToString();
+            this.lblNombreUsuario.Text = UsuarioActual.NombreUsuario;
             this.lblHabilitado.Text = hab;
             this.lblNombre.Text = persona.Nombre;
             this.lblApellido.Text = persona.Apellido;
@@ -120,6 +119,33 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.MostrarDatos();
+        }
+
+        protected void gridView_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+           
+            Application["UsuarioWeb"] = ModoForm.Modificacion;
+            this.MapearDatos();
+            Response.Redirect("UsuarioWeb.aspx");
+        }
+
+        public void MapearDatos()
+        {
+            this.Context.Items["Nombre"] = lblNombre.Text;
+            this.Context.Items["Apellido"] = lblApellido.Text;
+            this.Context.Items["Apellido"] = lblApellido.Text;
+            this.Context.Items["Direccion"] = lblDireccion.Text;
+            this.Context.Items["Email"] = lblEmail.Text;
+            this.Context.Items["Telefono"] = lblTelefono.Text;
+            this.Context.Items["Fecha"] = lblFechaNac.Text;
+            this.Context.Items["Carrera"] = lblCarrera.Text;
+            this.Context.Items["Plan"] = lblPlan.Text;
+            this.Context.Items["Usuario"] = UsuarioActual.NombreUsuario;
+            this.Context.Items["Clave"] = UsuarioActual.Clave;
+            this.Context.Items["Legajo"] = lblLegajo.Text;
+            this.Context.Items["Tipo"] = lblTipo.Text;
+            this.Context.Items["Habilitado"] = UsuarioActual.Habilitado;
+            Server.Transfer("UsuarioWeb.aspx", true);
         }
     }
 }

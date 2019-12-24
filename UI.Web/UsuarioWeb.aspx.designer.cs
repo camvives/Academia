@@ -10,7 +10,7 @@
 namespace UI.Web {
     
     
-    public partial class Usuario {
+    public partial class UsuarioWeb {
         
         /// <summary>
         /// ddlTipo control.

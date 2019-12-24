@@ -67,7 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationFrom.aspx" />
+    <Content Include="ApplicationForm.aspx" />
+    <Content Include="ConfirmaEliminar.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\error.png" />
@@ -76,17 +77,24 @@
     <Content Include="Imagenes\lapiz.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Login.aspx" />
-    <Content Include="Usuario.aspx" />
+    <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
     <Content Include="Usuarios.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationFrom.aspx.cs">
-      <DependentUpon>ApplicationFrom.aspx</DependentUpon>
+    <Compile Include="ApplicationForm.aspx.cs">
+      <DependentUpon>ApplicationForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ApplicationFrom.aspx.designer.cs">
-      <DependentUpon>ApplicationFrom.aspx</DependentUpon>
+    <Compile Include="ApplicationForm.aspx.designer.cs">
+      <DependentUpon>ApplicationForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmaEliminar.aspx.cs">
+      <DependentUpon>ConfirmaEliminar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmaEliminar.aspx.designer.cs">
+      <DependentUpon>ConfirmaEliminar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -106,12 +114,12 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Usuario.aspx.cs">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="UsuarioWeb.aspx.cs">
+      <DependentUpon>UsuarioWeb.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuario.aspx.designer.cs">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="UsuarioWeb.aspx.designer.cs">
+      <DependentUpon>UsuarioWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
