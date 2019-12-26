@@ -73,7 +73,7 @@
                 <td class="celda2">
                     <asp:TextBox ID="txtLegajo" runat="server" CssClass="elementoCelda"></asp:TextBox>
                     <asp:CustomValidator ID="reqLegajo" runat="server" ForeColor="Red" OnServerValidate="reqLegajo_ServerValidate"></asp:CustomValidator>
-                    <asp:RequiredFieldValidator ID="reqLegajo1" runat="server" ControlToValidate="txtLegajo" ErrorMessage="Campo Requerido" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqLegajo1" runat="server" ControlToValidate="txtLegajo" ErrorMessage="Campo Requerido" ForeColor="Red" Enabled="False"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>

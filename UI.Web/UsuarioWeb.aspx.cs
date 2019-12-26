@@ -261,9 +261,13 @@ namespace UI.Web
 
         protected void reqLegajo_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (ddlTipo.SelectedValue == "Administrador")
+            if (ddlTipo.SelectedValue == "Alumno")
             {
-                reqLegajo1.Enabled = false ;
+                reqLegajo1.Enabled = true ;
+            }
+            else if (ddlTipo.SelectedValue == "Docente")
+            {
+                reqLegajo1.Enabled = true;
             }
         }
 
