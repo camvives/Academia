@@ -10,7 +10,12 @@ namespace UI.Web
     public enum ModoForm { Alta, Baja, Modificacion, Consulta };
     public partial class ApplicationFrom : System.Web.UI.Page
     {
-        public ModoForm Modo { get; set; }
+        public ModoForm Modo
+        {
+            get { return (ModoForm)this.ViewState["Modo"]; }
+            set { this.ViewState["Modo"] = value; }
+        }
+            
 
         protected void Page_Load(object sender, EventArgs e)
         {

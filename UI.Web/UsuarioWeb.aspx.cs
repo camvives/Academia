@@ -13,27 +13,28 @@ namespace UI.Web
     public partial class UsuarioWeb : UI.Web.ApplicationFrom
     {
         public Persona PersonaActual { get; set; }
-        public Business.Entities.Usuario UsuarioActual { get; set; }
+        public Usuario UsuarioActual { get; set; }
 
 
         protected new void Page_Load(object sender, EventArgs e)
         {
+
+            PersonaActual = (Persona)Session["Persona"];
+            UsuarioActual = (Usuario)Session["Usuario"];
+
             if (!IsPostBack)
             {
                 this.CompletarDDLEsp();
                 this.CompletarFecha();
-                this.Modo = (ModoForm)Application["UsuarioWeb"];
+                this.Modo = (ModoForm)this.Context.Items["Modo"];
 
                 if (this.Modo == ModoForm.Modificacion)
-                {
+                {                 
                     MapearDeDatos();
-                }
-                
+                }     
             }
 
         }
-
-
 
         public void CompletarDDLEsp()
         {
@@ -44,12 +45,13 @@ namespace UI.Web
             ddlCarrera.DataBind();
 
 
-            ddlCarrera.Items.Insert(0, "Seleccionar Carrera");          
+            ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
             if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue("Plan"))))
             {
                 ddlPlan.Items.Insert(0, "Plan");
             }
             ddlPlan.Text = "Plan";
+
         }
 
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,6 +76,11 @@ namespace UI.Web
                 this.MapearADatos();
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
                 usuarioLogic.Save(UsuarioActual, PersonaActual);
+                this.lblError.Text = "Usuario Actualizado";
+                this.lblError.Visible = true;
+                this.btnAceptar.Enabled = false;
+                Response.AddHeader("REFRESH", "2;URL=Usuarios.aspx");
+                
             }
         }
 
@@ -83,8 +90,12 @@ namespace UI.Web
             if (Modo == ModoForm.Alta)
             {
                 PersonaActual = new Persona();
-                UsuarioActual = new Business.Entities.Usuario();
+                UsuarioActual = new Usuario();
                 this.UsuarioActual.State = BusinessEntity.States.New;
+            }
+            else if (Modo == ModoForm.Modificacion)
+            {
+                this.UsuarioActual.State = BusinessEntity.States.Modified;
             }
 
             this.PersonaActual.Nombre = this.txtNombre.Text;
@@ -124,23 +135,24 @@ namespace UI.Web
 
         public override void MapearDeDatos()
         {
-            ddlTipo.SelectedValue = this.Context.Items["Tipo"].ToString();
-            txtLegajo.Text = this.Context.Items["Legajo"].ToString();
-            this.CambiaTipo();               
-            txtNombre.Text = this.Context.Items["Nombre"].ToString();
-            txtApellido.Text = this.Context.Items["Apellido"].ToString();
-            txtDireccion.Text = this.Context.Items["Direccion"].ToString();
-            txtEmail.Text = this.Context.Items["Email"].ToString();
-            txtTelefono.Text = this.Context.Items["Telefono"].ToString();
-            ddlDia.Text = this.Context.Items["Fecha"].ToString().Substring(0, 2);
-            ddlMes.Text = this.Context.Items["Fecha"].ToString().Substring(3, 2);
-            ddlAnio.Text = this.Context.Items["Fecha"].ToString().Substring(6, 4);
-            txtUsuario.Text = this.Context.Items["Usuario"].ToString();
-            txtClave.Attributes["value"] = this.Context.Items["Clave"].ToString();
-            txtConfirmaClave.Attributes["value"] = this.Context.Items["Clave"].ToString();            
-            ddlCarrera.Text = this.Context.Items["Carrera"].ToString();
-            ddlPlan.Text = this.Context.Items["Plan"].ToString();
-            chkHabilitado.Checked = (bool)this.Context.Items["Habilitado"];
+            ddlTipo.SelectedValue = PersonaActual.TipoPersona.ToString();
+            txtLegajo.Text = PersonaActual.Legajo.ToString();
+            
+            txtApellido.Text = this.Context.Items["Plan"].ToString();
+            this.CambiaTipo();
+            ddlCarrera.SelectedValue = this.Context.Items["Carrera"].ToString();
+            txtNombre.Text = PersonaActual.Nombre;
+            txtApellido.Text = PersonaActual.Apellido;
+            txtDireccion.Text = PersonaActual.Direccion;
+            txtEmail.Text = PersonaActual.Email;
+            txtTelefono.Text = PersonaActual.Telefono;
+            ddlDia.Text = PersonaActual.FechaNacimiento.ToString().Substring(0, 2);
+            ddlMes.Text = PersonaActual.FechaNacimiento.ToString().Substring(3, 2);
+            ddlAnio.Text = PersonaActual.FechaNacimiento.ToString().Substring(6, 4);
+            txtUsuario.Text = UsuarioActual.NombreUsuario;
+            txtClave.Attributes["value"] = UsuarioActual.Clave;
+            txtConfirmaClave.Attributes["value"] = UsuarioActual.Clave;
+            chkHabilitado.Checked = UsuarioActual.Habilitado;
 
         }
 
@@ -182,7 +194,7 @@ namespace UI.Web
             {
                 return false;
             }
-            else if(ddlCarrera.SelectedIndex == 0)
+            else if (ddlCarrera.SelectedIndex == -1)
             {
                 return false;
             }

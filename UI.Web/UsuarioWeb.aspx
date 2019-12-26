@@ -122,7 +122,9 @@
                 </td>
             </tr>
         </table>
-        <asp:Label ID="lblError" runat="server" Text="Error" Visible="False" ForeColor="Red"></asp:Label>
+        <asp:Label ID="lblError" runat="server" Text="Error" Visible="False" ForeColor="Red"></asp:Label> <br />
+
         <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Guardar" Height="35px" Width="122px" CssClass="botonAceptar" />
     </div>
-</asp:Content>
+        
+    </asp:Content>

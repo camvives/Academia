@@ -14,6 +14,7 @@ namespace UI.Web
     public partial class UsuariosWeb : System.Web.UI.Page
     {
         public Usuario UsuarioActual { get; set; }
+        public Persona PersonaActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -48,16 +49,15 @@ namespace UI.Web
 
        public void MostrarDatos()
        {
-                UsuarioLogic ul = new UsuarioLogic();
-                Persona persona;
-                int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
-                (UsuarioActual, persona) = ul.GetOne(ID);
+            UsuarioLogic ul = new UsuarioLogic();
+            int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
+            (UsuarioActual, PersonaActual) = ul.GetOne(ID);
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(persona.IDPlan);
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
             #region Validaciones
             string hab;
@@ -91,26 +91,26 @@ namespace UI.Web
             }
 
             string leg;
-            if (persona.Legajo == 0)
+            if (this.PersonaActual.Legajo == 0)
             {
                 leg = "-";
             }
             else
             {
-                leg = persona.Legajo.ToString();
+                leg = this.PersonaActual.Legajo.ToString();
             }
             #endregion
 
             this.lblID.Text = UsuarioActual.ID.ToString();
             this.lblNombreUsuario.Text = UsuarioActual.NombreUsuario;
             this.lblHabilitado.Text = hab;
-            this.lblNombre.Text = persona.Nombre;
-            this.lblApellido.Text = persona.Apellido;
-            this.lblDireccion.Text = persona.Direccion;
-            this.lblEmail.Text = persona.Email;
-            this.lblTelefono.Text = persona.Telefono;
-            this.lblFechaNac.Text = persona.FechaNacimiento.ToString("dd/MM/yyyy");
-            this.lblTipo.Text = persona.TipoPersona.ToString();
+            this.lblNombre.Text = this.PersonaActual.Nombre;
+            this.lblApellido.Text = this.PersonaActual.Apellido;
+            this.lblDireccion.Text = PersonaActual.Direccion;
+            this.lblEmail.Text = PersonaActual.Email;
+            this.lblTelefono.Text = PersonaActual.Telefono;
+            this.lblFechaNac.Text = PersonaActual.FechaNacimiento.ToString("dd/MM/yyyy");
+            this.lblTipo.Text = PersonaActual.TipoPersona.ToString();
             this.lblLegajo.Text = leg;
             this.lblCarrera.Text = espdesc;
             this.lblPlan.Text = plandesc;
@@ -122,29 +122,20 @@ namespace UI.Web
         }
 
         protected void gridView_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-           
-            Application["UsuarioWeb"] = ModoForm.Modificacion;
+        {  
             this.MapearDatos();
             Response.Redirect("UsuarioWeb.aspx");
         }
 
         public void MapearDatos()
         {
-            this.Context.Items["Nombre"] = lblNombre.Text;
-            this.Context.Items["Apellido"] = lblApellido.Text;
-            this.Context.Items["Apellido"] = lblApellido.Text;
-            this.Context.Items["Direccion"] = lblDireccion.Text;
-            this.Context.Items["Email"] = lblEmail.Text;
-            this.Context.Items["Telefono"] = lblTelefono.Text;
-            this.Context.Items["Fecha"] = lblFechaNac.Text;
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Usuario"] = UsuarioActual;
+            Session.Add("Persona", PersonaActual);
+            //this.Context.Items["usuario"] = UsuarioActual;
+            //this.Context.Items["persona"] = PersonaActual;     
             this.Context.Items["Carrera"] = lblCarrera.Text;
-            this.Context.Items["Plan"] = lblPlan.Text;
-            this.Context.Items["Usuario"] = UsuarioActual.NombreUsuario;
-            this.Context.Items["Clave"] = UsuarioActual.Clave;
-            this.Context.Items["Legajo"] = lblLegajo.Text;
-            this.Context.Items["Tipo"] = lblTipo.Text;
-            this.Context.Items["Habilitado"] = UsuarioActual.Habilitado;
+            this.Context.Items["Plan"] = lblPlan.Text;     
             Server.Transfer("UsuarioWeb.aspx", true);
         }
     }
