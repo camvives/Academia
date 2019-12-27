@@ -15,6 +15,9 @@ namespace UI.Web
     {
         public Usuario UsuarioActual { get; set; }
         public Persona PersonaActual { get; set; }
+
+        public Especialidad Especialidad { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -57,7 +60,8 @@ namespace UI.Web
             Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
 
             EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+            Especialidad = el.GetOne(plan.IDEspecialidad);
+            
 
             #region Validaciones
             string hab;
@@ -81,13 +85,13 @@ namespace UI.Web
             }
 
             string espdesc;
-            if (especialidad.Descripcion is null)
+            if (Especialidad.Descripcion is null)
             {
                 espdesc = "-";
             }
             else
             {
-                espdesc = especialidad.Descripcion;
+                espdesc = Especialidad.Descripcion;
             }
 
             string leg;
@@ -132,10 +136,7 @@ namespace UI.Web
             this.Context.Items["Modo"] = ModoForm.Modificacion;
             Session["Usuario"] = UsuarioActual;
             Session.Add("Persona", PersonaActual);
-            //this.Context.Items["usuario"] = UsuarioActual;
-            //this.Context.Items["persona"] = PersonaActual;     
-            this.Context.Items["Carrera"] = lblCarrera.Text;
-            this.Context.Items["Plan"] = lblPlan.Text;     
+            this.Context.Items["Carrera"] = Especialidad.ID; 
             Server.Transfer("UsuarioWeb.aspx", true);
         }
     }

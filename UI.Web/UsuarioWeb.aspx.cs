@@ -24,9 +24,9 @@ namespace UI.Web
 
             if (!IsPostBack)
             {
-                this.CompletarDDLEsp();
-                this.CompletarFecha();
                 this.Modo = (ModoForm)this.Context.Items["Modo"];
+                this.CompletarDDLEsp();
+                this.CompletarFecha();       
 
                 if (this.Modo == ModoForm.Modificacion)
                 {                 
@@ -44,13 +44,15 @@ namespace UI.Web
             ddlCarrera.DataSource = especialidad.GetAll();
             ddlCarrera.DataBind();
 
-
-            ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
-            if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue("Plan"))))
+            if (this.Modo != ModoForm.Modificacion)
             {
-                ddlPlan.Items.Insert(0, "Plan");
+                ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
+                if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue("Plan"))))
+                {
+                    ddlPlan.Items.Insert(0, "Plan");
+                }
+                ddlPlan.Text = "Plan";
             }
-            ddlPlan.Text = "Plan";
 
         }
 
@@ -137,18 +139,18 @@ namespace UI.Web
         {
             ddlTipo.SelectedValue = PersonaActual.TipoPersona.ToString();
             txtLegajo.Text = PersonaActual.Legajo.ToString();
-            
-            txtApellido.Text = this.Context.Items["Plan"].ToString();
             this.CambiaTipo();
             ddlCarrera.SelectedValue = this.Context.Items["Carrera"].ToString();
+            this.CargaPlanes();
+            ddlPlan.SelectedValue = PersonaActual.IDPlan.ToString();
             txtNombre.Text = PersonaActual.Nombre;
             txtApellido.Text = PersonaActual.Apellido;
             txtDireccion.Text = PersonaActual.Direccion;
             txtEmail.Text = PersonaActual.Email;
             txtTelefono.Text = PersonaActual.Telefono;
-            ddlDia.Text = PersonaActual.FechaNacimiento.ToString().Substring(0, 2);
-            ddlMes.Text = PersonaActual.FechaNacimiento.ToString().Substring(3, 2);
-            ddlAnio.Text = PersonaActual.FechaNacimiento.ToString().Substring(6, 4);
+            ddlDia.Text = PersonaActual.FechaNacimiento.Day.ToString("D2");
+            ddlMes.Text = PersonaActual.FechaNacimiento.Month.ToString("D2");
+            ddlAnio.Text = PersonaActual.FechaNacimiento.Year.ToString();
             txtUsuario.Text = UsuarioActual.NombreUsuario;
             txtClave.Attributes["value"] = UsuarioActual.Clave;
             txtConfirmaClave.Attributes["value"] = UsuarioActual.Clave;
@@ -280,7 +282,6 @@ namespace UI.Web
 
         }
 
-
         public string FormatFecha()
         {
             return ddlAnio.Text + "/" + ddlMes.Text + "/" + ddlDia.Text;
@@ -340,6 +341,20 @@ namespace UI.Web
                 ddlPlan.Enabled = true;
                 txtLegajo.Enabled = true;
                 ddlPlan.Items.Remove("");
+            }
+        }
+
+        public void CargaPlanes()
+        {
+            if (ddlTipo.SelectedValue == "Alumno")
+            {
+                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+
+                PlanLogic plan = new PlanLogic();
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+                ddlPlan.DataBind();
             }
         }
     }
