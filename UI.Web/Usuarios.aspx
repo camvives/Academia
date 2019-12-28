@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<%@ Register Src="~/ConfirmaEliminar.ascx" TagPrefix="ce" TagName="confirmar" %>
     <style type="text/css">
         .auto-style2 {
             margin-right: 0px;
@@ -29,15 +31,21 @@
             width: 592px;
             height: 31px;
         }
+        .auto-style10 {
+            height: 545px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="formulario"> 
         <h1>USUARIOS</h1>
+        <div>
+            <ce:confirmar ID="Confirmar1" runat="server" />
+        </div>
         <table style="width:100%;">
             <tr>
-                <td>
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns = "False" DataKeyNames="ID" Height="251px" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing">
+                <td class="auto-style10">
+        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns = "False" DataKeyNames="ID" Height="251px" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -61,6 +69,8 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
+                    
+                 
                     <table class="auto-style5">
                         <tr>
                             <td class="auto-style3">ID</td>
@@ -144,7 +154,13 @@
                                 <asp:Label ID="lblPlan" runat="server" Text="Label"></asp:Label>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="auto-style8">&nbsp;</td>
+                            <td class="auto-style9">
+                                &nbsp;</td>
+                        </tr>
                     </table>
+                 
                 </td>
             </tr>
         </table>

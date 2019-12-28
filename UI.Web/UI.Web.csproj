@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationForm.aspx" />
-    <Content Include="ConfirmaEliminar.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\error.png" />
@@ -80,6 +79,7 @@
     <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
     <Content Include="Usuarios.aspx" />
+    <Content Include="ConfirmaEliminar.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationForm.aspx.cs">
@@ -88,13 +88,6 @@
     </Compile>
     <Compile Include="ApplicationForm.aspx.designer.cs">
       <DependentUpon>ApplicationForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ConfirmaEliminar.aspx.cs">
-      <DependentUpon>ConfirmaEliminar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ConfirmaEliminar.aspx.designer.cs">
-      <DependentUpon>ConfirmaEliminar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -127,6 +120,13 @@
     </Compile>
     <Compile Include="Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmaEliminar.ascx.cs">
+      <DependentUpon>ConfirmaEliminar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmaEliminar.ascx.designer.cs">
+      <DependentUpon>ConfirmaEliminar.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

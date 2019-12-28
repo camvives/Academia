@@ -2,8 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     &nbsp;&nbsp;&nbsp;<asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Volver</asp:LinkButton>       
     <div class="formulario">
-    <h1>Nuevo Usuario</h1>
+        <h1>Nuevo Usuario</h1>      
         <table class="tabla">
             <tr>
                 <td class="celda1">Tipo </td>

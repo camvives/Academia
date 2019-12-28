@@ -9,6 +9,7 @@ using Business.Entities;
 using System.Data;
 
 
+
 namespace UI.Web
 {
     public partial class UsuariosWeb : System.Web.UI.Page
@@ -20,8 +21,17 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             this.CompletarGrid();
+            this.Confirmar1.Visible = false;
+            
+            //Event Bubblig
+            Confirmar1.ButtonClick += new EventHandler(Confirmar1_ButtonClick);
+        }
+
+        private void Confirmar1_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarUsuario();
+            Response.Redirect("Usuarios.aspx");
         }
 
         public void CompletarGrid()
@@ -139,5 +149,19 @@ namespace UI.Web
             this.Context.Items["Carrera"] = Especialidad.ID; 
             Server.Transfer("UsuarioWeb.aspx", true);
         }
+
+        protected void gridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            this.Confirmar1.Visible = true;
+        }
+
+
+        public void EliminarUsuario()
+        {
+            UsuarioLogic ul = new UsuarioLogic();
+            UsuarioActual.State = BusinessEntity.States.Deleted;
+            ul.Save(UsuarioActual, PersonaActual);
+        }
     }
+
 }

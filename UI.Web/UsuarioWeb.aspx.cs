@@ -241,7 +241,6 @@ namespace UI.Web
             this.CambiaTipo();
         }
 
-
         public void CompletarFecha()
         {
             for (int i = 1; i <= 31; i++)
@@ -259,7 +258,6 @@ namespace UI.Web
                 ddlAnio.Items.Add(i.ToString());
             }
         }
-
 
         protected void reqLegajo_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -356,6 +354,11 @@ namespace UI.Web
                 ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
                 ddlPlan.DataBind();
             }
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Usuarios.aspx");
         }
     }
 }
