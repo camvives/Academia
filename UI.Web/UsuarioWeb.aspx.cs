@@ -78,11 +78,19 @@ namespace UI.Web
                 this.MapearADatos();
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
                 usuarioLogic.Save(UsuarioActual, PersonaActual);
-                this.lblError.Text = "Usuario Actualizado";
+
+                if (this.Modo == ModoForm.Modificacion)
+                {
+                    this.lblError.Text = "Usuario Actualizado";  
+                }
+                else if(this.Modo == ModoForm.Alta)
+                {
+                    this.lblError.Text = "Usuario Registrado";
+                }
                 this.lblError.Visible = true;
                 this.btnAceptar.Enabled = false;
                 Response.AddHeader("REFRESH", "2;URL=Usuarios.aspx");
-                
+
             }
         }
 

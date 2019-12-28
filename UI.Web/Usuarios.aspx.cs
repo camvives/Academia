@@ -162,6 +162,13 @@ namespace UI.Web
             UsuarioActual.State = BusinessEntity.States.Deleted;
             ul.Save(UsuarioActual, PersonaActual);
         }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("UsuarioWeb.aspx", true);
+            Response.Redirect("UsuarioWeb.aspx");
+        }
     }
 
 }

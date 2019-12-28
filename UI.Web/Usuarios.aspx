@@ -40,6 +40,7 @@
     <div class="formulario"> 
         <h1>USUARIOS</h1>
         <div>
+            <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
             <ce:confirmar ID="Confirmar1" runat="server" />
         </div>
         <table style="width:100%;">
