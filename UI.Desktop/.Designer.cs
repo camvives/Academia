@@ -37,6 +37,9 @@
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddbtnEditar = new System.Windows.Forms.ToolStripDropDownButton();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.especialidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.especialidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +65,9 @@
             // nuevoToolStripMenuItem1
             // 
             this.nuevoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuarioToolStripMenuItem1});
+            this.usuarioToolStripMenuItem1,
+            this.toolStripSeparator2,
+            this.especialidadToolStripMenuItem});
             this.nuevoToolStripMenuItem1.Name = "nuevoToolStripMenuItem1";
             resources.ApplyResources(this.nuevoToolStripMenuItem1, "nuevoToolStripMenuItem1");
             // 
@@ -87,7 +92,8 @@
             // 
             this.tsddbtnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsddbtnEditar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.especialidadesToolStripMenuItem});
             resources.ApplyResources(this.tsddbtnEditar, "tsddbtnEditar");
             this.tsddbtnEditar.Name = "tsddbtnEditar";
             // 
@@ -96,6 +102,23 @@
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             resources.ApplyResources(this.usuariosToolStripMenuItem, "usuariosToolStripMenuItem");
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.UsuariosToolStripMenuItem_Click);
+            // 
+            // especialidadToolStripMenuItem
+            // 
+            this.especialidadToolStripMenuItem.Name = "especialidadToolStripMenuItem";
+            resources.ApplyResources(this.especialidadToolStripMenuItem, "especialidadToolStripMenuItem");
+            this.especialidadToolStripMenuItem.Click += new System.EventHandler(this.EspecialidadToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // especialidadesToolStripMenuItem
+            // 
+            this.especialidadesToolStripMenuItem.Name = "especialidadesToolStripMenuItem";
+            resources.ApplyResources(this.especialidadesToolStripMenuItem, "especialidadesToolStripMenuItem");
+            this.especialidadesToolStripMenuItem.Click += new System.EventHandler(this.EspecialidadesToolStripMenuItem_Click);
             // 
             // formMain
             // 
@@ -127,6 +150,9 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
         private System.Windows.Forms.ToolStripDropDownButton tsddbtnEditar;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem especialidadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem especialidadesToolStripMenuItem;
     }
 }
 

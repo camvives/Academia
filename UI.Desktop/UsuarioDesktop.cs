@@ -53,20 +53,17 @@ namespace UI.Desktop
             if(Modo == ModoForm.Alta)
             {
                 UsuarioActual = new Usuario();
-            }
-            
-            this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-            this.UsuarioActual.Clave = this.txtClave.Text;
-            this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-
-            if (this.Modo == ModoForm.Alta)
-            {
                 this.UsuarioActual.State = BusinessEntity.States.New;
             }
-            else if(this.Modo == ModoForm.Modificacion)
+            else if (this.Modo == ModoForm.Modificacion)
             {
                 this.UsuarioActual.State = BusinessEntity.States.Modified;
             }
+
+            this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
+            this.UsuarioActual.Clave = this.txtClave.Text;
+            this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+            
         }
 
         public override void MapearDeDatos()

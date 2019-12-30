@@ -43,5 +43,17 @@ namespace UI.Desktop
                 this.Dispose();
             }
         }
+
+        private void EspecialidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EspecialidadDesktop especialidadDesktop = new EspecialidadDesktop();
+            especialidadDesktop.ShowDialog();
+        }
+
+        private void EspecialidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formEspecialidades formEspecialidades = new formEspecialidades();
+            formEspecialidades.ShowDialog();
+        }
     }
 }

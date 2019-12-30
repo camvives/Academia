@@ -121,27 +121,6 @@
     <value>25, 20</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="usuarioToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 34</value>
-  </data>
-  <data name="usuarioToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Usuario</value>
-  </data>
-  <data name="nuevoToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 34</value>
-  </data>
-  <data name="nuevoToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Nuevo</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 6</value>
-  </data>
-  <data name="salirToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 34</value>
-  </data>
-  <data name="salirToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
   <data name="tsddbtnArchivo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -167,10 +146,16 @@
     <value>Archivo</value>
   </data>
   <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 34</value>
+    <value>270, 34</value>
   </data>
   <data name="usuariosToolStripMenuItem.Text" xml:space="preserve">
     <value>Usuarios</value>
+  </data>
+  <data name="especialidadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="especialidadesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Especialidades</value>
   </data>
   <data name="tsddbtnEditar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -220,6 +205,36 @@
   </data>
   <data name="&gt;&gt;tsMenu.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="nuevoToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="nuevoToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="usuarioToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="usuarioToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 6</value>
+  </data>
+  <data name="salirToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="salirToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="especialidadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="especialidadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Especialidad</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1269,6 +1284,24 @@
     <value>usuariosToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;usuariosToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;especialidadToolStripMenuItem.Name" xml:space="preserve">
+    <value>especialidadToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;especialidadToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;especialidadesToolStripMenuItem.Name" xml:space="preserve">
+    <value>especialidadesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;especialidadesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
