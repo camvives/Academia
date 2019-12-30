@@ -14,6 +14,7 @@
         }
         .auto-style5 {
             width: 43%;
+            height: 550px;
         }
         .auto-style6 {
             width: 348px;
@@ -34,20 +35,43 @@
         .auto-style10 {
             height: 545px;
         }
-    </style>
+        .auto-style11 {
+            height: 0px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        .auto-style12 {
+            width: 100%;
+            height: 561px;
+            margin-top: 15px;
+        }
+        .auto-style14 {
+            height: 110px;
+            margin-top: 14px;
+            margin-bottom: 0px;
+        }
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="formulario"> 
-        <h1>USUARIOS</h1>
-        <div>
-            <asp:Button ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" Text="Nuevo" />
-            <ce:confirmar ID="Confirmar1" runat="server" />
-        </div>
-        <table style="width:100%;">
+    <div class="formulario">
+    </div>
+
+
+
+    <div class="formulario">
+        <h1 class="auto-style11">USUARIOS</h1>
+        <h1 class="auto-style14">
+        <ce:confirmar ID="Confirmar1" runat="server" />
+        </h1>
+        <table class="auto-style12">
+
             <tr>
+
                 <td class="auto-style10">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns = "False" DataKeyNames="ID" Height="251px" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled">
-            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+
+
+                    <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled" PageSize="8" OnPageIndexChanging="gridView_PageIndexChanging">
+                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -165,5 +189,9 @@
                 </td>
             </tr>
         </table>
+
+          <div>
+            
+        </div>
     </div>
 </asp:Content>

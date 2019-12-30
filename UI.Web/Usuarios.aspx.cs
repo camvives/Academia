@@ -193,6 +193,19 @@ namespace UI.Web
             Server.Transfer("UsuarioWeb.aspx", true);
             Response.Redirect("UsuarioWeb.aspx");
         }
+
+        protected void gridView_PageIndexChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        protected void gridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.CompletarGrid();
+            gridView.PageIndex = e.NewPageIndex;
+            gridView.DataBind();
+        }
     }
 
 }
