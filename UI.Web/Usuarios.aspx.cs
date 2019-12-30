@@ -28,107 +28,148 @@ namespace UI.Web
             Confirmar1.ButtonClick += new EventHandler(Confirmar1_ButtonClick);
         }
 
+        #region METODOS
+
+        public void CompletarGrid()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                List<Persona> personas;
+                List<Business.Entities.Usuario> usuarios;
+                (usuarios, personas) = ul.GetAll();
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ID");
+                dt.Columns.Add("Nombre");
+                dt.Columns.Add("Apellido");
+                dt.Columns.Add("NombreUsuario");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("Habilitado");
+
+                foreach (var usr in personas.Zip(usuarios, (a, b) => new { a, b }))  //Linq combina las dos listas
+                {
+                    dt.Rows.Add(usr.b.ID, usr.a.Nombre, usr.a.Apellido, usr.b.NombreUsuario, usr.a.Email, usr.b.Habilitado);
+                }
+
+                gridView.DataSource = dt;
+                gridView.DataBind();
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
+            }
+
+        }
+
+        public void MostrarDatos()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
+                (UsuarioActual, PersonaActual) = ul.GetOne(ID);
+
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad = el.GetOne(plan.IDEspecialidad);
+
+
+                #region Validaciones
+                string hab;
+                if (UsuarioActual.Habilitado == true)
+                {
+                    hab = "Sí";
+                }
+                else
+                {
+                    hab = "No";
+                }
+
+                string plandesc;
+                if (plan.Descripcion is null)
+                {
+                    plandesc = "-";
+                }
+                else
+                {
+                    plandesc = plan.Descripcion;
+                }
+
+                string espdesc;
+                if (Especialidad.Descripcion is null)
+                {
+                    espdesc = "-";
+                }
+                else
+                {
+                    espdesc = Especialidad.Descripcion;
+                }
+
+                string leg;
+                if (this.PersonaActual.Legajo == 0)
+                {
+                    leg = "-";
+                }
+                else
+                {
+                    leg = this.PersonaActual.Legajo.ToString();
+                }
+                #endregion
+
+                this.lblID.Text = UsuarioActual.ID.ToString();
+                this.lblNombreUsuario.Text = UsuarioActual.NombreUsuario;
+                this.lblHabilitado.Text = hab;
+                this.lblNombre.Text = this.PersonaActual.Nombre;
+                this.lblApellido.Text = this.PersonaActual.Apellido;
+                this.lblDireccion.Text = PersonaActual.Direccion;
+                this.lblEmail.Text = PersonaActual.Email;
+                this.lblTelefono.Text = PersonaActual.Telefono;
+                this.lblFechaNac.Text = PersonaActual.FechaNacimiento.ToString("dd/MM/yyyy");
+                this.lblTipo.Text = PersonaActual.TipoPersona.ToString();
+                this.lblLegajo.Text = leg;
+                this.lblCarrera.Text = espdesc;
+                this.lblPlan.Text = plandesc;
+            }
+            catch 
+            {
+                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
+            }
+
+        }
+
+        public void MapearDatos()
+        {
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Usuario"] = UsuarioActual;
+            Session.Add("Persona", PersonaActual);
+            this.Context.Items["Carrera"] = Especialidad.ID;
+            Server.Transfer("UsuarioWeb.aspx", true);
+        }
+
+        public void EliminarUsuario()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                UsuarioActual.State = BusinessEntity.States.Deleted;
+                ul.Save(UsuarioActual, PersonaActual);
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
+            }
+        }
+
+        #endregion
+
         private void Confirmar1_ButtonClick(object sender, EventArgs e)
         {
             this.EliminarUsuario();
             Response.Redirect("Usuarios.aspx");
         }
-
-        public void CompletarGrid()
-        {
-            
-            UsuarioLogic ul = new UsuarioLogic();
-            List<Persona> personas;
-            List<Business.Entities.Usuario> usuarios;
-            (usuarios, personas) = ul.GetAll();
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Nombre");
-            dt.Columns.Add("Apellido");
-            dt.Columns.Add("NombreUsuario");
-            dt.Columns.Add("Email");
-            dt.Columns.Add("Habilitado");
-
-            foreach (var usr in personas.Zip(usuarios, (a, b) => new { a, b }))  //Linq combina las dos listas
-            {
-                dt.Rows.Add(usr.b.ID, usr.a.Nombre, usr.a.Apellido, usr.b.NombreUsuario, usr.a.Email, usr.b.Habilitado);
-            }
-
-            gridView.DataSource = dt;
-            gridView.DataBind();
-            
-        }
-
-       public void MostrarDatos()
-       {
-            UsuarioLogic ul = new UsuarioLogic();
-            int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
-            (UsuarioActual, PersonaActual) = ul.GetOne(ID);
-
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
-
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad = el.GetOne(plan.IDEspecialidad);
-            
-
-            #region Validaciones
-            string hab;
-            if (UsuarioActual.Habilitado == true)
-            {
-                hab = "Sí";
-            }
-            else
-            {
-                hab = "No";
-            }
-
-            string plandesc;
-            if (plan.Descripcion is null)
-            {
-                plandesc = "-";
-            }
-            else
-            {
-                plandesc = plan.Descripcion;
-            }
-
-            string espdesc;
-            if (Especialidad.Descripcion is null)
-            {
-                espdesc = "-";
-            }
-            else
-            {
-                espdesc = Especialidad.Descripcion;
-            }
-
-            string leg;
-            if (this.PersonaActual.Legajo == 0)
-            {
-                leg = "-";
-            }
-            else
-            {
-                leg = this.PersonaActual.Legajo.ToString();
-            }
-            #endregion
-
-            this.lblID.Text = UsuarioActual.ID.ToString();
-            this.lblNombreUsuario.Text = UsuarioActual.NombreUsuario;
-            this.lblHabilitado.Text = hab;
-            this.lblNombre.Text = this.PersonaActual.Nombre;
-            this.lblApellido.Text = this.PersonaActual.Apellido;
-            this.lblDireccion.Text = PersonaActual.Direccion;
-            this.lblEmail.Text = PersonaActual.Email;
-            this.lblTelefono.Text = PersonaActual.Telefono;
-            this.lblFechaNac.Text = PersonaActual.FechaNacimiento.ToString("dd/MM/yyyy");
-            this.lblTipo.Text = PersonaActual.TipoPersona.ToString();
-            this.lblLegajo.Text = leg;
-            this.lblCarrera.Text = espdesc;
-            this.lblPlan.Text = plandesc;
-       }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -141,26 +182,9 @@ namespace UI.Web
             Response.Redirect("UsuarioWeb.aspx");
         }
 
-        public void MapearDatos()
-        {
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Usuario"] = UsuarioActual;
-            Session.Add("Persona", PersonaActual);
-            this.Context.Items["Carrera"] = Especialidad.ID; 
-            Server.Transfer("UsuarioWeb.aspx", true);
-        }
-
         protected void gridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             this.Confirmar1.Visible = true;
-        }
-
-
-        public void EliminarUsuario()
-        {
-            UsuarioLogic ul = new UsuarioLogic();
-            UsuarioActual.State = BusinessEntity.States.Deleted;
-            ul.Save(UsuarioActual, PersonaActual);
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
