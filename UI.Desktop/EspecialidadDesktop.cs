@@ -92,6 +92,7 @@ namespace UI.Desktop
         {
             if (string.IsNullOrEmpty(txtDesc.Text))
             {
+                this.Notificar("Campo vacío", "Debe completar el campo 'Descripción'", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else

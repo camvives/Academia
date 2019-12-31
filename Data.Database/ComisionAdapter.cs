@@ -111,7 +111,7 @@ namespace Data.Database
 
                 cmdSave.Parameters.AddWithValue("@desc_comision", comision.Descripcion);
                 cmdSave.Parameters.AddWithValue("@anio_especialidad", comision.AnioEspecialidad);
-                cmdSave.Parameters.AddWithValue("@id_plan", comision.AnioEspecialidad);
+                cmdSave.Parameters.AddWithValue("@id_plan", comision.IDPlan);
                 comision.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteNonQuery());
             }
             catch (Exception ex)
@@ -149,14 +149,14 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdSave = new SqlCommand("UPDATE especialidades SET desc_comision = @desc_comsion" +
-                                                                            " anio_especialidad = @anio_especialidad " +
+                SqlCommand cmdSave = new SqlCommand("UPDATE comisiones SET desc_comision = @desc_comision," +
+                                                                            " anio_especialidad = @anio_especialidad, " +
                                                                             " id_plan = @id_plan "
                                                                             + "WHERE id_comision = @id", sqlConn);
 
                 cmdSave.Parameters.AddWithValue("@desc_comision", comision.Descripcion);
                 cmdSave.Parameters.AddWithValue("@anio_especialidad", comision.AnioEspecialidad);
-                cmdSave.Parameters.AddWithValue("@id_plan", comision.AnioEspecialidad);
+                cmdSave.Parameters.AddWithValue("@id_plan", comision.IDPlan);
                 cmdSave.Parameters.AddWithValue("@id", comision.ID);
                 cmdSave.ExecuteNonQuery();
             }

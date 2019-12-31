@@ -23,8 +23,6 @@ namespace UI.Desktop
             public string DescEspecialidad { get; set; }
         }
 
-        
-
         public ComisionLogic ComLog
         {
             get { return new ComisionLogic(); }
@@ -108,6 +106,26 @@ namespace UI.Desktop
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void TsbNuevo_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            ComisionDesktop formComDesk = new ComisionDesktop();
+            formComDesk.ShowDialog();
+            this.Enabled = true;
+            this.Focus();
+
+            this.Listar();
+        }
+
+        private void TsbEditar_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgvComisiones.SelectedRows[0].Cells["ID"].Value;
+            Comision ComisionActual = ComLog.GetOne(ID);
+            ComisionDesktop formComDesk = new ComisionDesktop(ComisionActual, ModoForm.Modificacion);
+            formComDesk.ShowDialog();
+            this.Listar();
         }
     }
 }
