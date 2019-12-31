@@ -89,7 +89,7 @@ namespace UI.Desktop
             if (mensaje == DialogResult.Yes)
             {
                 this.EliminarEspecialidad();
-                MessageBox.Show("La especialidad se ha eliminado", "Eliminar Usuario");
+                MessageBox.Show("La especialidad se ha eliminado", "Eliminar Especialidad");
                 this.Listar();
             }
         }

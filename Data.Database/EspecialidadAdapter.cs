@@ -127,8 +127,7 @@ namespace Data.Database
             }
             catch (Exception ex)
             {
-                Exception exception = new Exception("Error al eliminar la especialidad", ex);
-                throw exception;
+                throw ex;
             }
             finally
             {

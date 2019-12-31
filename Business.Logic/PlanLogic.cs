@@ -14,7 +14,7 @@ namespace Business.Logic
 
         public PlanLogic()
         {
-          PlanData = new PlanAdapter();
+            PlanData = new PlanAdapter();
         }
 
         public List<Plan> GetPlanesEsp(int idesp)
