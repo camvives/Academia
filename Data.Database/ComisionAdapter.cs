@@ -38,7 +38,7 @@ namespace Data.Database
 
                 while (drComisiones.Read())
                 {
-                    Comision esp = new Comision
+                    Comision com = new Comision
                     {
                         ID = (int)drComisiones["id_comision"],
                         Descripcion = (string)drComisiones["desc_comision"],
@@ -46,7 +46,7 @@ namespace Data.Database
                         IDPlan = (int)drComisiones["id_plan"]
                     };
 
-                    comisiones.Add(esp);
+                    comisiones.Add(com);
                 }
 
                 drComisiones.Close();

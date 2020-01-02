@@ -41,8 +41,7 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            dgvComisiones.DataSource = this.ObtenerDatos();
-         
+            dgvComisiones.DataSource = this.ObtenerDatos();        
         }
 
         public List<DatosComisiones> ObtenerDatos()
