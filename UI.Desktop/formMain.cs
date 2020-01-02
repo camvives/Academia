@@ -55,5 +55,29 @@ namespace UI.Desktop
             formEspecialidades formEspecialidades = new formEspecialidades();
             formEspecialidades.ShowDialog();
         }
+
+        private void PlanesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formPlanes formPlanes = new formPlanes();
+            formPlanes.ShowDialog();
+        }
+
+        private void PlanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlanDesktop planDesktop = new PlanDesktop();
+            planDesktop.ShowDialog();
+        }
+
+        private void MateriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formMaterias formMaterias = new formMaterias();
+            formMaterias.ShowDialog();
+        }
+
+        private void MateriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MateriaDesktop materiaDesktop = new MateriaDesktop();
+            materiaDesktop.ShowDialog();
+        }
     }
 }

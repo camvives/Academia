@@ -44,6 +44,7 @@
     <Compile Include="BusinessEntity.cs" />
     <Compile Include="Comision.cs" />
     <Compile Include="Especialidad.cs" />
+    <Compile Include="Materia.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Plan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
