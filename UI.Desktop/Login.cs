@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Util;
+using Business.Entities;
+using Business.Logic;
 
 namespace UI.Desktop
 {
@@ -28,6 +30,13 @@ namespace UI.Desktop
             {
                 MessageBox.Show("Usuario y/o contraseña incorrectos", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public int BuscarTipo()
+        {
+            UsuarioLogic ul = new UsuarioLogic();
+            int tipo = ul.GetTipo(txtUsuario.Text);
+            return tipo;
         }
     }
 }

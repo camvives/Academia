@@ -36,5 +36,10 @@ namespace Business.Logic
         {
             return UsuarioData.GetClave(nombreUsuario);
         }
+
+        public int GetTipo(string nombreUsuario)
+        {
+            return UsuarioData.GetTipo(nombreUsuario);
+        }
     }
 }

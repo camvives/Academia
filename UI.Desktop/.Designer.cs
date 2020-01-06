@@ -30,19 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
             this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.tsddbtnArchivo = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsddbtnArchivoAdmin = new System.Windows.Forms.ToolStripDropDownButton();
             this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.usuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.especialidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsddbtnEditar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsddbtnEditarAdmin = new System.Windows.Forms.ToolStripDropDownButton();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.especialidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
@@ -51,20 +51,20 @@
             // 
             this.tsMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsddbtnArchivo,
-            this.tsddbtnEditar});
+            this.tsddbtnArchivoAdmin,
+            this.tsddbtnEditarAdmin});
             resources.ApplyResources(this.tsMenu, "tsMenu");
             this.tsMenu.Name = "tsMenu";
             // 
-            // tsddbtnArchivo
+            // tsddbtnArchivoAdmin
             // 
-            this.tsddbtnArchivo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsddbtnArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsddbtnArchivoAdmin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddbtnArchivoAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevoToolStripMenuItem1,
             this.toolStripSeparator1,
             this.salirToolStripMenuItem1});
-            resources.ApplyResources(this.tsddbtnArchivo, "tsddbtnArchivo");
-            this.tsddbtnArchivo.Name = "tsddbtnArchivo";
+            resources.ApplyResources(this.tsddbtnArchivoAdmin, "tsddbtnArchivoAdmin");
+            this.tsddbtnArchivoAdmin.Name = "tsddbtnArchivoAdmin";
             // 
             // nuevoToolStripMenuItem1
             // 
@@ -100,6 +100,12 @@
             resources.ApplyResources(this.planToolStripMenuItem, "planToolStripMenuItem");
             this.planToolStripMenuItem.Click += new System.EventHandler(this.PlanToolStripMenuItem_Click);
             // 
+            // materiaToolStripMenuItem
+            // 
+            this.materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
+            resources.ApplyResources(this.materiaToolStripMenuItem, "materiaToolStripMenuItem");
+            this.materiaToolStripMenuItem.Click += new System.EventHandler(this.MateriaToolStripMenuItem_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -111,16 +117,16 @@
             resources.ApplyResources(this.salirToolStripMenuItem1, "salirToolStripMenuItem1");
             this.salirToolStripMenuItem1.Click += new System.EventHandler(this.SalirToolStripMenuItem1_Click);
             // 
-            // tsddbtnEditar
+            // tsddbtnEditarAdmin
             // 
-            this.tsddbtnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsddbtnEditar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsddbtnEditarAdmin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddbtnEditarAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usuariosToolStripMenuItem,
             this.especialidadesToolStripMenuItem,
             this.planesToolStripMenuItem,
             this.materiasToolStripMenuItem});
-            resources.ApplyResources(this.tsddbtnEditar, "tsddbtnEditar");
-            this.tsddbtnEditar.Name = "tsddbtnEditar";
+            resources.ApplyResources(this.tsddbtnEditarAdmin, "tsddbtnEditarAdmin");
+            this.tsddbtnEditarAdmin.Name = "tsddbtnEditarAdmin";
             // 
             // usuariosToolStripMenuItem
             // 
@@ -139,12 +145,6 @@
             this.planesToolStripMenuItem.Name = "planesToolStripMenuItem";
             resources.ApplyResources(this.planesToolStripMenuItem, "planesToolStripMenuItem");
             this.planesToolStripMenuItem.Click += new System.EventHandler(this.PlanesToolStripMenuItem_Click);
-            // 
-            // materiaToolStripMenuItem
-            // 
-            this.materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
-            resources.ApplyResources(this.materiaToolStripMenuItem, "materiaToolStripMenuItem");
-            this.materiaToolStripMenuItem.Click += new System.EventHandler(this.MateriaToolStripMenuItem_Click);
             // 
             // materiasToolStripMenuItem
             // 
@@ -175,12 +175,12 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripDropDownButton tsddbtnArchivo;
+        private System.Windows.Forms.ToolStripDropDownButton tsddbtnArchivoAdmin;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripDropDownButton tsddbtnEditar;
+        private System.Windows.Forms.ToolStripDropDownButton tsddbtnEditarAdmin;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem especialidadToolStripMenuItem;

@@ -122,28 +122,28 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="usuarioToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>211, 34</value>
   </data>
   <data name="usuarioToolStripMenuItem1.Text" xml:space="preserve">
     <value>Usuario</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
+    <value>208, 6</value>
   </data>
   <data name="especialidadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>211, 34</value>
   </data>
   <data name="especialidadToolStripMenuItem.Text" xml:space="preserve">
     <value>Especialidad</value>
   </data>
   <data name="planToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>211, 34</value>
   </data>
   <data name="planToolStripMenuItem.Text" xml:space="preserve">
     <value>Plan</value>
   </data>
   <data name="materiaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
+    <value>211, 34</value>
   </data>
   <data name="materiaToolStripMenuItem.Text" xml:space="preserve">
     <value>Materia</value>
@@ -163,7 +163,7 @@
   <data name="salirToolStripMenuItem1.Text" xml:space="preserve">
     <value>Salir</value>
   </data>
-  <data name="tsddbtnArchivo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsddbtnArchivoAdmin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -178,16 +178,40 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="tsddbtnArchivo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="tsddbtnArchivoAdmin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsddbtnArchivo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsddbtnArchivoAdmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 29</value>
   </data>
-  <data name="tsddbtnArchivo.Text" xml:space="preserve">
+  <data name="tsddbtnArchivoAdmin.Text" xml:space="preserve">
     <value>Archivo</value>
   </data>
-  <data name="tsddbtnEditar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="usuariosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+  <data name="especialidadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="especialidadesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Especialidades</value>
+  </data>
+  <data name="planesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="planesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Planes</value>
+  </data>
+  <data name="materiasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="materiasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Materias</value>
+  </data>
+  <data name="tsddbtnEditarAdmin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
@@ -202,13 +226,13 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="tsddbtnEditar.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="tsddbtnEditarAdmin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsddbtnEditar.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsddbtnEditarAdmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 29</value>
   </data>
-  <data name="tsddbtnEditar.Text" xml:space="preserve">
+  <data name="tsddbtnEditarAdmin.Text" xml:space="preserve">
     <value>Editar</value>
   </data>
   <data name="tsMenu.Location" type="System.Drawing.Point, System.Drawing">
@@ -235,30 +259,6 @@
   </data>
   <data name="&gt;&gt;tsMenu.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="usuariosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usuarios</value>
-  </data>
-  <data name="especialidadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="especialidadesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Especialidades</value>
-  </data>
-  <data name="planesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="planesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Planes</value>
-  </data>
-  <data name="materiasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="materiasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Materias</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1268,10 +1268,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Academia</value>
   </data>
-  <data name="&gt;&gt;tsddbtnArchivo.Name" xml:space="preserve">
-    <value>tsddbtnArchivo</value>
+  <data name="&gt;&gt;tsddbtnArchivoAdmin.Name" xml:space="preserve">
+    <value>tsddbtnArchivoAdmin</value>
   </data>
-  <data name="&gt;&gt;tsddbtnArchivo.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsddbtnArchivoAdmin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nuevoToolStripMenuItem1.Name" xml:space="preserve">
@@ -1304,6 +1304,12 @@
   <data name="&gt;&gt;planToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;materiaToolStripMenuItem.Name" xml:space="preserve">
+    <value>materiaToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;materiaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
@@ -1316,10 +1322,10 @@
   <data name="&gt;&gt;salirToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsddbtnEditar.Name" xml:space="preserve">
-    <value>tsddbtnEditar</value>
+  <data name="&gt;&gt;tsddbtnEditarAdmin.Name" xml:space="preserve">
+    <value>tsddbtnEditarAdmin</value>
   </data>
-  <data name="&gt;&gt;tsddbtnEditar.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsddbtnEditarAdmin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;usuariosToolStripMenuItem.Name" xml:space="preserve">
@@ -1338,12 +1344,6 @@
     <value>planesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;planesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;materiaToolStripMenuItem.Name" xml:space="preserve">
-    <value>materiaToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;materiaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;materiasToolStripMenuItem.Name" xml:space="preserve">

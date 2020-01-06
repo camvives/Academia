@@ -352,5 +352,29 @@ namespace Data.Database
             return clave;
         }
 
+        public int GetTipo(string nombreUsuario)
+        {
+            int tipo = 3;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdTipo = new SqlCommand("SELECT tipo_persona FROM personas "+
+                                                     "INNER JOIN  usuarios on personas.id_persona = usuarios.id_persona "+ 
+                                                     "WHERE nombre_usuario = @nombreUsuario;", sqlConn);
+                cmdTipo.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                SqlDataReader drTipo = cmdTipo.ExecuteReader();
+
+                if (drTipo.Read())
+                {
+                     tipo = (int)drTipo["tipo_persona"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return tipo;
+        }
     }
 }

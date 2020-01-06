@@ -37,11 +37,23 @@ namespace UI.Desktop
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            formLogin login = new formLogin();
-            if (login.ShowDialog() != DialogResult.OK)
+            using (formLogin login = new formLogin())
             {
-                this.Dispose();
+                login.ShowDialog();
+                int tipo = login.BuscarTipo();
+                if (tipo == 1 || tipo == 2)
+                {
+                    this.tsddbtnArchivoAdmin.Visible = false;
+                    this.tsddbtnEditarAdmin.Visible = false;
+                }
+
+                if (login.DialogResult != DialogResult.OK)
+                {
+                    this.Dispose();
+                }
+
             }
+               
         }
 
         private void EspecialidadToolStripMenuItem_Click(object sender, EventArgs e)
