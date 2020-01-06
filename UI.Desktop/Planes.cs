@@ -67,7 +67,7 @@ namespace UI.Desktop
                 Plan planActual = PlanLog.GetOne(ID);
                 planActual.State = BusinessEntity.States.Deleted;
                 PlanLog.Save(planActual);
-            }
+        }
             catch
             {
                 MessageBox.Show("Error al eliminar el plan, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -111,12 +111,14 @@ namespace UI.Desktop
 
         private void TsbEliminar_Click(object sender, EventArgs e)
         {
-            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar el plan?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar el plan? \n Se eliminaran usuarios, materias y comisiones asociados al plan.", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (mensaje == DialogResult.Yes)
             {
-                this.EliminarPlan();
-                MessageBox.Show("El plan se ha eliminado", "Eliminar Plan");
-                this.Listar();
+
+               this.EliminarPlan();
+               MessageBox.Show("El plan se ha eliminado", "Eliminar Plan");
+               this.Listar();
+
             }
         }
     }

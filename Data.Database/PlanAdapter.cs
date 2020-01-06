@@ -163,9 +163,44 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("DELETE planes WHERE id_plan = @id", sqlConn);
-                cmdDelete.Parameters.AddWithValue("@id", Id);
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand cmdDeletePlan = sqlConn.CreateCommand();
+                SqlTransaction transaction = sqlConn.BeginTransaction("DeletePlanes");
+                cmdDeletePlan.Transaction = transaction;
+
+                try
+                {
+                    cmdDeletePlan.CommandText = "DELETE FROM usuarios WHERE id_persona IN (SELECT id_persona FROM personas WHERE id_plan=@id)";
+                    cmdDeletePlan.Parameters.AddWithValue("@id", Id);
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM personas WHERE id_plan=@id";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM materias WHERE id_plan=@id";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM comisiones WHERE id_plan=@id";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM planes WHERE id_plan=@id";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    transaction.Commit();
+
+                }
+                catch (Exception ex1)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                        throw ex1;
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw ex2;
+                    }
+                }
+
             }
             catch (Exception ex)
             {

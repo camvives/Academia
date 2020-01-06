@@ -206,34 +206,41 @@ namespace Data.Database
 
         public void Delete(int IdUsr, int IdPer)
         {
-            this.OpenConnection();
-            SqlCommand cmdDeleteUsr = sqlConn.CreateCommand();
-            SqlTransaction transaction = sqlConn.BeginTransaction("DeleteUsuario");
-            cmdDeleteUsr.Transaction = transaction;
-
             try
-            {          
-                cmdDeleteUsr.CommandText = "DELETE FROM usuarios WHERE id_usuario=@id";
-                cmdDeleteUsr.Parameters.AddWithValue("@id", IdUsr);
-                cmdDeleteUsr.ExecuteNonQuery();
-
-                cmdDeleteUsr.CommandText = "DELETE FROM personas WHERE id_persona=@idper";                
-                cmdDeleteUsr.Parameters.AddWithValue("@idper", IdPer);
-                cmdDeleteUsr.ExecuteNonQuery();
-
-                transaction.Commit();
-            }
-            catch (Exception ex)
             {
+                this.OpenConnection();
+                SqlCommand cmdDeleteUsr = sqlConn.CreateCommand();
+                SqlTransaction transaction = sqlConn.BeginTransaction("DeleteUsuario");
+                cmdDeleteUsr.Transaction = transaction;
+
                 try
                 {
-                    transaction.Rollback();
-                    throw ex;
+                    cmdDeleteUsr.CommandText = "DELETE FROM usuarios WHERE id_usuario=@id";
+                    cmdDeleteUsr.Parameters.AddWithValue("@id", IdUsr);
+                    cmdDeleteUsr.ExecuteNonQuery();
+
+                    cmdDeleteUsr.CommandText = "DELETE FROM personas WHERE id_persona=@idper";
+                    cmdDeleteUsr.Parameters.AddWithValue("@idper", IdPer);
+                    cmdDeleteUsr.ExecuteNonQuery();
+
+                    transaction.Commit();
                 }
-                catch (Exception ex2)
+                catch (Exception ex)
                 {
-                    throw ex2;
+                    try
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw ex2;
+                    }
                 }
+            }
+            catch (Exception ex3)
+            {
+                throw ex3;
             }
         }
 
