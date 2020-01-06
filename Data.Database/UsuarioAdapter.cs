@@ -204,7 +204,7 @@ namespace Data.Database
             return (usr, per);
         }
 
-        public void Delete(int IdUsr, int IdPer)
+        protected void Delete(int IdUsr, int IdPer)
         {
             try
             {
@@ -244,7 +244,7 @@ namespace Data.Database
             }
         }
 
-        public void Update(Usuario usuario, Persona persona)
+        protected void Update(Usuario usuario, Persona persona)
         {
 
             this.OpenConnection();

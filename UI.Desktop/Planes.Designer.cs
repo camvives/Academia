@@ -73,7 +73,7 @@
             this.tsbNuevo.Name = "tsbNuevo";
             this.tsbNuevo.Size = new System.Drawing.Size(92, 29);
             this.tsbNuevo.Text = "Nuevo";
-            this.tsbNuevo.ToolTipText = "Nuevo Usuario";
+            this.tsbNuevo.ToolTipText = "Nuevo Plan";
             this.tsbNuevo.Click += new System.EventHandler(this.TsbNuevo_Click);
             // 
             // tsbEditar
@@ -83,7 +83,7 @@
             this.tsbEditar.Name = "tsbEditar";
             this.tsbEditar.Size = new System.Drawing.Size(85, 29);
             this.tsbEditar.Text = "Editar";
-            this.tsbEditar.ToolTipText = "Modificar Usuario";
+            this.tsbEditar.ToolTipText = "Modificar Plan";
             this.tsbEditar.Click += new System.EventHandler(this.TsbEditar_Click);
             // 
             // tsbEliminar
@@ -93,7 +93,7 @@
             this.tsbEliminar.Name = "tsbEliminar";
             this.tsbEliminar.Size = new System.Drawing.Size(102, 29);
             this.tsbEliminar.Text = "Eliminar";
-            this.tsbEliminar.ToolTipText = "Eliminar Usuario";
+            this.tsbEliminar.ToolTipText = "Eliminar plan";
             this.tsbEliminar.Click += new System.EventHandler(this.TsbEliminar_Click);
             // 
             // toolStripSeparator1
