@@ -33,8 +33,19 @@ namespace UI.Desktop
             UsuarioActual = usuario;
             PersonaActual = persona;
             Modo = modo;
-            this.Text = "Editar Usuario";
 
+            if (Modo == ModoForm.ModificacionUsr)
+            {
+                this.Text = "Mis Datos";
+                this.chkHabilitado.Visible = false;
+                this.lblHabilitado.Visible = false;
+
+            }
+            else
+            {
+                this.Text = "Editar Usuario";
+            }
+            
             try
             {
                this.MapearDeDatos();
@@ -55,7 +66,7 @@ namespace UI.Desktop
                 UsuarioActual = new Usuario();
                 this.UsuarioActual.State = BusinessEntity.States.New;
             }
-            else if (this.Modo == ModoForm.Modificacion)
+            else if (this.Modo == ModoForm.Modificacion || this.Modo == ModoForm.ModificacionUsr)
             {
                 this.UsuarioActual.State = BusinessEntity.States.Modified;
             }
@@ -89,15 +100,20 @@ namespace UI.Desktop
 
                 if(Modo == ModoForm.Alta)
                 {
-                this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if(Modo == ModoForm.Modificacion)
                 {
-                this.Notificar("Editar Usuario", "Los cambios han sido registrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Notificar("Editar Usuario", "Los cambios han sido registrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    this.Notificar("Editar Usuario", "Los cambios han sido registrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
 
                 this.DialogResult = DialogResult.OK;
-            }
+        }
             catch
             {
                 this.Notificar("Error", "Error al registrar usuario, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);

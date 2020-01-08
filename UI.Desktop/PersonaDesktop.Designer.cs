@@ -59,6 +59,7 @@
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lklblModificar = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -77,7 +78,7 @@
             this.tableLayoutPanel5.ColumnCount = 3;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.8612F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.1388F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
             this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbCarrera, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbPlan, 2, 0);
@@ -108,7 +109,7 @@
             this.cmbCarrera.Location = new System.Drawing.Point(104, 11);
             this.cmbCarrera.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmbCarrera.Name = "cmbCarrera";
-            this.cmbCarrera.Size = new System.Drawing.Size(212, 30);
+            this.cmbCarrera.Size = new System.Drawing.Size(210, 30);
             this.cmbCarrera.TabIndex = 2;
             this.cmbCarrera.SelectedValueChanged += new System.EventHandler(this.CmbCarrera_SelectedValueChanged);
             // 
@@ -118,7 +119,7 @@
             this.cmbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlan.FormattingEnabled = true;
-            this.cmbPlan.Location = new System.Drawing.Point(322, 11);
+            this.cmbPlan.Location = new System.Drawing.Point(320, 11);
             this.cmbPlan.Name = "cmbPlan";
             this.cmbPlan.Size = new System.Drawing.Size(73, 30);
             this.cmbPlan.TabIndex = 3;
@@ -427,12 +428,25 @@
             this.label10.Text = "Datos Personales";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lklblModificar
+            // 
+            this.lklblModificar.AutoSize = true;
+            this.lklblModificar.Location = new System.Drawing.Point(12, 557);
+            this.lklblModificar.Name = "lklblModificar";
+            this.lklblModificar.Size = new System.Drawing.Size(73, 20);
+            this.lklblModificar.TabIndex = 16;
+            this.lklblModificar.TabStop = true;
+            this.lklblModificar.Text = "Modificar";
+            this.lklblModificar.Visible = false;
+            this.lklblModificar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LklblModificar_LinkClicked);
+            // 
             // FormPersonaDesktop
             // 
             this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 591);
+            this.Controls.Add(this.lklblModificar);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
@@ -493,5 +507,6 @@
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.LinkLabel lklblModificar;
     }
 }

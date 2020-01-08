@@ -35,7 +35,7 @@
             this.txtClave = new System.Windows.Forms.TextBox();
             this.lblConfContrasenia = new System.Windows.Forms.Label();
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblHabilitado = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -115,17 +115,17 @@
             this.chkHabilitado.TabIndex = 4;
             this.chkHabilitado.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblHabilitado
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(73, 155);
-            this.label1.Margin = new System.Windows.Forms.Padding(14, 0, 14, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Habilitado";
+            this.lblHabilitado.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblHabilitado.AutoSize = true;
+            this.lblHabilitado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabilitado.Location = new System.Drawing.Point(73, 155);
+            this.lblHabilitado.Margin = new System.Windows.Forms.Padding(14, 0, 14, 0);
+            this.lblHabilitado.Name = "lblHabilitado";
+            this.lblHabilitado.Size = new System.Drawing.Size(98, 25);
+            this.lblHabilitado.TabIndex = 1;
+            this.lblHabilitado.Text = "Habilitado";
             // 
             // txtUsuario
             // 
@@ -195,7 +195,7 @@
             this.ClientSize = new System.Drawing.Size(383, 249);
             this.Controls.Add(this.chkHabilitado);
             this.Controls.Add(this.lblConfContrasenia);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblHabilitado);
             this.Controls.Add(this.txtConfirmarClave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtClave);
@@ -227,7 +227,7 @@
         private System.Windows.Forms.TextBox txtConfirmarClave;
         private System.Windows.Forms.CheckBox chkHabilitado;
         private System.Windows.Forms.Label lblConfContrasenia;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHabilitado;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGuardar;

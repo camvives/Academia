@@ -41,6 +41,35 @@ namespace UI.Desktop
             }
         }
 
+        public FormPersonaDesktop(Usuario usuario, Persona persona, ModoForm modo) : this()
+        {
+            this.Text = "Mis Datos";
+            Modo = modo;
+            UsuarioLogic ul = new UsuarioLogic();
+            PersonaActual = persona;
+            UsuarioActual = usuario;
+            this.MapearDeDatos();
+
+            if (Modo == ModoForm.Consulta)
+            {
+                this.txtApellido.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.cmbTipo.Enabled = false;
+                this.txtDireccion.Enabled = false;
+                this.txtDireccionNum.Enabled = false;
+                this.txtEmail.Enabled = false;
+                this.txtLegajo.Enabled = false;
+                this.cmbCarrera.Enabled = false;
+                this.cmbPlan.Enabled = false;
+                this.dtpNacimiento.Enabled = false;
+                this.txtTelefono.Enabled = false;
+
+                this.lklblModificar.Visible = true;
+                this.btnCancelar.Visible = false;
+            }
+        }
+
+
         private void FormPersonaDesktop_Load(object sender, EventArgs e)
         {
             if (Modo == ModoForm.Alta)
@@ -174,13 +203,13 @@ namespace UI.Desktop
             this.MapearADatos();
 
             UsuarioDesktop usuarioDesktop;
-            if(Modo == ModoForm.Modificacion)
+            if(Modo == ModoForm.Alta)
             {
-               usuarioDesktop = new UsuarioDesktop(UsuarioActual, PersonaActual, Modo);
+                usuarioDesktop = new UsuarioDesktop(PersonaActual);
             }
             else
             {
-                usuarioDesktop = new UsuarioDesktop(PersonaActual);
+                usuarioDesktop = new UsuarioDesktop(UsuarioActual, PersonaActual, Modo);
             }
 
             this.Hide();
@@ -266,9 +295,16 @@ namespace UI.Desktop
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            if (this.Validar())
+            if (Modo == ModoForm.Consulta)
             {
-                this.GuardarCambios();
+                this.Close();
+            }
+            else
+            {
+                if (this.Validar())
+                {
+                    this.GuardarCambios();
+                }         
             }
         }
 
@@ -368,6 +404,23 @@ namespace UI.Desktop
                 txtLegajo.Enabled = true;
             }
         }
+        
+
+        private void LklblModificar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.btnCancelar.Enabled = true;
+            this.Modo = ModoForm.ModificacionUsr;
+
+            this.txtApellido.Enabled = true;
+            this.txtNombre.Enabled = true;
+            this.txtDireccion.Enabled = true;
+            this.txtDireccionNum.Enabled = true;
+            this.txtEmail.Enabled = true;
+            this.dtpNacimiento.Enabled = true;
+            this.txtTelefono.Enabled = true;
+
+        }
+
         #endregion
     }
 }

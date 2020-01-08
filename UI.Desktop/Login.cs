@@ -15,6 +15,9 @@ namespace UI.Desktop
 {
     public partial class formLogin : Form
     {
+        public Usuario UsuarioActual { get; set; }
+        public Persona PersonaActual { get; set; }
+
         public formLogin()
         {
             InitializeComponent();
@@ -32,11 +35,11 @@ namespace UI.Desktop
             }
         }
 
-        public int BuscarTipo()
+        public (Usuario, Persona) BuscarUsuario()
         {
             UsuarioLogic ul = new UsuarioLogic();
-            int tipo = ul.GetTipo(txtUsuario.Text);
-            return tipo;
+            (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);
+            return (UsuarioActual, PersonaActual);
         }
     }
 }

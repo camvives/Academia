@@ -44,6 +44,11 @@
             this.especialidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsddBtnArchivoAlumno = new System.Windows.Forms.ToolStripDropDownButton();
+            this.misDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +57,8 @@
             this.tsMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsddbtnArchivoAdmin,
-            this.tsddbtnEditarAdmin});
+            this.tsddbtnEditarAdmin,
+            this.tsddBtnArchivoAlumno});
             resources.ApplyResources(this.tsMenu, "tsMenu");
             this.tsMenu.Name = "tsMenu";
             // 
@@ -152,6 +158,41 @@
             resources.ApplyResources(this.materiasToolStripMenuItem, "materiasToolStripMenuItem");
             this.materiasToolStripMenuItem.Click += new System.EventHandler(this.MateriasToolStripMenuItem_Click);
             // 
+            // tsddBtnArchivoAlumno
+            // 
+            this.tsddBtnArchivoAlumno.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddBtnArchivoAlumno.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.misDatosToolStripMenuItem,
+            this.salirToolStripMenuItem});
+            resources.ApplyResources(this.tsddBtnArchivoAlumno, "tsddBtnArchivoAlumno");
+            this.tsddBtnArchivoAlumno.Name = "tsddBtnArchivoAlumno";
+            // 
+            // misDatosToolStripMenuItem
+            // 
+            this.misDatosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datosPersonalesToolStripMenuItem,
+            this.datosDeUsuarioToolStripMenuItem});
+            this.misDatosToolStripMenuItem.Name = "misDatosToolStripMenuItem";
+            resources.ApplyResources(this.misDatosToolStripMenuItem, "misDatosToolStripMenuItem");
+            // 
+            // datosPersonalesToolStripMenuItem
+            // 
+            this.datosPersonalesToolStripMenuItem.Name = "datosPersonalesToolStripMenuItem";
+            resources.ApplyResources(this.datosPersonalesToolStripMenuItem, "datosPersonalesToolStripMenuItem");
+            this.datosPersonalesToolStripMenuItem.Click += new System.EventHandler(this.DatosPersonalesToolStripMenuItem_Click);
+            // 
+            // datosDeUsuarioToolStripMenuItem
+            // 
+            this.datosDeUsuarioToolStripMenuItem.Name = "datosDeUsuarioToolStripMenuItem";
+            resources.ApplyResources(this.datosDeUsuarioToolStripMenuItem, "datosDeUsuarioToolStripMenuItem");
+            this.datosDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.DatosDeUsuarioToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
+            // 
             // formMain
             // 
             resources.ApplyResources(this, "$this");
@@ -189,6 +230,11 @@
         private System.Windows.Forms.ToolStripMenuItem planesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materiaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materiasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton tsddBtnArchivoAlumno;
+        private System.Windows.Forms.ToolStripMenuItem misDatosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem datosPersonalesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem datosDeUsuarioToolStripMenuItem;
     }
 }
 

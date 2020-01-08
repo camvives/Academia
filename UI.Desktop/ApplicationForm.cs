@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UI.Desktop
 {
-    public enum ModoForm { Alta, Baja, Modificacion, Consulta };
+    public enum ModoForm { Alta, ModificacionUsr, Modificacion, Consulta };
 
     public partial class ApplicationForm : Form
     {      

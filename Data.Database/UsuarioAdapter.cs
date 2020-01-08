@@ -352,29 +352,66 @@ namespace Data.Database
             return clave;
         }
 
-        public int GetTipo(string nombreUsuario)
+        public (Usuario, Persona) GetUsuario(string nombreUsuario)
         {
-            int tipo = 3;
+            Usuario usr = new Usuario();
+            Persona per = new Persona();
+
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdTipo = new SqlCommand("SELECT tipo_persona FROM personas "+
-                                                     "INNER JOIN  usuarios on personas.id_persona = usuarios.id_persona "+ 
-                                                     "WHERE nombre_usuario = @nombreUsuario;", sqlConn);
-                cmdTipo.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-                SqlDataReader drTipo = cmdTipo.ExecuteReader();
+                SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM usuarios us " +
+                                                       "INNER JOIN personas per " +
+                                                       "ON us.id_persona = per.id_persona " +
+                                                       "WHERE @nombreUsuario = us.nombre_usuario", sqlConn);
+                cmdUsuario.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
 
-                if (drTipo.Read())
+                if (drUsuario.Read())
                 {
-                     tipo = (int)drTipo["tipo_persona"];
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    usr.Habilitado = (bool)drUsuario["habilitado"];
+                    usr.Clave = (string)drUsuario["clave"];
+
+                    per.ID = (int)drUsuario["id_persona"];
+                    per.Apellido = (string)drUsuario["apellido"];
+                    per.Nombre = (string)drUsuario["nombre"];
+                    per.Direccion = (string)drUsuario["direccion"];
+                    per.Email = (string)drUsuario["email"];
+                    per.Telefono = (string)drUsuario["telefono"];
+                    per.FechaNacimiento = (DateTime)drUsuario["fecha_nac"];
+                    per.TipoPersona = (Persona.TiposPersonas)(int)drUsuario["tipo_persona"];
+
+                    if (drUsuario["legajo"] is DBNull)
+                    {
+                        per.Legajo = 0;
+                    }
+                    else
+                    {
+                        per.Legajo = (int)drUsuario["legajo"];
+                    }
+
+                    if (drUsuario["id_plan"] is DBNull)
+                    {
+                        per.IDPlan = 0;
+                    }
+                    else
+                    {
+                        per.IDPlan = (int)drUsuario["id_plan"];
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            finally
+            {
+                this.CloseConnection();
+            }
 
-            return tipo;
+            return (usr, per);
         }
     }
 }

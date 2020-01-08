@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Entities;
 
 namespace UI.Desktop
 {
     public partial class formMain : Form
     {
+        public Usuario UsuarioActual { get; set; }
+        public Persona PersonaActual { get; set; }
+
         public formMain()
         {
             InitializeComponent();
@@ -40,11 +44,15 @@ namespace UI.Desktop
             using (formLogin login = new formLogin())
             {
                 login.ShowDialog();
-                int tipo = login.BuscarTipo();
-                if (tipo == 1 || tipo == 2)
+                (UsuarioActual, PersonaActual) = login.BuscarUsuario();
+                if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
                 {
-                    this.tsddbtnArchivoAdmin.Visible = false;
-                    this.tsddbtnEditarAdmin.Visible = false;
+                    this.tsddbtnArchivoAdmin.Visible = true;
+                    this.tsddbtnEditarAdmin.Visible = true;
+                }
+                else
+                {
+                    this.tsddBtnArchivoAlumno.Visible = true;
                 }
 
                 if (login.DialogResult != DialogResult.OK)
@@ -90,6 +98,23 @@ namespace UI.Desktop
         {
             MateriaDesktop materiaDesktop = new MateriaDesktop();
             materiaDesktop.ShowDialog();
+        }
+
+        private void DatosPersonalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPersonaDesktop formPersona = new FormPersonaDesktop(UsuarioActual, PersonaActual, ModoForm.Consulta);
+            formPersona.Show();
+        }
+
+        private void DatosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UsuarioDesktop usuarioDesktop = new UsuarioDesktop(UsuarioActual, PersonaActual, ModoForm.ModificacionUsr);
+            usuarioDesktop.Show();
+        }
+
+        private void SalirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
