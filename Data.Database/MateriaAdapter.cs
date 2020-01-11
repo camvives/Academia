@@ -173,6 +173,45 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
+
+        public List<Materia> GetMateriasPlan(int IDPlan)
+        {
+            List<Materia> materias = new List<Materia>();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdMaterias = new SqlCommand("SELECT * FROM materias WHERE id_plan = @id", sqlConn);
+                cmdMaterias.Parameters.AddWithValue("@id", IDPlan);
+                SqlDataReader drMaterias = cmdMaterias.ExecuteReader();
+
+                while (drMaterias.Read())
+                {
+                    Materia mat = new Materia
+                    {
+                        ID = (int)drMaterias["id_materia"],
+                        Descripcion = (string)drMaterias["desc_materia"],
+                        HorasSemanales = (int)drMaterias["hs_semanales"],
+                        HorasTotales = (int)drMaterias["hs_totales"],
+                        IDPlan = (int)drMaterias["id_plan"]
+                    };
+
+                    materias.Add(mat);
+                }
+
+                drMaterias.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return materias;
+
+        }
     }
 }
 

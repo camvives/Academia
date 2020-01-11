@@ -49,6 +49,9 @@
             this.datosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.comisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,9 +131,12 @@
             this.tsddbtnEditarAdmin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsddbtnEditarAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usuariosToolStripMenuItem,
+            this.cursosToolStripMenuItem,
+            this.toolStripSeparator3,
             this.especialidadesToolStripMenuItem,
             this.planesToolStripMenuItem,
-            this.materiasToolStripMenuItem});
+            this.materiasToolStripMenuItem,
+            this.comisionesToolStripMenuItem});
             resources.ApplyResources(this.tsddbtnEditarAdmin, "tsddbtnEditarAdmin");
             this.tsddbtnEditarAdmin.Name = "tsddbtnEditarAdmin";
             // 
@@ -193,6 +199,23 @@
             resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
+            // cursosToolStripMenuItem
+            // 
+            this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
+            resources.ApplyResources(this.cursosToolStripMenuItem, "cursosToolStripMenuItem");
+            this.cursosToolStripMenuItem.Click += new System.EventHandler(this.CursosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // comisionesToolStripMenuItem
+            // 
+            this.comisionesToolStripMenuItem.Name = "comisionesToolStripMenuItem";
+            resources.ApplyResources(this.comisionesToolStripMenuItem, "comisionesToolStripMenuItem");
+            this.comisionesToolStripMenuItem.Click += new System.EventHandler(this.ComisionesToolStripMenuItem_Click);
+            // 
             // formMain
             // 
             resources.ApplyResources(this, "$this");
@@ -235,6 +258,9 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosPersonalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datosDeUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem comisionesToolStripMenuItem;
     }
 }
 

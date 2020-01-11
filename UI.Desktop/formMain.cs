@@ -116,5 +116,17 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void CursosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formCursos formCursos = new formCursos();
+            formCursos.ShowDialog();
+        }
+
+        private void ComisionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formComisiones formComisiones = new formComisiones();
+            formComisiones.ShowDialog();
+        }
     }
 }

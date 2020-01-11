@@ -169,8 +169,46 @@ namespace Data.Database
                 this.CloseConnection();
             }
         }
-    }
 
+        public List<Comision> GetComisionesMat(int IDPlan)
+        {
+            List<Comision> comisiones = new List<Comision>();
+
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdComisiones = new SqlCommand("SELECT * FROM comisiones WHERE id_plan = @id", sqlConn);
+                cmdComisiones.Parameters.AddWithValue("@id", IDPlan);
+
+                SqlDataReader drComisiones = cmdComisiones.ExecuteReader();
+
+                while (drComisiones.Read())
+                {
+                    Comision com = new Comision
+                    {
+                        ID = (int)drComisiones["id_comision"],
+                        Descripcion = (string)drComisiones["desc_comision"],
+                        AnioEspecialidad = (int)drComisiones["anio_especialidad"],
+                        IDPlan = (int)drComisiones["id_plan"]
+                    };
+
+                    comisiones.Add(com);
+                }
+
+                drComisiones.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return comisiones;
+        }
+    }
 
 }
 

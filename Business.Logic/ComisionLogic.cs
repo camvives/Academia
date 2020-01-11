@@ -32,5 +32,10 @@ namespace Business.Logic
         {
             ComisionData.Save(comision);
         }
+
+        public List<Comision> GetComisionesMat(int IDPlan)
+        {
+            return ComisionData.GetComisionesMat(IDPlan);
+        }
     }
 }
