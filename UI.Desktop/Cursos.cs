@@ -10,16 +10,26 @@ using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
 
+
 namespace UI.Desktop
 {
     public partial class formCursos : Form
     {
-  
+        public Persona PersonaActual { get; set; }
 
         public formCursos()
         {
             InitializeComponent();
             this.dgvCursos.AutoGenerateColumns = false;
+        }
+
+        public formCursos(Persona per) : this()
+        {
+            this.dgvCursos.Columns["id"].Visible = false;
+            this.dgvCursos.Columns["AnioCalendario"].Visible = false;
+            this.dgvCursos.Columns["Carrera"].Visible = false;
+            this.dgvCursos.Columns["Inscribirse"].Visible = true;
+            PersonaActual = per;
         }
 
         public class DatosCursos
@@ -28,7 +38,8 @@ namespace UI.Desktop
             public string DescMateria { get; set; }
             public string DescComision { get; set; }
             public int AnioCalendario { get; set; }
-            public int  Cupo { get; set; }
+            public int  Cupo { get; set; }     
+            public string DescEspecialidad { get; set; }
         }
 
         public CursoLogic CursoLog
@@ -56,6 +67,12 @@ namespace UI.Desktop
                 ComisionLogic cl = new ComisionLogic();
                 Comision com = cl.GetOne(c.IDComision);
                 datosCurso.DescComision = com.Descripcion;
+
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(com.IDPlan);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                datosCurso.DescEspecialidad = especialidad.Descripcion;
 
                 datosCursos.Add(datosCurso);
             }
@@ -129,5 +146,13 @@ namespace UI.Desktop
             formCurDesk.ShowDialog();
             this.Listar();
         }
+
+        private void DgvCursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                this.dgvCursos.Rows[e.RowIndex].Cells["Inscribirse"].Value = true;
+        }
+
+
     }
 }

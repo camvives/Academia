@@ -41,17 +41,18 @@
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddbtnEditarAdmin = new System.Windows.Forms.ToolStripDropDownButton();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.especialidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddBtnArchivoAlumno = new System.Windows.Forms.ToolStripDropDownButton();
             this.misDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.comisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtnInscribirse = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,8 @@
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsddbtnArchivoAdmin,
             this.tsddbtnEditarAdmin,
-            this.tsddBtnArchivoAlumno});
+            this.tsddBtnArchivoAlumno,
+            this.tsbtnInscribirse});
             resources.ApplyResources(this.tsMenu, "tsMenu");
             this.tsMenu.Name = "tsMenu";
             // 
@@ -146,6 +148,17 @@
             resources.ApplyResources(this.usuariosToolStripMenuItem, "usuariosToolStripMenuItem");
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.UsuariosToolStripMenuItem_Click);
             // 
+            // cursosToolStripMenuItem
+            // 
+            this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
+            resources.ApplyResources(this.cursosToolStripMenuItem, "cursosToolStripMenuItem");
+            this.cursosToolStripMenuItem.Click += new System.EventHandler(this.CursosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
             // especialidadesToolStripMenuItem
             // 
             this.especialidadesToolStripMenuItem.Name = "especialidadesToolStripMenuItem";
@@ -163,6 +176,12 @@
             this.materiasToolStripMenuItem.Name = "materiasToolStripMenuItem";
             resources.ApplyResources(this.materiasToolStripMenuItem, "materiasToolStripMenuItem");
             this.materiasToolStripMenuItem.Click += new System.EventHandler(this.MateriasToolStripMenuItem_Click);
+            // 
+            // comisionesToolStripMenuItem
+            // 
+            this.comisionesToolStripMenuItem.Name = "comisionesToolStripMenuItem";
+            resources.ApplyResources(this.comisionesToolStripMenuItem, "comisionesToolStripMenuItem");
+            this.comisionesToolStripMenuItem.Click += new System.EventHandler(this.ComisionesToolStripMenuItem_Click);
             // 
             // tsddBtnArchivoAlumno
             // 
@@ -199,22 +218,12 @@
             resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
-            // cursosToolStripMenuItem
+            // tsbtnInscribirse
             // 
-            this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
-            resources.ApplyResources(this.cursosToolStripMenuItem, "cursosToolStripMenuItem");
-            this.cursosToolStripMenuItem.Click += new System.EventHandler(this.CursosToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // comisionesToolStripMenuItem
-            // 
-            this.comisionesToolStripMenuItem.Name = "comisionesToolStripMenuItem";
-            resources.ApplyResources(this.comisionesToolStripMenuItem, "comisionesToolStripMenuItem");
-            this.comisionesToolStripMenuItem.Click += new System.EventHandler(this.ComisionesToolStripMenuItem_Click);
+            this.tsbtnInscribirse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.tsbtnInscribirse, "tsbtnInscribirse");
+            this.tsbtnInscribirse.Name = "tsbtnInscribirse";
+            this.tsbtnInscribirse.Click += new System.EventHandler(this.TsbtnInscribirse_Click);
             // 
             // formMain
             // 
@@ -261,6 +270,7 @@
         private System.Windows.Forms.ToolStripMenuItem cursosToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem comisionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tsbtnInscribirse;
     }
 }
 

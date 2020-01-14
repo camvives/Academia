@@ -42,10 +42,12 @@
             this.dgvCursos = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AnioCalendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Carrera = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Inscribirse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
@@ -53,6 +55,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.AllowItemReorder = true;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNuevo,
@@ -60,7 +63,7 @@
             this.tsbEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(1089, 34);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -108,13 +111,13 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.67442F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.32558F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 416);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1089, 416);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // btnSalir
             // 
             this.btnSalir.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSalir.Location = new System.Drawing.Point(500, 366);
+            this.btnSalir.Location = new System.Drawing.Point(729, 366);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(132, 48);
@@ -141,10 +144,12 @@
             this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
-            this.nombre,
-            this.apellido,
-            this.Usuario,
-            this.DescPlan});
+            this.Materia,
+            this.Comision,
+            this.AnioCalendario,
+            this.Cupo,
+            this.Carrera,
+            this.Inscribirse});
             this.tableLayoutPanel1.SetColumnSpan(this.dgvCursos, 2);
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -167,16 +172,17 @@
             this.dgvCursos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCursos.RowTemplate.Height = 24;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(794, 360);
+            this.dgvCursos.Size = new System.Drawing.Size(1083, 360);
             this.dgvCursos.TabIndex = 1;
+            this.dgvCursos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCursos_CellContentClick);
             // 
             // btnActualizar
             // 
             this.btnActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnActualizar.Location = new System.Drawing.Point(638, 366);
+            this.btnActualizar.Location = new System.Drawing.Point(867, 366);
             this.btnActualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(159, 48);
+            this.btnActualizar.Size = new System.Drawing.Size(219, 48);
             this.btnActualizar.TabIndex = 2;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
@@ -192,49 +198,67 @@
             this.id.ReadOnly = true;
             this.id.Width = 65;
             // 
-            // nombre
+            // Materia
             // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.DataPropertyName = "DescMateria";
-            this.nombre.HeaderText = "Materia";
-            this.nombre.MinimumWidth = 6;
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
+            this.Materia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Materia.DataPropertyName = "DescMateria";
+            this.Materia.HeaderText = "Materia";
+            this.Materia.MinimumWidth = 6;
+            this.Materia.Name = "Materia";
+            this.Materia.ReadOnly = true;
             // 
-            // apellido
+            // Comision
             // 
-            this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.apellido.DataPropertyName = "DescComision";
-            this.apellido.HeaderText = "Comisión";
-            this.apellido.MinimumWidth = 6;
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            this.apellido.Width = 128;
+            this.Comision.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Comision.DataPropertyName = "DescComision";
+            this.Comision.HeaderText = "Comisión";
+            this.Comision.MinimumWidth = 6;
+            this.Comision.Name = "Comision";
+            this.Comision.ReadOnly = true;
+            this.Comision.Width = 128;
             // 
-            // Usuario
+            // AnioCalendario
             // 
-            this.Usuario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Usuario.DataPropertyName = "AnioCalendario";
-            this.Usuario.HeaderText = "Año Calendario";
-            this.Usuario.MinimumWidth = 6;
-            this.Usuario.Name = "Usuario";
-            this.Usuario.ReadOnly = true;
-            this.Usuario.Width = 169;
+            this.AnioCalendario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AnioCalendario.DataPropertyName = "AnioCalendario";
+            this.AnioCalendario.HeaderText = "Año Calendario";
+            this.AnioCalendario.MinimumWidth = 6;
+            this.AnioCalendario.Name = "AnioCalendario";
+            this.AnioCalendario.ReadOnly = true;
+            this.AnioCalendario.Width = 169;
             // 
-            // DescPlan
+            // Cupo
             // 
-            this.DescPlan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DescPlan.DataPropertyName = "Cupo";
-            this.DescPlan.HeaderText = "Cupo";
-            this.DescPlan.MinimumWidth = 8;
-            this.DescPlan.Name = "DescPlan";
-            this.DescPlan.ReadOnly = true;
+            this.Cupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cupo.DataPropertyName = "Cupo";
+            this.Cupo.HeaderText = "Cupo";
+            this.Cupo.MinimumWidth = 8;
+            this.Cupo.Name = "Cupo";
+            this.Cupo.ReadOnly = true;
+            // 
+            // Carrera
+            // 
+            this.Carrera.DataPropertyName = "DescEspecialidad";
+            this.Carrera.HeaderText = "Carrera";
+            this.Carrera.MinimumWidth = 8;
+            this.Carrera.Name = "Carrera";
+            this.Carrera.ReadOnly = true;
+            this.Carrera.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Carrera.Width = 150;
+            // 
+            // Inscribirse
+            // 
+            this.Inscribirse.HeaderText = "Inscribirse";
+            this.Inscribirse.MinimumWidth = 8;
+            this.Inscribirse.Name = "Inscribirse";
+            this.Inscribirse.ReadOnly = true;
+            this.Inscribirse.Width = 150;
             // 
             // formCursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1089, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "formCursos";
@@ -260,9 +284,11 @@
         private System.Windows.Forms.DataGridView dgvCursos;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Usuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescPlan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Materia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comision;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AnioCalendario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cupo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Carrera;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Inscribirse;
     }
 }

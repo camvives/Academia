@@ -53,6 +53,7 @@ namespace UI.Desktop
                 else
                 {
                     this.tsddBtnArchivoAlumno.Visible = true;
+                    this.tsbtnInscribirse.Visible = true;
                 }
 
                 if (login.DialogResult != DialogResult.OK)
@@ -127,6 +128,12 @@ namespace UI.Desktop
         {
             formComisiones formComisiones = new formComisiones();
             formComisiones.ShowDialog();
+        }
+
+        private void TsbtnInscribirse_Click(object sender, EventArgs e)
+        {
+            formCursos formCursos = new formCursos(PersonaActual);
+            formCursos.ShowDialog();
         }
     }
 }

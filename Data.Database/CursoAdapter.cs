@@ -172,6 +172,46 @@ namespace Data.Database
             }
         }
 
+        public List<Curso> GetCursosUsuario(int IDPlan)
+        {
+            List<Curso> cursos = new List<Curso>();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdCursos = new SqlCommand("SELECT * FROM cursos WHERE anio_calendario = @anio " +
+                                                   " AND id_materia=(SELECT id_materia FROM materias WHERE id_plan = @id)", sqlConn);
+                cmdCursos.Parameters.AddWithValue("@anio", DateTime.Today.Year);
+                cmdCursos.Parameters.AddWithValue("id", IDPlan);
+                SqlDataReader drCursos = cmdCursos.ExecuteReader();
+
+                while (drCursos.Read())
+                {
+                    Curso cur = new Curso
+                    {
+                        ID = (int)drCursos["id_curso"],
+                        IDMateria = (int)drCursos["id_materia"],
+                        IDComision = (int)drCursos["id_comision"],
+                        AnioCalendario = (int)drCursos["anio_calendario"],
+                        Cupo = (int)drCursos["cupo"]
+                    };
+
+                    cursos.Add(cur);
+                }
+
+                drCursos.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return cursos;
+
+        }
 
     }
 }

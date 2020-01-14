@@ -79,28 +79,30 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
+            
             this.CompletarCombobox();
+
 
             ComisionLogic cl = new ComisionLogic();
             Comision comision = cl.GetOne(CursoActual.IDComision);
-            this.cmbComision.SelectedIndex = cmbComision.FindStringExact(comision.Descripcion);
+            
 
             MateriaLogic ml = new MateriaLogic();
             Materia materia = ml.GetOne(CursoActual.IDMateria);
-            this.cmbMateria.SelectedIndex = cmbMateria.FindStringExact(materia.Descripcion);
+
 
             PlanLogic pl = new PlanLogic();
             Plan plan = pl.GetOne(comision.IDPlan);
-            this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
-
-
             EspecialidadLogic el = new EspecialidadLogic();
             Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+
             this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+            this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
 
-
-           
-
+            cmbPlan.Text = plan.Descripcion;
+            this.cmbMateria.SelectedIndex = cmbMateria.FindStringExact(materia.Descripcion);
+            this.cmbComision.SelectedIndex = cmbComision.FindStringExact(comision.Descripcion);
 
 
             this.btnGuardar.Text = "Guardar";
@@ -181,8 +183,8 @@ namespace UI.Desktop
         {
             Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
 
-            PlanLogic plan = new PlanLogic();
-            cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
+            PlanLogic pl = new PlanLogic();
+            cmbPlan.DataSource = pl.GetPlanesEsp(esp.ID);
             cmbPlan.DisplayMember = "Descripcion";
             cmbPlan.ValueMember = "ID";
         }

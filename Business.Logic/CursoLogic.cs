@@ -32,5 +32,10 @@ namespace Business.Logic
             CursoData.Save(curso);
         }
 
+        public List<Curso> GetCursosUsuario(int IDPLan)
+        {
+            return CursoData.GetCursosUsuario(IDPLan);
+        }
+
     }
 }
