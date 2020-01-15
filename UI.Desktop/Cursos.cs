@@ -21,14 +21,17 @@ namespace UI.Desktop
         {
             InitializeComponent();
             this.dgvCursos.AutoGenerateColumns = false;
+           
         }
 
         public formCursos(Persona per) : this()
         {
+            this.tspCurso.Visible = false;
+            this.btnActualizar.Text = "Inscribirse";
             this.dgvCursos.Columns["id"].Visible = false;
             this.dgvCursos.Columns["AnioCalendario"].Visible = false;
             this.dgvCursos.Columns["Carrera"].Visible = false;
-            this.dgvCursos.Columns["Inscribirse"].Visible = true;
+            
             PersonaActual = per;
         }
 
@@ -47,6 +50,30 @@ namespace UI.Desktop
             get { return new CursoLogic(); }
         }
 
+        public List<DatosCursos> ObtenerDatosUsr()
+        {
+            List<DatosCursos> datosCursos = new List<DatosCursos>();
+            List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
+
+            foreach (Curso c in cursos)
+            {
+                DatosCursos datosCurso = new DatosCursos();
+                datosCurso.Cupo = c.Cupo;
+                datosCurso.ID = c.ID;
+
+                MateriaLogic ml = new MateriaLogic();
+                Materia mat = ml.GetOne(c.IDMateria);
+                datosCurso.DescMateria = mat.Descripcion;
+
+                ComisionLogic cl = new ComisionLogic();
+                Comision com = cl.GetOne(c.IDComision);
+                datosCurso.DescComision = com.Descripcion;
+
+                datosCursos.Add(datosCurso);
+            }
+
+            return datosCursos;
+        }
 
         public List<DatosCursos> ObtenerDatos()
         {
@@ -87,7 +114,15 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            this.dgvCursos.DataSource = this.ObtenerDatos();
+            if (PersonaActual == null)
+            {
+                this.dgvCursos.DataSource = this.ObtenerDatos();
+            }
+            else
+            {
+                this.dgvCursos.DataSource = this.ObtenerDatosUsr();
+            }
+            
         }
 
 
@@ -119,7 +154,14 @@ namespace UI.Desktop
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            this.Listar();
+            if (PersonaActual == null)
+            {
+                this.Listar();
+            }
+            else
+            {
+                this.Inscribir();
+            }
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)
@@ -149,10 +191,43 @@ namespace UI.Desktop
 
         private void DgvCursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-                this.dgvCursos.Rows[e.RowIndex].Cells["Inscribirse"].Value = true;
+            
         }
 
+
+        public void Inscribir()
+        {
+            List<Alumno_Inscripcion> alumnosInsc = new List<Alumno_Inscripcion>();
+
+            foreach (DataGridViewRow row in dgvCursos.Rows)
+            {
+                if ((Convert.ToBoolean(row.Cells[6].Value) == true))
+                {
+                    Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                    alInsc.IDAlumno = PersonaActual.ID;
+                    alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
+
+                    alumnosInsc.Add(alInsc);
+                }
+            }
+
+            foreach (Alumno_Inscripcion ai in alumnosInsc)
+            {
+                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                aiLog.Save(ai);
+            }
+
+            var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (mensaje == DialogResult.Yes)
+            {
+                //REPORTE
+            }
+            else
+            {
+                this.Close();
+            }
+
+        }
 
     }
 }

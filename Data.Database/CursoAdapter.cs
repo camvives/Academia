@@ -179,7 +179,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
                 SqlCommand cmdCursos = new SqlCommand("SELECT * FROM cursos WHERE anio_calendario = @anio " +
-                                                   " AND id_materia=(SELECT id_materia FROM materias WHERE id_plan = @id)", sqlConn);
+                                                   " AND id_materia IN (SELECT id_materia FROM materias WHERE id_plan = @id)", sqlConn);
                 cmdCursos.Parameters.AddWithValue("@anio", DateTime.Today.Year);
                 cmdCursos.Parameters.AddWithValue("id", IDPlan);
                 SqlDataReader drCursos = cmdCursos.ExecuteReader();
