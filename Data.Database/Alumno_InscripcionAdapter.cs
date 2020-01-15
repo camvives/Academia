@@ -86,5 +86,31 @@ namespace Data.Database
 
         }
 
+
+        public int GetCantidadInscriptos(int IDCurso)
+        {
+            int cantidad = 0;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdInscrpciones = new SqlCommand("SELECT count(*) FROM alumnos_inscripciones WHERE id_curso = @idCurso", sqlConn);
+
+                cmdInscrpciones.Parameters.AddWithValue("@idCurso", IDCurso);
+                cantidad = (int)cmdInscrpciones.ExecuteScalar();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return cantidad;
+
+        }
     }
+    
 }

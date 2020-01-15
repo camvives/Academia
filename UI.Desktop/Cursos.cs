@@ -9,19 +9,36 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
 using Business.Logic;
+using Util;
 
 
 namespace UI.Desktop
 {
     public partial class formCursos : Form
     {
+        public class DatosCursos
+        {
+            public int ID { get; set; }
+            public string DescMateria { get; set; }
+            public string DescComision { get; set; }
+            public int AnioCalendario { get; set; }
+            public int Cupo { get; set; }
+            public string DescEspecialidad { get; set; }
+        }
+
         public Persona PersonaActual { get; set; }
 
+        public CursoLogic CursoLog
+        {
+            get { return new CursoLogic(); }
+        }
+
+        #region Constructores
         public formCursos()
         {
             InitializeComponent();
             this.dgvCursos.AutoGenerateColumns = false;
-           
+            this.dgvCursos.Columns["Inscribirse"].Visible = false;           
         }
 
         public formCursos(Persona per) : this()
@@ -31,25 +48,14 @@ namespace UI.Desktop
             this.dgvCursos.Columns["id"].Visible = false;
             this.dgvCursos.Columns["AnioCalendario"].Visible = false;
             this.dgvCursos.Columns["Carrera"].Visible = false;
-            
+            this.dgvCursos.Columns["Inscribirse"].Visible = true;
+            this.dgvCursos.Columns["Cupo"].HeaderText = "Cupo Disponible";
+
             PersonaActual = per;
         }
+        #endregion
 
-        public class DatosCursos
-        {
-            public int ID { get; set; }
-            public string DescMateria { get; set; }
-            public string DescComision { get; set; }
-            public int AnioCalendario { get; set; }
-            public int  Cupo { get; set; }     
-            public string DescEspecialidad { get; set; }
-        }
-
-        public CursoLogic CursoLog
-        {
-            get { return new CursoLogic(); }
-        }
-
+        #region METODOS
         public List<DatosCursos> ObtenerDatosUsr()
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
@@ -58,7 +64,10 @@ namespace UI.Desktop
             foreach (Curso c in cursos)
             {
                 DatosCursos datosCurso = new DatosCursos();
-                datosCurso.Cupo = c.Cupo;
+                Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
+                int cupoActual = c.Cupo - ail.GetCantidadInscriptos(c.ID);
+
+                datosCurso.Cupo = cupoActual;
                 datosCurso.ID = c.ID;
 
                 MateriaLogic ml = new MateriaLogic();
@@ -70,7 +79,7 @@ namespace UI.Desktop
                 datosCurso.DescComision = com.Descripcion;
 
                 datosCursos.Add(datosCurso);
-                
+
             }
 
             return datosCursos;
@@ -108,11 +117,6 @@ namespace UI.Desktop
             return datosCursos;
         }
 
-        private void Cursos_Load(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
         public void Listar()
         {
             if (PersonaActual == null)
@@ -126,7 +130,7 @@ namespace UI.Desktop
                 List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
 
                 List<int> idInscripciones = new List<int>();
-                foreach (Alumno_Inscripcion ai in inscripciones)            
+                foreach (Alumno_Inscripcion ai in inscripciones)
                 {
                     int idCurso = ai.IDCurso;
                     idInscripciones.Add(idCurso);
@@ -141,12 +145,11 @@ namespace UI.Desktop
                         row.Cells[6].Value = 2;
 
                     }
-                  
+
                 }
             }
-            
-        }
 
+        }
 
         public void EliminarCurso()
         {
@@ -161,6 +164,61 @@ namespace UI.Desktop
             {
                 MessageBox.Show("Error al eliminar el curso, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void Inscribir()
+        {
+            List<Alumno_Inscripcion> alumnosInsc = new List<Alumno_Inscripcion>();
+
+            foreach (DataGridViewRow row in dgvCursos.Rows)
+            {
+                if (row.Cells[6].Value != null)
+                {
+                    if (int.Parse(row.Cells[6].Value.ToString()) == 1)
+                    {
+                        if (Validaciones.ValidarCupo(int.Parse(row.Cells["ID"].Value.ToString())))
+                        {
+                            Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                            alInsc.IDAlumno = PersonaActual.ID;
+                            alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
+
+                            alumnosInsc.Add(alInsc);
+
+                            foreach (Alumno_Inscripcion ai in alumnosInsc)
+                            {
+                                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                                aiLog.Save(ai);
+                            }
+
+                            var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (mensaje == DialogResult.Yes)
+                            {
+                                //REPORTE
+                            }
+                            else
+                            {
+                                this.Close();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No hay cupo en uno o más cursos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                           
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+
+        private void Cursos_Load(object sender, EventArgs e)
+        {
+            this.Listar();
         }
 
         private void TsbEliminar_Click(object sender, EventArgs e)
@@ -211,44 +269,8 @@ namespace UI.Desktop
             this.Listar();
         }
 
+        #endregion
 
-        public void Inscribir()
-        {
-            List<Alumno_Inscripcion> alumnosInsc = new List<Alumno_Inscripcion>();
-
-            foreach (DataGridViewRow row in dgvCursos.Rows)
-            {
-                if (row.Cells[6].Value != null)
-                {
-                    if(int.Parse(row.Cells[6].Value.ToString()) == 1)              
-                    {
-                        Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
-                        alInsc.IDAlumno = PersonaActual.ID;
-                        alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
-
-                        alumnosInsc.Add(alInsc);
-                    }
-                    
-                }
-            }
-
-            foreach (Alumno_Inscripcion ai in alumnosInsc)
-            {
-                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
-                aiLog.Save(ai);
-            }
-
-            var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (mensaje == DialogResult.Yes)
-            {
-                //REPORTE
-            }
-            else
-            {
-                this.Close();
-            }
-
-        }
 
     }
 }

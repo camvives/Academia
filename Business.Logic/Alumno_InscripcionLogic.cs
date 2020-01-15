@@ -27,5 +27,11 @@ namespace Business.Logic
             return AlumInscData.GetMateriasInscripto(IDPersona);
         }
 
+        public int GetCantidadInscriptos(int IDCurso)
+        {
+            return AlumInscData.GetCantidadInscriptos(IDCurso);
+
+        }
+
     }
 }
