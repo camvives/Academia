@@ -22,5 +22,10 @@ namespace Business.Logic
             AlumInscData.Save(ai);
         }
 
+        public List<Alumno_Inscripcion> GetMateriasInscripto(int IDPersona)
+        {
+            return AlumInscData.GetMateriasInscripto(IDPersona);
+        }
+
     }
 }

@@ -42,6 +42,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +50,6 @@
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Carrera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Inscribirse = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.tspCurso.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
@@ -175,7 +175,18 @@
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCursos.Size = new System.Drawing.Size(1083, 360);
             this.dgvCursos.TabIndex = 1;
-            this.dgvCursos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCursos_CellContentClick);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnActualizar.Location = new System.Drawing.Point(867, 366);
+            this.btnActualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(219, 48);
+            this.btnActualizar.TabIndex = 2;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
             // id
             // 
@@ -241,24 +252,13 @@
             // 
             // Inscribirse
             // 
-            this.Inscribirse.FalseValue = "false";
+            this.Inscribirse.FalseValue = "0";
             this.Inscribirse.HeaderText = "Inscribirse";
+            this.Inscribirse.IndeterminateValue = "2";
             this.Inscribirse.MinimumWidth = 8;
             this.Inscribirse.Name = "Inscribirse";
-            this.Inscribirse.TrueValue = "true";
+            this.Inscribirse.TrueValue = "1";
             this.Inscribirse.Width = 150;
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnActualizar.Location = new System.Drawing.Point(867, 366);
-            this.btnActualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(219, 48);
-            this.btnActualizar.TabIndex = 2;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
             // formCursos
             // 

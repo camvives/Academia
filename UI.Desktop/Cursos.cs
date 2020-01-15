@@ -70,6 +70,7 @@ namespace UI.Desktop
                 datosCurso.DescComision = com.Descripcion;
 
                 datosCursos.Add(datosCurso);
+                
             }
 
             return datosCursos;
@@ -121,6 +122,27 @@ namespace UI.Desktop
             else
             {
                 this.dgvCursos.DataSource = this.ObtenerDatosUsr();
+                Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
+                List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
+
+                List<int> idInscripciones = new List<int>();
+                foreach (Alumno_Inscripcion ai in inscripciones)            
+                {
+                    int idCurso = ai.IDCurso;
+                    idInscripciones.Add(idCurso);
+                }
+
+                foreach (DataGridViewRow row in dgvCursos.Rows)
+                {
+                    if (idInscripciones.Contains(int.Parse(row.Cells["ID"].Value.ToString())))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGray;
+                        row.Cells[6].ReadOnly = true;
+                        row.Cells[6].Value = 2;
+
+                    }
+                  
+                }
             }
             
         }
@@ -189,11 +211,6 @@ namespace UI.Desktop
             this.Listar();
         }
 
-        private void DgvCursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
 
         public void Inscribir()
         {
@@ -201,13 +218,17 @@ namespace UI.Desktop
 
             foreach (DataGridViewRow row in dgvCursos.Rows)
             {
-                if ((Convert.ToBoolean(row.Cells[6].Value) == true))
+                if (row.Cells[6].Value != null)
                 {
-                    Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
-                    alInsc.IDAlumno = PersonaActual.ID;
-                    alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
+                    if(int.Parse(row.Cells[6].Value.ToString()) == 1)              
+                    {
+                        Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                        alInsc.IDAlumno = PersonaActual.ID;
+                        alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
 
-                    alumnosInsc.Add(alInsc);
+                        alumnosInsc.Add(alInsc);
+                    }
+                    
                 }
             }
 
