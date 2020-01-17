@@ -50,10 +50,11 @@ namespace UI.Desktop
                     this.tsddbtnArchivoAdmin.Visible = true;
                     this.tsddbtnEditarAdmin.Visible = true;
                 }
-                else
+                else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
                 {
                     this.tsddBtnArchivoAlumno.Visible = true;
                     this.tsbtnInscribirse.Visible = true;
+                    this.tsbtnEstadoAcademico.Visible = true;
                 }
 
                 if (login.DialogResult != DialogResult.OK)
@@ -134,6 +135,12 @@ namespace UI.Desktop
         {
             formCursos formCursos = new formCursos(PersonaActual);
             formCursos.ShowDialog();
+        }
+
+        private void TsbtnEstadoAcademico_Click(object sender, EventArgs e)
+        {
+            formEstadoAcademico formEstado = new formEstadoAcademico(PersonaActual);
+            formEstado.ShowDialog();
         }
     }
 }

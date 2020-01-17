@@ -52,7 +52,10 @@
             this.datosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tss1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnInscribirse = new System.Windows.Forms.ToolStripButton();
+            this.tss2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnEstadoAcademico = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +66,10 @@
             this.tsddbtnArchivoAdmin,
             this.tsddbtnEditarAdmin,
             this.tsddBtnArchivoAlumno,
-            this.tsbtnInscribirse});
+            this.tss1,
+            this.tsbtnInscribirse,
+            this.tss2,
+            this.tsbtnEstadoAcademico});
             resources.ApplyResources(this.tsMenu, "tsMenu");
             this.tsMenu.Name = "tsMenu";
             // 
@@ -218,12 +224,29 @@
             resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
+            // tss1
+            // 
+            this.tss1.Name = "tss1";
+            resources.ApplyResources(this.tss1, "tss1");
+            // 
             // tsbtnInscribirse
             // 
             this.tsbtnInscribirse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.tsbtnInscribirse, "tsbtnInscribirse");
             this.tsbtnInscribirse.Name = "tsbtnInscribirse";
             this.tsbtnInscribirse.Click += new System.EventHandler(this.TsbtnInscribirse_Click);
+            // 
+            // tss2
+            // 
+            this.tss2.Name = "tss2";
+            resources.ApplyResources(this.tss2, "tss2");
+            // 
+            // tsbtnEstadoAcademico
+            // 
+            this.tsbtnEstadoAcademico.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.tsbtnEstadoAcademico, "tsbtnEstadoAcademico");
+            this.tsbtnEstadoAcademico.Name = "tsbtnEstadoAcademico";
+            this.tsbtnEstadoAcademico.Click += new System.EventHandler(this.TsbtnEstadoAcademico_Click);
             // 
             // formMain
             // 
@@ -271,6 +294,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem comisionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tsbtnInscribirse;
+        private System.Windows.Forms.ToolStripSeparator tss1;
+        private System.Windows.Forms.ToolStripSeparator tss2;
+        private System.Windows.Forms.ToolStripButton tsbtnEstadoAcademico;
     }
 }
 

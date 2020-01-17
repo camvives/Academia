@@ -202,7 +202,7 @@ namespace UI.Desktop
                         }
                         else
                         {
-                            MessageBox.Show("No hay cupo en uno o más cursos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No hay cupo en uno o más cursos seleccionados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                            
                         }
 

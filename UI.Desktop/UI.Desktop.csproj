@@ -88,6 +88,12 @@
     <Compile Include="Comisiones.Designer.cs">
       <DependentUpon>Comisiones.cs</DependentUpon>
     </Compile>
+    <Compile Include="EstadoAcademico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EstadoAcademico.Designer.cs">
+      <DependentUpon>EstadoAcademico.cs</DependentUpon>
+    </Compile>
     <Compile Include="formMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Especialidades.resx">
       <DependentUpon>Especialidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EstadoAcademico.resx">
+      <DependentUpon>EstadoAcademico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMain.dje-NE.resx">
       <DependentUpon>formMain.cs</DependentUpon>
