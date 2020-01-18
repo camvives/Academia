@@ -413,5 +413,38 @@ namespace Data.Database
 
             return (usr, per);
         }
+
+
+        public Persona GetDocente(int IDPersona)
+        {
+            Persona per = new Persona();
+
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdDocente = new SqlCommand("SELECT * FROM personas " +
+                                                       "WHERE @id = id_persona", sqlConn);
+                cmdDocente.Parameters.AddWithValue("@id", IDPersona);
+                SqlDataReader drDocente = cmdDocente.ExecuteReader();
+
+                if (drDocente.Read())
+                {
+                    per.ID = (int)drDocente["id_persona"];
+                    per.Apellido = (string)drDocente["apellido"];
+                    per.Nombre = (string)drDocente["nombre"];
+                    per.Legajo = (int)drDocente["legajo"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return per ;
+        }
     }
 }

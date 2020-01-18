@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +48,7 @@
     <Compile Include="Alumno_InscripcionAdapter.cs" />
     <Compile Include="ComisionAdapter.cs" />
     <Compile Include="CursoAdapter.cs" />
+    <Compile Include="Docente_CursoAdapter.cs" />
     <Compile Include="EspecialidadAdapter.cs" />
     <Compile Include="MateriaAdapter.cs" />
     <Compile Include="PlanAdapter.cs" />

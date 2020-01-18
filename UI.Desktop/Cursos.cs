@@ -24,6 +24,7 @@ namespace UI.Desktop
             public int AnioCalendario { get; set; }
             public int Cupo { get; set; }
             public string DescEspecialidad { get; set; }
+            public string DescPlan { get; set; }
         }
 
         public Persona PersonaActual { get; set; }
@@ -38,7 +39,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
             this.dgvCursos.AutoGenerateColumns = false;
-            this.dgvCursos.Columns["Inscribirse"].Visible = false;           
+            this.dgvCursos.Columns["Inscribirse"].Visible = false;     
         }
 
         public formCursos(Persona per) : this()
@@ -49,6 +50,7 @@ namespace UI.Desktop
             this.dgvCursos.Columns["AnioCalendario"].Visible = false;
             this.dgvCursos.Columns["Carrera"].Visible = false;
             this.dgvCursos.Columns["Inscribirse"].Visible = true;
+            this.dgvCursos.Columns["Plan"].Visible = false;
             this.dgvCursos.Columns["Cupo"].HeaderText = "Cupo Disponible";
 
             PersonaActual = per;
@@ -107,6 +109,7 @@ namespace UI.Desktop
 
                 PlanLogic pl = new PlanLogic();
                 Plan plan = pl.GetOne(com.IDPlan);
+                datosCurso.DescPlan = plan.Descripcion;
                 EspecialidadLogic el = new EspecialidadLogic();
                 Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
                 datosCurso.DescEspecialidad = especialidad.Descripcion;
@@ -143,7 +146,6 @@ namespace UI.Desktop
                         row.DefaultCellStyle.BackColor = Color.LightGray;
                         row.Cells[6].ReadOnly = true;
                         row.Cells[6].Value = 2;
-
                     }
 
                 }
@@ -269,8 +271,15 @@ namespace UI.Desktop
             this.Listar();
         }
 
+
         #endregion
 
-
+        private void TsbtnDocentes_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
+            Curso cursoActual = CursoLog.GetOne(ID);
+            formDocentes_Cursos dc = new formDocentes_Cursos(cursoActual);
+            dc.ShowDialog();
+        }
     }
 }
