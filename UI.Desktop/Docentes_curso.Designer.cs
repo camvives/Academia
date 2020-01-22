@@ -40,12 +40,12 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.dgvDocCur = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.tspCurso.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocCur)).BeginInit();
@@ -83,6 +83,7 @@
             this.tsbEditar.Size = new System.Drawing.Size(85, 29);
             this.tsbEditar.Text = "Editar";
             this.tsbEditar.ToolTipText = "Modificar Curso";
+            this.tsbEditar.Click += new System.EventHandler(this.TsbEditar_Click);
             // 
             // tsbEliminar
             // 
@@ -159,6 +160,7 @@
             this.dgvDocCur.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvDocCur.MultiSelect = false;
             this.dgvDocCur.Name = "dgvDocCur";
+            this.dgvDocCur.ReadOnly = true;
             this.dgvDocCur.RowHeadersWidth = 51;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,6 +170,53 @@
             this.dgvDocCur.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDocCur.Size = new System.Drawing.Size(914, 360);
             this.dgvDocCur.TabIndex = 1;
+            // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 8;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 65;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.MinimumWidth = 8;
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 150;
+            // 
+            // Apellido
+            // 
+            this.Apellido.DataPropertyName = "Apellido";
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.MinimumWidth = 8;
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            this.Apellido.Width = 150;
+            // 
+            // Legajo
+            // 
+            this.Legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Legajo.DataPropertyName = "Legajo";
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.MinimumWidth = 8;
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            this.Legajo.Width = 106;
+            // 
+            // Cargo
+            // 
+            this.Cargo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cargo.DataPropertyName = "Cargo";
+            this.Cargo.HeaderText = "Cargo";
+            this.Cargo.MinimumWidth = 8;
+            this.Cargo.Name = "Cargo";
+            this.Cargo.ReadOnly = true;
             // 
             // btnActualizar
             // 
@@ -180,48 +229,6 @@
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
-            // 
-            // ID
-            // 
-            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 8;
-            this.ID.Name = "ID";
-            this.ID.Width = 65;
-            // 
-            // Nombre
-            // 
-            this.Nombre.DataPropertyName = "Nombre";
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.MinimumWidth = 8;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 150;
-            // 
-            // Apellido
-            // 
-            this.Apellido.DataPropertyName = "Apellido";
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.MinimumWidth = 8;
-            this.Apellido.Name = "Apellido";
-            this.Apellido.Width = 150;
-            // 
-            // Legajo
-            // 
-            this.Legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Legajo.DataPropertyName = "Legajo";
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.MinimumWidth = 8;
-            this.Legajo.Name = "Legajo";
-            this.Legajo.Width = 106;
-            // 
-            // Cargo
-            // 
-            this.Cargo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Cargo.DataPropertyName = "Cargo";
-            this.Cargo.HeaderText = "Cargo";
-            this.Cargo.MinimumWidth = 8;
-            this.Cargo.Name = "Cargo";
             // 
             // formDocentes_Cursos
             // 

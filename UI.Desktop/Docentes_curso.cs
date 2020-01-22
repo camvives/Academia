@@ -125,7 +125,16 @@ namespace UI.Desktop
             formCurDesk.ShowDialog();
             this.Enabled = true;
             this.Focus();
+            this.Listar();
+        }
 
+        private void TsbEditar_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgvDocCur.SelectedRows[0].Cells["ID"].Value;
+            int legajo = (int)dgvDocCur.SelectedRows[0].Cells["Legajo"].Value;
+            string cargo = (string)dgvDocCur.SelectedRows[0].Cells["Cargo"].Value;
+            Docentes_CursosDesktop formCurDesk = new Docentes_CursosDesktop(legajo, cargo, ID, CursoActual, ModoForm.Modificacion);
+            formCurDesk.ShowDialog();
             this.Listar();
         }
     }

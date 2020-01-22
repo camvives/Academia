@@ -17,6 +17,7 @@ namespace UI.Desktop
         public Curso CursoActual { get; set; }
         public Docentes_Cursos Docentes_CursosActual { get; set; }
 
+
         public Docentes_CursosDesktop()
         {
             InitializeComponent();
@@ -26,7 +27,20 @@ namespace UI.Desktop
         {
             CursoActual = curso;
             this.Text = "Curso ID " + CursoActual.ID;
+
         }
+
+        public Docentes_CursosDesktop(int legajo, string cargo, int ID, Curso curso, ModoForm modo) : this()
+        {
+            CursoActual = curso;
+            this.MapearDeDatos(legajo, cargo);
+            Modo = modo;
+            this.Text = "Editar";
+            Docentes_CursosActual = new Docentes_Cursos();
+            Docentes_CursosActual.ID = ID;
+            
+        }
+
 
         public void CompletarCombobox()
         {
@@ -37,7 +51,7 @@ namespace UI.Desktop
             foreach (Persona per in docentes)
             {
                 string datos;
-                datos = per.Nombre + " " + per.Apellido + " - " + per.Legajo + " - " + per.ID;
+                datos = per.Legajo + " - " + per.Nombre + " " + per.Apellido + " - " +  per.ID;
                 datosDocentes.Add(datos);
             }
 
@@ -73,11 +87,18 @@ namespace UI.Desktop
 
         }
 
+        public void MapearDeDatos(int legajo, string cargo)
+        {
+            this.txtCargo.Text = cargo;
+            this.CompletarCombobox();
+            cmbDocente.SelectedIndex = cmbDocente.FindString(legajo.ToString());
+        }
+
 
         public void GuardarCambios()
         {
-            try
-            {
+            //try
+            //{
                 this.MapearADatos();
                 Docente_CursoLogic docCurLog = new Docente_CursoLogic();
                 docCurLog.Save(Docentes_CursosActual);
@@ -92,11 +113,11 @@ namespace UI.Desktop
                 }
 
                 this.DialogResult = DialogResult.OK;
-            }
-            catch
-            {
-                this.Notificar("Error", "Error al registrar asignación de docente al curso, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+            //catch
+            //{
+            //    this.Notificar("Error", "Error al registrar asignación de docente al curso, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         public bool Validar()
@@ -125,5 +146,6 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
     }
 }
