@@ -113,6 +113,12 @@
       <DependentUpon>formMain.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Inscriptos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inscriptos.Designer.cs">
+      <DependentUpon>Inscriptos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMain.resx">
       <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inscriptos.resx">
+      <DependentUpon>Inscriptos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

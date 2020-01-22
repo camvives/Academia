@@ -415,7 +415,7 @@ namespace Data.Database
         }
 
 
-        public Persona GetDocente(int IDPersona)
+        public Persona GetPersona(int IDPersona)
         {
             Persona per = new Persona();
 

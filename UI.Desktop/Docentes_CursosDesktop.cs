@@ -38,7 +38,7 @@ namespace UI.Desktop
             this.Text = "Editar";
             Docentes_CursosActual = new Docentes_Cursos();
             Docentes_CursosActual.ID = ID;
-            
+
         }
 
 
@@ -47,11 +47,11 @@ namespace UI.Desktop
             UsuarioLogic ul = new UsuarioLogic();
             List<Persona> docentes = ul.GetDocentes();
             List<string> datosDocentes = new List<string>();
-            
+
             foreach (Persona per in docentes)
             {
                 string datos;
-                datos = per.Legajo + " - " + per.Nombre + " " + per.Apellido + " - " +  per.ID;
+                datos = per.Legajo + " - " + per.Nombre + " " + per.Apellido + " - " + per.ID;
                 datosDocentes.Add(datos);
             }
 
@@ -60,7 +60,7 @@ namespace UI.Desktop
 
         private void Docentes_CursosDesktop_Load(object sender, EventArgs e)
         {
-            if(this.Modo == ModoForm.Alta)
+            if (this.Modo == ModoForm.Alta)
             {
                 this.CompletarCombobox();
             }
@@ -97,8 +97,8 @@ namespace UI.Desktop
 
         public void GuardarCambios()
         {
-            //try
-            //{
+            try
+            {
                 this.MapearADatos();
                 Docente_CursoLogic docCurLog = new Docente_CursoLogic();
                 docCurLog.Save(Docentes_CursosActual);
@@ -113,12 +113,16 @@ namespace UI.Desktop
                 }
 
                 this.DialogResult = DialogResult.OK;
-            //}
-            //catch
-            //{
-            //    this.Notificar("Error", "Error al registrar asignación de docente al curso, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+
+
+            catch
+            {
+                this.Notificar("Error", "Error al registrar asignación de docente al curso, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+    
+
 
         public bool Validar()
         {

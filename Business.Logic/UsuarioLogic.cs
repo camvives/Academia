@@ -42,9 +42,9 @@ namespace Business.Logic
             return UsuarioData.GetUsuario(nombreUsuario);
         }
 
-        public Persona GetDocente(int IDPersona)
+        public Persona GetPersona(int IDPersona)
         {
-            return UsuarioData.GetDocente(IDPersona);
+            return UsuarioData.GetPersona(IDPersona);
         }
 
         public List<Persona> GetDocentes()

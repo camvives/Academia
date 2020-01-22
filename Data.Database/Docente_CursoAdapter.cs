@@ -99,6 +99,44 @@ namespace Data.Database
             return docCurso;
         }
 
+        public List<Docentes_Cursos> GetCursosPorDocente (int idDocente)
+        {
+            List<Docentes_Cursos> docentesCurso = new List<Docentes_Cursos>();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdDocentes = new SqlCommand("SELECT * FROM docentes_cursos WHERE id_docente = @id", sqlConn);
+                cmdDocentes.Parameters.AddWithValue("@id", idDocente);
+                SqlDataReader drDocente = cmdDocentes.ExecuteReader();
+
+                while (drDocente.Read())
+                {
+                    Docentes_Cursos doccur = new Docentes_Cursos()
+                    {
+                        ID = (int)drDocente["id_dictado"],
+                        IDCurso = (int)drDocente["id_curso"],
+                        IDDocente = (int)drDocente["id_docente"],
+                        Cargo = (string)drDocente["cargo"]
+                    };
+
+                    docentesCurso.Add(doccur);
+                }
+
+                drDocente.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return docentesCurso;
+
+        }
+
 
         protected void Insert(Docentes_Cursos docCurso)
         {

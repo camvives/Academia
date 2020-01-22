@@ -56,6 +56,11 @@ namespace UI.Desktop
                     this.tsbtnInscribirse.Visible = true;
                     this.tsbtnEstadoAcademico.Visible = true;
                 }
+                else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Docente)
+                {
+                    this.tsddBtnArchivoAlumno.Visible = true;
+                    this.tsbtnConsultaCursos.Visible = true;
+                }
 
                 if (login.DialogResult != DialogResult.OK)
                 {
@@ -141,6 +146,12 @@ namespace UI.Desktop
         {
             formEstadoAcademico formEstado = new formEstadoAcademico(PersonaActual);
             formEstado.ShowDialog();
+        }
+
+        private void TsbtnConsultaCursos_Click(object sender, EventArgs e)
+        {
+            formInscriptos formInscriptos = new formInscriptos(PersonaActual);
+            formInscriptos.ShowDialog();
         }
     }
 }

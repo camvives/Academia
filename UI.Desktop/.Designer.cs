@@ -56,6 +56,8 @@
             this.tsbtnInscribirse = new System.Windows.Forms.ToolStripButton();
             this.tss2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnEstadoAcademico = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnConsultaCursos = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,9 @@
             this.tss1,
             this.tsbtnInscribirse,
             this.tss2,
-            this.tsbtnEstadoAcademico});
+            this.tsbtnEstadoAcademico,
+            this.toolStripSeparator4,
+            this.tsbtnConsultaCursos});
             resources.ApplyResources(this.tsMenu, "tsMenu");
             this.tsMenu.Name = "tsMenu";
             // 
@@ -248,6 +252,18 @@
             this.tsbtnEstadoAcademico.Name = "tsbtnEstadoAcademico";
             this.tsbtnEstadoAcademico.Click += new System.EventHandler(this.TsbtnEstadoAcademico_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // tsbtnConsultaCursos
+            // 
+            this.tsbtnConsultaCursos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.tsbtnConsultaCursos, "tsbtnConsultaCursos");
+            this.tsbtnConsultaCursos.Name = "tsbtnConsultaCursos";
+            this.tsbtnConsultaCursos.Click += new System.EventHandler(this.TsbtnConsultaCursos_Click);
+            // 
             // formMain
             // 
             resources.ApplyResources(this, "$this");
@@ -297,6 +313,8 @@
         private System.Windows.Forms.ToolStripSeparator tss1;
         private System.Windows.Forms.ToolStripSeparator tss2;
         private System.Windows.Forms.ToolStripButton tsbtnEstadoAcademico;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton tsbtnConsultaCursos;
     }
 }
 

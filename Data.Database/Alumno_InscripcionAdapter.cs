@@ -111,6 +111,53 @@ namespace Data.Database
             return cantidad;
 
         }
+
+        public List<Alumno_Inscripcion> GetAlumnosInscriptos(int IDCurso)
+        {
+            List<Alumno_Inscripcion> inscripciones = new List<Alumno_Inscripcion>();
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdInscrpciones = new SqlCommand("SELECT * FROM alumnos_inscripciones WHERE id_curso = @idCurso", sqlConn);
+
+                cmdInscrpciones.Parameters.AddWithValue("@idCurso", IDCurso);
+                SqlDataReader drInscripciones = cmdInscrpciones.ExecuteReader();
+
+                while (drInscripciones.Read())
+                {
+                    Alumno_Inscripcion AlInsc = new Alumno_Inscripcion
+                    {
+                        ID = (int)drInscripciones["id_inscripcion"],
+                        IDAlumno = (int)drInscripciones["id_alumno"],
+                        IDCurso = (int)drInscripciones["id_curso"],
+                        Condicion = (string)drInscripciones["condicion"]
+
+                    };
+
+                    if (drInscripciones["nota"] != DBNull.Value)
+                    {
+                        AlInsc.Nota = (int)drInscripciones["nota"];
+                    }
+
+
+                    inscripciones.Add(AlInsc);
+                }
+
+                drInscripciones.Close();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return inscripciones;
+
+        }
     }
     
 }

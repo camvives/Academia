@@ -68,7 +68,7 @@ namespace UI.Desktop
                 Doc = new Docente();
                 UsuarioLogic ul = new UsuarioLogic();
 
-                Persona docente = ul.GetDocente(dc.IDDocente);
+                Persona docente = ul.GetPersona(dc.IDDocente);
                 Doc.Nombre = docente.Nombre;
                 Doc.Apellido = docente.Apellido;
                 Doc.Legajo = docente.Legajo;

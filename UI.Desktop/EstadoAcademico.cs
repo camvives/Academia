@@ -99,5 +99,10 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void DgvEstadoAcademico_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
