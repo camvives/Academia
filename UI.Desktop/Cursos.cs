@@ -271,9 +271,6 @@ namespace UI.Desktop
             this.Listar();
         }
 
-
-        #endregion
-
         private void TsbtnDocentes_Click(object sender, EventArgs e)
         {
             int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
@@ -281,5 +278,8 @@ namespace UI.Desktop
             formDocentes_Cursos dc = new formDocentes_Cursos(cursoActual);
             dc.ShowDialog();
         }
+
+        #endregion
+
     }
 }

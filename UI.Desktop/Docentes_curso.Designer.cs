@@ -41,6 +41,7 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.dgvDocCur = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +73,7 @@
             this.tsbNuevo.Size = new System.Drawing.Size(92, 29);
             this.tsbNuevo.Text = "Nuevo";
             this.tsbNuevo.ToolTipText = "Nuevo Curso";
+            this.tsbNuevo.Click += new System.EventHandler(this.TsbNuevo_Click);
             // 
             // tsbEditar
             // 
@@ -90,6 +92,7 @@
             this.tsbEliminar.Size = new System.Drawing.Size(102, 29);
             this.tsbEliminar.Text = "Eliminar";
             this.tsbEliminar.ToolTipText = "Eliminar Curso";
+            this.tsbEliminar.Click += new System.EventHandler(this.TsbEliminar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -137,6 +140,7 @@
             this.dgvDocCur.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDocCur.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDocCur.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.Nombre,
             this.Apellido,
             this.Legajo,
@@ -177,6 +181,15 @@
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 8;
+            this.ID.Name = "ID";
+            this.ID.Width = 65;
+            // 
             // Nombre
             // 
             this.Nombre.DataPropertyName = "Nombre";
@@ -195,11 +208,12 @@
             // 
             // Legajo
             // 
+            this.Legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Legajo.DataPropertyName = "Legajo";
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.MinimumWidth = 8;
             this.Legajo.Name = "Legajo";
-            this.Legajo.Width = 150;
+            this.Legajo.Width = 106;
             // 
             // Cargo
             // 
@@ -238,6 +252,7 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.DataGridView dgvDocCur;
         private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
