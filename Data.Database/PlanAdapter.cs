@@ -169,11 +169,26 @@ namespace Data.Database
 
                 try
                 {
-                    cmdDeletePlan.CommandText = "DELETE FROM usuarios WHERE id_persona IN (SELECT id_persona FROM personas WHERE id_plan=@id)";
                     cmdDeletePlan.Parameters.AddWithValue("@id", Id);
+
+                    cmdDeletePlan.CommandText = "DELETE FROM alumnos_inscripciones WHERE id_alumno IN (SELECT id_persona FROM personas WHERE id_plan=@id)";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM usuarios WHERE id_persona IN (SELECT id_persona FROM personas WHERE id_plan=@id)"; 
                     cmdDeletePlan.ExecuteNonQuery();
 
                     cmdDeletePlan.CommandText = "DELETE FROM personas WHERE id_plan=@id";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM cursos WHERE id_materia IN (SELECT id_materia FROM materias mat " +
+                                                                                          " INNER JOIN planes pl ON mat.id_plan = pl.id_plan" +
+                                                                                          " WHERE pl.id_plan=@id)";
+                    cmdDeletePlan.ExecuteNonQuery();
+
+                    cmdDeletePlan.CommandText = "DELETE FROM docentes_cursos WHERE id_curso IN (SELECT id_cursos FROM materias mat " +
+                                                                                          " INNER JOIN planes pl ON mat.id_plan = pl.id_plan" +
+                                                                                          " INNER JOIN cursos cur ON mat.id_materia = mat.id_curso" +
+                                                                                          " WHERE pl.id_plan=@id)";
                     cmdDeletePlan.ExecuteNonQuery();
 
                     cmdDeletePlan.CommandText = "DELETE FROM materias WHERE id_plan=@id";

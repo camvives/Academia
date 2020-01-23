@@ -121,9 +121,69 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("DELETE especialidades WHERE id_especialidad = @id", sqlConn);
-                cmdDelete.Parameters.Add("@id", SqlDbType.Int).Value = Id;
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand cmdDelete = sqlConn.CreateCommand();
+                SqlTransaction transaction = sqlConn.BeginTransaction("DeleteEspecialidades");
+                cmdDelete.Transaction = transaction;
+
+                try
+                {
+                    cmdDelete.Parameters.AddWithValue("@id", Id);
+
+                    cmdDelete.CommandText = "DELETE FROM alumnos_inscripciones WHERE id_alumno IN (SELECT id_persona FROM personas per" +
+                                                                                          " INNER JOIN planes pl on per.id_plan = pl.id_plan" +
+                                                                                          "  WHERE pl.id_especialidad=@id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM usuarios WHERE id_persona IN (SELECT id_persona FROM personas per" +
+                                                                                          " INNER JOIN planes pl on per.id_plan = pl.id_plan" +
+                                                                                          "  WHERE pl.id_especialidad=@id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM personas WHERE id_plan IN (SELECT id_plan FROM planes WHERE id_especialidad = @id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM docentes_cursos WHERE id_curso IN (SELECT cur.id_curso " +
+                                                                                      " FROM cursos cur " +
+                                                                                      "INNER JOIN materias mat on cur.id_materia = mat.id_materia" +
+                                                                                      " INNER JOIN planes pl on pl.id_plan = mat.id_plan" +
+                                                                                      " WHERE pl.id_especialidad = @id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM cursos WHERE id_materia IN (SELECT id_materia FROM materias mat " +
+                                                                                          " INNER JOIN planes pl ON mat.id_plan = pl.id_plan" +
+                                                                                          " WHERE pl.id_especialidad=@id)";
+                    cmdDelete.ExecuteNonQuery();
+
+              
+
+                    cmdDelete.CommandText = "DELETE FROM materias WHERE id_plan IN (SELECT id_plan FROM planes WHERE id_especialidad = @id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM comisiones WHERE id_plan IN (SELECT id_plan FROM planes WHERE id_especialidad = @id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM planes WHERE id_especialidad=@id";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM especialidades WHERE id_especialidad=@id";
+                    cmdDelete.ExecuteNonQuery();
+
+                    transaction.Commit();
+
+                }
+                catch (Exception ex1)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                        throw ex1;
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw ex2;
+                    }
+                }
+
             }
             catch (Exception ex)
             {

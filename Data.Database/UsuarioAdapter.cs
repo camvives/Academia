@@ -215,6 +215,14 @@ namespace Data.Database
 
                 try
                 {
+                    cmdDeleteUsr.CommandText = "DELETE FROM docentes_cursos WHERE id_docente=@idd";
+                    cmdDeleteUsr.Parameters.AddWithValue("@idd", IdPer);
+                    cmdDeleteUsr.ExecuteNonQuery();
+
+                    cmdDeleteUsr.CommandText = "DELETE FROM alumnos_inscripciones WHERE id_alumno=@idp";
+                    cmdDeleteUsr.Parameters.AddWithValue("@idp", IdPer);
+                    cmdDeleteUsr.ExecuteNonQuery();
+
                     cmdDeleteUsr.CommandText = "DELETE FROM usuarios WHERE id_usuario=@id";
                     cmdDeleteUsr.Parameters.AddWithValue("@id", IdUsr);
                     cmdDeleteUsr.ExecuteNonQuery();
@@ -241,6 +249,10 @@ namespace Data.Database
             catch (Exception ex3)
             {
                 throw ex3;
+            }
+            finally
+            {
+                this.CloseConnection();
             }
         }
 
@@ -417,7 +429,6 @@ namespace Data.Database
 
             return (usr, per);
         }
-
 
         public Persona GetPersona(int IDPersona)
         {

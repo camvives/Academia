@@ -222,7 +222,7 @@
             // 
             this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.nombre.DataPropertyName = "nombre";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.nombre.DefaultCellStyle = dataGridViewCellStyle4;
             this.nombre.HeaderText = "Nombre";
             this.nombre.MinimumWidth = 6;
@@ -233,7 +233,7 @@
             // 
             this.apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.apellido.DataPropertyName = "apellido";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.apellido.DefaultCellStyle = dataGridViewCellStyle5;
             this.apellido.HeaderText = "Apellido";
             this.apellido.MinimumWidth = 6;

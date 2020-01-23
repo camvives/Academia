@@ -122,7 +122,7 @@ namespace UI.Desktop
 
                 usuario.State = BusinessEntity.States.Deleted;
                 ul.Save(usuario, persona);
-            }
+        }
             catch
             {
                 MessageBox.Show("Error al eliminar usuario, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -169,7 +169,7 @@ namespace UI.Desktop
 
         private void TsbEliminar_Click(object sender, EventArgs e)
         {
-            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar al Usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar al Usuario?\nSe eliminarán todas sus inscripciones asociadas", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (mensaje == DialogResult.Yes)
             {
