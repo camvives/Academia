@@ -144,8 +144,8 @@ namespace UI.Desktop
                     if (idInscripciones.Contains(int.Parse(row.Cells["ID"].Value.ToString())))
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGray;
-                        row.Cells[6].ReadOnly = true;
-                        row.Cells[6].Value = 2;
+                        row.Cells["Inscribirse"].ReadOnly = true;
+                        row.Cells["Inscribirse"].Value = 2;
                     }
 
                 }
@@ -174,9 +174,9 @@ namespace UI.Desktop
 
             foreach (DataGridViewRow row in dgvCursos.Rows)
             {
-                if (row.Cells[6].Value != null)
+                if (row.Cells["Inscribirse"].Value != null)
                 {
-                    if (int.Parse(row.Cells[6].Value.ToString()) == 1)
+                    if (int.Parse(row.Cells["Inscribirse"].Value.ToString()) == 1)
                     {
                         if (Validaciones.ValidarCupo(int.Parse(row.Cells["ID"].Value.ToString())))
                         {
