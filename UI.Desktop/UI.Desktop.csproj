@@ -119,6 +119,12 @@
     <Compile Include="Inscriptos.Designer.cs">
       <DependentUpon>Inscriptos.cs</DependentUpon>
     </Compile>
+    <Compile Include="InscriptosDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InscriptosDesktop.Designer.cs">
+      <DependentUpon>InscriptosDesktop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inscriptos.resx">
       <DependentUpon>Inscriptos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InscriptosDesktop.resx">
+      <DependentUpon>InscriptosDesktop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

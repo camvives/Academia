@@ -30,14 +30,22 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.cmbCursos = new System.Windows.Forms.ComboBox();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Inscripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nota2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_persona = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +85,7 @@
             this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
             // dgvCursos
             // 
@@ -95,31 +104,34 @@
             this.dgvCursos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
+            this.ID_Inscripcion,
+            this.Nota2,
+            this.ID_persona,
+            this.ID_Curso,
             this.Legajo,
             this.Nombre,
             this.Apellido,
             this.Condicion,
             this.Nota});
             this.tableLayoutPanel1.SetColumnSpan(this.dgvCursos, 2);
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCursos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCursos.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCursos.Location = new System.Drawing.Point(3, 48);
             this.dgvCursos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvCursos.MultiSelect = false;
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dgvCursos.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dgvCursos.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvCursos.RowTemplate.Height = 24;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCursos.Size = new System.Drawing.Size(1009, 350);
@@ -147,24 +159,53 @@
             this.cmbCursos.FormattingEnabled = true;
             this.cmbCursos.Location = new System.Drawing.Point(3, 6);
             this.cmbCursos.Name = "cmbCursos";
-            this.cmbCursos.Size = new System.Drawing.Size(691, 33);
+            this.cmbCursos.Size = new System.Drawing.Size(799, 33);
             this.cmbCursos.TabIndex = 4;
             this.cmbCursos.SelectedIndexChanged += new System.EventHandler(this.CmbCursos_SelectedIndexChanged);
             // 
-            // ID
+            // ID_Inscripcion
             // 
-            this.ID.DataPropertyName = "Id_Inscripcion";
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 8;
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Visible = false;
-            this.ID.Width = 150;
+            this.ID_Inscripcion.DataPropertyName = "ID_Inscripcion";
+            this.ID_Inscripcion.HeaderText = "ID";
+            this.ID_Inscripcion.MinimumWidth = 8;
+            this.ID_Inscripcion.Name = "ID_Inscripcion";
+            this.ID_Inscripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ID_Inscripcion.Visible = false;
+            this.ID_Inscripcion.Width = 150;
+            // 
+            // Nota2
+            // 
+            this.Nota2.DataPropertyName = "Nota";
+            this.Nota2.HeaderText = "Nota2";
+            this.Nota2.MinimumWidth = 8;
+            this.Nota2.Name = "Nota2";
+            this.Nota2.Visible = false;
+            this.Nota2.Width = 150;
+            // 
+            // ID_persona
+            // 
+            this.ID_persona.DataPropertyName = "ID_persona";
+            this.ID_persona.HeaderText = "IDPersona";
+            this.ID_persona.MinimumWidth = 8;
+            this.ID_persona.Name = "ID_persona";
+            this.ID_persona.Visible = false;
+            this.ID_persona.Width = 150;
+            // 
+            // ID_Curso
+            // 
+            this.ID_Curso.DataPropertyName = "ID_Curso";
+            this.ID_Curso.HeaderText = "IDCurso";
+            this.ID_Curso.MinimumWidth = 8;
+            this.ID_Curso.Name = "ID_Curso";
+            this.ID_Curso.Visible = false;
+            this.ID_Curso.Width = 150;
             // 
             // Legajo
             // 
             this.Legajo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Legajo.DataPropertyName = "legajo";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Legajo.DefaultCellStyle = dataGridViewCellStyle3;
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.MinimumWidth = 6;
             this.Legajo.Name = "Legajo";
@@ -175,6 +216,8 @@
             // 
             this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Nombre.DataPropertyName = "Nombre";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.MinimumWidth = 8;
             this.Nombre.Name = "Nombre";
@@ -184,6 +227,8 @@
             // 
             this.Apellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Apellido.DataPropertyName = "Apellido";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Apellido.DefaultCellStyle = dataGridViewCellStyle5;
             this.Apellido.HeaderText = "Apellido";
             this.Apellido.MinimumWidth = 8;
             this.Apellido.Name = "Apellido";
@@ -193,6 +238,8 @@
             // 
             this.Condicion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Condicion.DataPropertyName = "Condicion";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Condicion.DefaultCellStyle = dataGridViewCellStyle6;
             this.Condicion.HeaderText = "Condicion";
             this.Condicion.MinimumWidth = 8;
             this.Condicion.Name = "Condicion";
@@ -201,7 +248,9 @@
             // Nota
             // 
             this.Nota.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nota.DataPropertyName = "Nota";
+            this.Nota.DataPropertyName = "NotaMostrar";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Nota.DefaultCellStyle = dataGridViewCellStyle7;
             this.Nota.HeaderText = "Nota";
             this.Nota.MinimumWidth = 8;
             this.Nota.Name = "Nota";
@@ -229,7 +278,10 @@
         private System.Windows.Forms.DataGridView dgvCursos;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.ComboBox cmbCursos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Inscripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nota2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_persona;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Curso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;

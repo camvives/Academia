@@ -18,12 +18,17 @@ namespace UI.Desktop
         public class DatosAlumnos
         {
             public int ID_Inscripcion { get; set; }
+            public int ID_Curso { get; set; }
+            public int ID_persona { get; set; }
             public int Legajo { get; set; }
             public string Nombre { get; set; }
             public string Apellido { get; set; }
             public string Condicion { get; set; }
-            public string Nota { get; set; }
+            public string NotaMostrar { get; set; }
+            public int Nota { get; set; }
         }
+
+        public DatosAlumnos AlumnoActual { get; set;}
 
         public Persona Docente { get; set; }
         public formInscriptos()
@@ -38,8 +43,8 @@ namespace UI.Desktop
         }
 
         private void CmbCursos_SelectedIndexChanged(object sender, EventArgs e)
-        {        
-            this.dgvCursos.DataSource = this.ObtenerDatos();
+        {
+            this.Listar();   
         }
 
         private void FormInscriptos_Load(object sender, EventArgs e)
@@ -96,13 +101,16 @@ namespace UI.Desktop
                 DatosAlumnos alumno = new DatosAlumnos();
                 alumno.ID_Inscripcion = ai.ID;
                 alumno.Condicion = ai.Condicion;
+                alumno.Nota = ai.Nota;
+                alumno.ID_Curso = ai.IDCurso;
+                alumno.ID_persona = ai.IDAlumno;
                 if (ai.Nota == 0)
                 {
-                    alumno.Nota = "-";
+                    alumno.NotaMostrar = "-";
                 }
                 else
                 {
-                    alumno.Nota = ai.Nota.ToString();
+                    alumno.NotaMostrar = ai.Nota.ToString();
                 }
 
                 UsuarioLogic ul = new UsuarioLogic();
@@ -124,9 +132,36 @@ namespace UI.Desktop
            
         }
 
+        public void Listar()
+        {
+            this.dgvCursos.DataSource = this.ObtenerDatos();
+        }
+
         private void DgvCursos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            this.MapearDatos();
+            InscriptosDesktop ides = new InscriptosDesktop(AlumnoActual);
+            ides.ShowDialog();
+            this.Listar();
+            
+        }
 
+        public void MapearDatos()
+        {
+            AlumnoActual = new DatosAlumnos();
+            AlumnoActual.ID_Inscripcion = (int)dgvCursos.SelectedRows[0].Cells["ID_Inscripcion"].Value;
+            AlumnoActual.ID_persona = (int)dgvCursos.SelectedRows[0].Cells["ID_Persona"].Value;
+            AlumnoActual.ID_Curso = (int)dgvCursos.SelectedRows[0].Cells["ID_Curso"].Value;
+            AlumnoActual.Legajo = (int)dgvCursos.SelectedRows[0].Cells["Legajo"].Value;
+            AlumnoActual.Nombre = (string)dgvCursos.SelectedRows[0].Cells["Nombre"].Value;
+            AlumnoActual.Apellido = (string)dgvCursos.SelectedRows[0].Cells["Apellido"].Value;
+            AlumnoActual.Nota = (int)dgvCursos.SelectedRows[0].Cells["Nota2"].Value;
+
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

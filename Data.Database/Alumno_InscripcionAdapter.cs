@@ -13,7 +13,15 @@ namespace Data.Database
     {
         public void Save(Alumno_Inscripcion ai)
         {
-            this.Insert(ai);
+            if(ai.State == BusinessEntity.States.Modified)
+            {
+                this.Update(ai);
+            }
+            else
+            {
+                this.Insert(ai);
+            }
+           
         }
 
         protected void Insert(Alumno_Inscripcion ai)
@@ -28,6 +36,35 @@ namespace Data.Database
                 cmdSave.Parameters.AddWithValue("@id_curso", ai.IDCurso);
                 cmdSave.Parameters.AddWithValue("@condicion", "Inscripto");
                 ai.ID = Decimal.ToInt32((decimal)cmdSave.ExecuteNonQuery());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+        }
+
+        protected void Update(Alumno_Inscripcion ai)
+        {
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdSave = new SqlCommand("UPDATE alumnos_inscripciones SET id_alumno = @id_alumno, " +
+                                                                                      "id_curso = @id_curso, " +
+                                                                                      "nota = @nota, " +
+                                                                                      "condicion = @condicion " +
+                                                                  "WHERE id_inscripcion = @inscripcion", sqlConn);
+
+                cmdSave.Parameters.AddWithValue("@id_alumno", ai.IDAlumno);
+                cmdSave.Parameters.AddWithValue("@id_curso", ai.IDCurso);
+                cmdSave.Parameters.AddWithValue("@condicion", ai.Condicion);
+                cmdSave.Parameters.AddWithValue("@nota", ai.Nota);
+                cmdSave.Parameters.AddWithValue("@inscripcion", ai.ID);
+                cmdSave.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
