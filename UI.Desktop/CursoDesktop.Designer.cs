@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CursoDesktop));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,7 +76,7 @@
             // txtAnio
             // 
             this.txtAnio.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAnio.Location = new System.Drawing.Point(133, 127);
+            this.txtAnio.Location = new System.Drawing.Point(134, 127);
             this.txtAnio.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(63, 30);
@@ -99,7 +100,7 @@
             this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMateria.FormattingEnabled = true;
-            this.cmbMateria.Location = new System.Drawing.Point(133, 13);
+            this.cmbMateria.Location = new System.Drawing.Point(134, 13);
             this.cmbMateria.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(314, 30);
@@ -143,7 +144,7 @@
             this.cmbComision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbComision.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbComision.FormattingEnabled = true;
-            this.cmbComision.Location = new System.Drawing.Point(133, 70);
+            this.cmbComision.Location = new System.Drawing.Point(134, 70);
             this.cmbComision.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmbComision.Name = "cmbComision";
             this.cmbComision.Size = new System.Drawing.Size(314, 30);
@@ -153,7 +154,7 @@
             // 
             this.txtCupo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtCupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCupo.Location = new System.Drawing.Point(133, 185);
+            this.txtCupo.Location = new System.Drawing.Point(134, 185);
             this.txtCupo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtCupo.Name = "txtCupo";
             this.txtCupo.Size = new System.Drawing.Size(63, 30);
@@ -189,7 +190,7 @@
             this.tableLayoutPanel5.ColumnCount = 3;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.8612F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.1388F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
             this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbCarrera, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbPlan, 2, 0);
@@ -220,7 +221,7 @@
             this.cmbCarrera.Location = new System.Drawing.Point(122, 11);
             this.cmbCarrera.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cmbCarrera.Name = "cmbCarrera";
-            this.cmbCarrera.Size = new System.Drawing.Size(250, 30);
+            this.cmbCarrera.Size = new System.Drawing.Size(249, 30);
             this.cmbCarrera.TabIndex = 2;
             this.cmbCarrera.SelectedIndexChanged += new System.EventHandler(this.CmbCarrera_SelectedIndexChanged);
             // 
@@ -230,7 +231,7 @@
             this.cmbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlan.FormattingEnabled = true;
-            this.cmbPlan.Location = new System.Drawing.Point(378, 11);
+            this.cmbPlan.Location = new System.Drawing.Point(377, 11);
             this.cmbPlan.Name = "cmbPlan";
             this.cmbPlan.Size = new System.Drawing.Size(93, 30);
             this.cmbPlan.TabIndex = 3;
@@ -246,6 +247,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CursoDesktop";
             this.Text = "Nuevo Curso";
             this.Load += new System.EventHandler(this.CursoDesktop_Load);

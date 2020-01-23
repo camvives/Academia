@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Docentes_CursosDesktop));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbDocente = new System.Windows.Forms.ComboBox();
@@ -134,6 +135,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Docentes_CursosDesktop";
             this.Text = "Docentes_CursosDesktop";
             this.Load += new System.EventHandler(this.Docentes_CursosDesktop_Load);

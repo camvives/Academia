@@ -44,27 +44,33 @@ namespace UI.Desktop
             using (formLogin login = new formLogin())
             {
                 login.ShowDialog();
-                (UsuarioActual, PersonaActual) = login.BuscarUsuario();
-                if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
-                {
-                    this.tsddbtnArchivoAdmin.Visible = true;
-                    this.tsddbtnEditarAdmin.Visible = true;
-                }
-                else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
-                {
-                    this.tsddBtnArchivoAlumno.Visible = true;
-                    this.tsbtnInscribirse.Visible = true;
-                    this.tsbtnEstadoAcademico.Visible = true;
-                }
-                else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Docente)
-                {
-                    this.tsddBtnArchivoAlumno.Visible = true;
-                    this.tsbtnConsultaCursos.Visible = true;
-                }
 
                 if (login.DialogResult != DialogResult.OK)
                 {
                     this.Dispose();
+                }
+                else
+                {
+                    (UsuarioActual, PersonaActual) = login.BuscarUsuario();
+                    if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
+                    {
+                        this.tsddbtnArchivoAdmin.Visible = true;
+                        this.tsddbtnEditarAdmin.Visible = true;
+                    }
+                    else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+                    {
+                        this.tsddBtnArchivoAlumno.Visible = true;
+                        this.tsbtnInscribirse.Visible = true;
+                        this.tsbtnEstadoAcademico.Visible = true;
+                        this.tss1.Visible = true;
+                        this.tss2.Visible = true;
+                    }
+                    else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Docente)
+                    {
+                        this.tsddBtnArchivoAlumno.Visible = true;
+                        this.tsbtnConsultaCursos.Visible = true;
+                        this.tss3.Visible = true;
+                    }
                 }
 
             }
@@ -152,6 +158,18 @@ namespace UI.Desktop
         {
             formInscriptos formInscriptos = new formInscriptos(PersonaActual);
             formInscriptos.ShowDialog();
+        }
+
+        private void CursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CursoDesktop curdesk = new CursoDesktop();
+            curdesk.ShowDialog();
+        }
+
+        private void ComisiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComisionDesktop comdesk = new ComisionDesktop();
+            comdesk.ShowDialog();
         }
     }
 }

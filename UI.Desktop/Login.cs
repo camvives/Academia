@@ -25,21 +25,46 @@ namespace UI.Desktop
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-            if(Validaciones.ValidarUsuario(txtUsuario.Text, txtClave.Text))
+            try
             {
-                this.DialogResult = DialogResult.OK;
+                if (!Validaciones.ValidarContraseña(txtUsuario.Text, txtClave.Text))
+                {
+                    MessageBox.Show("Usuario y/o contraseña incorrectos", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else if (!Validaciones.ValidarHabilitado(txtUsuario.Text, txtClave.Text))
+                {
+                    MessageBox.Show("Usuario no habilitado", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+
+                    this.DialogResult = DialogResult.OK;
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Usuario y/o contraseña incorrectos", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al recuperar datos del usuario. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         public (Usuario, Persona) BuscarUsuario()
         {
-            UsuarioLogic ul = new UsuarioLogic();
-            (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);              
+            }
+            catch
+            {
+                MessageBox.Show("Error al recuperar datos del usuario. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
             return (UsuarioActual, PersonaActual);
+            
         }
+
+
     }
 }

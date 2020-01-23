@@ -32,9 +32,9 @@ namespace Business.Logic
             return UsuarioData.GetOne(id);
         }
 
-        public string GetClave(string nombreUsuario)
+        public (string, bool) GetClaveYHabilitado(string nombreUsuario)
         {
-            return UsuarioData.GetClave(nombreUsuario);
+            return UsuarioData.GetClaveYHabilitado(nombreUsuario);
         }
 
         public (Usuario, Persona) GetUsuario(string nombreUsuario)

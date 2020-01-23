@@ -33,10 +33,10 @@ namespace Util
             return false;
         }
 
-        public static Boolean ValidarUsuario(string user, string clave)
+        public static Boolean ValidarContraseña(string user, string clave)
         {
             UsuarioLogic ul = new UsuarioLogic();
-            string claveBD = ul.GetClave(user);
+            (string claveBD,_) = ul.GetClaveYHabilitado(user);
 
             if (claveBD == clave)
             {
@@ -48,6 +48,23 @@ namespace Util
                 return false;
             }
         }
+
+        public static Boolean ValidarHabilitado(string user, string clave)
+        {
+            UsuarioLogic ul = new UsuarioLogic();
+            (_, bool habilitado) = ul.GetClaveYHabilitado(user);
+
+            if (habilitado)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+
 
         public static Boolean ValidarCupo(int IDCurso)
         {

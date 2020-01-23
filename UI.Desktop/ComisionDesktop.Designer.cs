@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComisionDesktop));
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbCarrera = new System.Windows.Forms.ComboBox();
             this.cmbPlan = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cmbCarrera = new System.Windows.Forms.ComboBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,7 +51,7 @@
             this.tableLayoutPanel5.ColumnCount = 3;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.78947F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.21053F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.tableLayoutPanel5.Controls.Add(this.cmbPlan, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.cmbCarrera, 1, 0);
@@ -62,26 +62,13 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(524, 52);
             this.tableLayoutPanel5.TabIndex = 16;
             // 
-            // cmbCarrera
-            // 
-            this.cmbCarrera.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cmbCarrera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCarrera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCarrera.FormattingEnabled = true;
-            this.cmbCarrera.Location = new System.Drawing.Point(139, 11);
-            this.cmbCarrera.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.cmbCarrera.Name = "cmbCarrera";
-            this.cmbCarrera.Size = new System.Drawing.Size(238, 30);
-            this.cmbCarrera.TabIndex = 2;
-            this.cmbCarrera.SelectedIndexChanged += new System.EventHandler(this.CmbCarrera_SelectedIndexChanged);
-            // 
             // cmbPlan
             // 
             this.cmbPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPlan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPlan.FormattingEnabled = true;
-            this.cmbPlan.Location = new System.Drawing.Point(383, 11);
+            this.cmbPlan.Location = new System.Drawing.Point(382, 11);
             this.cmbPlan.Name = "cmbPlan";
             this.cmbPlan.Size = new System.Drawing.Size(82, 30);
             this.cmbPlan.TabIndex = 3;
@@ -96,6 +83,19 @@
             this.label9.Size = new System.Drawing.Size(78, 25);
             this.label9.TabIndex = 2;
             this.label9.Text = "Carrera";
+            // 
+            // cmbCarrera
+            // 
+            this.cmbCarrera.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbCarrera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCarrera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCarrera.FormattingEnabled = true;
+            this.cmbCarrera.Location = new System.Drawing.Point(138, 11);
+            this.cmbCarrera.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.cmbCarrera.Name = "cmbCarrera";
+            this.cmbCarrera.Size = new System.Drawing.Size(238, 30);
+            this.cmbCarrera.TabIndex = 2;
+            this.cmbCarrera.SelectedIndexChanged += new System.EventHandler(this.CmbCarrera_SelectedIndexChanged);
             // 
             // txtDescripcion
             // 
@@ -208,6 +208,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.tableLayoutPanel5);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ComisionDesktop";

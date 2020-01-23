@@ -328,13 +328,14 @@ namespace Data.Database
 
         }
 
-        public string GetClave(string nombreUsuario)
+        public (string, bool) GetClaveYHabilitado(string nombreUsuario)
         {
             string clave = null;
+            bool habilitado = false;
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdClave = new SqlCommand("SELECT clave FROM usuarios " +
+                SqlCommand cmdClave = new SqlCommand("SELECT clave, habilitado FROM usuarios " +
                                                        " WHERE @nombreUsuario = nombre_usuario", sqlConn);
                 cmdClave.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
                 SqlDataReader drClave = cmdClave.ExecuteReader();
@@ -342,6 +343,8 @@ namespace Data.Database
                 if (drClave.Read())
                 {
                     clave = (string)drClave["clave"];
+                    habilitado = (bool)drClave["habilitado"];
+                    
                 }
             }
             catch(Exception ex)
@@ -349,7 +352,8 @@ namespace Data.Database
                 throw ex;
             }
 
-            return clave;
+            return (clave, habilitado);
+
         }
 
         public (Usuario, Persona) GetUsuario(string nombreUsuario)
