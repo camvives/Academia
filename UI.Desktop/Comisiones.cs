@@ -87,7 +87,7 @@ namespace UI.Desktop
 
         private void TsbEliminar_Click(object sender, EventArgs e)
         {
-            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar la comisión?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var mensaje = MessageBox.Show("¿Está seguro que desea eliminar la comisión?\nSe eliminarán los cursos asociados", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (mensaje == DialogResult.Yes)
             {
                 this.EliminarComision();

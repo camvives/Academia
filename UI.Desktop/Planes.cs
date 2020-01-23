@@ -61,18 +61,18 @@ namespace UI.Desktop
 
         public void EliminarPlan()
         {
-            //try
-            //{
+            try
+            {
                 int ID = (int)dgvPlanes.SelectedRows[0].Cells["ID"].Value;
                 Plan planActual = PlanLog.GetOne(ID);
                 planActual.State = BusinessEntity.States.Deleted;
                 PlanLog.Save(planActual);
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Error al eliminar el plan, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
+            }
+            catch
+            {
+                MessageBox.Show("Error al eliminar el plan, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }   
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
