@@ -129,19 +129,46 @@ namespace Data.Database
             try
             {
                 this.OpenConnection();
-                SqlCommand cmdDelete = new SqlCommand("DELETE FROM cursos WHERE id_curso = @id", sqlConn);
-                cmdDelete.Parameters.AddWithValue("@id", Id);
-                cmdDelete.ExecuteNonQuery();
+                SqlCommand cmdDelete = sqlConn.CreateCommand();
+                SqlTransaction transaction = sqlConn.BeginTransaction("DeleteCurso");
+                cmdDelete.Transaction = transaction;
+
+                try
+                {
+                    cmdDelete.Parameters.AddWithValue("@id", Id);
+
+                    cmdDelete.CommandText = "DELETE FROM alumnos_inscripciones WHERE id_curso = @id";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM docentes_cursos WHERE id_curso = @id)";
+                    cmdDelete.ExecuteNonQuery();
+
+                    cmdDelete.CommandText = "DELETE FROM cursos WHERE id_comision=@id";
+                    cmdDelete.ExecuteNonQuery();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                    catch (Exception ex2)
+                    {
+                        throw ex2;
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (Exception ex3)
             {
-                throw ex;
+                throw ex3;
             }
             finally
             {
                 this.CloseConnection();
             }
-
         }
 
         protected void Update(Curso curso)
