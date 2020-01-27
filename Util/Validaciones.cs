@@ -33,7 +33,7 @@ namespace Util
             return false;
         }
 
-        public static Boolean ValidarContraseña(string user, string clave)
+        public static Boolean ValidarUsuario(string user, string clave)
         {
             UsuarioLogic ul = new UsuarioLogic();
             (string claveBD,_) = ul.GetClaveYHabilitado(user);

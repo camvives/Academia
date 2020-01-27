@@ -27,7 +27,7 @@ namespace UI.Desktop
         {
             try
             {
-                if (!Validaciones.ValidarContraseña(txtUsuario.Text, txtClave.Text))
+                if (!Validaciones.ValidarUsuario(txtUsuario.Text, txtClave.Text))
                 {
                     MessageBox.Show("Usuario y/o contraseña incorrectos", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

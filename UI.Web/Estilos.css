@@ -52,11 +52,15 @@
 
 .login {
     margin-top:auto;
-    width: 455px;
+    width: 400px;
     height: 130px;
     margin: 0 auto;
-    background-color: rgba(27, 25, 27, 0.10);
-   
+    background-color: rgba(59, 62, 95, 0.25)  
 }
 
+.login-page {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
 
