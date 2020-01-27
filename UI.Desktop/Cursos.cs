@@ -195,7 +195,8 @@ namespace UI.Desktop
                             var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (mensaje == DialogResult.Yes)
                             {
-                                //REPORTE
+                                Reporte rep = new Reporte(PersonaActual.ID);
+                                rep.ShowDialog();
                             }
                             else
                             {

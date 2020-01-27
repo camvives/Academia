@@ -121,60 +121,6 @@
     <value>25, 20</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="usuarioToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="usuarioToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Usuario</value>
-  </data>
-  <data name="cursoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="cursoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Curso</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
-  </data>
-  <data name="especialidadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="especialidadToolStripMenuItem.Text" xml:space="preserve">
-    <value>Especialidad</value>
-  </data>
-  <data name="planToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="planToolStripMenuItem.Text" xml:space="preserve">
-    <value>Plan</value>
-  </data>
-  <data name="materiaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="materiaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Materia</value>
-  </data>
-  <data name="comisiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="comisiónToolStripMenuItem.Text" xml:space="preserve">
-    <value>Comisión</value>
-  </data>
-  <data name="nuevoToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="nuevoToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Nuevo</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 6</value>
-  </data>
-  <data name="salirToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 34</value>
-  </data>
-  <data name="salirToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
   <data name="tsddbtnArchivoAdmin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -229,6 +175,24 @@
   </data>
   <data name="tsddbtnEditarAdmin.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="misDatosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 34</value>
+  </data>
+  <data name="misDatosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mis Datos</value>
+  </data>
+  <data name="imprimirCertificadoDeInscripciónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 34</value>
+  </data>
+  <data name="imprimirCertificadoDeInscripciónToolStripMenuItem.Text" xml:space="preserve">
+    <value>Certificado de Inscripción</value>
+  </data>
+  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 34</value>
+  </data>
+  <data name="salirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Salir</value>
   </data>
   <data name="tsddBtnArchivoAlumno.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -380,6 +344,60 @@
   <data name="&gt;&gt;tsMenu.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="nuevoToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="nuevoToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="usuarioToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="usuarioToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="cursoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="cursoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Curso</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 6</value>
+  </data>
+  <data name="especialidadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="especialidadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Especialidad</value>
+  </data>
+  <data name="planToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="planToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="materiaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="materiaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Materia</value>
+  </data>
+  <data name="comisiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="comisiónToolStripMenuItem.Text" xml:space="preserve">
+    <value>Comisión</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 6</value>
+  </data>
+  <data name="salirToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 34</value>
+  </data>
+  <data name="salirToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
   <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 34</value>
   </data>
@@ -419,12 +437,6 @@
   <data name="comisionesToolStripMenuItem.Text" xml:space="preserve">
     <value>Comisiones</value>
   </data>
-  <data name="misDatosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 34</value>
-  </data>
-  <data name="misDatosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mis Datos</value>
-  </data>
   <data name="datosPersonalesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 34</value>
   </data>
@@ -436,12 +448,6 @@
   </data>
   <data name="datosDeUsuarioToolStripMenuItem.Text" xml:space="preserve">
     <value>Cambiar Usuario o Contraseña</value>
-  </data>
-  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 34</value>
-  </data>
-  <data name="salirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Salir</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1469,6 +1475,12 @@
   <data name="&gt;&gt;usuarioToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;cursoToolStripMenuItem.Name" xml:space="preserve">
+    <value>cursoToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cursoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
@@ -1491,6 +1503,12 @@
     <value>materiaToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;materiaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comisiónToolStripMenuItem.Name" xml:space="preserve">
+    <value>comisiónToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;comisiónToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
@@ -1619,16 +1637,10 @@
   <data name="&gt;&gt;tsbtnConsultaCursos.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cursoToolStripMenuItem.Name" xml:space="preserve">
-    <value>cursoToolStripMenuItem</value>
+  <data name="&gt;&gt;imprimirCertificadoDeInscripciónToolStripMenuItem.Name" xml:space="preserve">
+    <value>imprimirCertificadoDeInscripciónToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;cursoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comisiónToolStripMenuItem.Name" xml:space="preserve">
-    <value>comisiónToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;comisiónToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;imprimirCertificadoDeInscripciónToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

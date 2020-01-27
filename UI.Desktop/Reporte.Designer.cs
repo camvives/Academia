@@ -36,11 +36,12 @@
             this.crystalReportViewer1.ActiveViewIndex = 0;
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crystalReportViewer1.DisplayStatusBar = false;
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
             this.crystalReportViewer1.ReportSource = "C:\\Users\\camvi\\source\\repos\\Academia\\Util\\Certificado_Inscripcion.rpt";
-            this.crystalReportViewer1.Size = new System.Drawing.Size(986, 500);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1297, 534);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
@@ -48,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 500);
+            this.ClientSize = new System.Drawing.Size(1297, 534);
             this.Controls.Add(this.crystalReportViewer1);
             this.Name = "Reporte";
             this.Text = "Reporte";

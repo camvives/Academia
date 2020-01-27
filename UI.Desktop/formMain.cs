@@ -171,5 +171,11 @@ namespace UI.Desktop
             ComisionDesktop comdesk = new ComisionDesktop();
             comdesk.ShowDialog();
         }
+
+        private void imprimirCertificadoDeInscripciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reporte reporte = new Reporte(PersonaActual.ID);
+            reporte.ShowDialog();
+        }
     }
 }

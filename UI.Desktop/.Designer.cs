@@ -33,10 +33,12 @@
             this.tsddbtnArchivoAdmin = new System.Windows.Forms.ToolStripDropDownButton();
             this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.usuarioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.especialidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comisiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsddbtnEditarAdmin = new System.Windows.Forms.ToolStripDropDownButton();
@@ -58,8 +60,7 @@
             this.tsbtnEstadoAcademico = new System.Windows.Forms.ToolStripButton();
             this.tss3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnConsultaCursos = new System.Windows.Forms.ToolStripButton();
-            this.cursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comisiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +109,12 @@
             resources.ApplyResources(this.usuarioToolStripMenuItem1, "usuarioToolStripMenuItem1");
             this.usuarioToolStripMenuItem1.Click += new System.EventHandler(this.UsuarioToolStripMenuItem1_Click);
             // 
+            // cursoToolStripMenuItem
+            // 
+            this.cursoToolStripMenuItem.Name = "cursoToolStripMenuItem";
+            resources.ApplyResources(this.cursoToolStripMenuItem, "cursoToolStripMenuItem");
+            this.cursoToolStripMenuItem.Click += new System.EventHandler(this.CursoToolStripMenuItem_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -130,6 +137,12 @@
             this.materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
             resources.ApplyResources(this.materiaToolStripMenuItem, "materiaToolStripMenuItem");
             this.materiaToolStripMenuItem.Click += new System.EventHandler(this.MateriaToolStripMenuItem_Click);
+            // 
+            // comisiónToolStripMenuItem
+            // 
+            this.comisiónToolStripMenuItem.Name = "comisiónToolStripMenuItem";
+            resources.ApplyResources(this.comisiónToolStripMenuItem, "comisiónToolStripMenuItem");
+            this.comisiónToolStripMenuItem.Click += new System.EventHandler(this.ComisiónToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -202,6 +215,7 @@
             this.tsddBtnArchivoAlumno.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsddBtnArchivoAlumno.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.misDatosToolStripMenuItem,
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem,
             this.salirToolStripMenuItem});
             resources.ApplyResources(this.tsddBtnArchivoAlumno, "tsddBtnArchivoAlumno");
             this.tsddBtnArchivoAlumno.Name = "tsddBtnArchivoAlumno";
@@ -268,17 +282,11 @@
             this.tsbtnConsultaCursos.Name = "tsbtnConsultaCursos";
             this.tsbtnConsultaCursos.Click += new System.EventHandler(this.TsbtnConsultaCursos_Click);
             // 
-            // cursoToolStripMenuItem
+            // imprimirCertificadoDeInscripciónToolStripMenuItem
             // 
-            this.cursoToolStripMenuItem.Name = "cursoToolStripMenuItem";
-            resources.ApplyResources(this.cursoToolStripMenuItem, "cursoToolStripMenuItem");
-            this.cursoToolStripMenuItem.Click += new System.EventHandler(this.CursoToolStripMenuItem_Click);
-            // 
-            // comisiónToolStripMenuItem
-            // 
-            this.comisiónToolStripMenuItem.Name = "comisiónToolStripMenuItem";
-            resources.ApplyResources(this.comisiónToolStripMenuItem, "comisiónToolStripMenuItem");
-            this.comisiónToolStripMenuItem.Click += new System.EventHandler(this.ComisiónToolStripMenuItem_Click);
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Name = "imprimirCertificadoDeInscripciónToolStripMenuItem";
+            resources.ApplyResources(this.imprimirCertificadoDeInscripciónToolStripMenuItem, "imprimirCertificadoDeInscripciónToolStripMenuItem");
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Click += new System.EventHandler(this.imprimirCertificadoDeInscripciónToolStripMenuItem_Click);
             // 
             // formMain
             // 
@@ -333,6 +341,7 @@
         private System.Windows.Forms.ToolStripButton tsbtnConsultaCursos;
         private System.Windows.Forms.ToolStripMenuItem cursoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comisiónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imprimirCertificadoDeInscripciónToolStripMenuItem;
     }
 }
 
