@@ -196,7 +196,8 @@ namespace UI.Desktop
                             if (mensaje == DialogResult.Yes)
                             {
                                 Reporte rep = new Reporte(PersonaActual.ID);
-                                rep.ShowDialog();
+                                rep.Show();
+                                this.Close();
                             }
                             else
                             {
