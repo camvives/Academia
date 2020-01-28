@@ -32,5 +32,13 @@ namespace UI.Web
                 }
             }
         }
+
+        protected void btnIngresar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Response.Redirect("~/Main.aspx");
+            }       
+        }
     }
 }

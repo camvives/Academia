@@ -44,7 +44,7 @@
 
             <br />
             
-            <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" />
+            <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" OnClick="btnIngresar_Click" />
         </div>
   
     </div>

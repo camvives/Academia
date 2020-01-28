@@ -13,5 +13,10 @@ namespace UI.Web
         {
 
         }
+
+        protected void imgLogo_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/Main.aspx");
+        }
     }
 }
