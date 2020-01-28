@@ -20,7 +20,7 @@
         </h2>
 
             <div class="auto-style1">
-            <asp:Menu runat="server"  Orientation="Vertical" ID="mnuPrincipal"  RenderingMode="Table" Width="315px">
+            <asp:Menu runat="server"  Orientation="Vertical" ID="mnuPrincipal"  RenderingMode="Table" Width="315px" OnMenuItemClick="mnuPrincipal_MenuItemClick">
                 <Items>
                     <asp:MenuItem Text="Usuarios" Value="Usuario"></asp:MenuItem>
                     <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>

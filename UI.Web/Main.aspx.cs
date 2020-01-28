@@ -61,5 +61,34 @@ namespace UI.Web
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Inscripcion"));
             }
         }
+
+        protected void mnuPrincipal_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            if(e.Item == mnuPrincipal.FindItem("Usuario"))
+            {
+                Response.Redirect("~/Usuarios.aspx");
+            }
+            else if(e.Item == mnuPrincipal.FindItem("Cursos"))
+            {
+                Response.Redirect("~/Cursos.aspx");
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Especialidades"))
+            {
+                Response.Redirect("~/Especialidades.aspx");
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Planes"))
+            {
+                Response.Redirect("~/Planes.aspx");
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Materias"))
+            {
+                Response.Redirect("~/Materias.aspx");
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Comisiones"))
+            {
+                Response.Redirect("~/Comisiones.aspx");
+            }
+
+        }
     }
 }
