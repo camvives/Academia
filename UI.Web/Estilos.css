@@ -5,11 +5,23 @@
 }
 .principal {
     background-color: rgba(27, 25, 27, 0.35);
+    height: 97px;
 }
 
 .logo {
     width: 173px;
     height: 56px;
+    margin-top:20px;
+    margin-left:30px;
+}
+
+.menu {
+    width: 100%;
+    background-color: rgba(59, 62, 95, 0.10);
+    height: 25px;
+    vertical-align: central;
+    margin: 0 auto 0 auto;
+   
 }
 
 .formulario{
@@ -62,5 +74,7 @@
     height: 100%;
     width: 100%;
     text-align: center;
+    margin-top:100px;
 }
+
 

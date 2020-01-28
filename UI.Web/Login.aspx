@@ -1,6 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="UI.Web.Login" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class ="login-page">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="UI.Web.Login1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Estilos.css"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+      <div class ="login-page">
        
         <div>
             <h1>¡Bienvenido al Sistema!</h1>
@@ -38,4 +48,6 @@
         </div>
   
     </div>
-</asp:Content>
+    </form>
+</body>
+</html>

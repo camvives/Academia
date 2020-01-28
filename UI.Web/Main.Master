@@ -8,23 +8,32 @@
      <link href="Estilos.css" rel ="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <style type="text/css">
-        .auto-style1 {
-            background-color: rgba(27, 25, 27, 0.35);
-            height: 97px;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="auto-style1">
-           &nbsp;&nbsp;&nbsp;&nbsp;
-            <br />
-&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:ImageButton ID="imgLogo" runat="server" Height="56px" ImageUrl="~/Imagenes/Logo.png" Width="173px" />
-            <br />
-           <br />
+        <div class="principal">
+            <asp:ImageButton ID="imgLogo" runat="server" ImageUrl="~/Imagenes/Logo.png" class="logo"/>
         </div>
+        <div class="menu">
+            <asp:Menu runat="server"  Orientation="Horizontal" Width="100%">
+                <Items>
+                    <asp:MenuItem Text="Usuarios" Value="Usuario"></asp:MenuItem>
+                    <asp:MenuItem Text="Cursos" Value="Cursos"></asp:MenuItem>
+                    <asp:MenuItem Text="Especialidades" Value="Especialidades"></asp:MenuItem>
+                    <asp:MenuItem Text="Planes" Value="Planes"></asp:MenuItem>
+                    <asp:MenuItem Text="Materias" Value="Materias"></asp:MenuItem>
+                    <asp:MenuItem Text="Comisiones" Value="Comisiones"></asp:MenuItem>
+                </Items>
+                <StaticSelectedStyle BackColor="#507CD1" />
+                <StaticMenuItemStyle HorizontalPadding="72px" VerticalPadding="2px" ForeColor="Black" BorderStyle="Solid" BorderWidth="1px" BorderColor="Black" />
+                <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
+                <DynamicMenuStyle BackColor="#B5C7DE" />
+                <DynamicSelectedStyle BackColor="#507CD1" />
+                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
+            </asp:Menu>
+            </div>    
+        <br />
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">                
             </asp:ContentPlaceHolder>
