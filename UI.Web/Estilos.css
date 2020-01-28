@@ -16,10 +16,10 @@
 }
 
 .menu {
+    width: 300px;
     text-align: center;
-    width: 240px;
     background-color: rgba(59, 62, 95, 0.30);
-    height: 205px;
+    height: auto;
     vertical-align: central;
     margin: 0 auto 0 auto;
     margin-top: 50px;
