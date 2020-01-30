@@ -11,6 +11,7 @@ namespace UI.Web
     {
         public event EventHandler BtnNuevoClick;
         public event EventHandler BtnEliminarClick;
+        public event EventHandler BtnEditarClick;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,6 +26,11 @@ namespace UI.Web
         protected void btnEliminar_Click(object sender, ImageClickEventArgs e)
         {
             BtnEliminarClick(sender, e);
+        }
+
+        protected void btnEditar_Click(object sender, ImageClickEventArgs e)
+        {
+            BtnEditarClick(sender, e);
         }
     }
 }

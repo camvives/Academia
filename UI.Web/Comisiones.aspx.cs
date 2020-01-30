@@ -18,6 +18,7 @@ namespace UI.Web
             get { return new ComisionLogic(); }
         }
 
+
         public class DatosComisiones
         {
             public int ID { get; set; }
@@ -38,7 +39,23 @@ namespace UI.Web
             //Event Bubblig
             MenuABM.BtnNuevoClick += new EventHandler(BtnNuevo_ButtonClick);
             MenuABM.BtnEliminarClick += new EventHandler(BtnEliminar_ButtonClick);
+            MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
 
+        }
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            this.GetComision();
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(this.ComisionActual.IDPlan);
+
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            this.Context.Items["Carrera"] = especialidad.ID;
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Comision"] = ComisionActual;
+            Server.Transfer("ComisionWeb.aspx", true);
         }
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
@@ -51,6 +68,9 @@ namespace UI.Web
         {
             this.EliminarComision();
             Response.Redirect("Comisiones.aspx");
+        }
+
+        public void CompletarGrid() { 
         }
 
         public List<DatosComisiones> ObtenerDatos()
@@ -116,6 +136,11 @@ namespace UI.Web
             ComisionActual = ComLog.GetOne(ID);
         }
 
-
+        protected void gdvComisiones_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gdvComisiones.DataSource = this.ObtenerDatos();
+            gdvComisiones.PageIndex = e.NewPageIndex;
+            gdvComisiones.DataBind();
+        }
     }
 }

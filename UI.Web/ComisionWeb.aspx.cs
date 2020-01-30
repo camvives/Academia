@@ -15,7 +15,7 @@ namespace UI.Web
 
         protected new void Page_Load(object sender, EventArgs e)
         {
-            ComisionActual = (Comision)Session["Comison"];
+            ComisionActual = (Comision)Session["Comision"];
 
             if (!IsPostBack)
             {
@@ -68,13 +68,7 @@ namespace UI.Web
             ddlPlan.Enabled = true;
             ddlCarrera.Items.Remove("Seleccionar Carrera");
             ddlPlan.Items.Remove("Plan");
-            int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
-
-            PlanLogic plan = new PlanLogic();
-            ddlPlan.DataTextField = "Descripcion";
-            ddlPlan.DataValueField = "ID";
-            ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-            ddlPlan.DataBind();
+            this.CargaPlanes();
         }
 
         public override void MapearADatos()
@@ -112,9 +106,31 @@ namespace UI.Web
                     Response.Write("<script>alert('La Comisión ha sido Registrada')</script>");
                 }
 
-                Response.Redirect("~/Comisiones.aspx");
+                Response.AddHeader("REFRESH", "0.1;URL=Comisiones.aspx");
 
             }
+        }
+
+        public override void MapearDeDatos()
+        {
+            ddlCarrera.SelectedValue = this.Context.Items["Carrera"].ToString();
+            this.CargaPlanes();
+            ddlPlan.SelectedValue = ComisionActual.IDPlan.ToString();
+            txtDescripcion.Text = ComisionActual.Descripcion;
+            ddlAnio.SelectedValue = ComisionActual.AnioEspecialidad.ToString();
+        }
+
+        public void CargaPlanes()
+        {
+            
+            int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+
+            PlanLogic plan = new PlanLogic();
+            ddlPlan.DataTextField = "Descripcion";
+            ddlPlan.DataValueField = "ID";
+            ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+            ddlPlan.DataBind();
+            
         }
     }
 }
