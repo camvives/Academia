@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="ApplicationForm.aspx" />
     <Content Include="Comisiones.aspx" />
+    <Content Include="ComisionWeb.aspx" />
     <Content Include="Cursos.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="Estilos.css" />
@@ -104,6 +105,13 @@
     </Compile>
     <Compile Include="Comisiones.aspx.designer.cs">
       <DependentUpon>Comisiones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComisionWeb.aspx.cs">
+      <DependentUpon>ComisionWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComisionWeb.aspx.designer.cs">
+      <DependentUpon>ComisionWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cursos.aspx.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>

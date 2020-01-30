@@ -35,7 +35,6 @@ namespace UI.Web
                 this.gdvComisiones.DataBind();
             }
 
-
             //Event Bubblig
             MenuABM.BtnNuevoClick += new EventHandler(BtnNuevo_ButtonClick);
             MenuABM.BtnEliminarClick += new EventHandler(BtnEliminar_ButtonClick);
@@ -44,7 +43,8 @@ namespace UI.Web
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("ComisionWeb.aspx", true);
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
@@ -89,9 +89,7 @@ namespace UI.Web
         {
             try
             {
-                GridViewRow row = gdvComisiones.SelectedRow;
-                int ID = int.Parse(row.Cells[0].Text);
-                ComisionActual = ComLog.GetOne(ID);
+                this.GetComision();
                 ComisionActual.State = BusinessEntity.States.Deleted;
                 ComLog.Save(ComisionActual);
             }
@@ -101,11 +99,6 @@ namespace UI.Web
             }
         }
 
-        protected void gdvComisiones_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int ID = int.Parse(gdvComisiones.Rows[e.RowIndex].Cells[0].Text);
-            ComisionActual = ComLog.GetOne(ID);
-        }
 
         protected void gdvComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -116,9 +109,13 @@ namespace UI.Web
             }
         }
 
-        protected void gdvComisiones_SelectedIndexChanged(object sender, EventArgs e)
+        public void GetComision()
         {
-
+            GridViewRow row = gdvComisiones.SelectedRow;
+            int ID = int.Parse(row.Cells[0].Text);
+            ComisionActual = ComLog.GetOne(ID);
         }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace UI.Web
 {
 
 
-    public partial class ApplicationFrom
+    public partial class ApplicationForm
     {
 
         /// <summary>

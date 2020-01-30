@@ -10,7 +10,7 @@ using Util;
 
 namespace UI.Web
 {
-    public partial class UsuarioWeb : UI.Web.ApplicationFrom
+    public partial class UsuarioWeb : UI.Web.ApplicationForm
     {
         public Persona PersonaActual { get; set; }
         public Usuario UsuarioActual { get; set; }

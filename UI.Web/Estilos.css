@@ -38,12 +38,32 @@
     padding-right:10px;
 }
 
+.celda01 {
+    text-align: right;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding-right:20px;
+    padding-bottom:10px;
+    padding-top:10px;
+}
 
+.celda02 {
+    text-align: left;
+    margin-left:10px;
+}
+
+.tablaAlta {
+    width: 60%;
+    margin: 0 auto 0 auto;
+    text-align:center;
+    vertical-align:central;
+
+}
 
 .celda1 {
     text-align: right;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height:initial;
+
 }
 
 .celda2 {
