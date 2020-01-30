@@ -65,6 +65,12 @@ namespace UI.Web
             }
         }
 
+        public override void MapearDeDatos()
+        {
+            txtDescripcion.Text = EspActual.Descripcion;
+        }
+
+
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Especialidades.aspx");

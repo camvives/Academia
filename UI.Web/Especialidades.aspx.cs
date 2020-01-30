@@ -33,7 +33,10 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.GetEspecialidad();
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Especialidad"] = EspActual;
+            Server.Transfer("EspecialidadWeb.aspx", true);
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
