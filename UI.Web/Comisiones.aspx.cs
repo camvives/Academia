@@ -70,8 +70,6 @@ namespace UI.Web
             Response.Redirect("Comisiones.aspx");
         }
 
-        public void CompletarGrid() { 
-        }
 
         public List<DatosComisiones> ObtenerDatos()
         {

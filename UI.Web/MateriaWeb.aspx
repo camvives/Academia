@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="ComisionWeb.aspx.cs" Inherits="UI.Web.ComisionWeb" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="MateriaWeb.aspx.cs" Inherits="UI.Web.MateriaWeb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="text-align:center">
-        <h1>Comisión</h1>
+        <div style="text-align:center">
+        <h1>Materia</h1>
     </div>
     <br />
     <div>
@@ -33,20 +33,25 @@
             </tr>
             <tr>
                 <td class="celda01">
-                    Año Especialidad
+                    Horas Semanales
                 </td>
                 <td class="celda02">
-                    <asp:DropDownList ID="ddlAnio" runat="server"  Width="60px" Height="25px">
-                        <asp:ListItem>1</asp:ListItem>
-                        <asp:ListItem>2</asp:ListItem>
-                        <asp:ListItem>3</asp:ListItem>
-                        <asp:ListItem>4</asp:ListItem>
-                        <asp:ListItem>5</asp:ListItem>
-                        <asp:ListItem>6</asp:ListItem>
-                    </asp:DropDownList>
+                   <asp:TextBox ID="txtHsSem" runat="server" Width="100px"></asp:TextBox> 
+                    <br />
+                   <asp:RequiredFieldValidator ID="reqHsSem" runat="server" ControlToValidate="txtHsSem" ErrorMessage="Campo Requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
             </tr>
-            </table>
+            <tr>
+               <td class="celda01">
+                    Horas Totales
+                </td>
+                <td class="celda02">
+                   <asp:TextBox ID="txtHsTot" runat="server" Width="100px"></asp:TextBox> 
+                    <br />
+                   <asp:RequiredFieldValidator ID="reqHsTot" runat="server" ControlToValidate="txtHsTot" ErrorMessage="Campo Requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+         </table>
     </div>
     <br />
     <div style="text-align:center">
@@ -55,5 +60,4 @@
         <asp:Button runat="server" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_Click" />
         
     </div>
-
 </asp:Content>

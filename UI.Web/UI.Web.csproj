@@ -86,6 +86,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Materias.aspx" />
+    <Content Include="MateriaWeb.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
@@ -165,6 +166,13 @@
     </Compile>
     <Compile Include="Materias.aspx.designer.cs">
       <DependentUpon>Materias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MateriaWeb.aspx.cs">
+      <DependentUpon>MateriaWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MateriaWeb.aspx.designer.cs">
+      <DependentUpon>MateriaWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Planes.aspx.cs">
       <DependentUpon>Planes.aspx</DependentUpon>

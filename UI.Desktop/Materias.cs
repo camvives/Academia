@@ -73,17 +73,17 @@ namespace UI.Desktop
 
         public void EliminarMateria()
         {
-            //try
-            //{
+            try
+            {
                 int ID = (int)dgvMaterias.SelectedRows[0].Cells["ID"].Value;
                 Materia MatActual = MatLog.GetOne(ID);
                 MatActual.State = BusinessEntity.States.Deleted;
                 MatLog.Save(MatActual);
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Error al eliminar la materia, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Error al eliminar la materia, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TsbEliminar_Click(object sender, EventArgs e)
