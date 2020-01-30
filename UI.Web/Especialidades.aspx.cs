@@ -44,7 +44,8 @@ namespace UI.Web
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("EspecialidadWeb.aspx", true);
         }
 
         public void Listar()
@@ -59,8 +60,6 @@ namespace UI.Web
                 Response.Write("<script>alert('Error al recuperar la lista de especialidades')</script>");
                 Response.Redirect("~/Main.aspx");
             }
-
-
         }
 
         protected void gdvEspecialidades_RowDataBound(object sender, GridViewRowEventArgs e)

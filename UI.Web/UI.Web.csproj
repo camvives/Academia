@@ -72,6 +72,7 @@
     <Content Include="ComisionWeb.aspx" />
     <Content Include="Cursos.aspx" />
     <Content Include="Especialidades.aspx" />
+    <Content Include="EspecialidadWeb.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\Editar.png" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="Especialidades.aspx.designer.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EspecialidadWeb.aspx.cs">
+      <DependentUpon>EspecialidadWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EspecialidadWeb.aspx.designer.cs">
+      <DependentUpon>EspecialidadWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
