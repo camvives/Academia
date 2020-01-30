@@ -6,15 +6,9 @@
         .auto-style2 {
             margin-right: 0px;
         }
-        .auto-style3 {
-            width: 348px;
-        }
-        .auto-style4 {
-            width: 592px;
-        }
         .auto-style5 {
-            width: 43%;
-            height: 550px;
+            width: 400px;
+            height: 500px;
         }
         .auto-style6 {
             width: 348px;
@@ -53,51 +47,46 @@
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="formulario">
-    </div>
-
-    <div class="formulario">
-        <h1 class="auto-style11">USUARIOS</h1>
-        <h1 class="auto-style14">
+    <div style="text-align:center;">
+        <div>
+        <h1>USUARIOS</h1>
         <ce:confirmar ID="Confirmar1" runat="server" />
-        </h1>
-        <table class="auto-style12">
+        </div>
 
+    <div>
+        <table class="tablaUsr">
             <tr>
-
-                <td class="auto-style10">
-
-
-                    <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="55%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled" PageSize="8" OnPageIndexChanging="gridView_PageIndexChanging">
+                <td style="height:500px">
+                    <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="70%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled" PageSize="8" OnPageIndexChanging="gridView_PageIndexChanging">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-            <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" />
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Usuario" />
-                <asp:BoundField DataField="Email" HeaderText="Email" />
-                <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" />
-                <asp:CommandField ButtonType="Image" ShowDeleteButton="True" ShowSelectButton="True" ShowEditButton="True" DeleteImageUrl="~/Imagenes/error.png" EditImageUrl="~/Imagenes/lapiz.png" SelectImageUrl="~/Imagenes/informacion.png" >
-                <ControlStyle Height="30px" Width="30px" />
-                </asp:CommandField>
-            </Columns>
-            <EditRowStyle BackColor="#999999" />
-            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" VerticalAlign="Middle" />
-            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#E9E7E2" />
-            <SortedAscendingHeaderStyle BackColor="#506C8C" />
-            <SortedDescendingCellStyle BackColor="#FFFDF8" />
-            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                 <Columns>
+                    <asp:BoundField DataField="ID" HeaderText="ID" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                    <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                    <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Usuario" />
+                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                    <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" />
+                    <asp:CommandField ButtonType="Image" ShowDeleteButton="True" ShowSelectButton="True" ShowEditButton="True" DeleteImageUrl="~/Imagenes/error.png" EditImageUrl="~/Imagenes/lapiz.png" SelectImageUrl="~/Imagenes/informacion.png" >
+                    <ControlStyle Height="30px" Width="30px" />
+                    </asp:CommandField>
+                </Columns>
+                    <EditRowStyle BackColor="#999999" />
+                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" VerticalAlign="Middle" />
+                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-                    
-                 
-                    <table class="auto-style5">
+ 
+ 
+                    <table class="tablaDatos">
                         <tr>
-                            <td class="auto-style3">ID</td>
-                            <td class="auto-style4">
+                            <td>ID</td>
+                            <td>
                                 <asp:Label ID="lblID" runat="server" Text="ID"></asp:Label>
                             </td>
                         </tr>
@@ -189,7 +178,7 @@
         </table>
 
           <div>
-            
+            </div>
         </div>
     </div>
 </asp:Content>

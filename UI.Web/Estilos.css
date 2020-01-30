@@ -25,9 +25,20 @@
     margin-top: 50px;
 }
 
-.formulario{
-    text-align:center;
+.tablaUsr {
+    width: 100%;
+    margin-top: 5px;
 }
+
+.tablaDatos {
+    width: 30%;
+    height: 500px;
+    text-align:center;
+    margin-left:300px;
+    padding-right:10px;
+}
+
+
 
 .celda1 {
     text-align: right;
@@ -47,11 +58,9 @@
 }
 
 .tabla {
-    
-    margin-left:auto;
-    margin-right: auto;
+    width:100%;
+    height: 100%;
     text-align: center;
-    height: auto;
 }
 
 .fecha{
@@ -77,5 +86,6 @@
     text-align: center;
     margin-top:100px;
 }
+
 
 

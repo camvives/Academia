@@ -73,11 +73,14 @@
     <Content Include="Especialidades.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\Editar.png" />
+    <Content Include="Imagenes\Eliminar.png" />
     <Content Include="Imagenes\error.png" />
     <Content Include="Imagenes\fondo.png" />
     <Content Include="Imagenes\informacion.png" />
     <Content Include="Imagenes\lapiz.png" />
     <Content Include="Imagenes\Logo.png" />
+    <Content Include="Imagenes\nuevo.png" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Materias.aspx" />
@@ -85,7 +88,7 @@
     <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
     <Content Include="Usuarios.aspx" />
-    <Content Include="ConfirmaEliminar.ascx" />
+    <Content Include="MenuABM.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationForm.aspx.cs">
@@ -169,12 +172,12 @@
     <Compile Include="Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ConfirmaEliminar.ascx.cs">
-      <DependentUpon>ConfirmaEliminar.ascx</DependentUpon>
+    <Compile Include="MenuABM.ascx.cs">
+      <DependentUpon>MenuABM.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConfirmaEliminar.ascx.designer.cs">
-      <DependentUpon>ConfirmaEliminar.ascx</DependentUpon>
+    <Compile Include="MenuABM.ascx.designer.cs">
+      <DependentUpon>MenuABM.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

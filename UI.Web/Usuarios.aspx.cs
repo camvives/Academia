@@ -22,10 +22,10 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             this.CompletarGrid();
-            this.Confirmar1.Visible = false;
+            //this.Confirmar1.Visible = false;
             
-            //Event Bubblig
-            Confirmar1.ButtonClick += new EventHandler(Confirmar1_ButtonClick);
+            ////Event Bubblig
+            //Confirmar1.ButtonClick += new EventHandler(Confirmar1_ButtonClick);
         }
 
         #region METODOS
@@ -184,7 +184,7 @@ namespace UI.Web
 
         protected void gridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            this.Confirmar1.Visible = true;
+            //this.Confirmar1.Visible = true;
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)

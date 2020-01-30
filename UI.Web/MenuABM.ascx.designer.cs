@@ -7,36 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UI.Web {
-    
-    
-    public partial class WebUserControl1 {
-        
+namespace UI.Web
+{
+
+
+    public partial class WebUserControl2
+    {
+
         /// <summary>
-        /// lblMensaje control.
+        /// btnNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensaje;
-        
+        protected global::System.Web.UI.WebControls.ImageButton btnNuevo;
+
         /// <summary>
-        /// btnAceptar control.
+        /// btnEditar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
-        
+        protected global::System.Web.UI.WebControls.ImageButton btnEditar;
+
         /// <summary>
-        /// btnCancelar control.
+        /// btnEliminar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.ImageButton btnEliminar;
     }
 }
