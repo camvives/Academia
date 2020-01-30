@@ -115,7 +115,7 @@ namespace UI.Web
             }
             catch
             {
-                Response.Write("<script>alert('Error al eliminar al usuario')</script>");
+                Response.Write("<script>alert('Error al eliminar la comisión')</script>");
             }
         }
 

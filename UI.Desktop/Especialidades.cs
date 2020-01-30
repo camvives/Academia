@@ -43,18 +43,18 @@ namespace UI.Desktop
 
         public void EliminarEspecialidad()
         {
-            //try
-            //{
+            try
+            {
                 int ID = (int)dgvEspecialidades.SelectedRows[0].Cells["ID"].Value;
                 EspActual = EspLog.GetOne(ID);
                 EspActual.State = BusinessEntity.States.Deleted;
                 EspLog.Save(EspActual);
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Error al eliminar la especialidad, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
+            }
+            catch
+            {
+                MessageBox.Show("Error al eliminar la especialidad, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+}
 
 
         private void FormEspecialidades_Load(object sender, EventArgs e)
