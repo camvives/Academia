@@ -88,6 +88,7 @@
     <Content Include="Materias.aspx" />
     <Content Include="MateriaWeb.aspx" />
     <Content Include="Planes.aspx" />
+    <Content Include="PlanWeb.aspx" />
     <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
     <Content Include="Usuarios.aspx" />
@@ -180,6 +181,13 @@
     </Compile>
     <Compile Include="Planes.aspx.designer.cs">
       <DependentUpon>Planes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PlanWeb.aspx.cs">
+      <DependentUpon>PlanWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PlanWeb.aspx.designer.cs">
+      <DependentUpon>PlanWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioWeb.aspx.cs">
