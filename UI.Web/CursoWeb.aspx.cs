@@ -76,22 +76,7 @@ namespace UI.Web
 
         protected void ddlPlan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlPlan.Items.Remove("Plan");
-            int PlanId = int.Parse(ddlPlan.SelectedValue.ToString());
-
-            MateriaLogic materiaLogic = new MateriaLogic();
-            ddlMateria.DataTextField = "Descripcion";
-            ddlMateria.DataValueField = "ID";
-            ddlMateria.DataSource = materiaLogic.GetMateriasPlan(PlanId);
-            ddlMateria.DataBind();
-            
-
-            ComisionLogic comisionLog = new ComisionLogic();
-            ddlComision.DataTextField = "Descripcion";
-            ddlComision.DataValueField = "ID";
-            ddlComision.DataSource = comisionLog.GetComisionesMat(PlanId);
-            ddlComision.DataBind();
-
+            this.CargaMatCom();
         }
 
         public void CargaPlanes()
@@ -166,6 +151,37 @@ namespace UI.Web
             this.CursoActual.IDComision = int.Parse(this.ddlComision.SelectedValue);
             this.CursoActual.AnioCalendario = int.Parse(txtAnio.Text);
             this.CursoActual.Cupo = int.Parse(TxtCupo.Text);
+        }
+
+        public override void MapearDeDatos()
+        {
+            ddlCarrera.SelectedValue = this.Context.Items["Carrera"].ToString();
+            this.CargaPlanes();
+            ddlPlan.SelectedValue = this.Context.Items["Plan"].ToString();
+            this.CargaMatCom();
+            ddlComision.SelectedValue = CursoActual.IDComision.ToString();
+            ddlMateria.SelectedValue = CursoActual.IDMateria.ToString();
+            this.txtAnio.Text = CursoActual.AnioCalendario.ToString();
+            this.TxtCupo.Text = CursoActual.Cupo.ToString();
+        }
+
+        public void CargaMatCom()
+        {
+            ddlPlan.Items.Remove("Plan");
+            int PlanId = int.Parse(ddlPlan.SelectedValue.ToString());
+
+            MateriaLogic materiaLogic = new MateriaLogic();
+            ddlMateria.DataTextField = "Descripcion";
+            ddlMateria.DataValueField = "ID";
+            ddlMateria.DataSource = materiaLogic.GetMateriasPlan(PlanId);
+            ddlMateria.DataBind();
+
+
+            ComisionLogic comisionLog = new ComisionLogic();
+            ddlComision.DataTextField = "Descripcion";
+            ddlComision.DataValueField = "ID";
+            ddlComision.DataSource = comisionLog.GetComisionesMat(PlanId);
+            ddlComision.DataBind();
         }
     }
 }

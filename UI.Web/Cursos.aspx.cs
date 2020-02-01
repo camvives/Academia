@@ -46,7 +46,22 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.GetCurso();
+
+            MateriaLogic ml = new MateriaLogic();
+            Materia mat = ml.GetOne(CursoActual.IDMateria);
+            
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(mat.IDPlan);
+
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            this.Context.Items["Carrera"] = especialidad.ID;
+            this.Context.Items["Plan"] = plan.ID;
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Curso"] = CursoActual;
+            Server.Transfer("CursoWeb.aspx", true);
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
