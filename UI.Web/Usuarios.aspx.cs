@@ -17,11 +17,38 @@ namespace UI.Web
         public Usuario UsuarioActual { get; set; }
         public Persona PersonaActual { get; set; }
 
+        public UsuarioLogic UsrLog
+        {
+            get { return new UsuarioLogic(); }
+        }
+
         public Especialidad Especialidad { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             this.CompletarGrid();
+
+            //Event Bubblig
+            MenuABM.BtnNuevoClick += new EventHandler(BtnNuevo_ButtonClick);
+            MenuABM.BtnEliminarClick += new EventHandler(BtnEliminar_ButtonClick);
+            MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
+
+        }
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarUsuario();
+            Response.Redirect("~/Usuarios.aspx");
+        }
+
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #region METODOS
@@ -71,13 +98,13 @@ namespace UI.Web
         {
             try
             {
-                UsuarioLogic ul = new UsuarioLogic();
+                this.GetUsuario();
                 UsuarioActual.State = BusinessEntity.States.Deleted;
-                ul.Save(UsuarioActual, PersonaActual);
+                UsrLog.Save(UsuarioActual, PersonaActual);
             }
             catch
             {
-                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
+                Response.Write("<script>alert('Error al eliminar al usuario')</script>");
             }
         }
 
@@ -113,5 +140,13 @@ namespace UI.Web
         {
             Response.Redirect("~/Main.aspx");
         }
+
+        public void GetUsuario()
+        {
+            GridViewRow row = gdvUsuarios.SelectedRow;
+            int ID = int.Parse(row.Cells[0].Text);
+            (UsuarioActual, PersonaActual) = UsrLog.GetOne(ID);
+        }
+
     }
 }
