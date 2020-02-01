@@ -12,8 +12,21 @@
     <h1>Usuarios</h1>   
     </div>
     <br />
-    <uc1:MenuABM runat="server" ID="MenuABM" />
-
+    <div>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <uc1:MenuABM runat="server" ID="MenuABM" />
+            </td>
+            <td style="padding-left: 10px; padding-bottom:2px" >
+                <asp:ImageButton ID="btnInfo" runat="server" Height="26px" Width="80px" ImageUrl="~/Imagenes/Info.png" BorderStyle="Solid" BorderWidth="1px" OnClick="btnInfo_Click" />
+            </td>
+        </tr>
+    </table>
+    
+    
+  
     <div class="tabla">
        <asp:GridView ID="gdvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvUsuarios_RowDataBound">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

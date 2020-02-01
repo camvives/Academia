@@ -79,6 +79,7 @@
     <Content Include="Imagenes\Eliminar.png" />
     <Content Include="Imagenes\error.png" />
     <Content Include="Imagenes\fondo.png" />
+    <Content Include="Imagenes\Info.png" />
     <Content Include="Imagenes\informacion.png" />
     <Content Include="Imagenes\lapiz.png" />
     <Content Include="Imagenes\Logo.png" />
@@ -89,7 +90,7 @@
     <Content Include="MateriaWeb.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="PlanWeb.aspx" />
-    <Content Include="UsuariosDatos.aspx" />
+    <Content Include="UsuarioDatos.aspx" />
     <Content Include="UsuarioWeb.aspx" />
     <Content Include="Web.config" />
     <Content Include="Usuarios.aspx" />
@@ -191,12 +192,12 @@
       <DependentUpon>PlanWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsuariosDatos.aspx.cs">
-      <DependentUpon>UsuariosDatos.aspx</DependentUpon>
+    <Compile Include="UsuarioDatos.aspx.cs">
+      <DependentUpon>UsuarioDatos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UsuariosDatos.aspx.designer.cs">
-      <DependentUpon>UsuariosDatos.aspx</DependentUpon>
+    <Compile Include="UsuarioDatos.aspx.designer.cs">
+      <DependentUpon>UsuarioDatos.aspx</DependentUpon>
     </Compile>
     <Compile Include="UsuarioWeb.aspx.cs">
       <DependentUpon>UsuarioWeb.aspx</DependentUpon>

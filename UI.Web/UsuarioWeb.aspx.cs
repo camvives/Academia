@@ -150,54 +150,6 @@ namespace UI.Web
 
         }
 
-        public bool CamposVacios()
-        {
-            if (string.IsNullOrEmpty(txtApellido.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtNombre.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtTelefono.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtDireccion.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtEmail.Text))
-            {
-                return false;
-            }
-            else if ((ddlTipo.SelectedItem.ToString() == "Docente" || ddlTipo.SelectedItem.ToString() == "Alumno") && string.IsNullOrEmpty(txtLegajo.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtUsuario.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtClave.Text))
-            {
-                return false;
-            }
-            else if (string.IsNullOrEmpty(txtConfirmaClave.Text))
-            {
-                return false;
-            }
-            else if (ddlCarrera.SelectedIndex == -1)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
 
         public void CompletarFecha()
         {

@@ -37,7 +37,18 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.GetUsuario();
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            this.Context.Items["Carrera"] = especialidad.ID;
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Persona"] = PersonaActual;
+            Session["Usuario"] = UsuarioActual;
+            Server.Transfer("UsuarioWeb.aspx", true);
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
@@ -149,5 +160,21 @@ namespace UI.Web
             (UsuarioActual, PersonaActual) = UsrLog.GetOne(ID);
         }
 
+        protected void btnInfo_Click(object sender, ImageClickEventArgs e)
+        {
+            this.GetUsuario();
+            PlanLogic pl = new PlanLogic();
+            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+            this.Context.Items["Plan"] = plan.Descripcion;
+            this.Context.Items["Carrera"] = especialidad.Descripcion;
+            Session["Persona"] = PersonaActual;
+            Session["Usuario"] = UsuarioActual;
+            Server.Transfer("UsuarioDatos.aspx", true);
+
+        }
     }
 }
