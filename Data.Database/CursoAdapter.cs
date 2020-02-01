@@ -140,10 +140,10 @@ namespace Data.Database
                     cmdDelete.CommandText = "DELETE FROM alumnos_inscripciones WHERE id_curso = @id";
                     cmdDelete.ExecuteNonQuery();
 
-                    cmdDelete.CommandText = "DELETE FROM docentes_cursos WHERE id_curso = @id)";
+                    cmdDelete.CommandText = "DELETE FROM docentes_cursos WHERE id_curso = @id";
                     cmdDelete.ExecuteNonQuery();
 
-                    cmdDelete.CommandText = "DELETE FROM cursos WHERE id_comision=@id";
+                    cmdDelete.CommandText = "DELETE FROM cursos WHERE id_curso=@id";
                     cmdDelete.ExecuteNonQuery();
 
                     transaction.Commit();

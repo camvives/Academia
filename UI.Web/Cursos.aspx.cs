@@ -24,6 +24,8 @@ namespace UI.Web
 
         public Persona PersonaActual { get; set; }
 
+        public Curso CursoActual { get; set; }
+
         public CursoLogic CursoLog
         {
             get { return new CursoLogic(); }
@@ -49,8 +51,10 @@ namespace UI.Web
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.EliminarCurso();
+            Response.Redirect("Cursos.aspx");
         }
+
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
@@ -175,5 +179,28 @@ namespace UI.Web
         {
             Response.Redirect("~/Main.aspx");
         }
+
+        private void EliminarCurso()
+        {
+            try
+            {
+                this.GetCurso();
+                CursoActual.State = BusinessEntity.States.Deleted;
+                CursoLog.Save(CursoActual);
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al eliminar el curso')</script>");
+            }
+        }
+
+        public void GetCurso()
+        {
+            GridViewRow row = gdvCursos.SelectedRow;
+            int ID = int.Parse(row.Cells[0].Text);
+            CursoActual = CursoLog.GetOne(ID);
+        }
+
+
     }
 }
