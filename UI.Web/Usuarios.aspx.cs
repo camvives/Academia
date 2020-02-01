@@ -48,7 +48,8 @@ namespace UI.Web
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("UsuarioWeb.aspx", true);
         }
 
         #region METODOS

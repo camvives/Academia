@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UI.Web {
-    
-    
-    public partial class UsuarioWeb {
-        
+namespace UI.Web
+{
+
+
+    public partial class UsuarioWeb
+    {
+
         /// <summary>
         /// ddlTipo control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
-        
+
         /// <summary>
         /// txtNombre control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
-        
+
         /// <summary>
         /// reqNom control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNom;
-        
+
         /// <summary>
         /// txtApellido control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
-        
+
         /// <summary>
         /// reqAp control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqAp;
-        
+
         /// <summary>
         /// txtDireccion control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
-        
+
         /// <summary>
         /// reqDir control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDir;
-        
+
         /// <summary>
         /// txtEmail control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        
+
         /// <summary>
         /// valEmail control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator valEmail;
-        
+
         /// <summary>
         /// reqEmail control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqEmail;
-        
+
         /// <summary>
         /// txtTelefono control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
-        
+
         /// <summary>
         /// reqTel control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTel;
-        
+
         /// <summary>
         /// ddlDia control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDia;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// ddlMes control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMes;
-        
+
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// ddlAnio control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAnio;
-        
+
         /// <summary>
         /// valFechas control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator valFechas;
-        
+
         /// <summary>
         /// txtFecha control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
-        
+
         /// <summary>
         /// txtLegajo control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLegajo;
-        
+
         /// <summary>
         /// reqLegajo control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator reqLegajo;
-        
+
         /// <summary>
         /// reqLegajo1 control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLegajo1;
-        
+
         /// <summary>
         /// ddlCarrera control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCarrera;
-        
+
         /// <summary>
         /// ddlPlan control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPlan;
-        
+
         /// <summary>
         /// reqCarrera control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator reqCarrera;
-        
+
         /// <summary>
         /// reqCarrera1 control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCarrera1;
-        
+
         /// <summary>
         /// txtUsuario control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUsuario;
-        
+
         /// <summary>
         /// reqUser control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqUser;
-        
+
         /// <summary>
         /// txtClave control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtClave;
-        
+
         /// <summary>
         /// valClave control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator valClave;
-        
+
         /// <summary>
         /// reqClave control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqClave;
-        
+
         /// <summary>
         /// txtConfirmaClave control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmaClave;
-        
+
         /// <summary>
         /// valClaves control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator valClaves;
-        
+
         /// <summary>
         /// reqCClave control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCClave;
-        
+
         /// <summary>
         /// chkHabilitado control.
         /// </summary>
@@ -326,23 +328,23 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
-        
+
         /// <summary>
-        /// lblError control.
+        /// btnSalir control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-        
+        protected global::System.Web.UI.WebControls.Button btnSalir;
+
         /// <summary>
-        /// btnAceptar control.
+        /// btnGuardar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

@@ -198,35 +198,6 @@ namespace UI.Web
             }
         }
 
-        public bool Validar()
-        {
-
-            if (ddlTipo.SelectedIndex == -1)
-            {
-                this.lblError.Text = "Debe seleccionar un tipo de usuario";
-                this.lblError.Visible = true;
-                System.Threading.Thread.Sleep(5000);
-                this.lblError.Visible = false;
-
-                return false;
-            }
-            else if (!this.CamposVacios())
-            {
-                this.lblError.Text = "Debe completar todos los campos";
-                this.lblError.Visible = true;
-
-                return false;
-            }
-            else if (!(Validaciones.EmailValido(txtEmail.Text)))
-            {
-                this.lblError.Text = "Formato de mail inválido";
-                this.lblError.Visible = true;
-
-                return false;
-            }
-
-            return true;
-        }
 
         public void CompletarFecha()
         {
@@ -327,23 +298,22 @@ namespace UI.Web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar() && Page.IsValid)
+            if (Page.IsValid)
             {
                 this.MapearADatos();
-                UsuarioLogic usuarioLogic = new UsuarioLogic();
-                usuarioLogic.Save(UsuarioActual, PersonaActual);
+                UsuarioLogic ul = new UsuarioLogic();
+                ul.Save(UsuarioActual, PersonaActual);
 
                 if (this.Modo == ModoForm.Modificacion)
                 {
-                    this.lblError.Text = "Usuario Actualizado";  
+                    Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
                 }
-                else if(this.Modo == ModoForm.Alta)
+                else if (this.Modo == ModoForm.Alta)
                 {
-                    this.lblError.Text = "Usuario Registrado";
+                    Response.Write("<script>alert('El usuario ha sido registrado')</script>");
                 }
-                this.lblError.Visible = true;
-                this.btnAceptar.Enabled = false;
-                Response.AddHeader("REFRESH", "2;URL=Usuarios.aspx");
+
+                Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
 
             }
         }
@@ -395,5 +365,32 @@ namespace UI.Web
         }
 
         #endregion
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Usuarios.aspx");
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                this.MapearADatos();
+                UsuarioLogic ul = new UsuarioLogic();
+                ul.Save(UsuarioActual, PersonaActual);
+
+                if (this.Modo == ModoForm.Modificacion)
+                {
+                    Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
+                }
+                else if (this.Modo == ModoForm.Alta)
+                {
+                    Response.Write("<script>alert('El usuario ha sido registrado')</script>");
+                }
+
+                Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
+
+            }
+        }
     }
 }
