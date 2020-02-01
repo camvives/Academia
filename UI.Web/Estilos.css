@@ -38,6 +38,12 @@
     padding-right:10px;
 }
 
+.columna1 {
+    text-align: left;
+    margin-left: 10px;
+    width: 430px;
+}
+
 .celda01 {
     text-align: right;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

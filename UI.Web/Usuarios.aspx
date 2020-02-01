@@ -1,74 +1,29 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" EnableEventValidation="false" %>
+
+<%@ Register Src="~/MenuABM.ascx" TagPrefix="uc1" TagName="MenuABM" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<%@ Register Src="~/ConfirmaEliminar.ascx" TagPrefix="ce" TagName="confirmar" %>
-    <style type="text/css">
-        .auto-style2 {
-            margin-right: 0px;
-        }
-        .auto-style5 {
-            width: 400px;
-            height: 500px;
-        }
-        .auto-style6 {
-            width: 348px;
-            height: 32px;
-        }
-        .auto-style7 {
-            width: 592px;
-            height: 32px;
-        }
-        .auto-style8 {
-            width: 348px;
-            height: 31px;
-        }
-        .auto-style9 {
-            width: 592px;
-            height: 31px;
-        }
-        .auto-style10 {
-            height: 545px;
-        }
-        .auto-style11 {
-            height: 0px;
-            margin-top: 10px;
-            margin-bottom: 0px;
-        }
-        .auto-style12 {
-            width: 100%;
-            height: 561px;
-            margin-top: 15px;
-        }
-        .auto-style14 {
-            height: 110px;
-            margin-top: 14px;
-            margin-bottom: 0px;
-        }
-        </style>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="text-align:center;">
-        <div>
-        <h1>USUARIOS</h1>
-        <ce:confirmar ID="Confirmar1" runat="server" />
-        </div>
+     <div class="tabla">
+    <h1>Usuarios</h1>   
+    </div>
+    <br />
+    <uc1:MenuABM runat="server" ID="MenuABM" />
 
-    <div>
-        <table class="tablaUsr">
-            <tr>
-                <td style="height:500px">
-                    <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="70%" AllowPaging="True" CellPadding="4" CssClass="auto-style2" ForeColor="#333333" GridLines="None" HorizontalAlign="Left" SelectedIndex="0" OnLoad="gridView_SelectedIndexChanged" OnSelectedIndexChanged="gridView_SelectedIndexChanged" OnRowEditing="gridView_RowEditing" OnRowDeleting="gridView_RowDeleting" ViewStateMode="Enabled" PageSize="8" OnPageIndexChanging="gridView_PageIndexChanging">
-                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+    <div class="tabla">
+       <asp:GridView ID="gdvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvUsuarios_RowDataBound">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                  <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ID" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                    <asp:BoundField DataField="NombreUsuario" HeaderText="Nombre de Usuario" />
+                    <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario" />
                     <asp:BoundField DataField="Email" HeaderText="Email" />
-                    <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" />
-                    <asp:CommandField ButtonType="Image" ShowDeleteButton="True" ShowSelectButton="True" ShowEditButton="True" DeleteImageUrl="~/Imagenes/error.png" EditImageUrl="~/Imagenes/lapiz.png" SelectImageUrl="~/Imagenes/informacion.png" >
-                    <ControlStyle Height="30px" Width="30px" />
-                    </asp:CommandField>
+                    <asp:CheckBoxField DataField="Habilitado" HeaderText ="Habilitado" />
                 </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -81,104 +36,10 @@
                     <SortedDescendingCellStyle BackColor="#FFFDF8" />
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
- 
- 
-                    <table class="tablaDatos">
-                        <tr>
-                            <td>ID</td>
-                            <td>
-                                <asp:Label ID="lblID" runat="server" Text="ID"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Nombre de Usuario</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblNombreUsuario" runat="server" Text="NombreUsuario"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Habilitado</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblHabilitado" runat="server" Text="Sí"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">&nbsp;</td>
-                            <td class="auto-style4">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Nombre</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblNombre" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Apellido</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblApellido" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Direccion</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblDireccion" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Email</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblEmail" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Teléfono</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblTelefono" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Fecha de Nacimiento</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblFechaNac" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style6">Tipo</td>
-                            <td class="auto-style7">
-                                <asp:Label ID="lblTipo" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Legajo</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblLegajo" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style3">Carrera</td>
-                            <td class="auto-style4">
-                                <asp:Label ID="lblCarrera" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style8">Plan</td>
-                            <td class="auto-style9">
-                                <asp:Label ID="lblPlan" runat="server" Text="Label"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="auto-style8">&nbsp;</td>
-                            <td class="auto-style9">
-                                &nbsp;</td>
-                        </tr>
-                    </table>
-                 
-                </td>
-            </tr>
-        </table>
-
-          <div>
-            </div>
-        </div>
+    </div>
+    <br />
+    <div style="text-align:center;">
+        <asp:Button ID="btnSalir" runat="server" Text="Salir" OnClick="btnSalir_Click" />
     </div>
 </asp:Content>
+<%@ Register src="MenuABM.ascx" tagname="MenuABM" tagprefix="uc2" %>

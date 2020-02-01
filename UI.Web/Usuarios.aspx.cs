@@ -22,10 +22,6 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             this.CompletarGrid();
-            //this.Confirmar1.Visible = false;
-            
-            ////Event Bubblig
-            //Confirmar1.ButtonClick += new EventHandler(Confirmar1_ButtonClick);
         }
 
         #region METODOS
@@ -52,88 +48,10 @@ namespace UI.Web
                     dt.Rows.Add(usr.b.ID, usr.a.Nombre, usr.a.Apellido, usr.b.NombreUsuario, usr.a.Email, usr.b.Habilitado);
                 }
 
-                gridView.DataSource = dt;
-                gridView.DataBind();
+                gdvUsuarios.DataSource = dt;
+                gdvUsuarios.DataBind();
             }
             catch
-            {
-                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
-            }
-
-        }
-
-        public void MostrarDatos()
-        {
-            try
-            {
-                UsuarioLogic ul = new UsuarioLogic();
-                int ID = int.Parse(gridView.SelectedRow.Cells[0].Text);
-                (UsuarioActual, PersonaActual) = ul.GetOne(ID);
-
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
-
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad = el.GetOne(plan.IDEspecialidad);
-
-
-                #region Validaciones
-                string hab;
-                if (UsuarioActual.Habilitado == true)
-                {
-                    hab = "Sí";
-                }
-                else
-                {
-                    hab = "No";
-                }
-
-                string plandesc;
-                if (plan.Descripcion is null)
-                {
-                    plandesc = "-";
-                }
-                else
-                {
-                    plandesc = plan.Descripcion;
-                }
-
-                string espdesc;
-                if (Especialidad.Descripcion is null)
-                {
-                    espdesc = "-";
-                }
-                else
-                {
-                    espdesc = Especialidad.Descripcion;
-                }
-
-                string leg;
-                if (this.PersonaActual.Legajo == 0)
-                {
-                    leg = "-";
-                }
-                else
-                {
-                    leg = this.PersonaActual.Legajo.ToString();
-                }
-                #endregion
-
-                this.lblID.Text = UsuarioActual.ID.ToString();
-                this.lblNombreUsuario.Text = UsuarioActual.NombreUsuario;
-                this.lblHabilitado.Text = hab;
-                this.lblNombre.Text = this.PersonaActual.Nombre;
-                this.lblApellido.Text = this.PersonaActual.Apellido;
-                this.lblDireccion.Text = PersonaActual.Direccion;
-                this.lblEmail.Text = PersonaActual.Email;
-                this.lblTelefono.Text = PersonaActual.Telefono;
-                this.lblFechaNac.Text = PersonaActual.FechaNacimiento.ToString("dd/MM/yyyy");
-                this.lblTipo.Text = PersonaActual.TipoPersona.ToString();
-                this.lblLegajo.Text = leg;
-                this.lblCarrera.Text = espdesc;
-                this.lblPlan.Text = plandesc;
-            }
-            catch 
             {
                 Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
             }
@@ -171,21 +89,7 @@ namespace UI.Web
             Response.Redirect("Usuarios.aspx");
         }
 
-        protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.MostrarDatos();
-        }
 
-        protected void gridView_RowEditing(object sender, GridViewEditEventArgs e)
-        {  
-            this.MapearDatos();
-            Response.Redirect("UsuarioWeb.aspx");
-        }
-
-        protected void gridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            //this.Confirmar1.Visible = true;
-        }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -194,18 +98,20 @@ namespace UI.Web
             Response.Redirect("UsuarioWeb.aspx");
         }
 
-        protected void gridView_PageIndexChanged(object sender, EventArgs e)
-        {
-            
 
+
+        protected void gdvUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvUsuarios, "Select$" + e.Row.RowIndex);
+                e.Row.ToolTip = "Click para seleccionar fila";
+            }
         }
 
-        protected void gridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void btnSalir_Click(object sender, EventArgs e)
         {
-            this.CompletarGrid();
-            gridView.PageIndex = e.NewPageIndex;
-            gridView.DataBind();
+            Response.Redirect("~/Main.aspx");
         }
     }
-
 }

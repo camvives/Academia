@@ -12,7 +12,7 @@
                 <td class="celda01">
                     Descripción
                 </td>
-                <td class="celda02">
+                <td class="columna1">
                     <asp:TextBox ID="txtDescripcion" runat="server" Width="260px"></asp:TextBox> 
                     <br />
                     <asp:RequiredFieldValidator ID="reqDescripcion" runat="server" ControlToValidate="txtDescripcion" ErrorMessage="Campo Requerido" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -22,7 +22,7 @@
                 <td class="celda01">
                     Carrera
                 </td>  
-                <td class="celda02">
+                <td class="columna1">
                      <asp:DropDownList ID="ddlCarrera" runat="server"  Width="260px" AutoPostBack="True"  Height="25px" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged">
                     </asp:DropDownList>
                     <br />
