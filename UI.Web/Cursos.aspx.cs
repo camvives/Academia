@@ -31,7 +31,31 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Listar();
+            if (!IsPostBack)
+            {
+                this.Listar();
+            }
+
+            //Event Bubblig
+            MenuABM.BtnNuevoClick += new EventHandler(BtnNuevo_ButtonClick);
+            MenuABM.BtnEliminarClick += new EventHandler(BtnEliminar_ButtonClick);
+            MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
+        }
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("CursoWeb.aspx", true);
         }
 
         public List<DatosCursos> ObtenerDatosUsr()

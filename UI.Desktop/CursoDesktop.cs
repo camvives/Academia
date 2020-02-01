@@ -24,15 +24,15 @@ namespace UI.Desktop
             this.Modo = modo;
             this.CursoActual = cur;
 
-            //try
-            //{
+            try
+            {
                 this.MapearDeDatos();
-            //}
-            //catch
-            //{
-                //MessageBox.Show("Error al recuperar datos del curso", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //this.Close();
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Error al recuperar datos del curso", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
 
         }
 
@@ -42,8 +42,7 @@ namespace UI.Desktop
             EspecialidadLogic especialidad = new EspecialidadLogic();
             cmbCarrera.DataSource = especialidad.GetAll();
             cmbCarrera.DisplayMember = "Descripcion";
-            cmbCarrera.ValueMember = "ID";
-           
+            cmbCarrera.ValueMember = "ID";         
 
         }
 
