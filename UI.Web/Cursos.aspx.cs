@@ -216,6 +216,11 @@ namespace UI.Web
             CursoActual = CursoLog.GetOne(ID);
         }
 
-
+        protected void btnDocentes_Click(object sender, ImageClickEventArgs e)
+        {
+            this.GetCurso();
+            Session["Curso"] = CursoActual;
+            Response.Redirect("~/Docentes_Curso.aspx");
+        }
     }
 }

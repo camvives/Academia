@@ -8,8 +8,20 @@
         <div class="tabla">
     <h1>Cursos</h1>   
     </div>
-    <br />
-    <uc1:MenuABM runat="server" ID="MenuABM" />
+        <br />
+    <div>
+   
+    <table>
+        <tr>
+            <td>
+                <uc1:MenuABM runat="server" ID="MenuABM" />
+            </td>
+            <td style="padding-left: 10px; padding-bottom:2px" >
+                <asp:ImageButton ID="btnDocentes" runat="server" Height="26px" Width="130px" ImageUrl="~/Imagenes/Docentes.png" BorderStyle="Solid" BorderWidth="1px" OnClick="btnDocentes_Click" />
+            </td>
+        </tr>
+    </table>
+    </div>
     <div class="tabla">
        <asp:GridView ID="gdvCursos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvComisiones_RowDataBound" OnPageIndexChanging="gdvComisiones_PageIndexChanging" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

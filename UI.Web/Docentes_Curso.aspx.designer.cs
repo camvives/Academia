@@ -11,8 +11,17 @@ namespace UI.Web
 {
 
 
-    public partial class Cursos
+    public partial class Docentes_Curso
     {
+
+        /// <summary>
+        /// lblCurso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCurso;
 
         /// <summary>
         /// MenuABM control.
@@ -24,22 +33,13 @@ namespace UI.Web
         protected global::UI.Web.WebUserControl2 MenuABM;
 
         /// <summary>
-        /// btnDocentes control.
+        /// gdvDocCur control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnDocentes;
-
-        /// <summary>
-        /// gdvCursos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gdvCursos;
+        protected global::System.Web.UI.WebControls.GridView gdvDocCur;
 
         /// <summary>
         /// btnSalir control.

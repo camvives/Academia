@@ -1,42 +1,23 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" EnableEventValidation="false" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Docentes_Curso.aspx.cs" Inherits="UI.Web.Docentes_Curso" EnableEventValidation="false" %>
 <%@ Register Src="~/MenuABM.ascx" TagPrefix="uc1" TagName="MenuABM" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div class="tabla">
-    <h1>Usuarios</h1>   
+       <div class="tabla">
+       <h1><asp:Label ID="lblCurso" runat="server" Text="Label"></asp:Label></h1>
     </div>
     <br />
-    <div>
-   
-    <table>
-        <tr>
-            <td>
-                <uc1:MenuABM runat="server" ID="MenuABM" />
-            </td>
-            <td style="padding-left: 10px; padding-bottom:2px" >
-                <asp:ImageButton ID="btnInfo" runat="server" Height="26px" Width="80px" ImageUrl="~/Imagenes/Info.png" BorderStyle="Solid" BorderWidth="1px" OnClick="btnInfo_Click" />
-            </td>
-        </tr>
-    </table>
-    </div>
-    
-  
+    <uc1:MenuABM runat="server" ID="MenuABM" />
     <div class="tabla">
-       <asp:GridView ID="gdvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvUsuarios_RowDataBound">
+       <asp:GridView ID="gdvDocCur" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnPageIndexChanging="gdvDocCur_PageIndexChanging" OnRowDataBound="gdvDocCur_RowDataBound">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                  <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ID" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                    <asp:BoundField DataField="NombreUsuario" HeaderText="Usuario" />
-                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                    <asp:CheckBoxField DataField="Habilitado" HeaderText ="Habilitado" />
+                    <asp:BoundField DataField="Legajo" HeaderText="Legajo" />
+                    <asp:BoundField DataField="Cargo" HeaderText="Cargo" />
                 </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -55,4 +36,3 @@
         <asp:Button ID="btnSalir" runat="server" Text="Salir" OnClick="btnSalir_Click" />
     </div>
 </asp:Content>
-<%@ Register src="MenuABM.ascx" tagname="MenuABM" tagprefix="uc2" %>

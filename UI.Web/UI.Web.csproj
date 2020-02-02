@@ -72,10 +72,12 @@
     <Content Include="ComisionWeb.aspx" />
     <Content Include="Cursos.aspx" />
     <Content Include="CursoWeb.aspx" />
+    <Content Include="Docentes_Curso.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="EspecialidadWeb.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\Docentes.png" />
     <Content Include="Imagenes\Editar.png" />
     <Content Include="Imagenes\Eliminar.png" />
     <Content Include="Imagenes\error.png" />
@@ -132,6 +134,13 @@
     </Compile>
     <Compile Include="CursoWeb.aspx.designer.cs">
       <DependentUpon>CursoWeb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Docentes_Curso.aspx.cs">
+      <DependentUpon>Docentes_Curso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docentes_Curso.aspx.designer.cs">
+      <DependentUpon>Docentes_Curso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Especialidades.aspx.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
