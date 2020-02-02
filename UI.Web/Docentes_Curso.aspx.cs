@@ -24,6 +24,8 @@ namespace UI.Web
         }
         public Docente Doc { get; set; }
 
+        public Docentes_Cursos DocenteActual {get; set;}
+
         public Docente_CursoLogic DocCursoLog
         {
             get { return new Docente_CursoLogic(); }
@@ -54,7 +56,8 @@ namespace UI.Web
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.EliminarDocente();
+            Response.Redirect("Docentes_Curso.aspx");
         }
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
@@ -106,6 +109,27 @@ namespace UI.Web
                 e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvDocCur, "Select$" + e.Row.RowIndex);
                 e.Row.ToolTip = "Click para seleccionar fila";
             }
+        }
+
+        public void EliminarDocente()
+        {
+            try
+            {
+                this.GetDocente();
+                DocenteActual.State = BusinessEntity.States.Deleted;
+                DocCursoLog.Save(DocenteActual);
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al eliminar la comisión')</script>");
+            }
+        }
+
+        public void GetDocente()
+        {
+            GridViewRow row = gdvDocCur.SelectedRow;
+            int ID = int.Parse(row.Cells[0].Text);
+            DocenteActual = DocCursoLog.GetOne(ID);
         }
     }
 }
