@@ -17,6 +17,7 @@ namespace UI.Web
         protected new void Page_Load(object sender, EventArgs e)
         {
             CursoActual = (Curso)Session["Curso"];
+            Docentes_CursosActual = (Docentes_Cursos)Session["Docente"];
 
             if (!IsPostBack)
             {
@@ -25,6 +26,7 @@ namespace UI.Web
 
                 if (this.Modo == ModoForm.Modificacion)
                 {
+                    
                     MapearDeDatos();
                 }
             }
@@ -91,6 +93,13 @@ namespace UI.Web
             this.Docentes_CursosActual.IDCurso = this.CursoActual.ID;
             this.Docentes_CursosActual.IDDocente = ID;
             this.Docentes_CursosActual.Cargo = this.txtCargo.Text;
+        }
+
+        public override void MapearDeDatos()
+        {
+            ddlDocente.SelectedValue = Docentes_CursosActual.IDDocente.ToString();
+            this.txtCargo.Text = Docentes_CursosActual.Cargo;
+ 
         }
     }
 }

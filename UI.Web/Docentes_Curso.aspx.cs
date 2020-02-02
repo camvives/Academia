@@ -51,7 +51,12 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            this.GetDocente();
+            Session["Docente"] = DocenteActual;
+            Server.Transfer("Docente_CursoWeb.aspx", true);
+
+
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
