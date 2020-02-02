@@ -59,7 +59,8 @@ namespace UI.Web
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("Docente_CursoWeb.aspx", true);
         }
 
         public List<Docente> ObtenerDatos()

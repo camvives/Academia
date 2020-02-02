@@ -73,6 +73,7 @@
     <Content Include="Cursos.aspx" />
     <Content Include="CursoWeb.aspx" />
     <Content Include="Docentes_Curso.aspx" />
+    <Content Include="Docente_CursoWeb.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="EspecialidadWeb.aspx" />
     <Content Include="Estilos.css" />
@@ -141,6 +142,13 @@
     </Compile>
     <Compile Include="Docentes_Curso.aspx.designer.cs">
       <DependentUpon>Docentes_Curso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Docente_CursoWeb.aspx.cs">
+      <DependentUpon>Docente_CursoWeb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Docente_CursoWeb.aspx.designer.cs">
+      <DependentUpon>Docente_CursoWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Especialidades.aspx.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
