@@ -112,6 +112,10 @@ namespace UI.Web
             {
                 Response.Redirect("~/EstadoAcademico.aspx");
             }
+            else if(e.Item == mnuPrincipal.FindItem("ConsultaCur"))
+            {
+                Response.Redirect("~/Inscriptos.aspx");
+            }
 
         }
     }

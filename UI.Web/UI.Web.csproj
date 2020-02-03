@@ -656,6 +656,7 @@
     <Content Include="Imagenes\lapiz.png" />
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\nuevo.png" />
+    <Content Include="Inscriptos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Materias.aspx" />
@@ -742,6 +743,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inscriptos.aspx.cs">
+      <DependentUpon>Inscriptos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inscriptos.aspx.designer.cs">
+      <DependentUpon>Inscriptos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
