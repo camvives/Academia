@@ -103,6 +103,12 @@ namespace UI.Web
                 Context.Items["Modo"] = ModoForm.Consulta;
                 Server.Transfer("~/UsuarioWeb.aspx", true);
             }
+            else if(e.Item == mnuPrincipal.FindItem("Certificado"))
+            {
+                Session["ID"] = PersonaActual.ID;
+                Response.Redirect("~/Reporte.aspx");
+
+            }
 
         }
     }
