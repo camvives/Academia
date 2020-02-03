@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Business.Entities;
 using Business.Logic;
 
-namespace UI.Desktop
+namespace UI.Web
 {
-    public partial class formEstadoAcademico : Form
+    public partial class EstadoAcademico : System.Web.UI.Page
     {
+
         public Persona PersonaActual { get; set; }
 
         public Alumno_InscripcionLogic AILog
@@ -31,16 +29,11 @@ namespace UI.Desktop
             public string Nota { get; set; }
         }
 
-        public formEstadoAcademico()
+        protected void Page_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
-            this.dgvEstadoAcademico.AutoGenerateColumns = false;
-            this.dgvEstadoAcademico.Columns["Nota"].ValueType = typeof(string);
-        }
-
-        public formEstadoAcademico(Persona per) : this()
-        {
-            PersonaActual = per;
+            PersonaActual = (Persona)Session["Persona"];
+            gdvEstAcademico.DataSource = this.ObtenerDatos();
+            gdvEstAcademico.DataBind();
         }
 
         public List<DatosInscripciones> ObtenerDatos()
@@ -53,15 +46,15 @@ namespace UI.Desktop
                 DatosInscripciones datosInscripcion = new DatosInscripciones();
                 datosInscripcion.ID = ai.ID;
                 datosInscripcion.Condicion = ai.Condicion;
-                if(ai.Nota == 0)
+                if (ai.Nota == 0)
                 {
                     datosInscripcion.Nota = "-";
                 }
                 else
                 {
                     datosInscripcion.Nota = ai.Nota.ToString();
-                }             
-                
+                }
+
                 CursoLogic cl = new CursoLogic();
                 Curso curso = cl.GetOne(ai.IDCurso);
                 datosInscripcion.AnioCursado = curso.AnioCalendario;
@@ -73,31 +66,17 @@ namespace UI.Desktop
                 ComisionLogic cml = new ComisionLogic();
                 Comision comision = cml.GetOne(curso.IDComision);
                 datosInscripcion.DescComision = comision.Descripcion;
-                
-               datosInscripciones.Add(datosInscripcion);
+
+                datosInscripciones.Add(datosInscripcion);
             }
 
             return datosInscripciones;
         }
 
-        private void FormEstadoAcademico_Load(object sender, EventArgs e)
+        protected void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Listar();
-        }
-
-        public void Listar()
-        {
-            this.dgvEstadoAcademico.DataSource = this.ObtenerDatos();
-        }
-
-        private void BtnActualizar_Click(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
-        private void BtnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            Session["Persona"] = PersonaActual;
+            Response.Redirect("~/Main.aspx");
         }
     }
 }

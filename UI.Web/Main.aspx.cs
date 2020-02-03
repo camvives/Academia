@@ -107,7 +107,10 @@ namespace UI.Web
             {
                 Session["ID"] = PersonaActual.ID;
                 Response.Redirect("~/Reporte.aspx");
-
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Estado"))
+            {
+                Response.Redirect("~/EstadoAcademico.aspx");
             }
 
         }

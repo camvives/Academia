@@ -126,7 +126,6 @@
             this.dgvEstadoAcademico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstadoAcademico.Size = new System.Drawing.Size(794, 390);
             this.dgvEstadoAcademico.TabIndex = 1;
-            this.dgvEstadoAcademico.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEstadoAcademico_CellContentClick);
             // 
             // btnActualizar
             // 
