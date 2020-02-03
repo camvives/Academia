@@ -42,8 +42,9 @@ namespace UI.Web
         {
             if (Page.IsValid)
             {
-                (_, PersonaActual) = this.BuscarUsuario();
-                Session.Add("PersonaActual", PersonaActual);                
+                (UsuarioActual, PersonaActual) = this.BuscarUsuario();
+                Session.Add("Usuario", UsuarioActual);
+                Session.Add("Persona", PersonaActual);                
                 Response.Redirect("~/Main.aspx");
             }       
         }

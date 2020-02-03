@@ -12,11 +12,14 @@ namespace UI.Web
     public partial class Main1 : System.Web.UI.Page
     {
         public Persona PersonaActual { get; set; }
+        public Usuario UsuarioActual { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            PersonaActual = (Persona)Session["Persona"];
+            UsuarioActual = (Usuario)Session["Usuario"];
             if (!IsPostBack)
-            {
-                PersonaActual = (Persona)Session["PersonaActual"];
+            {          
                 this.lblNombre.Text = PersonaActual.Nombre + "!";
                 this.MostrarMenu();
             }
@@ -87,6 +90,18 @@ namespace UI.Web
             else if (e.Item == mnuPrincipal.FindItem("Comisiones"))
             {
                 Response.Redirect("~/Comisiones.aspx");
+            }
+            else if (e.Item == mnuPrincipal.FindItem("Datos"))
+            {
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+                this.Context.Items["Carrera"] = especialidad.ID;
+                Context.Items["Modo"] = ModoForm.Consulta;
+                Server.Transfer("~/UsuarioWeb.aspx", true);
             }
 
         }

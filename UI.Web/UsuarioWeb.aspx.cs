@@ -15,12 +15,15 @@ namespace UI.Web
         public Persona PersonaActual { get; set; }
         public Usuario UsuarioActual { get; set; }
 
+        public bool Admin { get; set; }
+
 
         protected new void Page_Load(object sender, EventArgs e)
         {
 
             PersonaActual = (Persona)Session["Persona"];
             UsuarioActual = (Usuario)Session["Usuario"];
+            
 
             if (!IsPostBack)
             {
@@ -31,7 +34,29 @@ namespace UI.Web
                 if (this.Modo == ModoForm.Modificacion)
                 {                 
                     MapearDeDatos();
-                }     
+                    Admin = true;
+                }
+                if (this.Modo == ModoForm.Consulta)
+                {
+                    MapearDeDatos();
+                    this.txtApellido.Enabled = false;
+                    this.txtNombre.Enabled = false;
+                    this.ddlTipo.Enabled = false;
+                    this.txtDireccion.Enabled = false;
+                    this.txtEmail.Enabled = false;
+                    this.txtLegajo.Enabled = false;
+                    this.ddlCarrera.Enabled = false;
+                    this.ddlPlan.Enabled = false;
+                    this.ddlDia.Enabled = false;
+                    this.ddlMes.Enabled = false;
+                    this.ddlAnio.Enabled = false;
+                    this.txtTelefono.Enabled = false;
+                    this.chkHabilitado.Enabled = false;
+                    this.txtUsuario.Enabled = false;
+                    this.btnGuardar.Text = "Modificar";
+                    Admin = false;
+                }
+
             }
 
         }
@@ -47,7 +72,7 @@ namespace UI.Web
                 ddlCarrera.DataSource = especialidad.GetAll();
                 ddlCarrera.DataBind();
 
-                if (this.Modo != ModoForm.Modificacion)
+                if (this.Modo == ModoForm.Alta)
                 {
                     ddlCarrera.Items.Insert(0, "Seleccionar Carrera");
                     if (!(ddlPlan.Items.Contains(ddlPlan.Items.FindByValue("Plan"))))
@@ -320,29 +345,68 @@ namespace UI.Web
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Usuarios.aspx");
+            if (Admin)
+            {
+                Response.Redirect("~/Usuarios.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Main.aspx");
+            }
+            
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if(this.Modo != ModoForm.Consulta)
             {
-                this.MapearADatos();
-                UsuarioLogic ul = new UsuarioLogic();
-                ul.Save(UsuarioActual, PersonaActual);
 
-                if (this.Modo == ModoForm.Modificacion)
+                if (Page.IsValid)
                 {
-                    Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('El usuario ha sido registrado')</script>");
-                }
+                    this.MapearADatos();
+                    UsuarioLogic ul = new UsuarioLogic();
+                    ul.Save(UsuarioActual, PersonaActual);
 
-                Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
+                    if (Admin)
+                    {
+                        if (this.Modo == ModoForm.Modificacion)
+                        {
+                            Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
+                        }
+                        else if (this.Modo == ModoForm.Alta)
+                        {
+                            Response.Write("<script>alert('El usuario ha sido registrado')</script>");
+                        }
+
+                        Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Los datos han sido actualizados')</script>");
+                        Response.AddHeader("REFRESH", "0.1;URL=Main.aspx");
+                    }
+
+
+                }
 
             }
+            else if(this.Modo == ModoForm.Consulta)
+            {
+                this.btnGuardar.Text = "Guardar";
+                Modo = ModoForm.Modificacion;
+                this.txtApellido.Enabled = true;
+                this.txtNombre.Enabled = true;
+                this.txtDireccion.Enabled = true;
+                this.txtEmail.Enabled = true;
+                this.txtLegajo.Enabled = true;
+                this.ddlDia.Enabled = true;
+                this.ddlMes.Enabled = true;
+                this.ddlAnio.Enabled = true;
+                this.txtTelefono.Enabled = true;
+                this.txtUsuario.Enabled = true;
+                          
+            }
+
         }
     }
 }
