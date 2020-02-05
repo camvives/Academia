@@ -129,9 +129,9 @@ namespace UI.Desktop
             else
             {
                 this.dgvCursos.DataSource = this.ObtenerDatosUsr();
-                Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
+           Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
                 List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
-
+     
                 List<int> idInscripciones = new List<int>();
                 foreach (Alumno_Inscripcion ai in inscripciones)
                 {

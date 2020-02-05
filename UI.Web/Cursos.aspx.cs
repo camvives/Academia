@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business.Entities;
 using Business.Logic;
+using Util;
 
 namespace UI.Web
 {
@@ -33,8 +34,10 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            PersonaActual = (Persona)Session["Persona"];
             if (!IsPostBack)
             {
+                
                 this.Listar();
             }
 
@@ -81,6 +84,8 @@ namespace UI.Web
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
             List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
+            Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
+            List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
 
             foreach (Curso c in cursos)
             {
@@ -100,6 +105,20 @@ namespace UI.Web
                 datosCurso.DescComision = com.Descripcion;
 
                 datosCursos.Add(datosCurso);
+
+            }
+
+            foreach (Alumno_Inscripcion ai in inscripciones)
+            {
+                foreach(DatosCursos dc in datosCursos)
+                {
+                    if (ai.IDCurso == dc.ID)
+                    {
+                        datosCursos.Remove(dc);
+                        break;
+                    }
+                }
+                
 
             }
 
@@ -141,35 +160,35 @@ namespace UI.Web
 
         public void Listar()
         {
-            if (PersonaActual == null)
+            if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
             {
                 this.gdvCursos.DataSource = this.ObtenerDatos();
                 this.gdvCursos.DataBind();
             }
-            //else
-            //{
-            //    this.gdvCursos.DataSource = this.ObtenerDatosUsr();
-            //    Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
-            //    List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
+            else
+            {
+                List<DatosCursos> datos = this.ObtenerDatosUsr();
+                if(datos.Count() == 0)
+                {
+                    Response.Write("<script>alert('No hay cursos disponibles para inscribirse')</script>");
+                    Response.AddHeader("REFRESH", "0.1;URL=Main.aspx");
+                }
+                else
+                {
+                    this.gdvCursos.DataSource = datos;
 
-            //    List<int> idInscripciones = new List<int>();
-            //    foreach (Alumno_Inscripcion ai in inscripciones)
-            //    {
-            //        int idCurso = ai.IDCurso;
-            //        idInscripciones.Add(idCurso);
-            //    }
+                    this.gdvCursos.DataBind();
+                    this.btnDocentes.Visible = false;
+                    this.MenuABM.Visible = false;
+                    gdvCursos.Columns[0].Visible = false;
+                    gdvCursos.Columns[3].Visible = false;
+                    gdvCursos.Columns[4].HeaderText = "Cupo Disponible";
+                    gdvCursos.Columns[5].Visible = false;
+                    gdvCursos.Columns[6].Visible = false;
+                    gdvCursos.Columns[7].Visible = true;
+                }
 
-            //    foreach (DataGridViewRow row in dgvCursos.Rows)
-            //    {
-            //        if (idInscripciones.Contains(int.Parse(row.Cells["ID"].Value.ToString())))
-            //        {
-            //            row.DefaultCellStyle.BackColor = Color.LightGray;
-            //            row.Cells["Inscribirse"].ReadOnly = true;
-            //            row.Cells["Inscribirse"].Value = 2;
-            //        }
-
-            //    }
-            //}
+            }
 
         }
 
@@ -221,6 +240,31 @@ namespace UI.Web
             this.GetCurso();
             Session["Curso"] = CursoActual;
             Response.Redirect("~/Docentes_Curso.aspx");
+        }
+
+        protected void gdvCursos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Inscribirse();
+        }
+
+        public void Inscribirse()
+        {
+            this.GetCurso();
+            if (Validaciones.ValidarCupo(CursoActual.ID))
+            {
+                Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                alInsc.IDAlumno = PersonaActual.ID;
+                alInsc.IDCurso = CursoActual.ID;
+                
+                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                aiLog.Save(alInsc);
+                Response.Redirect("~/Cursos.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('No hay cupo en el curso seleccionado')</script>");
+
+            }
         }
     }
 }

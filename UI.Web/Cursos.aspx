@@ -23,7 +23,7 @@
     </table>
     </div>
     <div class="tabla">
-       <asp:GridView ID="gdvCursos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvComisiones_RowDataBound" OnPageIndexChanging="gdvComisiones_PageIndexChanging" >
+       <asp:GridView ID="gdvCursos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvComisiones_RowDataBound" OnPageIndexChanging="gdvComisiones_PageIndexChanging" OnSelectedIndexChanged="gdvCursos_SelectedIndexChanged" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                  <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -33,6 +33,11 @@
                     <asp:BoundField DataField="Cupo" HeaderText="Cupo" />
                      <asp:BoundField DataField="DescEspecialidad" HeaderText="Carrera" />
                      <asp:BoundField DataField="DescPlan" HeaderText="Plan" />
+                     <asp:TemplateField ShowHeader="False" Visible="False">
+                         <ItemTemplate>
+                             <asp:LinkButton ID="lnkbtnInscribir" runat="server" CausesValidation="False" CommandName="Select" Text="Inscribirse" onclientclick="return confirm('¿Está seguro que desea inscribirse al curso?');"></asp:LinkButton>
+                         </ItemTemplate>
+                     </asp:TemplateField>
                 </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

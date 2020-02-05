@@ -116,6 +116,10 @@ namespace UI.Web
             {
                 Response.Redirect("~/Inscriptos.aspx");
             }
+            else if(e.Item == mnuPrincipal.FindItem("Inscripcion"))
+            {
+                Response.Redirect("~/Cursos.aspx");
+            }
 
         }
     }
