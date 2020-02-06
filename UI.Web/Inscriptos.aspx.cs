@@ -37,7 +37,6 @@ namespace UI.Web
                 this.CompletarCombobox();
                 gdvInscriptos.DataSource = this.ObtenerDatos();
                 gdvInscriptos.DataBind();
-
             }
 
         }
@@ -137,6 +136,28 @@ namespace UI.Web
         {
             gdvInscriptos.DataSource = this.ObtenerDatos();
             gdvInscriptos.DataBind();
+        }
+
+        protected void gdvInscriptos_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gdvInscriptos.Columns[4].Visible = false;
+            gdvInscriptos.Columns[3].Visible = true;
+            GridViewRow row = gdvInscriptos.SelectedRow;
+            //if (row.Cells[4].Controls[0].Sel)
+            //{
+
+            //    row.Cells[6].Enabled = true;
+            //}
+            //else
+            //{
+            //    row.Cells[6].Enabled = false;
+            //}
+
+        }
+
+        protected void gdvInscriptos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
         }
     }
 }

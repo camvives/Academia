@@ -32,7 +32,6 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.btnIngresar = new System.Windows.Forms.Button();
-            this.lnkOlvidaPass = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,17 +65,6 @@
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
             this.btnIngresar.Click += new System.EventHandler(this.BtnIngresar_Click);
-            // 
-            // lnkOlvidaPass
-            // 
-            this.lnkOlvidaPass.AutoSize = true;
-            this.lnkOlvidaPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkOlvidaPass.Location = new System.Drawing.Point(7, 259);
-            this.lnkOlvidaPass.Name = "lnkOlvidaPass";
-            this.lnkOlvidaPass.Size = new System.Drawing.Size(178, 22);
-            this.lnkOlvidaPass.TabIndex = 10;
-            this.lnkOlvidaPass.TabStop = true;
-            this.lnkOlvidaPass.Text = "Olvidé mi contraseña";
             // 
             // label3
             // 
@@ -118,7 +106,6 @@
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.btnIngresar);
-            this.Controls.Add(this.lnkOlvidaPass);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -138,7 +125,6 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.Button btnIngresar;
-        private System.Windows.Forms.LinkLabel lnkOlvidaPass;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

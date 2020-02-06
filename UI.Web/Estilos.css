@@ -1,7 +1,7 @@
 ﻿body {
 
-    /*background-image: url('Imagenes/fondo.png');
-    background-size: cover;*/
+    background-image: url('Imagenes/fondo.png');
+    background-size: cover;
 }
 .principal {
     background-color: rgba(27, 25, 27, 0.35);
