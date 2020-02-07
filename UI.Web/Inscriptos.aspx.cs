@@ -14,8 +14,8 @@ namespace UI.Web
         public class DatosAlumnos
         {
             public int ID { get; set; }
-            //public int ID_Curso { get; set; }
-            //public int ID_persona { get; set; }
+            public int ID_Curso { get; set; }
+            public int ID_persona { get; set; }
             public int Legajo { get; set; }
             public string Nombre { get; set; }
             public string Apellido { get; set; }
@@ -23,6 +23,10 @@ namespace UI.Web
             public string NotaMostrar { get; set; }
             public int Nota { get; set; }
         }
+
+        public Alumno_Inscripcion Alumno { get; set; }
+
+        public string Condicion { get; set; }
 
         public DatosAlumnos AlumnoActual { get; set; }
 
@@ -37,6 +41,9 @@ namespace UI.Web
                 this.CompletarCombobox();
                 gdvInscriptos.DataSource = this.ObtenerDatos();
                 gdvInscriptos.DataBind();
+                gdvInscriptos.Columns[7].Visible = false;
+                gdvInscriptos.Columns[8].Visible = false;
+                gdvInscriptos.Columns[6].Visible = false;
             }
 
         }
@@ -92,11 +99,11 @@ namespace UI.Web
                 alumno.ID = ai.ID;
                 alumno.Condicion = ai.Condicion;
                 alumno.Nota = ai.Nota;
-                //alumno.ID_Curso = ai.IDCurso;
-                //alumno.ID_persona = ai.IDAlumno;
+                alumno.ID_Curso = ai.IDCurso;
+                alumno.ID_persona = ai.IDAlumno;
                 if (ai.Nota == 0)
                 {
-                    alumno.NotaMostrar = "-";
+                    alumno.NotaMostrar = " ";
                 }
                 else
                 {
@@ -124,12 +131,12 @@ namespace UI.Web
 
         protected void gdvComisiones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void gdvInscriptos_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void ddlCurso_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,24 +147,119 @@ namespace UI.Web
 
         protected void gdvInscriptos_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            gdvInscriptos.EditIndex = e.NewEditIndex;
             gdvInscriptos.Columns[4].Visible = false;
             gdvInscriptos.Columns[3].Visible = true;
-            GridViewRow row = gdvInscriptos.SelectedRow;
-            //if (row.Cells[4].Controls[0].Sel)
-            //{
-
-            //    row.Cells[6].Enabled = true;
-            //}
-            //else
-            //{
-            //    row.Cells[6].Enabled = false;
-            //}
-
         }
 
         protected void gdvInscriptos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+           
+        }
+
+        protected void ddlCond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+           
+            GridViewRow row = (GridViewRow)(((Control)sender).NamingContainer);
+            DropDownList ddl = (DropDownList)row.FindControl("ddlCondicion");
+            RequiredFieldValidator req = (RequiredFieldValidator)row.FindControl("reqNota");
+            TextBox txtNota = (TextBox)row.FindControl("txtNota");
+            txtNota.Enabled = true;
+            //Session["Nota"] = txtNota.Text;
+            Session["Condicion"] = ddl.SelectedItem.Value;
+            Condicion = ddl.SelectedItem.Value;
+            if (Condicion  == "Aprobado")
+            {
+                txtNota.Text = "";
+                req.Enabled = true;
+                row.Cells[6].Enabled = true;
+            }
+            else
+            {
+                req.Enabled = false;
+                txtNota.Text = " ";
+                row.Cells[6].Enabled = false;
+            }
+            
+        }
+
+        protected void gdvInscriptos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            //try
+            //{
+            //GridViewRow row = (GridViewRow)(((Control)sender).NamingContainer);
+            //TextBox txtNota = (TextBox)gdvInscriptos.Rows[e.RowIndex].FindControl("txtNota");
+
+            //Session["Nota"] = txtNota.Text;
+
+            Label lblID = gdvInscriptos.Rows[e.RowIndex].FindControl("lblID") as Label;
+            Label lblIDCur = gdvInscriptos.Rows[e.RowIndex].FindControl("lblCurso") as Label;
+            Label lblIDPer = gdvInscriptos.Rows[e.RowIndex].FindControl("lblPersona") as Label;
+            DropDownList ddlCondicion = gdvInscriptos.Rows[e.RowIndex].FindControl("ddlCondicion") as DropDownList;
+            TextBox txtNota = gdvInscriptos.Rows[e.RowIndex].FindControl("txtNota") as TextBox;
+            
+            Alumno_Inscripcion ai = new Alumno_Inscripcion();
+            ai.ID = int.Parse(lblID.Text);
+            ai.IDCurso = int.Parse(lblIDCur.Text);
+            ai.IDAlumno = int.Parse(lblIDPer.Text);
+            ai.Condicion = ddlCondicion.SelectedValue;
+
+            if (txtNota.Text == " ")
+            {
+                ai.Nota = 0;
+            }
+            else
+            {
+                ai.Nota = int.Parse(txtNota.Text);
+            }
+
+
+            ai.State = BusinessEntity.States.Modified;
+
+            Alumno_InscripcionLogic al = new Alumno_InscripcionLogic();
+                al.Save(ai);
+                Response.Redirect("~/Inscriptos.aspx");
+            //}
+            //catch { }
+        }
+
+        protected void gdvInscriptos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            Response.Redirect("~/Inscriptos.aspx");
+        }
+
+        public void MapearADatos()
+        {
+            
+            Alumno = new Alumno_Inscripcion();
+            Alumno = (Alumno_Inscripcion)Session["AlumnoAct"];
+            Alumno.Condicion = (string)Session["Condicion"];
+            
+            GridViewRow row = gdvInscriptos.SelectedRow;
+            string Nota = (string)Session["Nota"];
+            if (Nota == " ")
+            {
+                Alumno.Nota = 0;
+            }
+            else
+            {
+                Alumno.Nota = int.Parse(Nota);
+            }
+            Alumno.State = BusinessEntity.States.Modified;
+   
+        }
+
+        protected void gdvInscriptos_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
 
         }
+
+        protected void ddlCondicion_DataBound(object sender, EventArgs e)
+        {
+  
+        }
+
+
     }
 }
