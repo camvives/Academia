@@ -261,6 +261,7 @@
             // 
             // Cupo
             // 
+            this.Cupo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.Cupo.DataPropertyName = "Cupo";
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.Cupo.DefaultCellStyle = dataGridViewCellStyle7;
@@ -268,7 +269,7 @@
             this.Cupo.MinimumWidth = 8;
             this.Cupo.Name = "Cupo";
             this.Cupo.ReadOnly = true;
-            this.Cupo.Width = 50;
+            this.Cupo.Width = 93;
             // 
             // Carrera
             // 

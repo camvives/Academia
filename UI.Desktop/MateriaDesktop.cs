@@ -24,6 +24,10 @@ namespace UI.Desktop
             this.Modo = modo;
             this.MateriaActual = mat;
 
+            if (Modo == ModoForm.Modificacion)
+            {
+                this.Text = "Editar Especialidad";
+            }
             try
             {
                 this.MapearDeDatos();

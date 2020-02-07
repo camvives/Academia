@@ -53,6 +53,7 @@
             this.misDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tss1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnInscribirse = new System.Windows.Forms.ToolStripButton();
@@ -60,7 +61,6 @@
             this.tsbtnEstadoAcademico = new System.Windows.Forms.ToolStripButton();
             this.tss3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnConsultaCursos = new System.Windows.Forms.ToolStripButton();
-            this.imprimirCertificadoDeInscripciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -240,6 +240,12 @@
             resources.ApplyResources(this.datosDeUsuarioToolStripMenuItem, "datosDeUsuarioToolStripMenuItem");
             this.datosDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.DatosDeUsuarioToolStripMenuItem_Click);
             // 
+            // imprimirCertificadoDeInscripciónToolStripMenuItem
+            // 
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Name = "imprimirCertificadoDeInscripciónToolStripMenuItem";
+            resources.ApplyResources(this.imprimirCertificadoDeInscripciónToolStripMenuItem, "imprimirCertificadoDeInscripciónToolStripMenuItem");
+            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Click += new System.EventHandler(this.imprimirCertificadoDeInscripciónToolStripMenuItem_Click);
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -281,12 +287,6 @@
             resources.ApplyResources(this.tsbtnConsultaCursos, "tsbtnConsultaCursos");
             this.tsbtnConsultaCursos.Name = "tsbtnConsultaCursos";
             this.tsbtnConsultaCursos.Click += new System.EventHandler(this.TsbtnConsultaCursos_Click);
-            // 
-            // imprimirCertificadoDeInscripciónToolStripMenuItem
-            // 
-            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Name = "imprimirCertificadoDeInscripciónToolStripMenuItem";
-            resources.ApplyResources(this.imprimirCertificadoDeInscripciónToolStripMenuItem, "imprimirCertificadoDeInscripciónToolStripMenuItem");
-            this.imprimirCertificadoDeInscripciónToolStripMenuItem.Click += new System.EventHandler(this.imprimirCertificadoDeInscripciónToolStripMenuItem_Click);
             // 
             // formMain
             // 

@@ -24,7 +24,7 @@ namespace UI.Desktop
 
         private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.IrALogin();
         }
 
         private void UsuarioToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -70,6 +70,7 @@ namespace UI.Desktop
                         this.tsddBtnArchivoAlumno.Visible = true;
                         this.tsbtnConsultaCursos.Visible = true;
                         this.tss3.Visible = true;
+                        this.imprimirCertificadoDeInscripciónToolStripMenuItem.Visible = false;
                     }
                 }
 
@@ -127,7 +128,7 @@ namespace UI.Desktop
 
         private void SalirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.IrALogin();
         }
 
         private void CursosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,5 +178,19 @@ namespace UI.Desktop
             Reporte reporte = new Reporte(PersonaActual.ID);
             reporte.ShowDialog();
         }
+
+
+        public void IrALogin()
+        {
+            this.tsMenu.Visible = false;
+            formLogin login = new formLogin();
+            login.ShowDialog();
+            if (login.DialogResult != DialogResult.OK)
+            {
+                this.Close();
+            }
+        }
     }
+
+    
 }

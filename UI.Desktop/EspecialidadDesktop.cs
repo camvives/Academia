@@ -25,6 +25,10 @@ namespace UI.Desktop
         {
             this.Modo = modo;
             this.EspActual = esp;
+            if (Modo == ModoForm.Modificacion)
+            {
+                this.Text = "Editar Especialidad";
+            }
 
             try
             {
