@@ -244,7 +244,11 @@ namespace UI.Web
 
         protected void gdvCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Inscribirse();
+            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+            {
+                this.Inscribirse();
+            }
+            
         }
 
         public void Inscribirse()
