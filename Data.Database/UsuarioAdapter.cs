@@ -499,5 +499,28 @@ namespace Data.Database
 
         }
 
+        public int BuscarLegajo(int legajo)
+        {
+            int cantidad;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdLegajo = new SqlCommand("SELECT count(*) FROM personas " +
+                                                        "WHERE legajo = @legajo", sqlConn);
+                cmdLegajo.Parameters.AddWithValue("@legajo", legajo);
+
+                cantidad = int.Parse(cmdLegajo.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return cantidad; 
+        }
     }
 }

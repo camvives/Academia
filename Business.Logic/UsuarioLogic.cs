@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Entities;
 using Data.Database;
+using System.Data;
+
 
 namespace Business.Logic
 {
@@ -19,7 +21,40 @@ namespace Business.Logic
 
         public void Save(Usuario usuario, Persona persona)
         {
-            UsuarioData.Save(usuario, persona);
+            try
+            {
+                if (usuario.State == BusinessEntity.States.New)
+                {
+                    int cant = this.BuscarLegajo(persona.Legajo);
+                    if (cant != 0)
+                    {
+                        throw new Exception("El legajo ya está registrado");
+                    }
+                    else
+                    {
+                        UsuarioData.Save(usuario, persona);
+                    }
+
+                }
+                else
+                {
+                    UsuarioData.Save(usuario, persona);
+                }
+
+            }
+            catch(System.Data.SqlClient.SqlException e)
+            {
+                switch (e.Number)
+                {
+                    case 2601:
+                        throw new Exception("El nombre de usuario ya se encuentra registrado");
+                        
+                    default:
+                        throw new Exception("Error al registrar el usuario. Intente Nuevamente");
+                }
+                
+            }
+         
         }
 
         public (List<Usuario>, List<Persona>) GetAll()
@@ -50,6 +85,11 @@ namespace Business.Logic
         public List<Persona> GetDocentes()
         {
             return UsuarioData.GetDocentes();
+        }
+
+        public int BuscarLegajo(int legajo)
+        {
+            return UsuarioData.BuscarLegajo(legajo);
         }
     }
 }

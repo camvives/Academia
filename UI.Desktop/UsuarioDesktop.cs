@@ -11,6 +11,7 @@ using Business.Entities;
 using Business.Logic;
 using Util;
 
+
 namespace UI.Desktop
 {
     public partial class UsuarioDesktop : ApplicationForm
@@ -113,11 +114,12 @@ namespace UI.Desktop
                 }
 
                 this.DialogResult = DialogResult.OK;
-        }
-            catch
-            {
-                this.Notificar("Error", "Error al registrar usuario, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         public bool Validar()

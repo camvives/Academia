@@ -212,7 +212,6 @@ namespace UI.Desktop
                 usuarioDesktop = new UsuarioDesktop(UsuarioActual, PersonaActual, Modo);
             }
 
-            this.Hide();
             usuarioDesktop.ShowDialog();
 
             if (usuarioDesktop.DialogResult == DialogResult.OK)

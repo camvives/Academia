@@ -25,7 +25,7 @@ namespace UI.Desktop
                 List<Usuario> usuarios;
                 (usuarios, personas) = ul.GetAll();
 
-                foreach (var usr in personas.Zip(usuarios, (a, b) => new { a, b }))  //Linq combina las dos listas
+                foreach (var usr in personas.Zip(usuarios, (a, b) => new { a, b }))  //Combinación de las listas con LINQ
                 {
                     dgvUsuarios.Rows.Add(usr.b.ID, usr.a.Nombre, usr.a.Apellido, usr.b.NombreUsuario, usr.a.Email, usr.b.Habilitado);
                 }

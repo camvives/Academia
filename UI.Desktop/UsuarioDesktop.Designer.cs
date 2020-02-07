@@ -212,7 +212,6 @@
             this.MaximizeBox = false;
             this.Name = "UsuarioDesktop";
             this.Text = "Nuevo Usuario";
-            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 
