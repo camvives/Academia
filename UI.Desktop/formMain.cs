@@ -34,6 +34,7 @@ namespace UI.Desktop
                 }
                 else
                 {
+
                     (UsuarioActual, PersonaActual) = login.BuscarUsuario();
                     if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
                     {
@@ -42,6 +43,7 @@ namespace UI.Desktop
                     }
                     else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
                     {
+                        
                         this.tsddBtnArchivoAlumno.Visible = true;
                         this.tsbtnInscribirse.Visible = true;
                         this.tsbtnEstadoAcademico.Visible = true;
@@ -61,22 +63,12 @@ namespace UI.Desktop
 
         }
 
-        public void IrALogin()
-        {
-            this.tsMenu.Visible = false;
-            formLogin login = new formLogin();
-            login.ShowDialog();
-            if (login.DialogResult != DialogResult.OK)
-            {
-                this.Close();
-            }
-        }
 
         #region MENU
 
         private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.IrALogin();
+            this.Close();
         }
 
         private void UsuarioToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -141,7 +133,7 @@ namespace UI.Desktop
 
         private void SalirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.IrALogin();
+            this.Close();
         }
 
         private void CursosToolStripMenuItem_Click(object sender, EventArgs e)

@@ -205,23 +205,6 @@ namespace UI.Desktop
 
                                 alumnosInsc.Add(alInsc);
 
-                                foreach (Alumno_Inscripcion ai in alumnosInsc)
-                                {
-                                    Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
-                                    aiLog.Save(ai);
-                                }
-
-                                var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if (mensaje == DialogResult.Yes)
-                                {
-                                    Reporte rep = new Reporte(PersonaActual.ID);
-                                    rep.Show();
-                                    this.Close();
-                                }
-                                else
-                                {
-                                    this.Close();
-                                }
                             }
                             else
                             {
@@ -232,6 +215,24 @@ namespace UI.Desktop
                         }
 
                     }
+                }
+
+                foreach (Alumno_Inscripcion ai in alumnosInsc)
+                {
+                    Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                    aiLog.Save(ai);
+                }
+
+                var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (mensaje == DialogResult.Yes)
+                {
+                    Reporte rep = new Reporte(PersonaActual.ID);
+                    rep.Show();
+                    this.Close();
+                }
+                else
+                {
+                    this.Close();
                 }
             }
             catch (Exception ex)

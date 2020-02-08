@@ -99,7 +99,7 @@ namespace UI.Web
 
                     this.Context.Items["Carrera"] = especialidad.ID;
                     Session["PersonaEdit"] = PersonaActual;
-                    Context.Items["Modo"] = ModoForm.Consulta;
+                    Session["Modo"] = ModoForm.Consulta;
                     Server.Transfer("~/UsuarioWeb.aspx", true);
                 }
                 catch (Exception ex)

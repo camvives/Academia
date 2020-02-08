@@ -23,7 +23,7 @@ namespace Business.Logic
         {
             try
             {
-                if (usuario.State != BusinessEntity.States.Deleted)
+                if (usuario.State == BusinessEntity.States.New)
                 {
                     int cant = this.BuscarLegajo(persona.Legajo);
                     if (cant != 0)
