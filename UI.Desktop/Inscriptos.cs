@@ -91,37 +91,44 @@ namespace UI.Desktop
         {
             string curso = this.cmbCursos.SelectedItem.ToString();
             int IDCurso = int.Parse(curso.Substring(curso.LastIndexOf(" ") + 1));
-
-            Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
-            List<Alumno_Inscripcion> alumnos = ail.GetAlumnosInscriptos(IDCurso);
             List<DatosAlumnos> datosAlumnos = new List<DatosAlumnos>();
+            Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
 
-            foreach (Alumno_Inscripcion ai in alumnos)
+            try
             {
-                DatosAlumnos alumno = new DatosAlumnos();
-                alumno.ID_Inscripcion = ai.ID;
-                alumno.Condicion = ai.Condicion;
-                alumno.Nota = ai.Nota;
-                alumno.ID_Curso = ai.IDCurso;
-                alumno.ID_persona = ai.IDAlumno;
-                if (ai.Nota == 0)
+                List<Alumno_Inscripcion> alumnos = ail.GetAlumnosInscriptos(IDCurso);
+
+                foreach (Alumno_Inscripcion ai in alumnos)
                 {
-                    alumno.NotaMostrar = "-";
+                    DatosAlumnos alumno = new DatosAlumnos();
+                    alumno.ID_Inscripcion = ai.ID;
+                    alumno.Condicion = ai.Condicion;
+                    alumno.Nota = ai.Nota;
+                    alumno.ID_Curso = ai.IDCurso;
+                    alumno.ID_persona = ai.IDAlumno;
+                    if (ai.Nota == 0)
+                    {
+                        alumno.NotaMostrar = "-";
+                    }
+                    else
+                    {
+                        alumno.NotaMostrar = ai.Nota.ToString();
+                    }
+
+                    UsuarioLogic ul = new UsuarioLogic();
+                    Persona persona = ul.GetPersona(ai.IDAlumno);
+
+                    alumno.Nombre = persona.Nombre;
+                    alumno.Legajo = persona.Legajo;
+                    alumno.Apellido = persona.Apellido;
+
+                    datosAlumnos.Add(alumno);
+
                 }
-                else
-                {
-                    alumno.NotaMostrar = ai.Nota.ToString();
-                }
-
-                UsuarioLogic ul = new UsuarioLogic();
-                Persona persona = ul.GetPersona(ai.IDAlumno);
-
-                alumno.Nombre = persona.Nombre;
-                alumno.Legajo = persona.Legajo;
-                alumno.Apellido = persona.Apellido;
-
-                datosAlumnos.Add(alumno);
-                   
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosAlumnos;

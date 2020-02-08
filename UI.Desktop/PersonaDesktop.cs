@@ -34,9 +34,9 @@ namespace UI.Desktop
                 (UsuarioActual, PersonaActual) = ul.GetOne(id);
                 this.MapearDeDatos();
             }
-            catch
+            catch(Exception e)
             {
-                MessageBox.Show("Error al recuperar datos del usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
         }

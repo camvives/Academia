@@ -21,20 +21,34 @@ namespace UI.Web
         }
         protected void valUser_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (!Validaciones.ValidarUsuario(this.txtUser.Text, this.txtPass.Text))
+            try
             {
-                args.IsValid = false;
+                if (!Validaciones.ValidarUsuario(this.txtUser.Text, this.txtPass.Text))
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
 
         protected void valHabilitado_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (valUser.IsValid)
+            try
             {
-                if (!Validaciones.ValidarHabilitado(this.txtUser.Text, this.txtPass.Text))
+                if (valUser.IsValid)
                 {
-                    args.IsValid = false;
+                    if (!Validaciones.ValidarHabilitado(this.txtUser.Text, this.txtPass.Text))
+                    {
+                        args.IsValid = false;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
 
@@ -56,9 +70,9 @@ namespace UI.Web
                 UsuarioLogic ul = new UsuarioLogic();
                 (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUser.Text);
             }
-            catch
+            catch (Exception ex)
             {
-                //fire custom validator
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
 
             return (UsuarioActual, PersonaActual);

@@ -59,32 +59,76 @@ namespace Business.Logic
 
         public (List<Usuario>, List<Persona>) GetAll()
         {
-            return UsuarioData.GetAll();
+            try
+            {
+                return UsuarioData.GetAll();
+            }
+            catch 
+            {
+                throw new Exception("Error al recuperar la lista de Usuarios");
+            }
         }
 
         public (Usuario, Persona) GetOne(int id)
         {
-            return UsuarioData.GetOne(id);
+            try
+            {
+                return UsuarioData.GetOne(id);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos del Usuario");
+            }
+            
         }
 
         public (string, bool) GetClaveYHabilitado(string nombreUsuario)
         {
-            return UsuarioData.GetClaveYHabilitado(nombreUsuario);
+            try
+            {
+                return UsuarioData.GetClaveYHabilitado(nombreUsuario);
+            }
+            catch
+            {
+                throw new Exception("Error al obtener datos de acceso. Intente nuevamente");
+            }
         }
 
         public (Usuario, Persona) GetUsuario(string nombreUsuario)
         {
-            return UsuarioData.GetUsuario(nombreUsuario);
+            try
+            {
+                return UsuarioData.GetUsuario(nombreUsuario);
+            }
+            catch
+            {
+                throw new Exception("Error al obtener datos de Usuario. Intente nuevamente");
+            }
         }
 
         public Persona GetPersona(int IDPersona)
         {
-            return UsuarioData.GetPersona(IDPersona);
+            try
+            {
+                return UsuarioData.GetPersona(IDPersona);
+            }
+            catch
+            {
+                throw new Exception("Error al obtener lista. Intente nuevamente");
+            }
         }
 
         public List<Persona> GetDocentes()
         {
-            return UsuarioData.GetDocentes();
+            try
+            {
+                return UsuarioData.GetDocentes();
+            }
+            catch
+            {
+                throw new Exception("Error al obtener lista. Intente nuevamente");
+
+            }
         }
 
         public int BuscarLegajo(int legajo)

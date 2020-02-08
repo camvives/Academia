@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Logic;
-using Business.Entities;
-using System.Data;
 
 
 
@@ -90,9 +89,10 @@ namespace UI.Web
                 gdvUsuarios.DataSource = dt;
                 gdvUsuarios.DataBind();
             }
-            catch
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('Error al recuperar la lista de usuarios')</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
             }
 
         }
@@ -154,9 +154,16 @@ namespace UI.Web
 
         public void GetUsuario()
         {
-            GridViewRow row = gdvUsuarios.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            (UsuarioActual, PersonaActual) = UsrLog.GetOne(ID);
+            try
+            {
+                GridViewRow row = gdvUsuarios.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                (UsuarioActual, PersonaActual) = UsrLog.GetOne(ID);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
 
         protected void btnInfo_Click(object sender, ImageClickEventArgs e)

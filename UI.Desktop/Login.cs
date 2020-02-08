@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Windows.Forms;
 using Util;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Desktop
 {
@@ -42,9 +35,9 @@ namespace UI.Desktop
                     this.DialogResult = DialogResult.OK;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al recuperar datos del usuario. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -54,15 +47,15 @@ namespace UI.Desktop
             try
             {
                 UsuarioLogic ul = new UsuarioLogic();
-                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);              
+                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Error al recuperar datos del usuario. Intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-          
+
             return (UsuarioActual, PersonaActual);
-            
+
         }
 
 

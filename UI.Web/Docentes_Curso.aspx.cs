@@ -72,24 +72,32 @@ namespace UI.Web
         }
 
         public List<Docente> ObtenerDatos()
-        {
+        {           
             List<Docente> datosDocentes = new List<Docente>();
-            Docente_CursoLogic dcl = new Docente_CursoLogic();
-            List<Docentes_Cursos> docentes = dcl.GetDocentesPorCurso(CursoActual.ID);
-
-            foreach (Docentes_Cursos dc in docentes)
+            try
             {
-                Doc = new Docente();
-                UsuarioLogic ul = new UsuarioLogic();
+                Docente_CursoLogic dcl = new Docente_CursoLogic();
+                List<Docentes_Cursos> docentes = dcl.GetDocentesPorCurso(CursoActual.ID);
 
-                Persona docente = ul.GetPersona(dc.IDDocente);
-                Doc.Nombre = docente.Nombre;
-                Doc.Apellido = docente.Apellido;
-                Doc.Legajo = docente.Legajo;
-                Doc.Cargo = dc.Cargo;
-                Doc.ID = dc.ID;
+                foreach (Docentes_Cursos dc in docentes)
+                {
+                    Doc = new Docente();
+                    UsuarioLogic ul = new UsuarioLogic();
 
-                datosDocentes.Add(Doc);
+                    Persona docente = ul.GetPersona(dc.IDDocente);
+                    Doc.Nombre = docente.Nombre;
+                    Doc.Apellido = docente.Apellido;
+                    Doc.Legajo = docente.Legajo;
+                    Doc.Cargo = dc.Cargo;
+                    Doc.ID = dc.ID;
+
+                    datosDocentes.Add(Doc);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
             }
 
             return datosDocentes;

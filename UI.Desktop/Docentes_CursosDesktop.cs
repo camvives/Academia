@@ -44,18 +44,26 @@ namespace UI.Desktop
 
         public void CompletarCombobox()
         {
-            UsuarioLogic ul = new UsuarioLogic();
-            List<Persona> docentes = ul.GetDocentes();
-            List<string> datosDocentes = new List<string>();
-
-            foreach (Persona per in docentes)
+            try
             {
-                string datos;
-                datos = per.Legajo + " - " + per.Nombre + " " + per.Apellido + " - " + per.ID;
-                datosDocentes.Add(datos);
-            }
+                UsuarioLogic ul = new UsuarioLogic();
+                List<Persona> docentes = ul.GetDocentes();
+                List<string> datosDocentes = new List<string>();
 
-            this.cmbDocente.DataSource = datosDocentes;
+                foreach (Persona per in docentes)
+                {
+                    string datos;
+                    datos = per.Legajo + " - " + per.Nombre + " " + per.Apellido + " - " + per.ID;
+                    datosDocentes.Add(datos);
+                }
+
+                this.cmbDocente.DataSource = datosDocentes;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void Docentes_CursosDesktop_Load(object sender, EventArgs e)

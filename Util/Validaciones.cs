@@ -35,34 +35,49 @@ namespace Util
 
         public static Boolean ValidarUsuario(string user, string clave)
         {
-            UsuarioLogic ul = new UsuarioLogic();
-            (string claveBD,_) = ul.GetClaveYHabilitado(user);
-
-            if (claveBD == clave)
+            try
             {
-                return true;
+                UsuarioLogic ul = new UsuarioLogic();
+                (string claveBD, _) = ul.GetClaveYHabilitado(user);
+
+                if (claveBD == clave)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
             }
-
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
         public static Boolean ValidarHabilitado(string user, string clave)
         {
-            UsuarioLogic ul = new UsuarioLogic();
-            (_, bool habilitado) = ul.GetClaveYHabilitado(user);
-
-            if (habilitado)
+            try
             {
-                return true;
+                UsuarioLogic ul = new UsuarioLogic();
+                (_, bool habilitado) = ul.GetClaveYHabilitado(user);
+
+                if (habilitado)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            else
-            {
-                return false;
-            }
         }
 
 

@@ -60,22 +60,30 @@ namespace UI.Desktop
         public List<Docente> ObtenerDatos()
         {
             List<Docente> datosDocentes = new List<Docente>();
-            Docente_CursoLogic dcl = new Docente_CursoLogic();
-            List<Docentes_Cursos> docentes = dcl.GetDocentesPorCurso(CursoActual.ID);
+            try
+            {               
+                Docente_CursoLogic dcl = new Docente_CursoLogic();
+                List<Docentes_Cursos> docentes = dcl.GetDocentesPorCurso(CursoActual.ID);
 
-            foreach (Docentes_Cursos dc in docentes)
+                foreach (Docentes_Cursos dc in docentes)
+                {
+                    Doc = new Docente();
+                    UsuarioLogic ul = new UsuarioLogic();
+
+                    Persona docente = ul.GetPersona(dc.IDDocente);
+                    Doc.Nombre = docente.Nombre;
+                    Doc.Apellido = docente.Apellido;
+                    Doc.Legajo = docente.Legajo;
+                    Doc.Cargo = dc.Cargo;
+                    Doc.ID = dc.ID;
+
+                    datosDocentes.Add(Doc);
+                }
+            
+            }
+            catch (Exception e)
             {
-                Doc = new Docente();
-                UsuarioLogic ul = new UsuarioLogic();
-
-                Persona docente = ul.GetPersona(dc.IDDocente);
-                Doc.Nombre = docente.Nombre;
-                Doc.Apellido = docente.Apellido;
-                Doc.Legajo = docente.Legajo;
-                Doc.Cargo = dc.Cargo;
-                Doc.ID = dc.ID;
-
-                datosDocentes.Add(Doc);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosDocentes;
