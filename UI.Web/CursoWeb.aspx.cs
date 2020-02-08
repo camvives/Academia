@@ -112,24 +112,32 @@ namespace UI.Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            try
             {
-                this.MapearADatos();
-                CursoLogic cl = new CursoLogic();
-                cl.Save(CursoActual);
-
-                if (this.Modo == ModoForm.Modificacion)
+                if (Page.IsValid)
                 {
-                    Response.Write("<script>alert('El curso ha sido actualizado')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('El curso ha sido Registrado')</script>");
-                }
+                    this.MapearADatos();
+                    CursoLogic cl = new CursoLogic();
+                    cl.Save(CursoActual);
 
-                Response.AddHeader("REFRESH", "0.1;URL=Cursos.aspx");
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('El curso ha sido actualizado')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('El curso ha sido Registrado')</script>");
+                    }
 
+                    Response.AddHeader("REFRESH", "0.1;URL=Cursos.aspx");
+
+                }
             }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+
         }
 
         protected void ddlMateria_SelectedIndexChanged(object sender, EventArgs e)

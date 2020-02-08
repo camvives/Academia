@@ -248,15 +248,23 @@ namespace UI.Web
             }
             catch
             {
-                Response.Write("<script>alert('Error al eliminar el curso')</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Error al eliminar el curso')", true);
+
             }
         }
 
         public void GetCurso()
         {
-            GridViewRow row = gdvCursos.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            CursoActual = CursoLog.GetOne(ID);
+            try
+            {
+                GridViewRow row = gdvCursos.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                CursoActual = CursoLog.GetOne(ID);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
 
         protected void btnDocentes_Click(object sender, ImageClickEventArgs e)
@@ -277,21 +285,28 @@ namespace UI.Web
 
         public void Inscribirse()
         {
-            this.GetCurso();
-            if (Validaciones.ValidarCupo(CursoActual.ID))
+            try
             {
-                Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
-                alInsc.IDAlumno = PersonaActual.ID;
-                alInsc.IDCurso = CursoActual.ID;
-                
-                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
-                aiLog.Save(alInsc);
-                Response.Redirect("~/Cursos.aspx");
-            }
-            else
-            {
-                Response.Write("<script>alert('No hay cupo en el curso seleccionado')</script>");
+                this.GetCurso();
+                if (Validaciones.ValidarCupo(CursoActual.ID))
+                {
+                    Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                    alInsc.IDAlumno = PersonaActual.ID;
+                    alInsc.IDCurso = CursoActual.ID;
 
+                    Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                    aiLog.Save(alInsc);
+                    Response.Redirect("~/Cursos.aspx");
+                }
+                else
+                {
+                    Response.Write("<script>alert('No hay cupo en el curso seleccionado')</script>");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
     }

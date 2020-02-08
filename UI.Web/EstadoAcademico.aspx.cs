@@ -39,35 +39,43 @@ namespace UI.Web
         public List<DatosInscripciones> ObtenerDatos()
         {
             List<DatosInscripciones> datosInscripciones = new List<DatosInscripciones>();
-            List<Alumno_Inscripcion> inscripciones = AILog.GetMateriasInscripto(PersonaActual.ID);
-
-            foreach (Alumno_Inscripcion ai in inscripciones)
+            try
             {
-                DatosInscripciones datosInscripcion = new DatosInscripciones();
-                datosInscripcion.ID = ai.ID;
-                datosInscripcion.Condicion = ai.Condicion;
-                if (ai.Nota == 0)
+                List<Alumno_Inscripcion> inscripciones = AILog.GetMateriasInscripto(PersonaActual.ID);
+
+                foreach (Alumno_Inscripcion ai in inscripciones)
                 {
-                    datosInscripcion.Nota = "-";
+                    DatosInscripciones datosInscripcion = new DatosInscripciones();
+                    datosInscripcion.ID = ai.ID;
+                    datosInscripcion.Condicion = ai.Condicion;
+                    if (ai.Nota == 0)
+                    {
+                        datosInscripcion.Nota = "-";
+                    }
+                    else
+                    {
+                        datosInscripcion.Nota = ai.Nota.ToString();
+                    }
+
+                    CursoLogic cl = new CursoLogic();
+                    Curso curso = cl.GetOne(ai.IDCurso);
+                    datosInscripcion.AnioCursado = curso.AnioCalendario;
+
+                    MateriaLogic ml = new MateriaLogic();
+                    Materia materia = ml.GetOne(curso.IDMateria);
+                    datosInscripcion.DescMateria = materia.Descripcion;
+
+                    ComisionLogic cml = new ComisionLogic();
+                    Comision comision = cml.GetOne(curso.IDComision);
+                    datosInscripcion.DescComision = comision.Descripcion;
+
+                    datosInscripciones.Add(datosInscripcion);
                 }
-                else
-                {
-                    datosInscripcion.Nota = ai.Nota.ToString();
-                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
-                CursoLogic cl = new CursoLogic();
-                Curso curso = cl.GetOne(ai.IDCurso);
-                datosInscripcion.AnioCursado = curso.AnioCalendario;
-
-                MateriaLogic ml = new MateriaLogic();
-                Materia materia = ml.GetOne(curso.IDMateria);
-                datosInscripcion.DescMateria = materia.Descripcion;
-
-                ComisionLogic cml = new ComisionLogic();
-                Comision comision = cml.GetOne(curso.IDComision);
-                datosInscripcion.DescComision = comision.Descripcion;
-
-                datosInscripciones.Add(datosInscripcion);
             }
 
             return datosInscripciones;

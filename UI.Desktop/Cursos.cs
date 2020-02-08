@@ -178,57 +178,64 @@ namespace UI.Desktop
                 cursoActual.State = BusinessEntity.States.Deleted;
                 CursoLog.Save(cursoActual);
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar el curso, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public void Inscribir()
         {
-            List<Alumno_Inscripcion> alumnosInsc = new List<Alumno_Inscripcion>();
-
-            foreach (DataGridViewRow row in dgvCursos.Rows)
+            try
             {
-                if (row.Cells["Inscribirse"].Value != null)
+                List<Alumno_Inscripcion> alumnosInsc = new List<Alumno_Inscripcion>();
+
+                foreach (DataGridViewRow row in dgvCursos.Rows)
                 {
-                    if (int.Parse(row.Cells["Inscribirse"].Value.ToString()) == 1)
+                    if (row.Cells["Inscribirse"].Value != null)
                     {
-                        if (Validaciones.ValidarCupo(int.Parse(row.Cells["ID"].Value.ToString())))
+                        if (int.Parse(row.Cells["Inscribirse"].Value.ToString()) == 1)
                         {
-                            Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
-                            alInsc.IDAlumno = PersonaActual.ID;
-                            alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
-
-                            alumnosInsc.Add(alInsc);
-
-                            foreach (Alumno_Inscripcion ai in alumnosInsc)
+                            if (Validaciones.ValidarCupo(int.Parse(row.Cells["ID"].Value.ToString())))
                             {
-                                Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
-                                aiLog.Save(ai);
-                            }
+                                Alumno_Inscripcion alInsc = new Alumno_Inscripcion();
+                                alInsc.IDAlumno = PersonaActual.ID;
+                                alInsc.IDCurso = int.Parse(row.Cells[0].Value.ToString());
 
-                            var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (mensaje == DialogResult.Yes)
-                            {
-                                Reporte rep = new Reporte(PersonaActual.ID);
-                                rep.Show();
-                                this.Close();
+                                alumnosInsc.Add(alInsc);
+
+                                foreach (Alumno_Inscripcion ai in alumnosInsc)
+                                {
+                                    Alumno_InscripcionLogic aiLog = new Alumno_InscripcionLogic();
+                                    aiLog.Save(ai);
+                                }
+
+                                var mensaje = MessageBox.Show("¿Desea imprimir certificado de inscripción?", "Finalizar Inscripción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (mensaje == DialogResult.Yes)
+                                {
+                                    Reporte rep = new Reporte(PersonaActual.ID);
+                                    rep.Show();
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    this.Close();
+                                }
                             }
                             else
                             {
-                                this.Close();
+                                MessageBox.Show("No hay cupo en uno o más cursos seleccionados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("No hay cupo en uno o más cursos seleccionados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                           
+
                         }
 
                     }
-
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -282,11 +289,19 @@ namespace UI.Desktop
 
         private void TsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
-            Curso cursoActual = CursoLog.GetOne(ID);
-            CursoDesktop formCurDesk = new CursoDesktop(cursoActual, ModoForm.Modificacion);
-            formCurDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
+                Curso cursoActual = CursoLog.GetOne(ID);
+                CursoDesktop formCurDesk = new CursoDesktop(cursoActual, ModoForm.Modificacion);
+                formCurDesk.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void TsbtnDocentes_Click(object sender, EventArgs e)

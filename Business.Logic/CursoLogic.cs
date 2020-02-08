@@ -19,22 +19,50 @@ namespace Business.Logic
 
         public List<Curso> GetAll()
         {
-            return CursoData.GetAll();
+            try
+            {
+                return CursoData.GetAll();
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar lista de cursos, intente nuevamente");
+            }
         }
 
         public Curso GetOne(int ID)
         {
-            return CursoData.GetOne(ID);
+            try
+            {
+                return CursoData.GetOne(ID);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos del curso, intente nuevamente");
+            }
         }
 
         public void Save(Curso curso)
         {
-            CursoData.Save(curso);
+            try
+            {
+                CursoData.Save(curso);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar datos del curso, intente nuevamente");
+            }
         }
 
         public List<Curso> GetCursosUsuario(int IDPLan)
         {
-            return CursoData.GetCursosUsuario(IDPLan);
+            try
+            {
+                return CursoData.GetCursosUsuario(IDPLan);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
 
     }

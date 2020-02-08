@@ -83,19 +83,26 @@ namespace Util
 
         public static Boolean ValidarCupo(int IDCurso)
         {
-            Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
-            int cantInscriptos = ail.GetCantidadInscriptos(IDCurso);
-
-            CursoLogic cursoLog = new CursoLogic();
-            Curso curso = cursoLog.GetOne(IDCurso);
-
-            if(cantInscriptos < curso.Cupo)
+            try
             {
-                return true;
+                Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
+                int cantInscriptos = ail.GetCantidadInscriptos(IDCurso);
+
+                CursoLogic cursoLog = new CursoLogic();
+                Curso curso = cursoLog.GetOne(IDCurso);
+
+                if (cantInscriptos < curso.Cupo)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
