@@ -45,7 +45,7 @@ namespace UI.Web
             Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
             this.Context.Items["Carrera"] = especialidad.ID;
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Modo"] = ModoForm.Modificacion;
             Session["PersonaEdit"] = PersonaActual;
             Session["Usuario"] = UsuarioActual;
             Server.Transfer("UsuarioWeb.aspx", true);
@@ -59,7 +59,7 @@ namespace UI.Web
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
-            this.Context.Items["Modo"] = ModoForm.Alta;
+            Session["Modo"] = ModoForm.Alta;
             Server.Transfer("UsuarioWeb.aspx", true);
         }
 
@@ -99,7 +99,7 @@ namespace UI.Web
 
         public void MapearDatos()
         {
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Modo"] = ModoForm.Modificacion;
             Session["Usuario"] = UsuarioActual;
             Session.Add("PersonaEdit", PersonaActual);
             this.Context.Items["Carrera"] = Especialidad.ID;
@@ -132,8 +132,7 @@ namespace UI.Web
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            this.Context.Items["Modo"] = ModoForm.Alta;
-            Server.Transfer("UsuarioWeb.aspx", true);
+            Session["Modo"] = ModoForm.Alta;
             Response.Redirect("UsuarioWeb.aspx");
         }
 
@@ -175,6 +174,13 @@ namespace UI.Web
             Session["Usuario"] = UsuarioActual;
             Server.Transfer("UsuarioDatos.aspx", true);
 
+        }
+
+        protected void gdvUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.CompletarGrid();
+            gdvUsuarios.PageIndex = e.NewPageIndex;
+            gdvUsuarios.DataBind();
         }
     }
 }

@@ -23,12 +23,12 @@ namespace Business.Logic
         {
             try
             {
-                if (usuario.State == BusinessEntity.States.New)
+                if (usuario.State != BusinessEntity.States.Deleted)
                 {
                     int cant = this.BuscarLegajo(persona.Legajo);
                     if (cant != 0)
                     {
-                        throw new Exception("El legajo ya está registrado");
+                        throw new Exception("El legajo ya se encuentra registrado");
                     }
                     else
                     {

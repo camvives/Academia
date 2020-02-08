@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="UI.Web.UsuariosWeb" EnableEventValidation="false" %>
-
 <%@ Register Src="~/MenuABM.ascx" TagPrefix="uc1" TagName="MenuABM" %>
 
 
@@ -28,7 +27,7 @@
     
   
     <div class="tabla">
-       <asp:GridView ID="gdvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvUsuarios_RowDataBound">
+       <asp:GridView ID="gdvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnRowDataBound="gdvUsuarios_RowDataBound" OnPageIndexChanging="gdvUsuarios_PageIndexChanging">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                  <Columns>
                     <asp:BoundField DataField="ID" HeaderText="ID" />

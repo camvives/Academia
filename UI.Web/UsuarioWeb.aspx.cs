@@ -33,11 +33,10 @@ namespace UI.Web
 
             PersonaActual = (Persona)Session["PersonaEdit"];
             UsuarioActual = (Usuario)Session["Usuario"];
-            
+            this.Modo = (ModoForm)Session["Modo"];
 
             if (!IsPostBack)
-            {
-                this.Modo = (ModoForm)this.Context.Items["Modo"];
+            {           
                 this.CompletarDDLEsp();
                 this.CompletarFecha();       
 
@@ -65,6 +64,10 @@ namespace UI.Web
                     this.txtUsuario.Enabled = false;
                     this.btnGuardar.Text = "Modificar";
                     Admin = false;
+                }
+                else
+                {
+                    Admin = true;
                 }
 
             }
@@ -283,27 +286,6 @@ namespace UI.Web
 
         }
 
-        protected void btnAceptar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                this.MapearADatos();
-                UsuarioLogic ul = new UsuarioLogic();
-                ul.Save(UsuarioActual, PersonaActual);
-
-                if (this.Modo == ModoForm.Modificacion)
-                {
-                    Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('El usuario ha sido registrado')</script>");
-                }
-
-                Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
-
-            }
-        }
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -373,29 +355,36 @@ namespace UI.Web
 
                 if (Page.IsValid)
                 {
-                    this.MapearADatos();
-                    UsuarioLogic ul = new UsuarioLogic();
-                    ul.Save(UsuarioActual, PersonaActual);
-
-                    if (Admin)
+                    try
                     {
-                        if (this.Modo == ModoForm.Modificacion)
-                        {
-                            Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
-                        }
-                        else if (this.Modo == ModoForm.Alta)
-                        {
-                            Response.Write("<script>alert('El usuario ha sido registrado')</script>");
-                        }
+                        this.MapearADatos();
+                        UsuarioLogic ul = new UsuarioLogic();
+                        ul.Save(UsuarioActual, PersonaActual);
 
-                        Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
+                        if (Admin)
+                        {
+                            if (this.Modo == ModoForm.Modificacion)
+                            {
+                                Response.Write("<script>alert('El usuario ha sido actualizado')</script>");
+                            }
+                            else if (this.Modo == ModoForm.Alta)
+                            {
+                                Response.Write("<script>alert('El usuario ha sido registrado')</script>");
+                            }
+
+                            Response.AddHeader("REFRESH", "0.1;URL=Usuarios.aspx");
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Los datos han sido actualizados')</script>");
+                            Response.AddHeader("REFRESH", "0.1;URL=Main.aspx");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Response.Write("<script>alert('Los datos han sido actualizados')</script>");
-                        Response.AddHeader("REFRESH", "0.1;URL=Main.aspx");
-                    }
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
+                    }
 
                 }
 
