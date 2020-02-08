@@ -54,37 +54,44 @@ namespace UI.Desktop
 
         public void CompletarCombobox()
         {
-            List<String> cursos = new List<string>();
-            Docente_CursoLogic dcLog = new Docente_CursoLogic();
-            List<Docentes_Cursos> docentesCursos = new List<Docentes_Cursos>();
-            docentesCursos = dcLog.GetCursosPorDocente(Docente.ID);
-
-            foreach (Docentes_Cursos dc in docentesCursos)
+            try
             {
-                string curso;
+                List<String> cursos = new List<string>();
+                Docente_CursoLogic dcLog = new Docente_CursoLogic();
+                List<Docentes_Cursos> docentesCursos = new List<Docentes_Cursos>();
+                docentesCursos = dcLog.GetCursosPorDocente(Docente.ID);
 
-                CursoLogic cl = new CursoLogic();
-                Curso cur = cl.GetOne(dc.IDCurso);
+                foreach (Docentes_Cursos dc in docentesCursos)
+                {
+                    string curso;
 
-                ComisionLogic col = new ComisionLogic();
-                Comision com = col.GetOne(cur.IDComision);
+                    CursoLogic cl = new CursoLogic();
+                    Curso cur = cl.GetOne(dc.IDCurso);
 
-                MateriaLogic mat = new MateriaLogic();
-                Materia materia = mat.GetOne(cur.IDMateria);
+                    ComisionLogic col = new ComisionLogic();
+                    Comision com = col.GetOne(cur.IDComision);
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(materia.IDPlan);
+                    MateriaLogic mat = new MateriaLogic();
+                    Materia materia = mat.GetOne(cur.IDMateria);
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(materia.IDPlan);
+
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
 
-                curso = com.Descripcion + " - " + materia.Descripcion + " - " + especialidad.Descripcion + " - " + cur.AnioCalendario.ToString() + " - " + dc.IDCurso.ToString(); 
+                    curso = com.Descripcion + " - " + materia.Descripcion + " - " + especialidad.Descripcion + " - " + cur.AnioCalendario.ToString() + " - " + dc.IDCurso.ToString();
 
-                cursos.Add(curso);
+                    cursos.Add(curso);
+                }
+
+                this.cmbCursos.DataSource = cursos;
             }
-
-            this.cmbCursos.DataSource = cursos;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public List<DatosAlumnos> ObtenerDatos()

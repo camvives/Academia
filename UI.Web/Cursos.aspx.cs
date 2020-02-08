@@ -49,22 +49,30 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            this.GetCurso();
+            try
+            {
+                this.GetCurso();
 
-            MateriaLogic ml = new MateriaLogic();
-            Materia mat = ml.GetOne(CursoActual.IDMateria);
-            
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(mat.IDPlan);
+                MateriaLogic ml = new MateriaLogic();
+                Materia mat = ml.GetOne(CursoActual.IDMateria);
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(mat.IDPlan);
 
-            this.Context.Items["Carrera"] = especialidad.ID;
-            this.Context.Items["Plan"] = plan.ID;
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Curso"] = CursoActual;
-            Server.Transfer("CursoWeb.aspx", true);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+                this.Context.Items["Carrera"] = especialidad.ID;
+                this.Context.Items["Plan"] = plan.ID;
+                this.Context.Items["Modo"] = ModoForm.Modificacion;
+                Session["Curso"] = CursoActual;
+                Server.Transfer("CursoWeb.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
@@ -128,31 +136,39 @@ namespace UI.Web
         public List<DatosCursos> ObtenerDatos()
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
-            List<Curso> cursos = CursoLog.GetAll();
-
-            foreach (Curso c in cursos)
+            try
             {
-                DatosCursos datosCurso = new DatosCursos();
-                datosCurso.ID = c.ID;
-                datosCurso.AnioCalendario = c.AnioCalendario;
-                datosCurso.Cupo = c.Cupo;
+                List<Curso> cursos = CursoLog.GetAll();
 
-                MateriaLogic ml = new MateriaLogic();
-                Materia mat = ml.GetOne(c.IDMateria);
-                datosCurso.DescMateria = mat.Descripcion;
+                foreach (Curso c in cursos)
+                {
+                    DatosCursos datosCurso = new DatosCursos();
+                    datosCurso.ID = c.ID;
+                    datosCurso.AnioCalendario = c.AnioCalendario;
+                    datosCurso.Cupo = c.Cupo;
 
-                ComisionLogic cl = new ComisionLogic();
-                Comision com = cl.GetOne(c.IDComision);
-                datosCurso.DescComision = com.Descripcion;
+                    MateriaLogic ml = new MateriaLogic();
+                    Materia mat = ml.GetOne(c.IDMateria);
+                    datosCurso.DescMateria = mat.Descripcion;
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(com.IDPlan);
-                datosCurso.DescPlan = plan.Descripcion;
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosCurso.DescEspecialidad = especialidad.Descripcion;
+                    ComisionLogic cl = new ComisionLogic();
+                    Comision com = cl.GetOne(c.IDComision);
+                    datosCurso.DescComision = com.Descripcion;
 
-                datosCursos.Add(datosCurso);
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(com.IDPlan);
+                    datosCurso.DescPlan = plan.Descripcion;
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosCurso.DescEspecialidad = especialidad.Descripcion;
+
+                    datosCursos.Add(datosCurso);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
             }
 
             return datosCursos;

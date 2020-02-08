@@ -62,12 +62,19 @@ namespace UI.Desktop
 
         private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
+            try
+            {
+                Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
 
-            PlanLogic plan = new PlanLogic();
-            cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
-            cmbPlan.DisplayMember = "Descripcion";
-            cmbPlan.ValueMember = "ID";
+                PlanLogic plan = new PlanLogic();
+                cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
+                cmbPlan.DisplayMember = "Descripcion";
+                cmbPlan.ValueMember = "ID";
+            }
+            catch(Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public override void MapearADatos()
@@ -90,18 +97,25 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(ComisionActual.IDPlan);
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+            try
+            {
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(ComisionActual.IDPlan);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
 
-            this.btnAgregar.Text = "Guardar";
-            this.txtDescripcion.Text = ComisionActual.Descripcion;
-            this.CompletarCombobox();
-            this.cmbAnio.SelectedIndex = cmbAnio.FindStringExact(ComisionActual.AnioEspecialidad.ToString());
-            this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
-            this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+                this.btnAgregar.Text = "Guardar";
+                this.txtDescripcion.Text = ComisionActual.Descripcion;
+                this.CompletarCombobox();
+                this.cmbAnio.SelectedIndex = cmbAnio.FindStringExact(ComisionActual.AnioEspecialidad.ToString());
+                this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
+                this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void GuardarCambios()

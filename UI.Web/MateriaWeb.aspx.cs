@@ -66,14 +66,21 @@ namespace UI.Web
 
         public void CargaPlanes()
         {
+            try
+            {
+                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
 
-            int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+                PlanLogic plan = new PlanLogic();
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+                ddlPlan.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
-            PlanLogic plan = new PlanLogic();
-            ddlPlan.DataTextField = "Descripcion";
-            ddlPlan.DataValueField = "ID";
-            ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-            ddlPlan.DataBind();
+            }
 
         }
 

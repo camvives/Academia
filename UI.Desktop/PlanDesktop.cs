@@ -102,9 +102,9 @@ namespace UI.Desktop
 
                 this.DialogResult = DialogResult.OK;
             }
-            catch
+            catch(Exception e)
             {
-                this.Notificar("Error", "Error al registrar plan, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Notificar("Error", e.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

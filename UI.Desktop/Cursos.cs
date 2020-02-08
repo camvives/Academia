@@ -90,31 +90,38 @@ namespace UI.Desktop
         public List<DatosCursos> ObtenerDatos()
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
-            List<Curso> cursos = CursoLog.GetAll();
-
-            foreach (Curso c in cursos)
+            try
             {
-                DatosCursos datosCurso = new DatosCursos();
-                datosCurso.ID = c.ID;
-                datosCurso.AnioCalendario = c.AnioCalendario;
-                datosCurso.Cupo = c.Cupo;
+                List<Curso> cursos = CursoLog.GetAll();
 
-                MateriaLogic ml = new MateriaLogic();
-                Materia mat = ml.GetOne(c.IDMateria);
-                datosCurso.DescMateria = mat.Descripcion;
+                foreach (Curso c in cursos)
+                {
+                    DatosCursos datosCurso = new DatosCursos();
+                    datosCurso.ID = c.ID;
+                    datosCurso.AnioCalendario = c.AnioCalendario;
+                    datosCurso.Cupo = c.Cupo;
 
-                ComisionLogic cl = new ComisionLogic();
-                Comision com = cl.GetOne(c.IDComision);
-                datosCurso.DescComision = com.Descripcion;
+                    MateriaLogic ml = new MateriaLogic();
+                    Materia mat = ml.GetOne(c.IDMateria);
+                    datosCurso.DescMateria = mat.Descripcion;
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(com.IDPlan);
-                datosCurso.DescPlan = plan.Descripcion;
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosCurso.DescEspecialidad = especialidad.Descripcion;
+                    ComisionLogic cl = new ComisionLogic();
+                    Comision com = cl.GetOne(c.IDComision);
+                    datosCurso.DescComision = com.Descripcion;
 
-                datosCursos.Add(datosCurso);
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(com.IDPlan);
+                    datosCurso.DescPlan = plan.Descripcion;
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosCurso.DescEspecialidad = especialidad.Descripcion;
+
+                    datosCursos.Add(datosCurso);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosCursos;

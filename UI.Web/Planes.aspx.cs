@@ -87,9 +87,17 @@ namespace UI.Web
 
         public void GetPlan()
         {
-            GridViewRow row = gdvPlanes.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            PlanActual = PlanLog.GetOne(ID);
+            try
+            {
+                GridViewRow row = gdvPlanes.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                PlanActual = PlanLog.GetOne(ID);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
         }
 
         public void EliminarPlan()

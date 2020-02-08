@@ -93,16 +93,24 @@ namespace UI.Web
             }
             else if (e.Item == mnuPrincipal.FindItem("Datos"))
             {
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+                try
+                {
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
-                this.Context.Items["Carrera"] = especialidad.ID;
-                Session["PersonaEdit"] = PersonaActual;
-                Context.Items["Modo"] = ModoForm.Consulta;
-                Server.Transfer("~/UsuarioWeb.aspx", true);
+                    this.Context.Items["Carrera"] = especialidad.ID;
+                    Session["PersonaEdit"] = PersonaActual;
+                    Context.Items["Modo"] = ModoForm.Consulta;
+                    Server.Transfer("~/UsuarioWeb.aspx", true);
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+                }
             }
             else if(e.Item == mnuPrincipal.FindItem("Certificado"))
             {

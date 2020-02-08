@@ -78,36 +78,41 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            
-            this.CompletarCombobox();
+            try
+            {
+                this.CompletarCombobox();
 
 
-            ComisionLogic cl = new ComisionLogic();
-            Comision comision = cl.GetOne(CursoActual.IDComision);
-            
-
-            MateriaLogic ml = new MateriaLogic();
-            Materia materia = ml.GetOne(CursoActual.IDMateria);
+                ComisionLogic cl = new ComisionLogic();
+                Comision comision = cl.GetOne(CursoActual.IDComision);
 
 
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(comision.IDPlan);
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                MateriaLogic ml = new MateriaLogic();
+                Materia materia = ml.GetOne(CursoActual.IDMateria);
 
 
-            this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
-            this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
-
-            cmbPlan.Text = plan.Descripcion;
-            this.cmbMateria.SelectedIndex = cmbMateria.FindStringExact(materia.Descripcion);
-            this.cmbComision.SelectedIndex = cmbComision.FindStringExact(comision.Descripcion);
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(comision.IDPlan);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
 
-            this.btnGuardar.Text = "Guardar";
-            this.txtAnio.Text = CursoActual.AnioCalendario.ToString();
-            this.txtCupo.Text = CursoActual.Cupo.ToString();
-           
+                this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+                this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
+
+                cmbPlan.Text = plan.Descripcion;
+                this.cmbMateria.SelectedIndex = cmbMateria.FindStringExact(materia.Descripcion);
+                this.cmbComision.SelectedIndex = cmbComision.FindStringExact(comision.Descripcion);
+
+
+                this.btnGuardar.Text = "Guardar";
+                this.txtAnio.Text = CursoActual.AnioCalendario.ToString();
+                this.txtCupo.Text = CursoActual.Cupo.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void GuardarCambios()
@@ -180,12 +185,20 @@ namespace UI.Desktop
 
         private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
+            try
+            {
+                Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
 
-            PlanLogic pl = new PlanLogic();
-            cmbPlan.DataSource = pl.GetPlanesEsp(esp.ID);
-            cmbPlan.DisplayMember = "Descripcion";
-            cmbPlan.ValueMember = "ID";
+                PlanLogic pl = new PlanLogic();
+                cmbPlan.DataSource = pl.GetPlanesEsp(esp.ID);
+                cmbPlan.DisplayMember = "Descripcion";
+                cmbPlan.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
         private void CmbPlan_SelectedIndexChanged(object sender, EventArgs e)

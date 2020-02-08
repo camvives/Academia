@@ -43,18 +43,26 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            this.GetMateria();
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(this.MateriaActual.IDPlan);
+            try {
+                this.GetMateria();
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.MateriaActual.IDPlan);
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
-            this.Context.Items["Carrera"] = especialidad.ID;
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Materia"] = MateriaActual;
-            Server.Transfer("MateriaWeb.aspx", true);
+                this.Context.Items["Carrera"] = especialidad.ID;
+                this.Context.Items["Modo"] = ModoForm.Modificacion;
+                Session["Materia"] = MateriaActual;
+                Server.Transfer("MateriaWeb.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
         }
+
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
         {
@@ -71,25 +79,33 @@ namespace UI.Web
         public List<DatosMaterias> ObtenerDatos()
         {
             List<DatosMaterias> datosMaterias = new List<DatosMaterias>();
-            List<Materia> materias = MatLog.GetAll();
-
-            foreach (Materia m in materias)
+            try
             {
-                DatosMaterias datosMateria = new DatosMaterias();
-                datosMateria.ID = m.ID;
-                datosMateria.Descripcion = m.Descripcion;
-                datosMateria.HorasSemanales = m.HorasSemanales;
-                datosMateria.HorasTotales = m.HorasTotales;
+                List<Materia> materias = MatLog.GetAll();
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(m.IDPlan);
-                datosMateria.DescPlan = plan.Descripcion;
+                foreach (Materia m in materias)
+                {
+                    DatosMaterias datosMateria = new DatosMaterias();
+                    datosMateria.ID = m.ID;
+                    datosMateria.Descripcion = m.Descripcion;
+                    datosMateria.HorasSemanales = m.HorasSemanales;
+                    datosMateria.HorasTotales = m.HorasTotales;
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosMateria.DescEspecialidad = especialidad.Descripcion;
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(m.IDPlan);
+                    datosMateria.DescPlan = plan.Descripcion;
 
-                datosMaterias.Add(datosMateria);
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosMateria.DescEspecialidad = especialidad.Descripcion;
+
+                    datosMaterias.Add(datosMateria);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
             }
 
             return datosMaterias;

@@ -45,17 +45,24 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            this.GetComision();
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(this.ComisionActual.IDPlan);
+            try
+            {
+                this.GetComision();
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.ComisionActual.IDPlan);
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
-            this.Context.Items["Carrera"] = especialidad.ID;
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Comision"] = ComisionActual;
-            Server.Transfer("ComisionWeb.aspx", true);
+                this.Context.Items["Carrera"] = especialidad.ID;
+                this.Context.Items["Modo"] = ModoForm.Modificacion;
+                Session["Comision"] = ComisionActual;
+                Server.Transfer("ComisionWeb.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
 
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
@@ -74,24 +81,31 @@ namespace UI.Web
         public List<DatosComisiones> ObtenerDatos()
         {
             List<DatosComisiones> datosComisiones = new List<DatosComisiones>();
-            List<Comision> comisiones = ComLog.GetAll();
-
-            foreach (Comision c in comisiones)
+            try
             {
-                DatosComisiones datosComision = new DatosComisiones();
-                datosComision.ID = c.ID;
-                datosComision.Descripcion = c.Descripcion;
-                datosComision.Anio = c.AnioEspecialidad;
+                List<Comision> comisiones = ComLog.GetAll();
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(c.IDPlan);
-                datosComision.DescPlan = plan.Descripcion;
+                foreach (Comision c in comisiones)
+                {
+                    DatosComisiones datosComision = new DatosComisiones();
+                    datosComision.ID = c.ID;
+                    datosComision.Descripcion = c.Descripcion;
+                    datosComision.Anio = c.AnioEspecialidad;
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosComision.DescEspecialidad = especialidad.Descripcion;
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(c.IDPlan);
+                    datosComision.DescPlan = plan.Descripcion;
 
-                datosComisiones.Add(datosComision);
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosComision.DescEspecialidad = especialidad.Descripcion;
+
+                    datosComisiones.Add(datosComision);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
 
             return datosComisiones;

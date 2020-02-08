@@ -36,18 +36,26 @@ namespace UI.Web
 
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
-            this.GetUsuario();
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+            try
+            {
+                this.GetUsuario();
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
-            this.Context.Items["Carrera"] = especialidad.ID;
-            Session["Modo"] = ModoForm.Modificacion;
-            Session["PersonaEdit"] = PersonaActual;
-            Session["Usuario"] = UsuarioActual;
-            Server.Transfer("UsuarioWeb.aspx", true);
+                this.Context.Items["Carrera"] = especialidad.ID;
+                Session["Modo"] = ModoForm.Modificacion;
+                Session["PersonaEdit"] = PersonaActual;
+                Session["Usuario"] = UsuarioActual;
+                Server.Transfer("UsuarioWeb.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
         }
 
         private void BtnEliminar_ButtonClick(object sender, EventArgs e)
@@ -168,18 +176,26 @@ namespace UI.Web
 
         protected void btnInfo_Click(object sender, ImageClickEventArgs e)
         {
-            this.GetUsuario();
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+            try
+            {
+                this.GetUsuario();
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
 
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
-            this.Context.Items["Plan"] = plan.Descripcion;
-            this.Context.Items["Carrera"] = especialidad.Descripcion;
-            Session["PersonaEdit"] = PersonaActual;
-            Session["Usuario"] = UsuarioActual;
-            Server.Transfer("UsuarioDatos.aspx", true);
+                this.Context.Items["Plan"] = plan.Descripcion;
+                this.Context.Items["Carrera"] = especialidad.Descripcion;
+                Session["PersonaEdit"] = PersonaActual;
+                Session["Usuario"] = UsuarioActual;
+                Server.Transfer("UsuarioDatos.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
 
         }
 

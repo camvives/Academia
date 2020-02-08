@@ -135,66 +135,73 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            PlanLogic pl = new PlanLogic();
-            Plan plan = pl.GetOne(PersonaActual.IDPlan);
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-
-            this.txtNombre.Text = this.PersonaActual.Nombre;
-            this.txtApellido.Text = this.PersonaActual.Apellido;
-            this.txtEmail.Text = this.PersonaActual.Email;
-            this.dtpNacimiento.Value = this.PersonaActual.FechaNacimiento;
-            this.txtTelefono.Text = this.PersonaActual.Telefono;
-            this.cmbTipo.SelectedIndex = cmbTipo.FindStringExact(this.PersonaActual.TipoPersona.ToString());
-
-            #region Direccion
-            txtDireccion.ForeColor = Color.Black;
-            txtDireccionNum.ForeColor = Color.Black;
-
-            string direccion = string.Empty;
-            string numdir = string.Empty;
-
-            //Separa numeros de la dirección
-            foreach (char c in PersonaActual.Direccion)
+            try
             {
-                if (Char.IsLetter(c))
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(PersonaActual.IDPlan);
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+                this.txtNombre.Text = this.PersonaActual.Nombre;
+                this.txtApellido.Text = this.PersonaActual.Apellido;
+                this.txtEmail.Text = this.PersonaActual.Email;
+                this.dtpNacimiento.Value = this.PersonaActual.FechaNacimiento;
+                this.txtTelefono.Text = this.PersonaActual.Telefono;
+                this.cmbTipo.SelectedIndex = cmbTipo.FindStringExact(this.PersonaActual.TipoPersona.ToString());
+
+                #region Direccion
+                txtDireccion.ForeColor = Color.Black;
+                txtDireccionNum.ForeColor = Color.Black;
+
+                string direccion = string.Empty;
+                string numdir = string.Empty;
+
+                //Separa numeros de la dirección
+                foreach (char c in PersonaActual.Direccion)
                 {
-                    direccion += c;
+                    if (Char.IsLetter(c))
+                    {
+                        direccion += c;
+                    }
+                    if (Char.IsNumber(c))
+                    {
+                        numdir += c;
+                    }
                 }
-                if (Char.IsNumber(c))
+                this.txtDireccion.Text = direccion;
+                this.txtDireccionNum.Text = numdir;
+                #endregion
+
+                if (PersonaActual.Legajo != 0)
                 {
-                    numdir += c;
+                    this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
+                }
+                else
+                {
+                    this.txtLegajo.Enabled = false;
+                }
+
+                if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
+                {
+                    this.cmbCarrera.Enabled = false;
+                    this.cmbPlan.Enabled = false;
+                }
+
+                if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+                {
+                    this.CompletarCombobox();
+                    this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
+                    this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+                }
+
+                if (this.Modo == ModoForm.Modificacion)
+                {
+                    this.btnGuardar.Text = "Guardar";
                 }
             }
-            this.txtDireccion.Text = direccion;
-            this.txtDireccionNum.Text = numdir;
-            #endregion
-
-            if (PersonaActual.Legajo != 0)
+            catch (Exception ex)
             {
-                this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
-            }
-            else
-            {
-                this.txtLegajo.Enabled = false;
-            }
-
-            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
-            {
-                this.cmbCarrera.Enabled = false;
-                this.cmbPlan.Enabled = false;
-            }
-            
-            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
-            {
-                this.CompletarCombobox();
-                this.cmbPlan.SelectedIndex = cmbPlan.FindStringExact(plan.Descripcion);
-                this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
-            }
-
-            if (this.Modo == ModoForm.Modificacion)
-            {
-                this.btnGuardar.Text = "Guardar";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -283,13 +290,21 @@ namespace UI.Desktop
         #region ELEMENTOS DEL FORM
         private void CmbCarrera_SelectedValueChanged(object sender, EventArgs e)
         {
-            //Obtiene el objeto seleccionado del combobox
-            Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
+            try
+            {
+                //Obtiene el objeto seleccionado del combobox
+                Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
 
-            PlanLogic plan = new PlanLogic();
-            cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
-            cmbPlan.DisplayMember = "Descripcion";
-            cmbPlan.ValueMember = "ID";
+                PlanLogic plan = new PlanLogic();
+                cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
+                cmbPlan.DisplayMember = "Descripcion";
+                cmbPlan.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)

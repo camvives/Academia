@@ -37,25 +37,32 @@ namespace UI.Desktop
         public List<DatosMaterias> ObtenerDatos()
         {
             List<DatosMaterias> datosMaterias = new List<DatosMaterias>();
-            List<Materia> materias = MatLog.GetAll();
-
-            foreach (Materia m in materias)
+            try
             {
-                DatosMaterias datosMateria = new DatosMaterias();
-                datosMateria.ID = m.ID;
-                datosMateria.Descripcion = m.Descripcion;
-                datosMateria.HorasSemanales = m.HorasSemanales;
-                datosMateria.HorasTotales = m.HorasTotales;
+                List<Materia> materias = MatLog.GetAll();
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(m.IDPlan);
-                datosMateria.DescPlan = plan.Descripcion;
+                foreach (Materia m in materias)
+                {
+                    DatosMaterias datosMateria = new DatosMaterias();
+                    datosMateria.ID = m.ID;
+                    datosMateria.Descripcion = m.Descripcion;
+                    datosMateria.HorasSemanales = m.HorasSemanales;
+                    datosMateria.HorasTotales = m.HorasTotales;
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosMateria.DescEspecialidad = especialidad.Descripcion;
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(m.IDPlan);
+                    datosMateria.DescPlan = plan.Descripcion;
 
-                datosMaterias.Add(datosMateria);
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosMateria.DescEspecialidad = especialidad.Descripcion;
+
+                    datosMaterias.Add(datosMateria);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosMaterias;

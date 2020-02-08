@@ -102,11 +102,18 @@ namespace UI.Desktop
 
         private void TsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgvPlanes.SelectedRows[0].Cells["ID"].Value;
-            Plan planActual = PlanLog.GetOne(ID);
-            PlanDesktop formPlanDesk = new PlanDesktop(planActual, ModoForm.Modificacion);
-            formPlanDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = (int)dgvPlanes.SelectedRows[0].Cells["ID"].Value;
+                Plan planActual = PlanLog.GetOne(ID);
+                PlanDesktop formPlanDesk = new PlanDesktop(planActual, ModoForm.Modificacion);
+                formPlanDesk.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TsbEliminar_Click(object sender, EventArgs e)

@@ -256,15 +256,22 @@ namespace UI.Web
 
         public void CargaPlanes()
         {
-            if (ddlTipo.SelectedValue == "Alumno")
+            try
             {
-                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+                if (ddlTipo.SelectedValue == "Alumno")
+                {
+                    int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
 
-                PlanLogic plan = new PlanLogic();
-                ddlPlan.DataTextField = "Descripcion";
-                ddlPlan.DataValueField = "ID";
-                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-                ddlPlan.DataBind();
+                    PlanLogic plan = new PlanLogic();
+                    ddlPlan.DataTextField = "Descripcion";
+                    ddlPlan.DataValueField = "ID";
+                    ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+                    ddlPlan.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
 
@@ -273,16 +280,24 @@ namespace UI.Web
         #region ELEMENTOS DEL FORM
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlPlan.Enabled = true;
-            ddlCarrera.Items.Remove("Seleccionar Carrera");
-            ddlPlan.Items.Remove("Plan");
-            int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+            try
+            {
+                ddlPlan.Enabled = true;
+                ddlCarrera.Items.Remove("Seleccionar Carrera");
+                ddlPlan.Items.Remove("Plan");
+                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
 
-            PlanLogic plan = new PlanLogic();
-            ddlPlan.DataTextField = "Descripcion";
-            ddlPlan.DataValueField = "ID";
-            ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-            ddlPlan.DataBind();         
+                PlanLogic plan = new PlanLogic();
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+                ddlPlan.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
 
         }
 

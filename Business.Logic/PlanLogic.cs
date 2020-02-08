@@ -16,24 +16,54 @@ namespace Business.Logic
         {
             PlanData = new PlanAdapter();
         }
+
         public void Save(Plan plan)
         {
-            PlanData.Save(plan);
+            try
+            {
+                PlanData.Save(plan);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar plan, intente nuevamente");
+            }
         }
 
         public List<Plan> GetPlanesEsp(int idesp)
         {
-            return PlanData.GetPlanesEsp(idesp);
+            try
+            {
+                return PlanData.GetPlanesEsp(idesp);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos del plan, intente nuevamente");
+            }
+
         }
 
         public Plan GetOne(int ID)
         {
-            return PlanData.GetOne(ID);
+            try
+            {
+                return PlanData.GetOne(ID);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos del plan, intente nuevamente");
+            }
         }
 
         public List<Plan> GetAll()
         {
-            return PlanData.GetAll();
+            try
+            {
+                return PlanData.GetAll();
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar lista de planes, intente nuevamente");
+            }
         }
     }
 }

@@ -47,24 +47,32 @@ namespace UI.Desktop
         public List<DatosComisiones> ObtenerDatos()
         {
             List<DatosComisiones> datosComisiones = new List<DatosComisiones>();
-            List<Comision> comisiones = ComLog.GetAll();
 
-            foreach (Comision c in comisiones)
+            try
             {
-                DatosComisiones datosComision = new DatosComisiones();
-                datosComision.ID = c.ID;
-                datosComision.Descripcion = c.Descripcion;
-                datosComision.Anio = c.AnioEspecialidad;
+                List<Comision> comisiones = ComLog.GetAll();
 
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(c.IDPlan);
-                datosComision.DescPlan = plan.Descripcion;
+                foreach (Comision c in comisiones)
+                {
+                    DatosComisiones datosComision = new DatosComisiones();
+                    datosComision.ID = c.ID;
+                    datosComision.Descripcion = c.Descripcion;
+                    datosComision.Anio = c.AnioEspecialidad;
 
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-                datosComision.DescEspecialidad = especialidad.Descripcion;
+                    PlanLogic pl = new PlanLogic();
+                    Plan plan = pl.GetOne(c.IDPlan);
+                    datosComision.DescPlan = plan.Descripcion;
 
-                datosComisiones.Add(datosComision);
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+                    datosComision.DescEspecialidad = especialidad.Descripcion;
+
+                    datosComisiones.Add(datosComision);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosComisiones;
