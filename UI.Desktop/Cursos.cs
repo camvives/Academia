@@ -306,10 +306,17 @@ namespace UI.Desktop
 
         private void TsbtnDocentes_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
-            Curso cursoActual = CursoLog.GetOne(ID);
-            formDocentes_Cursos dc = new formDocentes_Cursos(cursoActual);
-            dc.ShowDialog();
+            try
+            {
+                int ID = (int)dgvCursos.SelectedRows[0].Cells["ID"].Value;
+                Curso cursoActual = CursoLog.GetOne(ID);
+                formDocentes_Cursos dc = new formDocentes_Cursos(cursoActual);
+                dc.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion

@@ -20,22 +20,50 @@ namespace Business.Logic
 
         public List<Comision> GetAll()
         {
-            return ComisionData.GetAll();
+            try
+            {
+                return ComisionData.GetAll();
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar lista de comisiones, intente nuevamente");
+            }
         }
 
         public Comision GetOne(int ID)
         {
-            return ComisionData.GetOne(ID);
+            try
+            {
+                return ComisionData.GetOne(ID);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos de la comisión, intente nuevamente");
+            }
         }
 
         public void Save(Comision comision)
         {
-            ComisionData.Save(comision);
+            try
+            {
+                ComisionData.Save(comision);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar datos del curso, intente nuevamente");
+            }
         }
 
         public List<Comision> GetComisionesMat(int IDPlan)
         {
-            return ComisionData.GetComisionesMat(IDPlan);
+            try
+            {
+                return ComisionData.GetComisionesMat(IDPlan);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
     }
 }

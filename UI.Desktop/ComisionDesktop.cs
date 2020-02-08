@@ -144,9 +144,9 @@ namespace UI.Desktop
 
                 this.DialogResult = DialogResult.OK;
             }
-            catch
+            catch (Exception ex)
             {
-                this.Notificar("Error", "Error al registrar comisión, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Notificar("Error", ex.Message ,MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
