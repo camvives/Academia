@@ -48,12 +48,19 @@ namespace UI.Desktop
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            if (Validar())
+            try
             {
-                this.MapearADatos();
-                Alumno_InscripcionLogic al = new Alumno_InscripcionLogic();
-                al.Save(Alumno);
-                this.Close();
+                if (Validar())
+                {
+                    this.MapearADatos();
+                    Alumno_InscripcionLogic al = new Alumno_InscripcionLogic();
+                    al.Save(Alumno);
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

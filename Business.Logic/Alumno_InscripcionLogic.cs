@@ -19,23 +19,51 @@ namespace Business.Logic
 
         public void Save(Alumno_Inscripcion ai)
         {
-            AlumInscData.Save(ai);
+            try
+            {
+                AlumInscData.Save(ai);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar lista de inscripciones, intente nuevamente");
+            }
         }
 
         public List<Alumno_Inscripcion> GetMateriasInscripto(int IDPersona)
         {
-            return AlumInscData.GetMateriasInscripto(IDPersona);
+            try
+            {
+                return AlumInscData.GetMateriasInscripto(IDPersona);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
 
         public int GetCantidadInscriptos(int IDCurso)
         {
-            return AlumInscData.GetCantidadInscriptos(IDCurso);
+            try
+            {
+                return AlumInscData.GetCantidadInscriptos(IDCurso);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
 
         }
 
         public List<Alumno_Inscripcion> GetAlumnosInscriptos(int IDCurso)
         {
-            return AlumInscData.GetAlumnosInscriptos(IDCurso);
+            try
+            {
+                return AlumInscData.GetAlumnosInscriptos(IDCurso);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar lista de inscripciones, intente nuevamente");
+            }
         }
 
 

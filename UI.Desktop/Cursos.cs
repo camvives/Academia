@@ -138,33 +138,40 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            if (PersonaActual == null)
+            try
             {
-                this.dgvCursos.DataSource = this.ObtenerDatos();
-            }
-            else
-            {
-                this.dgvCursos.DataSource = this.ObtenerDatosUsr();
-           Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
-                List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
-     
-                List<int> idInscripciones = new List<int>();
-                foreach (Alumno_Inscripcion ai in inscripciones)
+                if (PersonaActual == null)
                 {
-                    int idCurso = ai.IDCurso;
-                    idInscripciones.Add(idCurso);
+                    this.dgvCursos.DataSource = this.ObtenerDatos();
                 }
-
-                foreach (DataGridViewRow row in dgvCursos.Rows)
+                else
                 {
-                    if (idInscripciones.Contains(int.Parse(row.Cells["ID"].Value.ToString())))
+                    this.dgvCursos.DataSource = this.ObtenerDatosUsr();
+                    Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
+                    List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
+
+                    List<int> idInscripciones = new List<int>();
+                    foreach (Alumno_Inscripcion ai in inscripciones)
                     {
-                        row.DefaultCellStyle.BackColor = Color.LightGray;
-                        row.Cells["Inscribirse"].ReadOnly = true;
-                        row.Cells["Inscribirse"].Value = 2;
+                        int idCurso = ai.IDCurso;
+                        idInscripciones.Add(idCurso);
                     }
 
+                    foreach (DataGridViewRow row in dgvCursos.Rows)
+                    {
+                        if (idInscripciones.Contains(int.Parse(row.Cells["ID"].Value.ToString())))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.LightGray;
+                            row.Cells["Inscribirse"].ReadOnly = true;
+                            row.Cells["Inscribirse"].Value = 2;
+                        }
+
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

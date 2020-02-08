@@ -19,6 +19,7 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
+
         public CursoDesktop(Curso cur, ModoForm modo) : this()
         {
             this.Modo = modo;

@@ -203,42 +203,41 @@ namespace UI.Web
 
         protected void gdvInscriptos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            //try
-            //{
-            //GridViewRow row = (GridViewRow)(((Control)sender).NamingContainer);
-            //TextBox txtNota = (TextBox)gdvInscriptos.Rows[e.RowIndex].FindControl("txtNota");
-
-            //Session["Nota"] = txtNota.Text;
-
-            Label lblID = gdvInscriptos.Rows[e.RowIndex].FindControl("lblID") as Label;
-            Label lblIDCur = gdvInscriptos.Rows[e.RowIndex].FindControl("lblCurso") as Label;
-            Label lblIDPer = gdvInscriptos.Rows[e.RowIndex].FindControl("lblPersona") as Label;
-            DropDownList ddlCondicion = gdvInscriptos.Rows[e.RowIndex].FindControl("ddlCondicion") as DropDownList;
-            TextBox txtNota = gdvInscriptos.Rows[e.RowIndex].FindControl("txtNota") as TextBox;
-            
-            Alumno_Inscripcion ai = new Alumno_Inscripcion();
-            ai.ID = int.Parse(lblID.Text);
-            ai.IDCurso = int.Parse(lblIDCur.Text);
-            ai.IDAlumno = int.Parse(lblIDPer.Text);
-            ai.Condicion = ddlCondicion.SelectedValue;
-
-            if (txtNota.Text == " ")
+            try
             {
-                ai.Nota = 0;
-            }
-            else
-            {
-                ai.Nota = int.Parse(txtNota.Text);
-            }
+                Label lblID = gdvInscriptos.Rows[e.RowIndex].FindControl("lblID") as Label;
+                Label lblIDCur = gdvInscriptos.Rows[e.RowIndex].FindControl("lblCurso") as Label;
+                Label lblIDPer = gdvInscriptos.Rows[e.RowIndex].FindControl("lblPersona") as Label;
+                DropDownList ddlCondicion = gdvInscriptos.Rows[e.RowIndex].FindControl("ddlCondicion") as DropDownList;
+                TextBox txtNota = gdvInscriptos.Rows[e.RowIndex].FindControl("txtNota") as TextBox;
+
+                Alumno_Inscripcion ai = new Alumno_Inscripcion();
+                ai.ID = int.Parse(lblID.Text);
+                ai.IDCurso = int.Parse(lblIDCur.Text);
+                ai.IDAlumno = int.Parse(lblIDPer.Text);
+                ai.Condicion = ddlCondicion.SelectedValue;
+
+                if (txtNota.Text == " ")
+                {
+                    ai.Nota = 0;
+                }
+                else
+                {
+                    ai.Nota = int.Parse(txtNota.Text);
+                }
 
 
-            ai.State = BusinessEntity.States.Modified;
+                ai.State = BusinessEntity.States.Modified;
 
-            Alumno_InscripcionLogic al = new Alumno_InscripcionLogic();
+                Alumno_InscripcionLogic al = new Alumno_InscripcionLogic();
                 al.Save(ai);
                 Response.Redirect("~/Inscriptos.aspx");
-            //}
-            //catch { }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+
         }
 
         protected void gdvInscriptos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
