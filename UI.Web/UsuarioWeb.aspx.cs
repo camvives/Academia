@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Entities;
-using Business.Logic;
-using Util;
 
 namespace UI.Web
 {
@@ -15,18 +11,16 @@ namespace UI.Web
         public Persona PersonaActual { get; set; }
         public Usuario UsuarioActual { get; set; }
 
-
-
-        public bool Admin 
-        { 
-            get {
+        public bool Admin
+        {
+            get
+            {
                 object admin = ViewState["admin"];
-                return (bool)admin;  
+                return (bool)admin;
             }
-            set { ViewState["admin"] = value; } 
-        
-        }
+            set { ViewState["admin"] = value; }
 
+        }
 
         protected new void Page_Load(object sender, EventArgs e)
         {
@@ -36,12 +30,12 @@ namespace UI.Web
             this.Modo = (ModoForm)Session["Modo"];
 
             if (!IsPostBack)
-            {           
+            {
                 this.CompletarDDLEsp();
-                this.CompletarFecha();       
+                this.CompletarFecha();
 
                 if (this.Modo == ModoForm.Modificacion)
-                {                 
+                {
                     MapearDeDatos();
                     Admin = true;
                 }
@@ -188,7 +182,6 @@ namespace UI.Web
 
         }
 
-
         public void CompletarFecha()
         {
             for (int i = 1; i <= 31; i++)
@@ -275,97 +268,9 @@ namespace UI.Web
             }
         }
 
-        #endregion
-
-        #region ELEMENTOS DEL FORM
-        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        public void Guardar()
         {
-            try
-            {
-                ddlPlan.Enabled = true;
-                ddlCarrera.Items.Remove("Seleccionar Carrera");
-                ddlPlan.Items.Remove("Plan");
-                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
-
-                PlanLogic plan = new PlanLogic();
-                ddlPlan.DataTextField = "Descripcion";
-                ddlPlan.DataValueField = "ID";
-                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
-                ddlPlan.DataBind();
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-
-            }
-
-        }
-
-
-        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.CambiaTipo();
-        }
-
-        protected void reqLegajo_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (ddlTipo.SelectedValue == "Alumno")
-            {
-                reqLegajo1.Enabled = true ;
-            }
-            else if (ddlTipo.SelectedValue == "Docente")
-            {
-                reqLegajo1.Enabled = true;
-            }
-        }
-
-        protected void reqCarrera_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if(ddlTipo.SelectedValue == "Alumno")
-            {
-                reqCarrera1.Enabled = true;
-            }
-
-        }
-
-        protected void ddlDia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtFecha.Text = FormatFecha();
-        }
-
-        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           txtFecha.Text = FormatFecha();
-        }
-
-        protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtFecha.Text = FormatFecha();
-        }
-
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Usuarios.aspx");
-        }
-
-        #endregion
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            if (Admin)
-            {
-                Response.Redirect("~/Usuarios.aspx");
-            }
-            else
-            {
-                Response.Redirect("~/Main.aspx");
-            }
-            
-        }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if(this.Modo != ModoForm.Consulta)
+            if (this.Modo != ModoForm.Consulta)
             {
 
                 if (Page.IsValid)
@@ -404,7 +309,7 @@ namespace UI.Web
                 }
 
             }
-            else if(this.Modo == ModoForm.Consulta)
+            else if (this.Modo == ModoForm.Consulta)
             {
                 this.btnGuardar.Text = "Guardar";
                 Modo = ModoForm.Modificacion;
@@ -418,9 +323,105 @@ namespace UI.Web
                 this.ddlAnio.Enabled = true;
                 this.txtTelefono.Enabled = true;
                 this.txtUsuario.Enabled = true;
-                          
+
+            }
+        }
+
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlPlan.Enabled = true;
+                ddlCarrera.Items.Remove("Seleccionar Carrera");
+                ddlPlan.Items.Remove("Plan");
+                int EspId = int.Parse(ddlCarrera.SelectedValue.ToString());
+
+                PlanLogic plan = new PlanLogic();
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataSource = plan.GetPlanesEsp(EspId);
+                ddlPlan.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
             }
 
         }
+
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.CambiaTipo();
+        }
+
+        protected void reqLegajo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (ddlTipo.SelectedValue == "Alumno")
+            {
+                reqLegajo1.Enabled = true;
+            }
+            else if (ddlTipo.SelectedValue == "Docente")
+            {
+                reqLegajo1.Enabled = true;
+            }
+        }
+
+        protected void reqCarrera_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (ddlTipo.SelectedValue == "Alumno")
+            {
+                reqCarrera1.Enabled = true;
+            }
+
+        }
+
+        protected void ddlDia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = FormatFecha();
+        }
+
+        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = FormatFecha();
+        }
+
+        protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFecha.Text = FormatFecha();
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Usuarios.aspx");
+        }
+
+       
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            if (Admin)
+            {
+                Response.Redirect("~/Usuarios.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Main.aspx");
+            }
+
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            this.Guardar();
+        }
+
+
+
+        #endregion
     }
+
 }

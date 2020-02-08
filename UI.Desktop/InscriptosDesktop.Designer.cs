@@ -152,7 +152,6 @@
             this.MaximizeBox = false;
             this.Name = "InscriptosDesktop";
             this.Text = "InscriptosDesktop";
-            this.Load += new System.EventHandler(this.InscriptosDesktop_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

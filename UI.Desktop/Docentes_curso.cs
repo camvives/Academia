@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -18,11 +12,8 @@ namespace UI.Desktop
         {
             public int ID { get; set; }
             public string Nombre { get; set; }
-
             public string Apellido { get; set; }
-
             public int Legajo { get; set; }
-
             public string Cargo { get; set; }
         }
 
@@ -61,7 +52,7 @@ namespace UI.Desktop
         {
             List<Docente> datosDocentes = new List<Docente>();
             try
-            {               
+            {
                 Docente_CursoLogic dcl = new Docente_CursoLogic();
                 List<Docentes_Cursos> docentes = dcl.GetDocentesPorCurso(CursoActual.ID);
 
@@ -79,7 +70,7 @@ namespace UI.Desktop
 
                     datosDocentes.Add(Doc);
                 }
-            
+
             }
             catch (Exception e)
             {
@@ -98,7 +89,6 @@ namespace UI.Desktop
         {
             this.Close();
         }
-
 
         public void EliminarAsignacion()
         {

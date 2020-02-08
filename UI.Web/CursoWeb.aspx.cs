@@ -58,27 +58,6 @@ namespace UI.Web
 
         }
 
-        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlPlan.Enabled = true;
-            ddlCarrera.Items.Remove("Seleccionar Carrera");
-
-            ddlMateria.Items.Clear();
-            ddlComision.Items.Clear();
-            ddlMateria.Items.Insert(0, " ");
-            ddlComision.Items.Insert(0, " ");
-            ddlMateria.Text = " ";
-            ddlComision.Text = " ";
-
-            this.CargaPlanes();
-            
-        }
-
-        protected void ddlPlan_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.CargaMatCom();
-        }
-
         public void CargaPlanes()
         {
             try
@@ -103,51 +82,6 @@ namespace UI.Web
 
             }
 
-        }
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Cursos.aspx");
-        }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Page.IsValid)
-                {
-                    this.MapearADatos();
-                    CursoLogic cl = new CursoLogic();
-                    cl.Save(CursoActual);
-
-                    if (this.Modo == ModoForm.Modificacion)
-                    {
-                        Response.Write("<script>alert('El curso ha sido actualizado')</script>");
-                    }
-                    else if (this.Modo == ModoForm.Alta)
-                    {
-                        Response.Write("<script>alert('El curso ha sido Registrado')</script>");
-                    }
-
-                    Response.AddHeader("REFRESH", "0.1;URL=Cursos.aspx");
-
-                }
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-            }
-
-        }
-
-        protected void ddlMateria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlMateria.Items.Remove(" ");
-        }
-
-        protected void ddlComision_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlComision.Items.Remove(" ");
         }
 
         public override void MapearADatos()
@@ -205,5 +139,74 @@ namespace UI.Web
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
+
+
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Cursos.aspx");
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Page.IsValid)
+                {
+                    this.MapearADatos();
+                    CursoLogic cl = new CursoLogic();
+                    cl.Save(CursoActual);
+
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('El curso ha sido actualizado')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('El curso ha sido Registrado')</script>");
+                    }
+
+                    Response.AddHeader("REFRESH", "0.1;URL=Cursos.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+
+        }
+
+        protected void ddlMateria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlMateria.Items.Remove(" ");
+        }
+
+        protected void ddlComision_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlComision.Items.Remove(" ");
+        }
+
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlPlan.Enabled = true;
+            ddlCarrera.Items.Remove("Seleccionar Carrera");
+
+            ddlMateria.Items.Clear();
+            ddlComision.Items.Clear();
+            ddlMateria.Items.Insert(0, " ");
+            ddlComision.Items.Insert(0, " ");
+            ddlMateria.Text = " ";
+            ddlComision.Text = " ";
+
+            this.CargaPlanes();
+
+        }
+
+        protected void ddlPlan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.CargaMatCom();
+        }
+
     }
 }

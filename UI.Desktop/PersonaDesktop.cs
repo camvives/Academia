@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 using Util;
 
 namespace UI.Desktop
@@ -23,7 +17,7 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
-        public FormPersonaDesktop(int id, ModoForm modo):this()
+        public FormPersonaDesktop(int id, ModoForm modo) : this()
         {
             this.Text = "Editar Usuario";
             Modo = modo;
@@ -34,7 +28,7 @@ namespace UI.Desktop
                 (UsuarioActual, PersonaActual) = ul.GetOne(id);
                 this.MapearDeDatos();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
@@ -69,15 +63,14 @@ namespace UI.Desktop
             }
         }
 
-
         private void FormPersonaDesktop_Load(object sender, EventArgs e)
         {
             if (Modo == ModoForm.Alta)
             {
                 this.CompletarCombobox();
-            }         
+            }
         }
-        
+
 
         #region METODOS
 
@@ -100,8 +93,8 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-         
-            if(Modo == ModoForm.Alta)
+
+            if (Modo == ModoForm.Alta)
             {
                 PersonaActual = new Persona();
             }
@@ -217,7 +210,7 @@ namespace UI.Desktop
             this.MapearADatos();
 
             UsuarioDesktop usuarioDesktop;
-            if(Modo == ModoForm.Alta)
+            if (Modo == ModoForm.Alta)
             {
                 usuarioDesktop = new UsuarioDesktop(PersonaActual);
             }
@@ -237,24 +230,24 @@ namespace UI.Desktop
         public bool Validar()
         {
 
-           if (cmbTipo.SelectedIndex == -1)
-           {
+            if (cmbTipo.SelectedIndex == -1)
+            {
                 this.Notificar("Usuario no válido", "Debe seleccionar un tipo de usuario.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-           }
-           else if (!this.CamposVacios())
-           {
+            }
+            else if (!this.CamposVacios())
+            {
                 this.Notificar("Campos vacíos", "Debe completar todos los campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-           }
-           else if (!(Validaciones.EmailValido(txtEmail.Text)))
-           {
+            }
+            else if (!(Validaciones.EmailValido(txtEmail.Text)))
+            {
                 this.Notificar("Email no válido", "Por favor, ingrese un formato de mail válido.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-           }
+            }
 
 
-           return true;      
+            return true;
         }
 
         public bool CamposVacios()
@@ -279,7 +272,7 @@ namespace UI.Desktop
             {
                 return false;
             }
-            else if(string.IsNullOrEmpty(txtEmail.Text))
+            else if (string.IsNullOrEmpty(txtEmail.Text))
             {
                 return false;
             }
@@ -292,6 +285,7 @@ namespace UI.Desktop
                 return true;
             }
         }
+
         #endregion
 
         #region ELEMENTOS DEL FORM
@@ -325,7 +319,7 @@ namespace UI.Desktop
                 if (this.Validar())
                 {
                     this.GuardarCambios();
-                }         
+                }
             }
         }
 
@@ -425,7 +419,7 @@ namespace UI.Desktop
                 txtLegajo.Enabled = true;
             }
         }
-        
+
 
         private void LklblModificar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Web
 {
@@ -24,7 +22,7 @@ namespace UI.Web
         }
         public Docente Doc { get; set; }
 
-        public Docentes_Cursos DocenteActual {get; set;}
+        public Docentes_Cursos DocenteActual { get; set; }
 
         public Docente_CursoLogic DocCursoLog
         {
@@ -49,30 +47,9 @@ namespace UI.Web
             MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
         }
 
-        private void BtnEditar_ButtonClick(object sender, EventArgs e)
-        {
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            this.GetDocente();
-            Session["Docente"] = DocenteActual;
-            Server.Transfer("Docente_CursoWeb.aspx", true);
-
-
-        }
-
-        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
-        {
-            this.EliminarDocente();
-            Response.Redirect("Docentes_Curso.aspx");
-        }
-
-        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
-        {
-            this.Context.Items["Modo"] = ModoForm.Alta;
-            Server.Transfer("Docente_CursoWeb.aspx", true);
-        }
 
         public List<Docente> ObtenerDatos()
-        {           
+        {
             List<Docente> datosDocentes = new List<Docente>();
             try
             {
@@ -103,27 +80,6 @@ namespace UI.Web
             return datosDocentes;
         }
 
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Cursos.aspx");
-        }
-
-        protected void gdvDocCur_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            this.gdvDocCur.DataSource = this.ObtenerDatos();
-            gdvDocCur.PageIndex = e.NewPageIndex;
-            gdvDocCur.DataBind();
-        }
-
-        protected void gdvDocCur_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvDocCur, "Select$" + e.Row.RowIndex);
-                e.Row.ToolTip = "Click para seleccionar fila";
-            }
-        }
-
         public void EliminarDocente()
         {
             try
@@ -151,5 +107,51 @@ namespace UI.Web
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
+
+
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            this.GetDocente();
+            Session["Docente"] = DocenteActual;
+            Server.Transfer("Docente_CursoWeb.aspx", true);
+
+
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarDocente();
+            Response.Redirect("Docentes_Curso.aspx");
+        }
+
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("Docente_CursoWeb.aspx", true);
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Cursos.aspx");
+        }
+
+        protected void gdvDocCur_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gdvDocCur.DataSource = this.ObtenerDatos();
+            gdvDocCur.PageIndex = e.NewPageIndex;
+            gdvDocCur.DataBind();
+        }
+
+        protected void gdvDocCur_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvDocCur, "Select$" + e.Row.RowIndex);
+                e.Row.ToolTip = "Click para seleccionar fila";
+            }
+        }
+
     }
 }

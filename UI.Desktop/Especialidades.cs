@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -16,7 +9,7 @@ namespace UI.Desktop
     {
         public EspecialidadLogic EspLog
         {
-            get { return new EspecialidadLogic(); }           
+            get { return new EspecialidadLogic(); }
         }
 
         public Especialidad EspActual { get; set; }
@@ -30,15 +23,15 @@ namespace UI.Desktop
         public void Listar()
         {
             try
-            { 
+            {
                 dgvEspecialidades.DataSource = EspLog.GetAll();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-           
+
         }
 
         public void EliminarEspecialidad()
@@ -54,7 +47,7 @@ namespace UI.Desktop
             {
                 MessageBox.Show("Error al eliminar la especialidad, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
 
 
         private void FormEspecialidades_Load(object sender, EventArgs e)

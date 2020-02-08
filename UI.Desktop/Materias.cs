@@ -34,6 +34,11 @@ namespace UI.Desktop
             get { return new MateriaLogic(); }
         }
 
+        private void FormMaterias_Load(object sender, EventArgs e)
+        {
+            this.Listar();
+        }
+
         public List<DatosMaterias> ObtenerDatos()
         {
             List<DatosMaterias> datosMaterias = new List<DatosMaterias>();
@@ -67,17 +72,10 @@ namespace UI.Desktop
 
             return datosMaterias;
         }
-
         public void Listar()
         {
             this.dgvMaterias.DataSource = this.ObtenerDatos();
         }
-
-        private void FormMaterias_Load(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
         public void EliminarMateria()
         {
             try
@@ -93,6 +91,8 @@ namespace UI.Desktop
             }
         }
 
+
+        #region ELEMENTOS DEL FORM
         private void TsbEliminar_Click(object sender, EventArgs e)
         {
             var mensaje = MessageBox.Show("¿Está seguro que desea eliminar la materia?\nSe eliminarán todos los cursos asociados", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -140,5 +140,6 @@ namespace UI.Desktop
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
     }
 }

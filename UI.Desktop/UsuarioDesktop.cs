@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Windows.Forms;
 using Util;
 
 
@@ -29,7 +22,7 @@ namespace UI.Desktop
             PersonaActual = persona;
         }
 
-        public UsuarioDesktop(Usuario usuario, Persona persona, ModoForm modo):this()
+        public UsuarioDesktop(Usuario usuario, Persona persona, ModoForm modo) : this()
         {
             UsuarioActual = usuario;
             PersonaActual = persona;
@@ -46,10 +39,10 @@ namespace UI.Desktop
             {
                 this.Text = "Editar Usuario";
             }
-            
+
             try
             {
-               this.MapearDeDatos();
+                this.MapearDeDatos();
             }
             catch
             {
@@ -62,7 +55,7 @@ namespace UI.Desktop
         #region METODOS
         public override void MapearADatos()
         {
-            if(Modo == ModoForm.Alta)
+            if (Modo == ModoForm.Alta)
             {
                 UsuarioActual = new Usuario();
                 this.UsuarioActual.State = BusinessEntity.States.New;
@@ -75,7 +68,7 @@ namespace UI.Desktop
             this.UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             this.UsuarioActual.Clave = this.txtClave.Text;
             this.UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-            
+
         }
 
         public override void MapearDeDatos()
@@ -99,11 +92,11 @@ namespace UI.Desktop
                 UsuarioLogic usuarioLogic = new UsuarioLogic();
                 usuarioLogic.Save(UsuarioActual, PersonaActual);
 
-                if(Modo == ModoForm.Alta)
+                if (Modo == ModoForm.Alta)
                 {
                     this.Notificar("Nuevo Usuario", "El usuario ha sido registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if(Modo == ModoForm.Modificacion)
+                else if (Modo == ModoForm.Modificacion)
                 {
                     this.Notificar("Editar Usuario", "Los cambios han sido registrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -117,7 +110,7 @@ namespace UI.Desktop
             }
             catch (Exception ex)
             {
-                this.Notificar("Error", ex.Message , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -153,7 +146,7 @@ namespace UI.Desktop
             {
                 return false;
             }
-            else if(string.IsNullOrEmpty(txtConfirmarClave.Text))
+            else if (string.IsNullOrEmpty(txtConfirmarClave.Text))
             {
                 return false;
             }

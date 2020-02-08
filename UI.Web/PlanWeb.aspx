@@ -23,7 +23,7 @@
                     Carrera
                 </td>  
                 <td class="columna1">
-                     <asp:DropDownList ID="ddlCarrera" runat="server"  Width="260px" AutoPostBack="True"  Height="25px" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged">
+                     <asp:DropDownList ID="ddlCarrera" runat="server"  Width="260px" AutoPostBack="True"  Height="25px">
                     </asp:DropDownList>
                     <br />
                      <asp:RequiredFieldValidator ID="reqCarrera1" runat="server" ControlToValidate="ddlCarrera"  ErrorMessage="Seleccione una Carrera" ForeColor="Red" Display="Dynamic" InitialValue="&quot;Seleccionar Carrera&quot;"></asp:RequiredFieldValidator>

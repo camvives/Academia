@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -41,6 +35,11 @@ namespace UI.Desktop
         public formEstadoAcademico(Persona per) : this()
         {
             PersonaActual = per;
+        }
+
+        private void FormEstadoAcademico_Load(object sender, EventArgs e)
+        {
+            this.Listar();
         }
 
         public List<DatosInscripciones> ObtenerDatos()
@@ -86,11 +85,6 @@ namespace UI.Desktop
                 this.Close();
             }
             return datosInscripciones;
-        }
-
-        private void FormEstadoAcademico_Load(object sender, EventArgs e)
-        {
-            this.Listar();
         }
 
         public void Listar()

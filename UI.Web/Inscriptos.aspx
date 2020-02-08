@@ -11,7 +11,7 @@
     </div>
     <br />
     <div class="tabla">   
-       <asp:GridView ID="gdvInscriptos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8" OnSelectedIndexChanged="gdvInscriptos_SelectedIndexChanged" AutoGenerateEditButton="True" OnRowEditing="gdvInscriptos_RowEditing" OnRowDataBound="gdvInscriptos_RowDataBound" OnRowCancelingEdit="gdvInscriptos_RowCancelingEdit" OnRowUpdating="gdvInscriptos_RowUpdating" OnRowUpdated="gdvInscriptos_RowUpdated" >
+       <asp:GridView ID="gdvInscriptos" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" Height="100%" Width="75%" AllowPaging="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" SelectedIndex="0" ViewStateMode="Enabled" PageSize="8"  AutoGenerateEditButton="True" OnRowEditing="gdvInscriptos_RowEditing" OnRowCancelingEdit="gdvInscriptos_RowCancelingEdit" OnRowUpdating="gdvInscriptos_RowUpdating">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                  <Columns>
                      <asp:BoundField DataField="Legajo" HeaderText="Legajo" ReadOnly="True" />

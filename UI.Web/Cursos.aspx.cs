@@ -81,7 +81,6 @@ namespace UI.Web
             Response.Redirect("Cursos.aspx");
         }
 
-
         private void BtnNuevo_ButtonClick(object sender, EventArgs e)
         {
             this.Context.Items["Modo"] = ModoForm.Alta;
@@ -216,28 +215,6 @@ namespace UI.Web
 
         }
 
-        protected void gdvComisiones_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            this.gdvCursos.DataSource = this.ObtenerDatos();
-            gdvCursos.PageIndex = e.NewPageIndex;
-            gdvCursos.DataBind();
-
-        }
-
-        protected void gdvComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvCursos, "Select$" + e.Row.RowIndex);
-                e.Row.ToolTip = "Click para seleccionar fila";
-            }
-        }
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Main.aspx");
-        }
-
         private void EliminarCurso()
         {
             try
@@ -267,22 +244,6 @@ namespace UI.Web
             }
         }
 
-        protected void btnDocentes_Click(object sender, ImageClickEventArgs e)
-        {
-            this.GetCurso();
-            Session["Curso"] = CursoActual;
-            Response.Redirect("~/Docentes_Curso.aspx");
-        }
-
-        protected void gdvCursos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
-            {
-                this.Inscribirse();
-            }
-            
-        }
-
         public void Inscribirse()
         {
             try
@@ -309,5 +270,44 @@ namespace UI.Web
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
+
+        protected void gdvComisiones_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gdvCursos.DataSource = this.ObtenerDatos();
+            gdvCursos.PageIndex = e.NewPageIndex;
+            gdvCursos.DataBind();
+
+        }
+
+        protected void gdvComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvCursos, "Select$" + e.Row.RowIndex);
+                e.Row.ToolTip = "Click para seleccionar fila";
+            }
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Main.aspx");
+        }
+
+        protected void btnDocentes_Click(object sender, ImageClickEventArgs e)
+        {
+            this.GetCurso();
+            Session["Curso"] = CursoActual;
+            Response.Redirect("~/Docentes_Curso.aspx");
+        }
+
+        protected void gdvCursos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+            {
+                this.Inscribirse();
+            }
+
+        }
+
     }
 }

@@ -17,8 +17,6 @@ namespace UI.Web
         {
             get { return new ComisionLogic(); }
         }
-
-
         public class DatosComisiones
         {
             public int ID { get; set; }
@@ -43,21 +41,13 @@ namespace UI.Web
 
         }
 
-        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        public void GetComision()
         {
             try
             {
-                this.GetComision();
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(this.ComisionActual.IDPlan);
-
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-
-                this.Context.Items["Carrera"] = especialidad.ID;
-                this.Context.Items["Modo"] = ModoForm.Modificacion;
-                Session["Comision"] = ComisionActual;
-                Server.Transfer("ComisionWeb.aspx", true);
+                GridViewRow row = gdvComisiones.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                ComisionActual = ComLog.GetOne(ID);
             }
             catch (Exception ex)
             {
@@ -65,16 +55,18 @@ namespace UI.Web
             }
         }
 
-        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        public void EliminarComision()
         {
-            this.Context.Items["Modo"] = ModoForm.Alta;
-            Server.Transfer("ComisionWeb.aspx", true);
-        }
-
-        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
-        {
-            this.EliminarComision();
-            Response.Redirect("Comisiones.aspx");
+            try
+            {
+                this.GetComision();
+                ComisionActual.State = BusinessEntity.States.Deleted;
+                ComLog.Save(ComisionActual);
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al eliminar la comisión')</script>");
+            }
         }
 
 
@@ -111,26 +103,44 @@ namespace UI.Web
             return datosComisiones;
         }
 
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Main.aspx");
-        }
-
-
-        public void EliminarComision()
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
             try
             {
                 this.GetComision();
-                ComisionActual.State = BusinessEntity.States.Deleted;
-                ComLog.Save(ComisionActual);
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.ComisionActual.IDPlan);
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+                this.Context.Items["Carrera"] = especialidad.ID;
+                this.Context.Items["Modo"] = ModoForm.Modificacion;
+                Session["Comision"] = ComisionActual;
+                Server.Transfer("ComisionWeb.aspx", true);
             }
-            catch
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('Error al eliminar la comisión')</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
 
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("ComisionWeb.aspx", true);
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarComision();
+            Response.Redirect("Comisiones.aspx");
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Main.aspx");
+        }
 
         protected void gdvComisiones_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -139,13 +149,6 @@ namespace UI.Web
                 e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvComisiones, "Select$" + e.Row.RowIndex);
                 e.Row.ToolTip = "Click para seleccionar fila";
             }
-        }
-
-        public void GetComision()
-        {
-            GridViewRow row = gdvComisiones.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            ComisionActual = ComLog.GetOne(ID);
         }
 
         protected void gdvComisiones_PageIndexChanging(object sender, GridViewPageEventArgs e)

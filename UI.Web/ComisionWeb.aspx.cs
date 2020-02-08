@@ -29,12 +29,6 @@ namespace UI.Web
             }
         }
 
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Comisiones.aspx");
-        }
-
         public void CompletarDDLEsp()
         {
             try
@@ -63,14 +57,6 @@ namespace UI.Web
 
         }
 
-        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlPlan.Enabled = true;
-            ddlCarrera.Items.Remove("Seleccionar Carrera");
-            ddlPlan.Items.Remove("Plan");
-            this.CargaPlanes();
-        }
-
         public override void MapearADatos()
         {
             if (Modo == ModoForm.Alta)
@@ -87,28 +73,6 @@ namespace UI.Web
             this.ComisionActual.AnioEspecialidad = int.Parse(this.ddlAnio.SelectedItem.ToString());
             int idPlan = int.Parse(ddlPlan.SelectedValue.ToString());
             this.ComisionActual.IDPlan = idPlan;
-        }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                this.MapearADatos();
-                ComisionLogic cl = new ComisionLogic();
-                cl.Save(ComisionActual);
-
-                if (this.Modo == ModoForm.Modificacion)
-                {
-                    Response.Write("<script>alert('La Comisión ha sido actualizada')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('La Comisión ha sido Registrada')</script>");
-                }
-
-                Response.AddHeader("REFRESH", "0.1;URL=Comisiones.aspx");
-
-            }
         }
 
         public override void MapearDeDatos()
@@ -137,6 +101,48 @@ namespace UI.Web
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
             }
+        }
+
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlPlan.Enabled = true;
+            ddlCarrera.Items.Remove("Seleccionar Carrera");
+            ddlPlan.Items.Remove("Plan");
+            this.CargaPlanes();
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Page.IsValid)
+                {
+                    this.MapearADatos();
+                    ComisionLogic cl = new ComisionLogic();
+                    cl.Save(ComisionActual);
+
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('La Comisión ha sido actualizada')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('La Comisión ha sido Registrada')</script>");
+                    }
+
+                    Response.AddHeader("REFRESH", "0.1;URL=Comisiones.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Comisiones.aspx");
         }
 
     }

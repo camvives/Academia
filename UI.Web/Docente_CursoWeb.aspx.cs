@@ -31,6 +31,7 @@ namespace UI.Web
                 }
             }
         }
+
         public void CompletarCombobox()
         {
             UsuarioLogic ul = new UsuarioLogic();
@@ -46,6 +47,33 @@ namespace UI.Web
 
             this.ddlDocente.DataSource = datosDocentes;
             ddlDocente.DataBind();
+        }
+
+        public override void MapearADatos()
+        {
+            if (Modo == ModoForm.Alta)
+            {
+                Docentes_CursosActual = new Docentes_Cursos();
+                Docentes_CursosActual.State = BusinessEntity.States.New;
+            }
+            else if (Modo == ModoForm.Modificacion)
+            {
+                Docentes_CursosActual.State = BusinessEntity.States.Modified;
+            }
+
+            string docente = this.ddlDocente.SelectedItem.ToString();
+            int ID = int.Parse(docente.Substring(docente.LastIndexOf(" ") + 1));
+
+            this.Docentes_CursosActual.IDCurso = this.CursoActual.ID;
+            this.Docentes_CursosActual.IDDocente = ID;
+            this.Docentes_CursosActual.Cargo = this.txtCargo.Text;
+        }
+
+        public override void MapearDeDatos()
+        {
+            ddlDocente.SelectedValue = Docentes_CursosActual.IDDocente.ToString();
+            this.txtCargo.Text = Docentes_CursosActual.Cargo;
+ 
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)
@@ -80,33 +108,6 @@ namespace UI.Web
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
-        }
-
-        public override void MapearADatos()
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                Docentes_CursosActual = new Docentes_Cursos();
-                Docentes_CursosActual.State = BusinessEntity.States.New;
-            }
-            else if (Modo == ModoForm.Modificacion)
-            {
-                Docentes_CursosActual.State = BusinessEntity.States.Modified;
-            }
-
-            string docente = this.ddlDocente.SelectedItem.ToString();
-            int ID = int.Parse(docente.Substring(docente.LastIndexOf(" ") + 1));
-
-            this.Docentes_CursosActual.IDCurso = this.CursoActual.ID;
-            this.Docentes_CursosActual.IDDocente = ID;
-            this.Docentes_CursosActual.Cargo = this.txtCargo.Text;
-        }
-
-        public override void MapearDeDatos()
-        {
-            ddlDocente.SelectedValue = Docentes_CursosActual.IDDocente.ToString();
-            this.txtCargo.Text = Docentes_CursosActual.Cargo;
- 
         }
     }
 }

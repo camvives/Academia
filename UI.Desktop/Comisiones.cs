@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Business.Entities;
 using Business.Logic;
-using Business.Entities;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -41,7 +35,7 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            dgvComisiones.DataSource = this.ObtenerDatos();        
+            dgvComisiones.DataSource = this.ObtenerDatos();
         }
 
         public List<DatosComisiones> ObtenerDatos()
@@ -92,6 +86,7 @@ namespace UI.Desktop
                 MessageBox.Show("Error al eliminar la comisión, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
 
         private void TsbEliminar_Click(object sender, EventArgs e)
         {

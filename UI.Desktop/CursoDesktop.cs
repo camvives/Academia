@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -37,6 +30,14 @@ namespace UI.Desktop
 
         }
 
+        private void CursoDesktop_Load(object sender, EventArgs e)
+        {
+            if (Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }
+        }
+
         public void CompletarCombobox()
         {
             try
@@ -51,14 +52,6 @@ namespace UI.Desktop
                 this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        }
-
-        private void CursoDesktop_Load(object sender, EventArgs e)
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                this.CompletarCombobox();
-            }
         }
 
         public override void MapearADatos()
@@ -81,7 +74,6 @@ namespace UI.Desktop
             this.CursoActual.IDComision = comision.ID;
 
         }
-
 
         public override void MapearDeDatos()
         {
@@ -141,13 +133,11 @@ namespace UI.Desktop
 
                 this.DialogResult = DialogResult.OK;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                this.Notificar("Error",ex.Message , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         public bool Validar()
         {
@@ -176,6 +166,7 @@ namespace UI.Desktop
                 return true;
             }
         }
+
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {

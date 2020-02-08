@@ -1,28 +1,25 @@
-﻿using System;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Web
 {
     public partial class Planes : System.Web.UI.Page
     {
-        public Plan PlanActual { get; set; }
-
-        public PlanLogic PlanLog
-        {
-            get { return new PlanLogic(); }
-        }
-
         public class DatosPlanes
         {
             public int ID { get; set; }
             public string Descripcion { get; set; }
             public string DescEspecialidad { get; set; }
+        }
+        public Plan PlanActual { get; set; }
+
+        public PlanLogic PlanLog
+        {
+            get { return new PlanLogic(); }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -39,30 +36,6 @@ namespace UI.Web
             MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
         }
 
-        private void BtnEditar_ButtonClick(object sender, EventArgs e)
-        {
-            this.GetPlan();
-
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(PlanActual.IDEspecialidad);
-
-            this.Context.Items["Carrera"] = especialidad.ID;
-            this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Plan"] = PlanActual;
-            Server.Transfer("PlanWeb.aspx", true);
-        }
-
-        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
-        {
-            this.EliminarPlan();
-            Response.Redirect("Planes.aspx");
-        }
-
-        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
-        {
-            this.Context.Items["Modo"] = ModoForm.Alta;
-            Server.Transfer("PlanWeb.aspx", true);
-        }
 
         public List<DatosPlanes> ObtenerDatos()
         {
@@ -114,6 +87,7 @@ namespace UI.Web
             }
         }
 
+
         protected void gdvComisiones_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             this.gdvPlanes.DataSource = this.ObtenerDatos();
@@ -134,5 +108,31 @@ namespace UI.Web
         {
             Response.Redirect("~/Main.aspx");
         }
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            this.GetPlan();
+
+            EspecialidadLogic el = new EspecialidadLogic();
+            Especialidad especialidad = el.GetOne(PlanActual.IDEspecialidad);
+
+            this.Context.Items["Carrera"] = especialidad.ID;
+            this.Context.Items["Modo"] = ModoForm.Modificacion;
+            Session["Plan"] = PlanActual;
+            Server.Transfer("PlanWeb.aspx", true);
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarPlan();
+            Response.Redirect("Planes.aspx");
+        }
+
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            this.Context.Items["Modo"] = ModoForm.Alta;
+            Server.Transfer("PlanWeb.aspx", true);
+        }
+
     }
 }

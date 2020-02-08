@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Business.Entities;
 using Business.Logic;
-using Business.Entities;
+using System;
+using System.Web.UI;
 
 namespace UI.Web
 {
     public partial class PlanWeb : UI.Web.ApplicationForm
     {
         public Plan PlanActual { get; set; }
+
         protected new void Page_Load(object sender, EventArgs e)
         {
             PlanActual = (Plan)Session["Plan"];
@@ -47,33 +44,6 @@ namespace UI.Web
 
         }
 
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Planes.aspx");
-        }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                this.MapearADatos();
-                PlanLogic pl = new PlanLogic();
-                pl.Save(PlanActual);
-
-                if (this.Modo == ModoForm.Modificacion)
-                {
-                    Response.Write("<script>alert('El Plan ha sido actualizado')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('El Plan ha sido Registrado')</script>");
-                }
-
-                Response.AddHeader("REFRESH", "0.1;URL=Planes.aspx");
-
-            }
-        }
-
         public override void MapearADatos()
         {
             if (Modo == ModoForm.Alta)
@@ -97,9 +67,39 @@ namespace UI.Web
             txtDescripcion.Text = PlanActual.Descripcion;
         }
 
-        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnSalir_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/Planes.aspx");
         }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Page.IsValid)
+                {
+                    this.MapearADatos();
+                    PlanLogic pl = new PlanLogic();
+                    pl.Save(PlanActual);
+
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('El Plan ha sido actualizado')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('El Plan ha sido Registrado')</script>");
+                    }
+
+                    Response.AddHeader("REFRESH", "0.1;URL=Planes.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+        }
+
     }
 }

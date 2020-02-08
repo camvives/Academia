@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using Util;
 
 
@@ -34,12 +29,11 @@ namespace UI.Desktop
             get { return new CursoLogic(); }
         }
 
-        #region Constructores
         public formCursos()
         {
             InitializeComponent();
             this.dgvCursos.AutoGenerateColumns = false;
-            this.dgvCursos.Columns["Inscribirse"].Visible = false;     
+            this.dgvCursos.Columns["Inscribirse"].Visible = false;
         }
 
         public formCursos(Persona per) : this()
@@ -55,7 +49,7 @@ namespace UI.Desktop
 
             PersonaActual = per;
         }
-        #endregion
+
 
         #region METODOS
         public List<DatosCursos> ObtenerDatosUsr()

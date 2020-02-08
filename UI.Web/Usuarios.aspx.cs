@@ -34,42 +34,6 @@ namespace UI.Web
 
         }
 
-        private void BtnEditar_ButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                this.GetUsuario();
-                PlanLogic pl = new PlanLogic();
-                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
-
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
-
-                this.Context.Items["Carrera"] = especialidad.ID;
-                Session["Modo"] = ModoForm.Modificacion;
-                Session["PersonaEdit"] = PersonaActual;
-                Session["Usuario"] = UsuarioActual;
-                Server.Transfer("UsuarioWeb.aspx", true);
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-
-            }
-        }
-
-        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
-        {
-            this.EliminarUsuario();
-            Response.Redirect("~/Usuarios.aspx");
-        }
-
-        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
-        {
-            Session["Modo"] = ModoForm.Alta;
-            Server.Transfer("UsuarioWeb.aspx", true);
-        }
-
         #region METODOS
 
         public void CompletarGrid()
@@ -128,38 +92,6 @@ namespace UI.Web
             }
         }
 
-        #endregion
-
-        private void Confirmar1_ButtonClick(object sender, EventArgs e)
-        {
-            this.EliminarUsuario();
-            Response.Redirect("Usuarios.aspx");
-        }
-
-
-
-        protected void btnNuevo_Click(object sender, EventArgs e)
-        {
-            Session["Modo"] = ModoForm.Alta;
-            Response.Redirect("UsuarioWeb.aspx");
-        }
-
-
-
-        protected void gdvUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvUsuarios, "Select$" + e.Row.RowIndex);
-                e.Row.ToolTip = "Click para seleccionar fila";
-            }
-        }
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Main.aspx");
-        }
-
         public void GetUsuario()
         {
             try
@@ -171,6 +103,31 @@ namespace UI.Web
             catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+        }
+
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+
+        private void Confirmar1_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarUsuario();
+            Response.Redirect("Usuarios.aspx");
+        }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            Session["Modo"] = ModoForm.Alta;
+            Response.Redirect("UsuarioWeb.aspx");
+        }
+
+        protected void gdvUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvUsuarios, "Select$" + e.Row.RowIndex);
+                e.Row.ToolTip = "Click para seleccionar fila";
             }
         }
 
@@ -205,5 +162,48 @@ namespace UI.Web
             gdvUsuarios.PageIndex = e.NewPageIndex;
             gdvUsuarios.DataBind();
         }
+
+        private void BtnEditar_ButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.GetUsuario();
+                PlanLogic pl = new PlanLogic();
+                Plan plan = pl.GetOne(this.PersonaActual.IDPlan);
+
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
+
+                this.Context.Items["Carrera"] = especialidad.ID;
+                Session["Modo"] = ModoForm.Modificacion;
+                Session["PersonaEdit"] = PersonaActual;
+                Session["Usuario"] = UsuarioActual;
+                Server.Transfer("UsuarioWeb.aspx", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
+        }
+
+        private void BtnEliminar_ButtonClick(object sender, EventArgs e)
+        {
+            this.EliminarUsuario();
+            Response.Redirect("~/Usuarios.aspx");
+        }
+
+        private void BtnNuevo_ButtonClick(object sender, EventArgs e)
+        {
+            Session["Modo"] = ModoForm.Alta;
+            Server.Transfer("UsuarioWeb.aspx", true);
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Main.aspx");
+        }
+
+        #endregion
     }
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 
 namespace UI.Desktop
@@ -28,9 +22,10 @@ namespace UI.Desktop
             public int Nota { get; set; }
         }
 
-        public DatosAlumnos AlumnoActual { get; set;}
+        public DatosAlumnos AlumnoActual { get; set; }
 
         public Persona Docente { get; set; }
+
         public formInscriptos()
         {
             InitializeComponent();
@@ -40,11 +35,6 @@ namespace UI.Desktop
         public formInscriptos(Persona per) : this()
         {
             Docente = per;
-        }
-
-        private void CmbCursos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.Listar();   
         }
 
         private void FormInscriptos_Load(object sender, EventArgs e)
@@ -133,7 +123,7 @@ namespace UI.Desktop
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -141,23 +131,9 @@ namespace UI.Desktop
             return datosAlumnos;
         }
 
-        private void DgvCursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-           
-        }
-
         public void Listar()
         {
             this.dgvCursos.DataSource = this.ObtenerDatos();
-        }
-
-        private void DgvCursos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            this.MapearDatos();
-            InscriptosDesktop ides = new InscriptosDesktop(AlumnoActual);
-            ides.ShowDialog();
-            this.Listar();
-            
         }
 
         public void MapearDatos()
@@ -171,6 +147,22 @@ namespace UI.Desktop
             AlumnoActual.Apellido = (string)dgvCursos.SelectedRows[0].Cells["Apellido"].Value;
             AlumnoActual.Nota = (int)dgvCursos.SelectedRows[0].Cells["Nota2"].Value;
 
+        }
+
+
+
+        private void DgvCursos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.MapearDatos();
+            InscriptosDesktop ides = new InscriptosDesktop(AlumnoActual);
+            ides.ShowDialog();
+            this.Listar();
+
+        }
+
+        private void CmbCursos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Listar();
         }
 
         private void BtnSalir_Click(object sender, EventArgs e)

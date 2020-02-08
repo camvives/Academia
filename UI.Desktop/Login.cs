@@ -16,6 +16,22 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
+        public (Usuario, Persona) BuscarUsuario()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return (UsuarioActual, PersonaActual);
+
+        }
+
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             try
@@ -41,23 +57,6 @@ namespace UI.Desktop
             }
 
         }
-
-        public (Usuario, Persona) BuscarUsuario()
-        {
-            try
-            {
-                UsuarioLogic ul = new UsuarioLogic();
-                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUsuario.Text);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return (UsuarioActual, PersonaActual);
-
-        }
-
 
     }
 }

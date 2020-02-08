@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Util;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Web
 {
@@ -19,6 +16,23 @@ namespace UI.Web
         {
 
         }
+
+        public (Usuario, Persona) BuscarUsuario()
+        {
+            try
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUser.Text);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
+
+            return (UsuarioActual, PersonaActual);
+
+        }
+
         protected void valUser_ServerValidate(object source, ServerValidateEventArgs args)
         {
             try
@@ -58,25 +72,11 @@ namespace UI.Web
             {
                 (UsuarioActual, PersonaActual) = this.BuscarUsuario();
                 Session.Add("Usuario", UsuarioActual);
-                Session.Add("Persona", PersonaActual);                
+                Session.Add("Persona", PersonaActual);
                 Response.Redirect("~/Main.aspx");
-            }       
+            }
         }
 
-        public (Usuario, Persona) BuscarUsuario()
-        {
-            try
-            {
-                UsuarioLogic ul = new UsuarioLogic();
-                (UsuarioActual, PersonaActual) = ul.GetUsuario(txtUser.Text);
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-            }
 
-            return (UsuarioActual, PersonaActual);
-
-        }
     }
 }

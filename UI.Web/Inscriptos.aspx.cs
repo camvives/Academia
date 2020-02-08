@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Web
 {
@@ -141,19 +139,31 @@ namespace UI.Web
             return datosAlumnos;
         }
 
+        public void MapearADatos()
+        {
+
+            Alumno = new Alumno_Inscripcion();
+            Alumno = (Alumno_Inscripcion)Session["AlumnoAct"];
+            Alumno.Condicion = (string)Session["Condicion"];
+
+            GridViewRow row = gdvInscriptos.SelectedRow;
+            string Nota = (string)Session["Nota"];
+            if (Nota == " ")
+            {
+                Alumno.Nota = 0;
+            }
+            else
+            {
+                Alumno.Nota = int.Parse(Nota);
+            }
+            Alumno.State = BusinessEntity.States.Modified;
+
+        }
+
+
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Main.aspx");
-        }
-
-        protected void gdvComisiones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void gdvInscriptos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         protected void ddlCurso_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,15 +179,8 @@ namespace UI.Web
             gdvInscriptos.Columns[3].Visible = true;
         }
 
-        protected void gdvInscriptos_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-           
-        }
-
         protected void ddlCond_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-           
             GridViewRow row = (GridViewRow)(((Control)sender).NamingContainer);
             DropDownList ddl = (DropDownList)row.FindControl("ddlCondicion");
             RequiredFieldValidator req = (RequiredFieldValidator)row.FindControl("reqNota");
@@ -186,7 +189,7 @@ namespace UI.Web
             //Session["Nota"] = txtNota.Text;
             Session["Condicion"] = ddl.SelectedItem.Value;
             Condicion = ddl.SelectedItem.Value;
-            if (Condicion  == "Aprobado")
+            if (Condicion == "Aprobado")
             {
                 txtNota.Text = "";
                 req.Enabled = true;
@@ -198,7 +201,7 @@ namespace UI.Web
                 txtNota.Text = " ";
                 row.Cells[6].Enabled = false;
             }
-            
+
         }
 
         protected void gdvInscriptos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -245,36 +248,8 @@ namespace UI.Web
             Response.Redirect("~/Inscriptos.aspx");
         }
 
-        public void MapearADatos()
-        {
-            
-            Alumno = new Alumno_Inscripcion();
-            Alumno = (Alumno_Inscripcion)Session["AlumnoAct"];
-            Alumno.Condicion = (string)Session["Condicion"];
-            
-            GridViewRow row = gdvInscriptos.SelectedRow;
-            string Nota = (string)Session["Nota"];
-            if (Nota == " ")
-            {
-                Alumno.Nota = 0;
-            }
-            else
-            {
-                Alumno.Nota = int.Parse(Nota);
-            }
-            Alumno.State = BusinessEntity.States.Modified;
-   
-        }
+     
 
-        protected void gdvInscriptos_RowUpdated(object sender, GridViewUpdatedEventArgs e)
-        {
-
-        }
-
-        protected void ddlCondicion_DataBound(object sender, EventArgs e)
-        {
-  
-        }
 
 
     }

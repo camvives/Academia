@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Web.UI;
 
 namespace UI.Web
 {
@@ -43,6 +39,11 @@ namespace UI.Web
             this.EspActual.Descripcion = this.txtDescripcion.Text;
         }
 
+        public override void MapearDeDatos()
+        {
+            txtDescripcion.Text = EspActual.Descripcion;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -69,15 +70,8 @@ namespace UI.Web
             catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-
             }
         }
-
-        public override void MapearDeDatos()
-        {
-            txtDescripcion.Text = EspActual.Descripcion;
-        }
-
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {

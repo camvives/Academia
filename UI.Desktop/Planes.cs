@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -80,7 +74,16 @@ namespace UI.Desktop
             {
                 MessageBox.Show("Error al eliminar el plan, intente nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }   
+        }
+
+
+
+        #region ELEMENTOS DEL FORM  
+
+        private void FormPlanes_Load(object sender, EventArgs e)
+        {
+            this.Listar();
+        }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
@@ -90,11 +93,6 @@ namespace UI.Desktop
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void FormPlanes_Load(object sender, EventArgs e)
-        {
-            this.Listar();
         }
 
         private void TsbNuevo_Click(object sender, EventArgs e)
@@ -118,7 +116,7 @@ namespace UI.Desktop
                 formPlanDesk.ShowDialog();
                 this.Listar();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -130,11 +128,12 @@ namespace UI.Desktop
             if (mensaje == DialogResult.Yes)
             {
 
-               this.EliminarPlan();
-               MessageBox.Show("El plan se ha eliminado", "Eliminar Plan");
-               this.Listar();
+                this.EliminarPlan();
+                MessageBox.Show("El plan se ha eliminado", "Eliminar Plan");
+                this.Listar();
 
             }
         }
+        #endregion
     }
 }

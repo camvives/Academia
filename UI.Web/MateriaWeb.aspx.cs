@@ -56,14 +56,6 @@ namespace UI.Web
 
         }
 
-        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlPlan.Enabled = true;
-            ddlCarrera.Items.Remove("Seleccionar Carrera");
-            ddlPlan.Items.Remove("Plan");
-            this.CargaPlanes();
-        }
-
         public void CargaPlanes()
         {
             try
@@ -103,7 +95,6 @@ namespace UI.Web
             this.MateriaActual.IDPlan = idPlan;
         }
 
-
         public override void MapearDeDatos()
         {
             ddlCarrera.SelectedValue = this.Context.Items["Carrera"].ToString();
@@ -112,6 +103,16 @@ namespace UI.Web
             txtDescripcion.Text = MateriaActual.Descripcion;
             txtHsSem.Text = MateriaActual.HorasSemanales.ToString();
             txtHsTot.Text = MateriaActual.HorasTotales.ToString();
+        }
+
+
+
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlPlan.Enabled = true;
+            ddlCarrera.Items.Remove("Seleccionar Carrera");
+            ddlPlan.Items.Remove("Plan");
+            this.CargaPlanes();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)

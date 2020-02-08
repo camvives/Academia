@@ -39,6 +39,15 @@ namespace UI.Desktop
             }
         }
 
+        private void MateriaDesktop_Load(object sender, EventArgs e)
+        {
+            if (Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }
+        }
+
+        #region METODOS
 
         public void CompletarCombobox()
         {
@@ -53,32 +62,6 @@ namespace UI.Desktop
             catch (Exception ex)
             {
                 this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
-
-                PlanLogic plan = new PlanLogic();
-                cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
-                cmbPlan.DisplayMember = "Descripcion";
-                cmbPlan.ValueMember = "ID";
-            }
-            catch (Exception ex )
-            {
-                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-
-        private void MateriaDesktop_Load(object sender, EventArgs e)
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                this.CompletarCombobox();
             }
         }
 
@@ -168,6 +151,27 @@ namespace UI.Desktop
             }
         }
 
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+        private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Especialidad esp = (Especialidad)cmbCarrera.SelectedItem;
+
+                PlanLogic plan = new PlanLogic();
+                cmbPlan.DataSource = plan.GetPlanesEsp(esp.ID);
+                cmbPlan.DisplayMember = "Descripcion";
+                cmbPlan.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
             if (Validar())
@@ -180,5 +184,6 @@ namespace UI.Desktop
         {
             this.Close();
         }
+        #endregion
     }
 }

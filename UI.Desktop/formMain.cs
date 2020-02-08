@@ -22,23 +22,6 @@ namespace UI.Desktop
 
         }
 
-        private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.IrALogin();
-        }
-
-        private void UsuarioToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            FormPersonaDesktop formPersona = new FormPersonaDesktop();
-            formPersona.ShowDialog();
-        }
-
-        private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormUsuarios formUsuarios = new FormUsuarios();
-            formUsuarios.ShowDialog();
-        }
-
         private void FormMain_Shown(object sender, EventArgs e)
         {
             using (formLogin login = new formLogin())
@@ -75,7 +58,37 @@ namespace UI.Desktop
                 }
 
             }
-               
+
+        }
+
+        public void IrALogin()
+        {
+            this.tsMenu.Visible = false;
+            formLogin login = new formLogin();
+            login.ShowDialog();
+            if (login.DialogResult != DialogResult.OK)
+            {
+                this.Close();
+            }
+        }
+
+        #region MENU
+
+        private void SalirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.IrALogin();
+        }
+
+        private void UsuarioToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormPersonaDesktop formPersona = new FormPersonaDesktop();
+            formPersona.ShowDialog();
+        }
+
+        private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormUsuarios formUsuarios = new FormUsuarios();
+            formUsuarios.ShowDialog();
         }
 
         private void EspecialidadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -179,18 +192,8 @@ namespace UI.Desktop
             reporte.ShowDialog();
         }
 
-
-        public void IrALogin()
-        {
-            this.tsMenu.Visible = false;
-            formLogin login = new formLogin();
-            login.ShowDialog();
-            if (login.DialogResult != DialogResult.OK)
-            {
-                this.Close();
-            }
-        }
+        #endregion
     }
 
-    
+
 }

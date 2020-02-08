@@ -31,6 +31,71 @@ namespace UI.Web
             MenuABM.BtnEditarClick += new EventHandler(BtnEditar_ButtonClick);
         }
 
+        public void Listar()
+        {
+            try
+            {
+                gdvEspecialidades.DataSource = EspLog.GetAll();
+                gdvEspecialidades.DataBind();
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al recuperar la lista de especialidades')</script>");
+                Response.Redirect("~/Main.aspx");
+            }
+        }
+
+        public void GetEspecialidad()
+        {
+            GridViewRow row = gdvEspecialidades.SelectedRow;
+            int ID = int.Parse(row.Cells[0].Text);
+            EspActual = EspLog.GetOne(ID);
+        }
+
+        public void EliminarEspecialidad()
+        {
+            try
+            {
+                this.GetEspecialidad();
+                EspActual.State = BusinessEntity.States.Deleted;
+                EspLog.Save(EspActual);
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error al eliminar la Especialidad')</script>");
+            }
+        }
+
+
+        protected void gdvEspecialidades_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                this.gdvEspecialidades.DataSource = EspLog.GetAll();
+                gdvEspecialidades.PageIndex = e.NewPageIndex;
+                gdvEspecialidades.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Main.aspx");
+        }
+
+        protected void gdvEspecialidades_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvEspecialidades, "Select$" + e.Row.RowIndex);
+                e.Row.ToolTip = "Click para seleccionar fila";
+            }
+        }
+
         private void BtnEditar_ButtonClick(object sender, EventArgs e)
         {
             this.GetEspecialidad();
@@ -49,71 +114,6 @@ namespace UI.Web
         {
             this.Context.Items["Modo"] = ModoForm.Alta;
             Server.Transfer("EspecialidadWeb.aspx", true);
-        }
-
-        public void Listar()
-        {
-            try
-            {
-                gdvEspecialidades.DataSource = EspLog.GetAll();
-                gdvEspecialidades.DataBind();
-            }
-            catch
-            {
-                Response.Write("<script>alert('Error al recuperar la lista de especialidades')</script>");
-                Response.Redirect("~/Main.aspx");
-            }
-        }
-
-        protected void gdvEspecialidades_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gdvEspecialidades, "Select$" + e.Row.RowIndex);
-                e.Row.ToolTip = "Click para seleccionar fila";
-            }
-        }
-
-        public void GetEspecialidad()
-        {
-            GridViewRow row = gdvEspecialidades.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            EspActual = EspLog.GetOne(ID);
-        }
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Main.aspx");
-        }
-
-
-        public void EliminarEspecialidad()
-        {
-            try
-            {
-                this.GetEspecialidad();
-                EspActual.State = BusinessEntity.States.Deleted;
-                EspLog.Save(EspActual);
-            }
-            catch
-            {
-                Response.Write("<script>alert('Error al eliminar la Especialidad')</script>");
-            }
-        }
-
-        protected void gdvEspecialidades_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            try
-            {
-                this.gdvEspecialidades.DataSource = EspLog.GetAll();
-                gdvEspecialidades.PageIndex = e.NewPageIndex;
-                gdvEspecialidades.DataBind();
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
-
-            }
         }
     }
 

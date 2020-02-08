@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Mail;
+﻿using Business.Entities;
 using Business.Logic;
-using Business.Entities;
+using System;
+using System.Net.Mail;
 
 namespace Util
 {
@@ -79,7 +75,6 @@ namespace Util
             }
 
         }
-
 
         public static Boolean ValidarCupo(int IDCurso)
         {

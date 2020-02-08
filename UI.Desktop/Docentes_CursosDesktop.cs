@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -41,6 +35,13 @@ namespace UI.Desktop
 
         }
 
+        private void Docentes_CursosDesktop_Load(object sender, EventArgs e)
+        {
+            if (this.Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }
+        }
 
         public void CompletarCombobox()
         {
@@ -63,14 +64,6 @@ namespace UI.Desktop
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
-            }
-        }
-
-        private void Docentes_CursosDesktop_Load(object sender, EventArgs e)
-        {
-            if (this.Modo == ModoForm.Alta)
-            {
-                this.CompletarCombobox();
             }
         }
 
@@ -102,7 +95,6 @@ namespace UI.Desktop
             cmbDocente.SelectedIndex = cmbDocente.FindString(legajo.ToString());
         }
 
-
         public void GuardarCambios()
         {
             try
@@ -129,8 +121,6 @@ namespace UI.Desktop
                 this.Notificar("Error", "Error al registrar asignación de docente al curso, intente nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
-
 
         public bool Validar()
         {
@@ -151,7 +141,7 @@ namespace UI.Desktop
             {
                 this.GuardarCambios();
             }
-           
+
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)

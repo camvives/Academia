@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business.Entities;
-using Business.Logic;
 
 namespace UI.Web
 {
@@ -13,37 +10,31 @@ namespace UI.Web
     {
         public Persona PersonaActual { get; set; }
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             PersonaActual = (Persona)Session["Persona"];
-           
+
             if (!IsPostBack)
-            {          
+            {
                 this.lblNombre.Text = PersonaActual.Nombre + "!";
                 this.MostrarMenu();
             }
 
         }
 
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Login.aspx");
-        }
-
         public void MostrarMenu()
         {
-            if(PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
+            if (PersonaActual.TipoPersona == Persona.TiposPersonas.Alumno)
             {
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Usuario"));
-                mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Cursos")); 
+                mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Cursos"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Especialidades"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Planes"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Materias"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Comisiones"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("ConsultaCur"));
             }
-            else if(PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
+            else if (PersonaActual.TipoPersona == Persona.TiposPersonas.Administrador)
             {
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Datos"));
                 mnuPrincipal.Items.Remove(mnuPrincipal.FindItem("Estado"));
@@ -65,13 +56,18 @@ namespace UI.Web
             }
         }
 
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+
         protected void mnuPrincipal_MenuItemClick(object sender, MenuEventArgs e)
         {
-            if(e.Item == mnuPrincipal.FindItem("Usuario"))
+            if (e.Item == mnuPrincipal.FindItem("Usuario"))
             {
                 Response.Redirect("~/Usuarios.aspx");
             }
-            else if(e.Item == mnuPrincipal.FindItem("Cursos"))
+            else if (e.Item == mnuPrincipal.FindItem("Cursos"))
             {
                 Response.Redirect("~/Cursos.aspx");
             }
@@ -112,7 +108,7 @@ namespace UI.Web
 
                 }
             }
-            else if(e.Item == mnuPrincipal.FindItem("Certificado"))
+            else if (e.Item == mnuPrincipal.FindItem("Certificado"))
             {
                 Session["ID"] = PersonaActual.ID;
                 Response.Redirect("~/Reporte.aspx");
@@ -121,11 +117,11 @@ namespace UI.Web
             {
                 Response.Redirect("~/EstadoAcademico.aspx");
             }
-            else if(e.Item == mnuPrincipal.FindItem("ConsultaCur"))
+            else if (e.Item == mnuPrincipal.FindItem("ConsultaCur"))
             {
                 Response.Redirect("~/Inscriptos.aspx");
             }
-            else if(e.Item == mnuPrincipal.FindItem("Inscripcion"))
+            else if (e.Item == mnuPrincipal.FindItem("Inscripcion"))
             {
                 Response.Redirect("~/Cursos.aspx");
             }

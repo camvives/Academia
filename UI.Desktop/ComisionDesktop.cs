@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Business.Entities;
 using Business.Logic;
-using Business.Entities;
+using System;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -19,8 +12,6 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
-
-        
 
         public ComisionDesktop(Comision com, ModoForm modo) : this()
         {
@@ -43,6 +34,14 @@ namespace UI.Desktop
             }
         }
 
+        private void ComisionDesktop_Load(object sender, EventArgs e)
+        {
+            if (Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }
+        }
+
         public void CompletarCombobox()
         {
             try
@@ -59,14 +58,6 @@ namespace UI.Desktop
             }
         }
 
-        private void ComisionDesktop_Load(object sender, EventArgs e)
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                this.CompletarCombobox();
-            }
-        }
-
         private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -78,7 +69,7 @@ namespace UI.Desktop
                 cmbPlan.DisplayMember = "Descripcion";
                 cmbPlan.ValueMember = "ID";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -99,7 +90,7 @@ namespace UI.Desktop
             this.ComisionActual.Descripcion = this.txtDescripcion.Text;
             this.ComisionActual.AnioEspecialidad = int.Parse(this.cmbAnio.SelectedItem.ToString());
             Plan plan = (Plan)cmbPlan.SelectedItem;
-            this.ComisionActual.IDPlan = plan.ID;  
+            this.ComisionActual.IDPlan = plan.ID;
         }
 
         public override void MapearDeDatos()
@@ -146,7 +137,7 @@ namespace UI.Desktop
             }
             catch (Exception ex)
             {
-                this.Notificar("Error", ex.Message ,MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -157,7 +148,7 @@ namespace UI.Desktop
                 this.Notificar("Campo vacío", "Debe completar el campo 'Descripción'", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if(cmbAnio.SelectedIndex == -1)
+            else if (cmbAnio.SelectedIndex == -1)
             {
                 this.Notificar("Año no válido", "Debe seleccionar un año de especialidad.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -167,6 +158,7 @@ namespace UI.Desktop
                 return true;
             }
         }
+
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {

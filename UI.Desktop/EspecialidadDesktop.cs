@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
@@ -49,7 +42,7 @@ namespace UI.Desktop
                 EspActual = new Especialidad();
                 EspActual.State = BusinessEntity.States.New;
             }
-            else if(Modo == ModoForm.Modificacion)
+            else if (Modo == ModoForm.Modificacion)
             {
                 EspActual.State = BusinessEntity.States.Modified;
             }
@@ -103,7 +96,7 @@ namespace UI.Desktop
             {
                 return true;
             }
-            
+
         }
 
         private void BtnAgregar_Click(object sender, EventArgs e)

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Logic;
+using System;
+using System.Windows.Forms;
 
 namespace UI.Desktop
 {
     public partial class PlanDesktop : ApplicationForm
     {
         public Plan PlanActual { get; set; }
+
         public PlanDesktop()
         {
             InitializeComponent();
@@ -37,6 +31,7 @@ namespace UI.Desktop
             }
         }
 
+        #region METODOS
         public void CompletarCombobox()
         {
             try
@@ -50,14 +45,6 @@ namespace UI.Desktop
             catch (Exception ex)
             {
                 this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void PlanDesktop_Load(object sender, EventArgs e)
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                this.CompletarCombobox();
             }
         }
 
@@ -116,7 +103,7 @@ namespace UI.Desktop
 
                 this.DialogResult = DialogResult.OK;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 this.Notificar("Error", e.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -140,6 +127,16 @@ namespace UI.Desktop
                 return true;
             }
         }
+        #endregion
+
+        #region ELEMENTOS DEL FORM
+        private void PlanDesktop_Load(object sender, EventArgs e)
+        {
+            if (Modo == ModoForm.Alta)
+            {
+                this.CompletarCombobox();
+            }
+        }
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
@@ -153,5 +150,6 @@ namespace UI.Desktop
         {
             this.Close();
         }
+        #endregion
     }
 }
