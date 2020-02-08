@@ -42,11 +42,18 @@ namespace UI.Desktop
 
         public void CompletarCombobox()
         {
-            EspecialidadLogic especialidad = new EspecialidadLogic();
+            try
+            {
+                EspecialidadLogic especialidad = new EspecialidadLogic();
 
-            cmbCarrera.DataSource = especialidad.GetAll();
-            cmbCarrera.DisplayMember = "Descripcion";
-            cmbCarrera.ValueMember = "ID";
+                cmbCarrera.DataSource = especialidad.GetAll();
+                cmbCarrera.DisplayMember = "Descripcion";
+                cmbCarrera.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CmbCarrera_SelectedIndexChanged(object sender, EventArgs e)

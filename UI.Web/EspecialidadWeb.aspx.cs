@@ -45,22 +45,30 @@ namespace UI.Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            try
             {
-                this.MapearADatos();
-                EspecialidadLogic el = new EspecialidadLogic();
-                el.Save(EspActual);
-
-                if (this.Modo == ModoForm.Modificacion)
+                if (Page.IsValid)
                 {
-                    Response.Write("<script>alert('La Especialidad ha sido actualizada')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('La Especialidad ha sido Registrada')</script>");
-                }
+                    this.MapearADatos();
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    el.Save(EspActual);
 
-                Response.AddHeader("REFRESH", "0.1;URL=Especialidades.aspx");
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('La Especialidad ha sido actualizada')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('La Especialidad ha sido Registrada')</script>");
+                    }
+
+                    Response.AddHeader("REFRESH", "0.1;URL=Especialidades.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
             }
         }

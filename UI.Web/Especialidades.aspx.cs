@@ -103,9 +103,17 @@ namespace UI.Web
 
         protected void gdvEspecialidades_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            this.gdvEspecialidades.DataSource = EspLog.GetAll();
-            gdvEspecialidades.PageIndex = e.NewPageIndex;
-            gdvEspecialidades.DataBind();
+            try
+            {
+                this.gdvEspecialidades.DataSource = EspLog.GetAll();
+                gdvEspecialidades.PageIndex = e.NewPageIndex;
+                gdvEspecialidades.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+
+            }
         }
     }
 

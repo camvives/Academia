@@ -33,9 +33,9 @@ namespace UI.Desktop
             { 
                 dgvEspecialidades.DataSource = EspLog.GetAll();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Error al recuperar la lista de especialidades", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
            
@@ -96,11 +96,18 @@ namespace UI.Desktop
 
         private void TsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgvEspecialidades.SelectedRows[0].Cells["ID"].Value;
-            EspActual = EspLog.GetOne(ID);
-            EspecialidadDesktop formEspDesk = new EspecialidadDesktop(EspActual, ModoForm.Modificacion);
-            formEspDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = (int)dgvEspecialidades.SelectedRows[0].Cells["ID"].Value;
+                EspActual = EspLog.GetOne(ID);
+                EspecialidadDesktop formEspDesk = new EspecialidadDesktop(EspActual, ModoForm.Modificacion);
+                formEspDesk.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }

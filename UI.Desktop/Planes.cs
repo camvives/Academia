@@ -41,19 +41,27 @@ namespace UI.Desktop
         public List<DatosPlanes> ObtenerDatos()
         {
             List<DatosPlanes> datosPlanes = new List<DatosPlanes>();
-            List<Plan> planes = PlanLog.GetAll();
 
-            foreach (Plan p in planes)
+            try
             {
-                DatosPlanes datosPlan = new DatosPlanes();
-                datosPlan.ID = p.ID;
-                datosPlan.Descripcion = p.Descripcion;
-               
-                EspecialidadLogic el = new EspecialidadLogic();
-                Especialidad especialidad = el.GetOne(p.IDEspecialidad);
-                datosPlan.DescEspecialidad = especialidad.Descripcion;
+                List<Plan> planes = PlanLog.GetAll();
 
-                datosPlanes.Add(datosPlan);
+                foreach (Plan p in planes)
+                {
+                    DatosPlanes datosPlan = new DatosPlanes();
+                    datosPlan.ID = p.ID;
+                    datosPlan.Descripcion = p.Descripcion;
+
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    Especialidad especialidad = el.GetOne(p.IDEspecialidad);
+                    datosPlan.DescEspecialidad = especialidad.Descripcion;
+
+                    datosPlanes.Add(datosPlan);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return datosPlanes;

@@ -20,17 +20,38 @@ namespace Business.Logic
 
         public List<Especialidad> GetAll()
         {
-            return EspecialidadData.GetAll();
+            try
+            {
+                return EspecialidadData.GetAll();
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar la lista de Carreras, intente nuevamente");
+            }
         }
 
         public Especialidad GetOne(int ID)
         {
-            return EspecialidadData.GetOne(ID);
+            try
+            {
+                return EspecialidadData.GetOne(ID);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar los datos de la Especialidad, intente nuevamente");
+            }
         }
 
         public void Save(Especialidad especialidad)
         {
-            EspecialidadData.Save(especialidad);
+            try
+            {
+                EspecialidadData.Save(especialidad);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar datos de la Especialidad, intente nuevamente");
+            }
         }
     }
 }

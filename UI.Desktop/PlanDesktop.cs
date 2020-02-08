@@ -39,11 +39,18 @@ namespace UI.Desktop
 
         public void CompletarCombobox()
         {
-            EspecialidadLogic especialidad = new EspecialidadLogic();
+            try
+            {
+                EspecialidadLogic especialidad = new EspecialidadLogic();
 
-            cmbCarrera.DataSource = especialidad.GetAll();
-            cmbCarrera.DisplayMember = "Descripcion";
-            cmbCarrera.ValueMember = "ID";
+                cmbCarrera.DataSource = especialidad.GetAll();
+                cmbCarrera.DisplayMember = "Descripcion";
+                cmbCarrera.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PlanDesktop_Load(object sender, EventArgs e)
@@ -73,14 +80,21 @@ namespace UI.Desktop
 
         public override void MapearDeDatos()
         {
-            EspecialidadLogic el = new EspecialidadLogic();
-            Especialidad especialidad = el.GetOne(PlanActual.IDEspecialidad);
+            try
+            {
+                EspecialidadLogic el = new EspecialidadLogic();
+                Especialidad especialidad = el.GetOne(PlanActual.IDEspecialidad);
 
 
-            this.btnAgregar.Text = "Guardar";
-            this.txtDescripcion.Text = PlanActual.Descripcion;
-            this.CompletarCombobox();
-            this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+                this.btnAgregar.Text = "Guardar";
+                this.txtDescripcion.Text = PlanActual.Descripcion;
+                this.CompletarCombobox();
+                this.cmbCarrera.SelectedIndex = cmbCarrera.FindStringExact(especialidad.Descripcion);
+            }
+            catch (Exception ex)
+            {
+                this.Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void GuardarCambios()
