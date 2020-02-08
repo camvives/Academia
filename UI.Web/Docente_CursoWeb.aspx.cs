@@ -55,23 +55,30 @@ namespace UI.Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            try
             {
-                this.MapearADatos();
-                Docente_CursoLogic dcl = new Docente_CursoLogic();
-                dcl.Save(Docentes_CursosActual);
-
-                if (this.Modo == ModoForm.Modificacion)
+                if (Page.IsValid)
                 {
-                    Response.Write("<script>alert('La asingación ha sido actualizada')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('La asignación ha sido Registrada')</script>");
-                }
+                    this.MapearADatos();
+                    Docente_CursoLogic dcl = new Docente_CursoLogic();
+                    dcl.Save(Docentes_CursosActual);
 
-                Response.AddHeader("REFRESH", "0.1;URL=Docentes_Curso.aspx");
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('La asingación ha sido actualizada')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('La asignación ha sido Registrada')</script>");
+                    }
 
+                    Response.AddHeader("REFRESH", "0.1;URL=Docentes_Curso.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
             }
         }
 

@@ -19,23 +19,51 @@ namespace Business.Logic
 
         public Docentes_Cursos GetOne(int ID)
         {
-            return DocenteCursoData.GetOne(ID);
+            try
+            {
+                return DocenteCursoData.GetOne(ID);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
 
         public void Save(Docentes_Cursos docCurso)
         {
-            DocenteCursoData.Save(docCurso);
+            try
+            {
+                DocenteCursoData.Save(docCurso);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar los datos, intente nuevamente");
+            }
         }
 
 
         public List<Docentes_Cursos> GetDocentesPorCurso(int idCurso)
         {
-            return DocenteCursoData.GetDocentesPorCurso(idCurso);
+            try
+            {
+                return DocenteCursoData.GetDocentesPorCurso(idCurso);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
 
         public List<Docentes_Cursos> GetCursosPorDocente(int idDocente)
         {
-            return DocenteCursoData.GetCursosPorDocente(idDocente);
+            try
+            {
+                return DocenteCursoData.GetCursosPorDocente(idDocente);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar datos, intente nuevamente");
+            }
         }
     }
 

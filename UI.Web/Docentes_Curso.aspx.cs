@@ -140,9 +140,16 @@ namespace UI.Web
 
         public void GetDocente()
         {
-            GridViewRow row = gdvDocCur.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            DocenteActual = DocCursoLog.GetOne(ID);
+            try
+            {
+                GridViewRow row = gdvDocCur.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                DocenteActual = DocCursoLog.GetOne(ID);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
     }
 }
