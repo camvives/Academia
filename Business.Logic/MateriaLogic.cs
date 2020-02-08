@@ -20,22 +20,51 @@ namespace Business.Logic
 
         public List<Materia> GetAll()
         {
-            return MateriaData.GetAll();
+            try
+            {
+                return MateriaData.GetAll();
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar la lista de materias, intente nuevamente");
+            }
         }
 
         public Materia GetOne(int ID)
         {
-            return MateriaData.GetOne(ID);
+            try
+            {
+                return MateriaData.GetOne(ID);
+            }
+            catch
+            {
+
+                throw new Exception("Error al recuperar datos de la materia, intente nuevamente");
+            }
         }
 
         public void Save(Materia materia)
         {
-            MateriaData.Save(materia);
+            try
+            {
+                MateriaData.Save(materia);
+            }
+            catch
+            {
+                throw new Exception("Error al registrar datos de la materia, intente nuevamente");
+            }
         }
 
         public List<Materia> GetMateriasPlan(int IDPlan)
         {
-            return MateriaData.GetMateriasPlan(IDPlan);
+            try
+            {
+                return MateriaData.GetMateriasPlan(IDPlan);
+            }
+            catch
+            {
+                throw new Exception("Error al recuperar materias, intente nuevamente");
+            }
         }
     }
 }

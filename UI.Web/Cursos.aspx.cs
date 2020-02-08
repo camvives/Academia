@@ -91,42 +91,50 @@ namespace UI.Web
         public List<DatosCursos> ObtenerDatosUsr()
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
-            List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
-            Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
-            List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
-
-            foreach (Curso c in cursos)
+            try
             {
-                DatosCursos datosCurso = new DatosCursos();
-                Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
-                int cupoActual = c.Cupo - ail.GetCantidadInscriptos(c.ID);
+                List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
+                Alumno_InscripcionLogic alInscLog = new Alumno_InscripcionLogic();
+                List<Alumno_Inscripcion> inscripciones = alInscLog.GetMateriasInscripto(PersonaActual.ID);
 
-                datosCurso.Cupo = cupoActual;
-                datosCurso.ID = c.ID;
-
-                MateriaLogic ml = new MateriaLogic();
-                Materia mat = ml.GetOne(c.IDMateria);
-                datosCurso.DescMateria = mat.Descripcion;
-
-                ComisionLogic cl = new ComisionLogic();
-                Comision com = cl.GetOne(c.IDComision);
-                datosCurso.DescComision = com.Descripcion;
-
-                datosCursos.Add(datosCurso);
-
-            }
-
-            foreach (Alumno_Inscripcion ai in inscripciones)
-            {
-                foreach(DatosCursos dc in datosCursos)
+                foreach (Curso c in cursos)
                 {
-                    if (ai.IDCurso == dc.ID)
-                    {
-                        datosCursos.Remove(dc);
-                        break;
-                    }
+                    DatosCursos datosCurso = new DatosCursos();
+                    Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
+                    int cupoActual = c.Cupo - ail.GetCantidadInscriptos(c.ID);
+
+                    datosCurso.Cupo = cupoActual;
+                    datosCurso.ID = c.ID;
+
+                    MateriaLogic ml = new MateriaLogic();
+                    Materia mat = ml.GetOne(c.IDMateria);
+                    datosCurso.DescMateria = mat.Descripcion;
+
+                    ComisionLogic cl = new ComisionLogic();
+                    Comision com = cl.GetOne(c.IDComision);
+                    datosCurso.DescComision = com.Descripcion;
+
+                    datosCursos.Add(datosCurso);
+
                 }
-                
+
+                foreach (Alumno_Inscripcion ai in inscripciones)
+                {
+                    foreach (DatosCursos dc in datosCursos)
+                    {
+                        if (ai.IDCurso == dc.ID)
+                        {
+                            datosCursos.Remove(dc);
+                            break;
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
             }
 

@@ -116,22 +116,30 @@ namespace UI.Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            try
             {
-                this.MapearADatos();
-                MateriaLogic cl = new MateriaLogic();
-                cl.Save(MateriaActual);
-
-                if (this.Modo == ModoForm.Modificacion)
+                if (Page.IsValid)
                 {
-                    Response.Write("<script>alert('La Materia ha sido actualizada')</script>");
-                }
-                else if (this.Modo == ModoForm.Alta)
-                {
-                    Response.Write("<script>alert('La Materia ha sido Registrada')</script>");
-                }
+                    this.MapearADatos();
+                    MateriaLogic cl = new MateriaLogic();
+                    cl.Save(MateriaActual);
 
-                Response.AddHeader("REFRESH", "0.1;URL=Materias.aspx");
+                    if (this.Modo == ModoForm.Modificacion)
+                    {
+                        Response.Write("<script>alert('La Materia ha sido actualizada')</script>");
+                    }
+                    else if (this.Modo == ModoForm.Alta)
+                    {
+                        Response.Write("<script>alert('La Materia ha sido Registrada')</script>");
+                    }
+
+                    Response.AddHeader("REFRESH", "0.1;URL=Materias.aspx");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
 
             }
         }

@@ -174,21 +174,28 @@ namespace UI.Web
 
         public void CargaMatCom()
         {
-            ddlPlan.Items.Remove("Plan");
-            int PlanId = int.Parse(ddlPlan.SelectedValue.ToString());
+            try
+            {
+                ddlPlan.Items.Remove("Plan");
+                int PlanId = int.Parse(ddlPlan.SelectedValue.ToString());
 
-            MateriaLogic materiaLogic = new MateriaLogic();
-            ddlMateria.DataTextField = "Descripcion";
-            ddlMateria.DataValueField = "ID";
-            ddlMateria.DataSource = materiaLogic.GetMateriasPlan(PlanId);
-            ddlMateria.DataBind();
+                MateriaLogic materiaLogic = new MateriaLogic();
+                ddlMateria.DataTextField = "Descripcion";
+                ddlMateria.DataValueField = "ID";
+                ddlMateria.DataSource = materiaLogic.GetMateriasPlan(PlanId);
+                ddlMateria.DataBind();
 
 
-            ComisionLogic comisionLog = new ComisionLogic();
-            ddlComision.DataTextField = "Descripcion";
-            ddlComision.DataValueField = "ID";
-            ddlComision.DataSource = comisionLog.GetComisionesMat(PlanId);
-            ddlComision.DataBind();
+                ComisionLogic comisionLog = new ComisionLogic();
+                ddlComision.DataTextField = "Descripcion";
+                ddlComision.DataValueField = "ID";
+                ddlComision.DataSource = comisionLog.GetComisionesMat(PlanId);
+                ddlComision.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
     }
 }

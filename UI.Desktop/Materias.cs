@@ -127,11 +127,18 @@ namespace UI.Desktop
 
         private void TsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgvMaterias.SelectedRows[0].Cells["ID"].Value;
-            Materia materiaActual = MatLog.GetOne(ID);
-            MateriaDesktop formMatDesk = new MateriaDesktop(materiaActual, ModoForm.Modificacion);
-            formMatDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = (int)dgvMaterias.SelectedRows[0].Cells["ID"].Value;
+                Materia materiaActual = MatLog.GetOne(ID);
+                MateriaDesktop formMatDesk = new MateriaDesktop(materiaActual, ModoForm.Modificacion);
+                formMatDesk.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

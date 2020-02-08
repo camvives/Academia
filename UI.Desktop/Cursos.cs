@@ -61,27 +61,36 @@ namespace UI.Desktop
         public List<DatosCursos> ObtenerDatosUsr()
         {
             List<DatosCursos> datosCursos = new List<DatosCursos>();
-            List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
 
-            foreach (Curso c in cursos)
+            try
             {
-                DatosCursos datosCurso = new DatosCursos();
-                Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
-                int cupoActual = c.Cupo - ail.GetCantidadInscriptos(c.ID);
+                List<Curso> cursos = CursoLog.GetCursosUsuario(PersonaActual.IDPlan);
 
-                datosCurso.Cupo = cupoActual;
-                datosCurso.ID = c.ID;
+                foreach (Curso c in cursos)
+                {
+                    DatosCursos datosCurso = new DatosCursos();
+                    Alumno_InscripcionLogic ail = new Alumno_InscripcionLogic();
+                    int cupoActual = c.Cupo - ail.GetCantidadInscriptos(c.ID);
 
-                MateriaLogic ml = new MateriaLogic();
-                Materia mat = ml.GetOne(c.IDMateria);
-                datosCurso.DescMateria = mat.Descripcion;
+                    datosCurso.Cupo = cupoActual;
+                    datosCurso.ID = c.ID;
 
-                ComisionLogic cl = new ComisionLogic();
-                Comision com = cl.GetOne(c.IDComision);
-                datosCurso.DescComision = com.Descripcion;
+                    MateriaLogic ml = new MateriaLogic();
+                    Materia mat = ml.GetOne(c.IDMateria);
+                    datosCurso.DescMateria = mat.Descripcion;
 
-                datosCursos.Add(datosCurso);
+                    ComisionLogic cl = new ComisionLogic();
+                    Comision com = cl.GetOne(c.IDComision);
+                    datosCurso.DescComision = com.Descripcion;
 
+                    datosCursos.Add(datosCurso);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
 
             return datosCursos;

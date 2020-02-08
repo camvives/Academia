@@ -203,16 +203,23 @@ namespace UI.Desktop
 
         private void CmbPlan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Plan plan = (Plan)cmbPlan.SelectedItem;
-            MateriaLogic materiaLogic = new MateriaLogic();
-            this.cmbMateria.DataSource = materiaLogic.GetMateriasPlan(plan.ID);
-            this.cmbMateria.DisplayMember = "Descripcion";
-            this.cmbMateria.ValueMember = "ID";
+            try
+            {
+                Plan plan = (Plan)cmbPlan.SelectedItem;
+                MateriaLogic materiaLogic = new MateriaLogic();
+                this.cmbMateria.DataSource = materiaLogic.GetMateriasPlan(plan.ID);
+                this.cmbMateria.DisplayMember = "Descripcion";
+                this.cmbMateria.ValueMember = "ID";
 
-            ComisionLogic comisionLog = new ComisionLogic();
-            cmbComision.DataSource = comisionLog.GetComisionesMat(plan.ID);
-            cmbComision.DisplayMember = "Descripcion";
-            cmbComision.ValueMember = "ID";
+                ComisionLogic comisionLog = new ComisionLogic();
+                cmbComision.DataSource = comisionLog.GetComisionesMat(plan.ID);
+                cmbComision.DisplayMember = "Descripcion";
+                cmbComision.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TxtAnio_KeyPress(object sender, KeyPressEventArgs e)

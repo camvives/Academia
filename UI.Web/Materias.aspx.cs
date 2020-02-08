@@ -131,9 +131,16 @@ namespace UI.Web
 
         public void GetMateria()
         {
-            GridViewRow row = gdvMaterias.SelectedRow;
-            int ID = int.Parse(row.Cells[0].Text);
-            MateriaActual = MatLog.GetOne(ID);
+            try
+            {
+                GridViewRow row = gdvMaterias.SelectedRow;
+                int ID = int.Parse(row.Cells[0].Text);
+                MateriaActual = MatLog.GetOne(ID);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.Message + "')", true);
+            }
         }
 
         public void EliminarMateria()
