@@ -12,12 +12,12 @@ namespace UI.Web
     public partial class Main1 : System.Web.UI.Page
     {
         public Persona PersonaActual { get; set; }
-        public Usuario UsuarioActual { get; set; }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             PersonaActual = (Persona)Session["Persona"];
-            UsuarioActual = (Usuario)Session["Usuario"];
+           
             if (!IsPostBack)
             {          
                 this.lblNombre.Text = PersonaActual.Nombre + "!";
@@ -100,6 +100,7 @@ namespace UI.Web
                 Especialidad especialidad = el.GetOne(plan.IDEspecialidad);
 
                 this.Context.Items["Carrera"] = especialidad.ID;
+                Session["PersonaEdit"] = PersonaActual;
                 Context.Items["Modo"] = ModoForm.Consulta;
                 Server.Transfer("~/UsuarioWeb.aspx", true);
             }

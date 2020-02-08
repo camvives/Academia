@@ -46,7 +46,7 @@ namespace UI.Web
 
             this.Context.Items["Carrera"] = especialidad.ID;
             this.Context.Items["Modo"] = ModoForm.Modificacion;
-            Session["Persona"] = PersonaActual;
+            Session["PersonaEdit"] = PersonaActual;
             Session["Usuario"] = UsuarioActual;
             Server.Transfer("UsuarioWeb.aspx", true);
         }
@@ -101,7 +101,7 @@ namespace UI.Web
         {
             this.Context.Items["Modo"] = ModoForm.Modificacion;
             Session["Usuario"] = UsuarioActual;
-            Session.Add("Persona", PersonaActual);
+            Session.Add("PersonaEdit", PersonaActual);
             this.Context.Items["Carrera"] = Especialidad.ID;
             Server.Transfer("UsuarioWeb.aspx", true);
         }
@@ -171,7 +171,7 @@ namespace UI.Web
 
             this.Context.Items["Plan"] = plan.Descripcion;
             this.Context.Items["Carrera"] = especialidad.Descripcion;
-            Session["Persona"] = PersonaActual;
+            Session["PersonaEdit"] = PersonaActual;
             Session["Usuario"] = UsuarioActual;
             Server.Transfer("UsuarioDatos.aspx", true);
 

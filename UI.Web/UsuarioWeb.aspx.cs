@@ -15,13 +15,23 @@ namespace UI.Web
         public Persona PersonaActual { get; set; }
         public Usuario UsuarioActual { get; set; }
 
-        public bool Admin { get; set; }
+
+
+        public bool Admin 
+        { 
+            get {
+                object admin = ViewState["admin"];
+                return (bool)admin;  
+            }
+            set { ViewState["admin"] = value; } 
+        
+        }
 
 
         protected new void Page_Load(object sender, EventArgs e)
         {
 
-            PersonaActual = (Persona)Session["Persona"];
+            PersonaActual = (Persona)Session["PersonaEdit"];
             UsuarioActual = (Usuario)Session["Usuario"];
             
 
