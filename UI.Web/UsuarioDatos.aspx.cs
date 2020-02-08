@@ -17,7 +17,7 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             this.UsuarioActual = (Usuario)Session["Usuario"];
-            this.PersonaActual = (Persona)Session["Persona"];
+            this.PersonaActual = (Persona)Session["PersonaEdit"];
             this.MostrarDatos();
         }
 
