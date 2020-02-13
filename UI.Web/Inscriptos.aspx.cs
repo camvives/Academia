@@ -32,6 +32,11 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((Persona.TiposPersonas)Session["Tipo"] != Persona.TiposPersonas.Docente)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
             Docente = (Persona)Session["Persona"];
 
             if (!IsPostBack)

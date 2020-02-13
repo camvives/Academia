@@ -73,6 +73,7 @@ namespace UI.Web
                 (UsuarioActual, PersonaActual) = this.BuscarUsuario();
                 Session.Add("Usuario", UsuarioActual);
                 Session.Add("Persona", PersonaActual);
+                Session.Add("Tipo", PersonaActual.TipoPersona);
                 Response.Redirect("~/Main.aspx");
             }
         }

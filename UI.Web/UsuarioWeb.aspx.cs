@@ -24,6 +24,10 @@ namespace UI.Web
 
         protected new void Page_Load(object sender, EventArgs e)
         {
+            if ((Persona.TiposPersonas)Session["Tipo"] != Persona.TiposPersonas.Administrador)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
 
             PersonaActual = (Persona)Session["PersonaEdit"];
             UsuarioActual = (Usuario)Session["Usuario"];

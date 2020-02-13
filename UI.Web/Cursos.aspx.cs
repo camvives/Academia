@@ -34,6 +34,7 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             PersonaActual = (Persona)Session["Persona"];
             if (!IsPostBack)
             {

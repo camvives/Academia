@@ -33,6 +33,11 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((Persona.TiposPersonas)Session["Tipo"] != Persona.TiposPersonas.Administrador)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
             this.CursoActual = (Curso)Session["Curso"];
             this.lblCurso.Text = "Docentes del curso " + CursoActual.ID.ToString();
             if (!IsPostBack)

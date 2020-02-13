@@ -28,6 +28,11 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((Persona.TiposPersonas)Session["Tipo"] != Persona.TiposPersonas.Alumno)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+
             PersonaActual = (Persona)Session["Persona"];
             gdvEstAcademico.DataSource = this.ObtenerDatos();
             gdvEstAcademico.DataBind();

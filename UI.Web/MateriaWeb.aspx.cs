@@ -14,6 +14,11 @@ namespace UI.Web
         public Materia MateriaActual { get; set; }
         protected new void Page_Load(object sender, EventArgs e)
         {
+            if ((Persona.TiposPersonas)Session["Tipo"] != Persona.TiposPersonas.Administrador)
+            {
+                Response.Redirect("~/Login.aspx");
+            } 
+
             MateriaActual = (Materia)Session["Materia"];
 
             if (!IsPostBack)
